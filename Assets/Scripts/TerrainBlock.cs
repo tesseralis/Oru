@@ -21,8 +21,9 @@ public class TerrainBlock: MonoBehaviour
 	void OnMouseDown ()
 	{
 		// Set the creature's destination to this block.
-		Debug.Log("Setting goal of " + GameManager.gm.creatures.SelectedCreature);
-		GameManager.gm.creatures.SelectedCreature.Goal = Coordinate;
+		var creature = GameManager.gm.creatures.SelectedCreature;
+		Debug.LogFormat("Setting goal of {0} to {1}", creature, Coordinate);
+		creature.Goal = Coordinate;
 	}
 	
 	private float cellSize = 2;
