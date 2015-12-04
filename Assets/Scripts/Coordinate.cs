@@ -23,7 +23,7 @@ public class Coordinate
 		hash = (hash * 11) + z;
 		return hash;
 	}
-	
+
 	public bool Equals( Coordinate other )
 	{
 		if    ( other == null )                    return false;
@@ -31,5 +31,10 @@ public class Coordinate
 		if    ( ReferenceEquals (this, other)    )    return true;
 		if    ( x == other.x && z == other.z    )    return true;
 		return false;
+	}
+
+	public override string ToString ()
+	{
+		return string.Format ("[Coordinate: x={0}, z={1}]", x, z);
 	}
 }
