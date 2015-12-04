@@ -1,4 +1,4 @@
-class Coordinate
+public class Coordinate
 {
 	public Coordinate(int _x, int _z)
 	{

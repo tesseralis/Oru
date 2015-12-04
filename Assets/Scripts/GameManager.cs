@@ -3,8 +3,6 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
-using Grid = System.Collections.Generic.IDictionary<Coordinate, Cell.cellTypes>;
-
 public class GameManager : MonoBehaviour
 {
 
@@ -26,8 +24,8 @@ public class GameManager : MonoBehaviour
 	// the goal in the world
 	public GameObject goal;
 
-	// the grid of available game tiles
-	public GameObject cells;
+	// the grid of available game blocks
+	public TerrainManager terrain;
 	// the creatures in the came world
 	public GameObject creatures;
 	
@@ -52,9 +50,6 @@ public class GameManager : MonoBehaviour
 	// the currently selected creature
 	private GameObject currentCreature;
 
-	// a map of available cell tiles
-	private Grid grid;
-
 	// a map of positions of creatures on the board
 	private IDictionary<GameObject, Coordinate> creatureCoordinates;
 
@@ -78,11 +73,6 @@ public class GameManager : MonoBehaviour
 		if (creatureMarker)
 		{
 			creatureMarker.SetActive (false);
-		}
-
-		if (cells)
-		{
-			grid = InitGrid (cells);
 		}
 
 		creatureDestinations = new Dictionary<GameObject, Coordinate> ();
@@ -145,19 +135,6 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
-	// Initialize what cell are available in the grid to move to
-	private Grid InitGrid(GameObject cell)
-	{
-		Grid grid = new Dictionary<Coordinate, Cell.cellTypes>();
-		foreach (Transform child in cell.transform)
-		{
-			Coordinate childCoord = CalculateGridCoordinate(child.transform.position);
-			// TODO Store something more useful here (like cell type)
-			grid.Add(childCoord, child.GetComponent<Cell>().cellType);
-		}
-		return grid;
-	}
-
 	// Initialize the positions of the creatures
 	private IDictionary<GameObject, Coordinate> InitCreatures(GameObject creatures)
 	{
@@ -214,16 +191,17 @@ public class GameManager : MonoBehaviour
 	// Move the creature to the next step towards its goal
 	private void DoNextStep(GameObject creature, Coordinate goal)
 	{
-		var next = NextCoordinate (CalculateGridCoordinate (creature.transform.position), goal, grid, creature.GetComponent<Creature>().allowedCells);
+		var next = NextCoordinate (CalculateGridCoordinate (creature.transform.position), goal, creature.GetComponent<Creature>().allowedTerrain);
 		creatureCoordinates[creature] = next;
 		creature.transform.position = new Vector3(next.x * cellSize, creature.transform.position.y, next.z * cellSize);
 	}
 
 	// do a BFS and figure out the right path
-	private Coordinate NextCoordinate(Coordinate start, Coordinate end, Grid grid, Cell.cellTypes[] allowedCellTypes)
+	private Coordinate NextCoordinate(Coordinate start, Coordinate end, TerrainType[] allowedTypes)
 	{
 		// TODO account for disallowed coordinates
 		// TODO do A* search
+		var grid = terrain.TerrainGrid;
 		var distance = new Dictionary<Coordinate, int>();
 		var parents = new Dictionary<Coordinate, Coordinate> ();
 		var queue = new Queue<Coordinate> ();
@@ -243,7 +221,7 @@ public class GameManager : MonoBehaviour
 			foreach (Coordinate neighbor in neighbors)
 			{
 				// TODO break when we reach the goal
-				if (grid.ContainsKey(neighbor) && allowedCellTypes.Contains(grid[neighbor]) && !distance.ContainsKey(neighbor))
+				if (grid.ContainsKey(neighbor) && allowedTypes.Contains(grid[neighbor]) && !distance.ContainsKey(neighbor))
 				{
 					distance[neighbor] = distance[current] + 1;
 					parents[neighbor] = current;
@@ -266,5 +244,3 @@ public class GameManager : MonoBehaviour
 		return next;
 	}
 }
-
-
