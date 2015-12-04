@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
 	// the grid of available game blocks
 	public TerrainManager terrain;
 	// the creatures in the came world
-	public GameObject creatures;
+	public CreatureManager creatures;
 	
 	// how width of the space between individual cells
 	public float cellSize = 2;
@@ -47,14 +47,6 @@ public class GameManager : MonoBehaviour
 	// the next time to take a step
 	private float nextStepTime;
 
-	// the currently selected creature
-	private GameObject currentCreature;
-
-	// a map of positions of creatures on the board
-	private IDictionary<GameObject, Coordinate> creatureCoordinates;
-
-	// a map of goals for the creatures on the board
-	private IDictionary<GameObject, Coordinate> creatureDestinations;
 
 	// The location that needs 
 	private Coordinate goalCoordinate;
@@ -73,13 +65,6 @@ public class GameManager : MonoBehaviour
 		if (creatureMarker)
 		{
 			creatureMarker.SetActive (false);
-		}
-
-		creatureDestinations = new Dictionary<GameObject, Coordinate> ();
-
-		if (creatures)
-		{
-			creatureCoordinates = InitCreatures(creatures);
 		}
 
 		if (goal)
@@ -112,21 +97,11 @@ public class GameManager : MonoBehaviour
 	void Step ()
 	{
 		Debug.Log ("Next step: " + nextStepTime);
-		foreach (GameObject child in creatureDestinations.Keys)
-		{
-			Debug.Log ("Seeing if we need to move " + child);
-			if (!creatureCoordinates[child].Equals(creatureDestinations[child]))
-			{
-				Debug.Log("Moving " + child + " to " + creatureDestinations[child]);
-				DoNextStep(child, creatureDestinations[child]);
-			}
-		}
+		creatures.Step();
 
-		// End the game if there's a creature at the goal
-		// TODO move this out to a new function and abstract it out
 		if (goalCoordinate != null)
 		{
-			if (creatureCoordinates.Values.Contains(goalCoordinate))
+			if (creatures.Creatures.Select(x => x.Position).Contains(goalCoordinate))
 			{
 				// TODO end game
 				Debug.Log("You win!");
@@ -135,45 +110,12 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
-	// Initialize the positions of the creatures
-	private IDictionary<GameObject, Coordinate> InitCreatures(GameObject creatures)
-	{
-		var positions = new Dictionary<GameObject, Coordinate>();
-		foreach (Transform child in creatures.transform)
-		{
-			Coordinate childCoord = CalculateGridCoordinate (child.transform.position);
-			positions[child.gameObject] = childCoord;
-		}
-		return positions;
-	}
-
 	private void WinGame()
 	{
 		hasWon = true;
 		if (winnerPanel)
 		{
 			winnerPanel.SetActive(true);
-		}
-	}
-
-	// Set the currently selected creature in the game
-	public void SetCurrentCreature(GameObject target)
-	{
-		currentCreature = target;
-		// Set the visual marker for the creature
-		if (creatureMarker)
-		{
-			creatureMarker.SetActive(true);
-			creatureMarker.transform.SetParent(target.transform, false);
-		}
-	}
-
-	// Set the goal for the current creature
-	public void SetCurrentCreatureDestination(GameObject target)
-	{
-		if (currentCreature)
-		{
-			creatureDestinations[currentCreature] = CalculateGridCoordinate(target.transform.position);
 		}
 	}
 
@@ -188,59 +130,4 @@ public class GameManager : MonoBehaviour
 		return new Coordinate((int)(position.x / cellSize), (int)(position.z / cellSize));
 	}
 	
-	// Move the creature to the next step towards its goal
-	private void DoNextStep(GameObject creature, Coordinate goal)
-	{
-		var next = NextCoordinate (CalculateGridCoordinate (creature.transform.position), goal, creature.GetComponent<Creature>().allowedTerrain);
-		creatureCoordinates[creature] = next;
-		creature.transform.position = new Vector3(next.x * cellSize, creature.transform.position.y, next.z * cellSize);
-	}
-
-	// do a BFS and figure out the right path
-	private Coordinate NextCoordinate(Coordinate start, Coordinate end, TerrainType[] allowedTypes)
-	{
-		// TODO account for disallowed coordinates
-		// TODO do A* search
-		var grid = terrain.TerrainGrid;
-		var distance = new Dictionary<Coordinate, int>();
-		var parents = new Dictionary<Coordinate, Coordinate> ();
-		var queue = new Queue<Coordinate> ();
-		distance [start] = 0;
-		queue.Enqueue (start);
-
-		while (queue.Count > 0)
-		{
-			var current = queue.Dequeue();
-			// TODO factor out to a separate script
-			Coordinate[] neighbors = {
-				new Coordinate(current.x, current.z + 1),
-				new Coordinate(current.x, current.z - 1),
-				new Coordinate(current.x + 1, current.z),
-				new Coordinate(current.x - 1, current.z)
-			};
-			foreach (Coordinate neighbor in neighbors)
-			{
-				// TODO break when we reach the goal
-				if (grid.ContainsKey(neighbor) && allowedTypes.Contains(grid[neighbor]) && !distance.ContainsKey(neighbor))
-				{
-					distance[neighbor] = distance[current] + 1;
-					parents[neighbor] = current;
-					queue.Enqueue(neighbor);
-				}
-			}
-
-		}
-		var next = end;
-		// if we can't get to the destination, return the same item
-		if (!parents.ContainsKey(next))
-		{
-			return start;
-		}
-		while (!parents[next].Equals (start))
-		{
-			Debug.Log("x="+next.x + " z="+next.z);
-			next = parents[next];
-		}
-		return next;
-	}
 }

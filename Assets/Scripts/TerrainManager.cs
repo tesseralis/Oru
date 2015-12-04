@@ -23,23 +23,17 @@ public class TerrainManager : MonoBehaviour
 
 	private IDictionary<Coordinate, TerrainType> grid;
 
-	private float cellSize = 2;
-
 	// Initialize the grid
 	void Start ()
 	{
+		// TODO this might fail if any other "start" function requires the grid
 		grid = new Dictionary<Coordinate, TerrainType>();
 		// Assume this grid's children are all terrain blocks
-		foreach (Transform terrainBlock in gameObject.transform)
+		foreach (Transform child in gameObject.transform)
 		{
-			Coordinate blockCoordinate = CalculateGridCoordinate(terrainBlock.position);
-			grid[blockCoordinate] = terrainBlock.gameObject.GetComponent<TerrainBlock>().type;
+			TerrainBlock block = child.gameObject.GetComponent<TerrainBlock>();
+			grid[block.Coordinate] = block.type;
 		}
 	}
 
-	// TODO figure out the right place to abstract this.
-	private Coordinate CalculateGridCoordinate(Vector3 position)
-	{
-		return new Coordinate((int)(position.x / cellSize), (int)(position.z / cellSize));
-	}
 }

@@ -13,7 +13,7 @@ GameObject:
   - 65: {fileID: 6569902}
   - 114: {fileID: 11432696}
   m_Layer: 0
-  m_Name: RockCell
+  m_Name: RockBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -84,10 +84,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 186096}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00739f8e6c3604136965133ab15eb2aa, type: 3}
+  m_Script: {fileID: 11500000, guid: b8a1bd06ad72b4f0dba4ec65b95adaea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cellType: 1
+  type: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -105,6 +105,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: cellType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: type
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

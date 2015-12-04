@@ -87,7 +87,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f828531687824056b48f74c9377d8d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allowedCells: 0000000001000000
+  allowedTerrain: 0000000001000000
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -97,6 +97,10 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: allowedCells.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: allowedTerrain.Array.size
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 0}
@@ -113,6 +117,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: allowedCells.Array.data[1]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: allowedTerrain.Array.data[1]
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
