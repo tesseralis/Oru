@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
@@ -118,7 +119,7 @@ public class GameManager : MonoBehaviour
 
 	public void RestartGame()
 	{
-		Application.LoadLevel(playAgainLevelToLoad);
+		SceneManager.LoadScene(playAgainLevelToLoad);
 	}
 
 	public Coordinate ToGridCoordinate(Vector3 position)
