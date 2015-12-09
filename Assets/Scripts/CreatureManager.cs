@@ -10,6 +10,8 @@ public class CreatureManager : MonoBehaviour
 
 	public GameObject creatureMarker;
 
+	public GameObject actionMarkers;
+
 	private Creature selectedCreature;
 
 	public IList<Creature> Creatures
@@ -34,6 +36,11 @@ public class CreatureManager : MonoBehaviour
 				creatureMarker.SetActive(true);
 				creatureMarker.transform.SetParent(value.gameObject.transform, false);
 			}
+			if (actionMarkers)
+			{
+				actionMarkers.transform.SetParent(value.gameObject.transform, false);
+				actionMarkers.GetComponent<ActionMarkers>().Action = value.GetComponent<IAction>();
+			}
 		}
 	}
 
@@ -45,6 +52,17 @@ public class CreatureManager : MonoBehaviour
 		foreach(Creature creature in Creatures)
 		{
 			creature.Step();
+		}
+	}
+
+	public void Update()
+	{
+		if (Input.GetKeyDown("space") && SelectedCreature != null)
+		{
+			// If the creature is moving, make it stop
+			SelectedCreature.Goal = null;
+			// Toggle the action marker
+			actionMarkers.SetActive(!actionMarkers.activeInHierarchy);
 		}
 	}
 }
