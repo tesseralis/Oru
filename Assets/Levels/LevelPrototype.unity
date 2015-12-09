@@ -655,18 +655,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 102484, guid: f542c1f9067694fc6bd3c223f3f92318, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6530966, guid: f542c1f9067694fc6bd3c223f3f92318, type: 2}
-      propertyPath: m_Size.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6530966, guid: f542c1f9067694fc6bd3c223f3f92318, type: 2}
-      propertyPath: m_Size.y
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f542c1f9067694fc6bd3c223f3f92318, type: 2}
   m_IsPrefabParent: 0
@@ -766,25 +754,10 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1afef6a08696149b18c31cdb92c17049, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &712904856 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 171066, guid: b0140aef76f004a08af3307b0f025fc2, type: 2}
-  m_PrefabInternal: {fileID: 2091531633}
 --- !u!4 &712904859 stripped
 Transform:
   m_PrefabParentObject: {fileID: 474872, guid: b0140aef76f004a08af3307b0f025fc2, type: 2}
   m_PrefabInternal: {fileID: 2091531633}
---- !u!114 &712904860
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 712904856}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e318ca0fbfd44ede9e42c36008af4a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &713362359
 Prefab:
   m_ObjectHideFlags: 0
@@ -978,6 +951,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cb19d0e964d94c35a5e8094944cc5be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  grassPrefab: {fileID: 177414, guid: 1afef6a08696149b18c31cdb92c17049, type: 2}
+  rockPrefab: {fileID: 186096, guid: db38fd54633eb409d9e6eea9e3658871, type: 2}
 --- !u!4 &1001215501 stripped
 Transform:
   m_PrefabParentObject: {fileID: 496182, guid: 1afef6a08696149b18c31cdb92c17049, type: 2}

@@ -26,8 +26,6 @@ public class TerrainBlock: MonoBehaviour
 		{
 			Debug.LogFormat("Setting goal of {0} to {1}", creature, Coordinate);
 			creature.Goal = Coordinate;
-			// TODO abstract this out
-			GameManager.gm.creatures.actionMarkers.SetActive(false);
 		}
 	}
 

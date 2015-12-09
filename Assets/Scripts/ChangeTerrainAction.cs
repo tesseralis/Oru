@@ -5,9 +5,8 @@ public class ChangeTerrainAction : MonoBehaviour, IAction
 {
 	public void Act(Coordinate target)
 	{
-		// TODO change, not destroy, the target.
+		// TODO carry the target and be able to put it down.
 		Debug.LogFormat("Acting on coordinate {0}.", target);
-		Destroy(GameManager.gm.terrain.TerrainGrid[target].gameObject);
-		GameManager.gm.terrain.TerrainGrid.Remove(target);
+		GameManager.gm.terrain[target] = TerrainType.Grass;
 	}
 }

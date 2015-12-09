@@ -8,7 +8,17 @@ public class Creature : MonoBehaviour
 
 	public TerrainType[] allowedTerrain = {TerrainType.Grass};
 
-	public Coordinate Goal { get; set; }
+	public Coordinate Goal {
+		get
+		{
+			return goal;
+		}
+		set
+		{
+			goal = value;
+			manager.actionMarkers.SetActive(false);
+		}
+	}
 
 	public Coordinate Position
 	{
@@ -18,6 +28,8 @@ public class Creature : MonoBehaviour
 	private CreatureManager manager;
 
 	private Coordinate position;
+
+	private Coordinate goal;
 
 	void Start()
 	{
@@ -49,7 +61,7 @@ public class Creature : MonoBehaviour
 	private Coordinate NextCoordinate()
 	{
 		// TODO do A* search
-		var grid = GameManager.gm.terrain.TerrainGrid;
+		var grid = GameManager.gm.terrain;
 		var distance = new Dictionary<Coordinate, int>();
 		var parents = new Dictionary<Coordinate, Coordinate> ();
 		var queue = new Queue<Coordinate> ();
@@ -69,7 +81,7 @@ public class Creature : MonoBehaviour
 			foreach (Coordinate neighbor in neighbors)
 			{
 				// TODO break when we reach the goal
-				if (grid.ContainsKey(neighbor) && allowedTerrain.Contains(grid[neighbor].type) && !distance.ContainsKey(neighbor))
+				if (grid.Contains(neighbor) && allowedTerrain.Contains(grid[neighbor]) && !distance.ContainsKey(neighbor))
 				{
 					distance[neighbor] = distance[current] + 1;
 					parents[neighbor] = current;

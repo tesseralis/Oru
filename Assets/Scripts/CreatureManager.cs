@@ -41,6 +41,7 @@ public class CreatureManager : MonoBehaviour
 			{
 				Debug.LogFormat("Setting action markers of {0} to {1}", selectedCreature, actionMarkers);
 				actionMarkers.transform.SetParent(value.gameObject.transform, false);
+				actionMarkers.SetActive(false);
 				actionMarkers.GetComponent<ActionMarkers>().Action = value.GetComponent<IAction>();
 			}
 		}
@@ -59,12 +60,17 @@ public class CreatureManager : MonoBehaviour
 
 	public void Update()
 	{
-		if (Input.GetKeyDown("space") && SelectedCreature != null)
+		if (Input.GetKeyDown("space") && (SelectedCreature != null))
 		{
+			Debug.LogFormat("Detected a space on {0}", SelectedCreature);
 			// If the creature is moving, make it stop
 			SelectedCreature.Goal = null;
 			// Toggle the action marker
-			actionMarkers.SetActive(!actionMarkers.activeInHierarchy);
+			// FIXME figure out why this won't work anymore.
+			Debug.LogFormat("Creature is now set to {0}", actionMarkers.activeSelf);
+			var activeValue = !actionMarkers.activeSelf;
+			Debug.LogFormat("Setting activity to {0}", activeValue);
+			actionMarkers.SetActive(activeValue);
 		}
 	}
 }
