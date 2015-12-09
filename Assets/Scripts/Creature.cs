@@ -76,7 +76,7 @@ public class Creature : MonoBehaviour
 			foreach (Coordinate neighbor in neighbors)
 			{
 				// TODO break when we reach the goal
-				if (grid.ContainsKey(neighbor) && allowedTerrain.Contains(grid[neighbor]) && !distance.ContainsKey(neighbor))
+				if (grid.ContainsKey(neighbor) && allowedTerrain.Contains(grid[neighbor].type) && !distance.ContainsKey(neighbor))
 				{
 					distance[neighbor] = distance[current] + 1;
 					parents[neighbor] = current;

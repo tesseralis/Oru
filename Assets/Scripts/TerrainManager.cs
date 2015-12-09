@@ -14,25 +14,25 @@ public class TerrainManager : MonoBehaviour
 	/// Mapping of grid coordinates to the type of terrain.
 	/// </summary>
 	/// <value>The terrain grid.</value>
-	public IDictionary<Coordinate, TerrainType> TerrainGrid
+	public IDictionary<Coordinate, TerrainBlock> TerrainGrid
 	{
 		get {
 			return grid;
 		}
 	}
 
-	private IDictionary<Coordinate, TerrainType> grid;
+	private IDictionary<Coordinate, TerrainBlock> grid;
 
 	// Initialize the grid
 	void Start ()
 	{
 		// TODO this might fail if any other "start" function requires the grid
-		grid = new Dictionary<Coordinate, TerrainType>();
+		grid = new Dictionary<Coordinate, TerrainBlock>();
 		// Assume this grid's children are all terrain blocks
 		foreach (Transform child in gameObject.transform)
 		{
 			TerrainBlock block = child.gameObject.GetComponent<TerrainBlock>();
-			grid[block.Coordinate] = block.type;
+			grid[block.Coordinate] = block;
 		}
 	}
 
