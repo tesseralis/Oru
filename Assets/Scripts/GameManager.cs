@@ -48,22 +48,25 @@ public class GameManager : MonoBehaviour
 
 	// The location that needs 
 	private Coordinate goalCoordinate;
+
+	void Awake ()
+	{
+		if (gm == null)
+		{
+			gm = this.gameObject.GetComponent<GameManager>();
+		}
+		
+		currentTime = 0;
+		nextStepTime = 0;
+	}
 	
 	// Use this for initialization
 	void Start ()
 	{
 
-		if (gm == null)
-		{
-			gm = this.gameObject.GetComponent<GameManager>();
-		}
-
-		currentTime = 0;
-		nextStepTime = 0;
-
 		if (goal)
 		{
-			goalCoordinate = CalculateGridCoordinate(goal.transform.position);
+			goalCoordinate = ToGridCoordinate(goal.transform.position);
 		}
 
 		if (winnerPanel)
@@ -118,9 +121,9 @@ public class GameManager : MonoBehaviour
 		Application.LoadLevel(playAgainLevelToLoad);
 	}
 
-	// TODO: translate the other way so we don't have to keep using float arith
-	private Coordinate CalculateGridCoordinate(Vector3 position)
+	public Coordinate ToGridCoordinate(Vector3 position)
 	{
+		// TODO round instead of floor for consistency?
 		return new Coordinate((int)(position.x / cellSize), (int)(position.z / cellSize));
 	}
 	

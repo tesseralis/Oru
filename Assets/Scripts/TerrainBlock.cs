@@ -14,7 +14,7 @@ public class TerrainBlock: MonoBehaviour
 		get
 		{
 			// TODO do a lazy eval to save instantiation cost?
-			return CalculateGridCoordinate(this.transform.position);
+			return GameManager.gm.ToGridCoordinate(this.transform.position);
 		}
 	}
 	
@@ -22,15 +22,13 @@ public class TerrainBlock: MonoBehaviour
 	{
 		// Set the creature's destination to this block.
 		var creature = GameManager.gm.creatures.SelectedCreature;
-		Debug.LogFormat("Setting goal of {0} to {1}", creature, Coordinate);
-		creature.Goal = Coordinate;
+		if (creature)
+		{
+			Debug.LogFormat("Setting goal of {0} to {1}", creature, Coordinate);
+			creature.Goal = Coordinate;
+			// TODO abstract this out
+			GameManager.gm.creatures.actionMarkers.SetActive(false);
+		}
 	}
-	
-	private float cellSize = 2;
 
-	// TODO figure out the right place to abstract this.
-	private Coordinate CalculateGridCoordinate(Vector3 position)
-	{
-		return new Coordinate((int)(position.x / cellSize), (int)(position.z / cellSize));
-	}
 }

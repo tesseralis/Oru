@@ -10,14 +10,8 @@ public class ActionMarker : MonoBehaviour
 		var action = GetComponentInParent<ActionMarkers>().Action;
 		if (action != null)
 		{
-			action.Act(CalculateGridCoordinate(position));
+			action.Act(GameManager.gm.ToGridCoordinate(position));
 		}
 	}
 
-	private float cellSize = 2;
-	// TODO figure out the right place to abstract this.
-	private Coordinate CalculateGridCoordinate(Vector3 position)
-	{
-		return new Coordinate((int)(position.x / cellSize), (int)(position.z / cellSize));
-	}
 }

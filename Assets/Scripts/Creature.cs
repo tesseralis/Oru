@@ -22,7 +22,7 @@ public class Creature : MonoBehaviour
 	void Start()
 	{
 		// Store our initial position
-		position = CalculateGridCoordinate(gameObject.transform.position);
+		position = GameManager.gm.ToGridCoordinate(gameObject.transform.position);
 		// Assume our parent is our manager
 		manager = GetComponentInParent<CreatureManager>();
 	}
@@ -36,20 +36,13 @@ public class Creature : MonoBehaviour
 	{
 		if (Goal != null && (!position.Equals(Goal)))
 		{
+			var cellSize = GameManager.gm.cellSize;
 			var next = NextCoordinate ();
 			position = next;
 
 			// Update the position visually
 			gameObject.transform.position = new Vector3(next.x * cellSize, gameObject.transform.position.y, next.z * cellSize);
 		}
-	}
-
-	private float cellSize = 2;
-	
-	// TODO figure out the right place to abstract this.
-	private Coordinate CalculateGridCoordinate(Vector3 position)
-	{
-		return new Coordinate((int)(position.x / cellSize), (int)(position.z / cellSize));
 	}
 
 	// do a BFS and figure out the right path
