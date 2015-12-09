@@ -33,11 +33,13 @@ public class CreatureManager : MonoBehaviour
 			selectedCreature = value;
 			if (creatureMarker)
 			{
+				Debug.LogFormat("Setting creature marker of {0} to {1}", selectedCreature, creatureMarker);
 				creatureMarker.SetActive(true);
 				creatureMarker.transform.SetParent(value.gameObject.transform, false);
 			}
 			if (actionMarkers)
 			{
+				Debug.LogFormat("Setting action markers of {0} to {1}", selectedCreature, actionMarkers);
 				actionMarkers.transform.SetParent(value.gameObject.transform, false);
 				actionMarkers.GetComponent<ActionMarkers>().Action = value.GetComponent<IAction>();
 			}
