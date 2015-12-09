@@ -19,8 +19,6 @@ public class GameManager : MonoBehaviour
 	// the level to load when restarting
 	public string playAgainLevelToLoad;
 
-	// the marker UI for the current game creature
-	public GameObject creatureMarker;
 	// the goal in the world
 	public GameObject goal;
 
@@ -62,10 +60,6 @@ public class GameManager : MonoBehaviour
 
 		currentTime = 0;
 		nextStepTime = 0;
-		if (creatureMarker)
-		{
-			creatureMarker.SetActive (false);
-		}
 
 		if (goal)
 		{
