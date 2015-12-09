@@ -85,6 +85,10 @@ NavMeshSettings:
     cellSize: .166666672
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &17565745 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 102484, guid: f542c1f9067694fc6bd3c223f3f92318, type: 2}
+  m_PrefabInternal: {fileID: 688802847}
 --- !u!4 &21566533 stripped
 Transform:
   m_PrefabParentObject: {fileID: 496182, guid: 1afef6a08696149b18c31cdb92c17049, type: 2}
@@ -506,8 +510,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 346592262}
-  m_LocalRotation: {x: -.0871722996, y: .899590611, z: -.210452557, w: -.37262255}
-  m_LocalPosition: {x: 8.8470993, y: 4.76297998, z: 8.4294548}
+  m_LocalRotation: {x: .0313791111, y: .965462625, z: -.218238831, w: .138813734}
+  m_LocalPosition: {x: -1.40865517, y: 6.44628334, z: 17.175436}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -649,6 +653,18 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 466006, guid: f542c1f9067694fc6bd3c223f3f92318, type: 2}
       propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 102484, guid: f542c1f9067694fc6bd3c223f3f92318, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6530966, guid: f542c1f9067694fc6bd3c223f3f92318, type: 2}
+      propertyPath: m_Size.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6530966, guid: f542c1f9067694fc6bd3c223f3f92318, type: 2}
+      propertyPath: m_Size.y
       value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -887,7 +903,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   winnerPanel: {fileID: 223146022}
   playAgainLevelToLoad: LevelPrototype
-  creatureMarker: {fileID: 618320991}
   goal: {fileID: 1820473787}
   terrain: {fileID: 980324998}
   creatures: {fileID: 1761952226}
@@ -1514,6 +1529,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   creatureMarker: {fileID: 618320991}
+  actionMarkers: {fileID: 17565745}
 --- !u!1 &1820473787
 GameObject:
   m_ObjectHideFlags: 0
