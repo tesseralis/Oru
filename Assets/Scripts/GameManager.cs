@@ -23,6 +23,9 @@ public class GameManager : MonoBehaviour
 	// the goal in the world
 	public GameObject goal;
 
+	// the creature type that needs to reach the goal
+	public CreatureType winningCreatureType;
+
 	// the grid of available game blocks
 	public TerrainManager terrain;
 	// the creatures in the came world
@@ -99,7 +102,7 @@ public class GameManager : MonoBehaviour
 
 		if (goalCoordinate != null)
 		{
-			if (creatures.Creatures.Select(x => x.Position).Contains(goalCoordinate))
+			if (creatures.Creatures.Where(x => x.creatureType == winningCreatureType).Select(x => x.Position).Contains(goalCoordinate))
 			{
 				// TODO end game
 				Debug.Log("You win!");

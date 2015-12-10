@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class Creature : MonoBehaviour
 {
-
+	public CreatureType creatureType;
 	public TerrainType[] allowedTerrain = {TerrainType.Grass};
 
 	public Coordinate Goal {
