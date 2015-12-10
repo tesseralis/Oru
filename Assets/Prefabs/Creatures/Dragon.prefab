@@ -42,8 +42,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 156160}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: .25, z: 0}
-  m_LocalScale: {x: .75, y: .5, z: .5}
+  m_LocalPosition: {x: 0, y: 0.25, z: 0}
+  m_LocalScale: {x: 0.75, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 474872}
   m_RootOrder: 0
@@ -81,7 +81,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: .5
+  m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
@@ -103,8 +103,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .75, y: 1, z: .5}
-  m_Center: {x: 0, y: .75, z: 0}
+  m_Size: {x: 0.75, y: 1, z: 0.5}
+  m_Center: {x: 0, y: 0.75, z: 0}
 --- !u!114 &11418332
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -116,6 +116,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e318ca0fbfd44ede9e42c36008af4a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  carryType: 1
+  leaveType: 0
 --- !u!114 &11423522
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -127,6 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f828531687824056b48f74c9377d8d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  creatureType: 1
   allowedTerrain: 0000000001000000
 --- !u!1001 &100100000
 Prefab:
@@ -134,7 +137,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: creatureType
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 171066}

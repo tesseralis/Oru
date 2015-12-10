@@ -21,10 +21,7 @@ public class GameManager : MonoBehaviour
 	public string playAgainLevelToLoad;
 
 	// the goal in the world
-	public GameObject goal;
-
-	// the creature type that needs to reach the goal
-	public CreatureType winningCreatureType;
+	public Goal goal;
 
 	// the grid of available game blocks
 	public TerrainManager terrain;
@@ -49,10 +46,6 @@ public class GameManager : MonoBehaviour
 	// the next time to take a step
 	private float nextStepTime;
 
-
-	// The location that needs 
-	private Coordinate goalCoordinate;
-
 	void Awake ()
 	{
 		if (gm == null)
@@ -67,11 +60,6 @@ public class GameManager : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-
-		if (goal)
-		{
-			goalCoordinate = ToGridCoordinate(goal.transform.position);
-		}
 
 		if (winnerPanel)
 		{
@@ -100,14 +88,12 @@ public class GameManager : MonoBehaviour
 		Debug.Log ("Next step: " + nextStepTime);
 		creatures.Step();
 
-		if (goalCoordinate != null)
+		if (creatures.Creatures.Where(x => x.creatureType == goal.winningCreatureType)
+			.Select(x => x.Position).Contains(goal.Coordinate))
 		{
-			if (creatures.Creatures.Where(x => x.creatureType == winningCreatureType).Select(x => x.Position).Contains(goalCoordinate))
-			{
-				// TODO end game
-				Debug.Log("You win!");
-				WinGame();
-			}
+			// TODO end game
+			Debug.Log("You win!");
+			WinGame();
 		}
 	}
 

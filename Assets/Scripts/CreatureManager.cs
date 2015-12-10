@@ -13,6 +13,8 @@ public class CreatureManager : MonoBehaviour
 
 	public GameObject actionMarkers;
 
+	public InfoPanel infoPanel;
+
 	private Creature selectedCreature;
 
 	public IList<Creature> Creatures
@@ -48,6 +50,10 @@ public class CreatureManager : MonoBehaviour
 				}
 				actionMarkers.SetActive(false);
 			}
+			// Update the info panel
+			infoPanel.gameObject.SetActive(true);
+			infoPanel.Name = value.creatureType.ToString();
+			infoPanel.Description = "Action: " + value.GetComponent<IAction>();
 		}
 	}
 
@@ -70,7 +76,7 @@ public class CreatureManager : MonoBehaviour
 			// If the creature is moving, make it stop
 			SelectedCreature.Goal = null;
 			// Toggle the action marker
-			// FIXME figure out why this won't work anymore.
+			// FIXME figure out why toggling won't work anymore.
 			Debug.LogFormat("Creature is now set to {0}", actionMarkers.activeSelf);
 			var activeValue = !actionMarkers.activeSelf;
 			Debug.LogFormat("Setting activity to {0}", activeValue);
