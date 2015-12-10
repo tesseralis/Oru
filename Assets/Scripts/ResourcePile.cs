@@ -7,6 +7,15 @@ public class ResourcePile : MonoBehaviour
 {
 	public ResourceCount[] resources;
 
+	public Coordinate Coordinate
+	{
+		get
+		{
+			// TODO do a lazy eval to save instantiation cost?
+			return GameManager.gm.ToGridCoordinate(this.transform.position);
+		}
+	}
+
 	void OnMouseOver()
 	{
 		Debug.Log("Going over resources.");
