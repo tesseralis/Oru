@@ -3,9 +3,14 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
+/// <summary>
+/// A creature represents a single movable unit in the game, whether friendly or not.
+/// </summary>
 public class Creature : MonoBehaviour
 {
+	// The type of creature this is.
 	public CreatureType creatureType;
+	// The type of terrain this creature is allowed to go on.
 	public TerrainType[] allowedTerrain = {TerrainType.Grass};
 
 	public Coordinate Goal {
@@ -16,6 +21,7 @@ public class Creature : MonoBehaviour
 		set
 		{
 			goal = value;
+			// Disable actions when we move the creature.
 			manager.actionMarkers.SetActive(false);
 		}
 	}
