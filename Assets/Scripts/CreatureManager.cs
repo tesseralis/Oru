@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -41,8 +42,11 @@ public class CreatureManager : MonoBehaviour
 			{
 				Debug.LogFormat("Setting action markers of {0} to {1}", selectedCreature, actionMarkers);
 				actionMarkers.transform.SetParent(value.gameObject.transform, false);
+				foreach (var marker in actionMarkers.GetComponentsInChildren<ActionMarker>())
+				{
+					marker.Action = value.GetComponent<IAction>();
+				}
 				actionMarkers.SetActive(false);
-				actionMarkers.GetComponent<ActionMarkers>().Action = value.GetComponent<IAction>();
 			}
 		}
 	}
