@@ -34,6 +34,13 @@ public class CreatureManager : MonoBehaviour
 		set
 		{
 			selectedCreature = value;
+			// If creatures are unselected, get rid of the UI.
+			if (selectedCreature == null)
+			{
+				if (creatureMarker) { creatureMarker.SetActive(false); }
+				if (actionMarkers) { actionMarkers.SetActive(false); }
+				return;
+			}
 			if (creatureMarker)
 			{
 				Debug.LogFormat("Setting creature marker of {0} to {1}", selectedCreature, creatureMarker);
@@ -51,7 +58,6 @@ public class CreatureManager : MonoBehaviour
 				actionMarkers.SetActive(false);
 			}
 			// Update the info panel
-			infoPanel.gameObject.SetActive(true);
 			infoPanel.Name = value.creatureType.ToString();
 			infoPanel.Description = "Action: " + value.GetComponent<IAction>();
 		}

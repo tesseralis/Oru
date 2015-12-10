@@ -11,13 +11,21 @@ public class InfoPanel : MonoBehaviour
 
 	public string Name
 	{
-		set { nameDisplay.text = value; }
+		set {
+			nameDisplay.text = value;
+			// Activate this whenever it's changed
+			gameObject.SetActive(true);
+		}
 		get { return nameDisplay.text; }
 	}
 
 	public string Description
 	{
-		set { descriptionDisplay.text = value; }
+		set {
+			descriptionDisplay.text = value;
+			// Activate this whenever it's changed
+			gameObject.SetActive(true);
+		}
 		get { return descriptionDisplay.text; }
 	}
 
