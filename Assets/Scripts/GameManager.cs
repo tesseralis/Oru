@@ -25,11 +25,12 @@ public class GameManager : MonoBehaviour
 
 	// the grid of available game blocks
 	public TerrainManager terrain;
-	// the creatures in the came world
+	// the creatures in the game world
 	public CreatureManager creatures;
-
-	// the set of instructions available in the game world
-	public GameObject instructions;
+	// the resources in the game world
+	public ResourceManager resources;
+	// the recipes of the game world
+	public RecipeManager recipes;
 
 	// the element to use to determine where to create creatures
 	public GameObject createMarker;
@@ -52,10 +53,6 @@ public class GameManager : MonoBehaviour
 	// the next time to take a step
 	private float nextStepTime;
 
-	// The location of all the instructions in the world
-	private IDictionary<Coordinate, Instruction> instructionLocations;
-	// The list of available instructions in the game
-	private IList<CreatureType> availableInstructions;
 
 	void Awake ()
 	{
@@ -77,16 +74,7 @@ public class GameManager : MonoBehaviour
 			winnerPanel.SetActive(false);
 		}
 
-		instructionLocations = new Dictionary<Coordinate, Instruction>();
-		availableInstructions = new List<CreatureType>();
-		if (instructions)
-		{
-			foreach (var instruction in instructions.GetComponentsInChildren<Instruction>())
-			{
-				instructionLocations[instruction.Coordinate] = instruction;
-			}
-		}
-	
+
 	}
 	
 	// Update is called once per frame
@@ -108,6 +96,7 @@ public class GameManager : MonoBehaviour
 	{
 		Debug.Log ("Next step: " + nextStepTime);
 		creatures.Step();
+		recipes.UpdateAvailableRecipes(creatures.Creatures.Select(x => x.Position).ToList());
 
 		if (creatures.Creatures.Where(x => x.creatureType == goal.winningCreatureType)
 			.Select(x => x.Position).Contains(goal.Coordinate))
@@ -117,19 +106,6 @@ public class GameManager : MonoBehaviour
 			WinGame();
 		}
 
-		foreach (var entry in instructionLocations)
-		{
-			// If there is a creature at our location, remove this instruction
-			// from the grid and add it to the list of available instructions
-			if (creatures.Creatures.Select(x => x.Position).Contains(entry.Key))
-			{
-				if (!availableInstructions.Contains(entry.Value.creature))
-				{
-					availableInstructions.Add(entry.Value.creature);
-				}
-				Destroy(entry.Value.gameObject);
-			}
-		}
 	}
 
 	private void WinGame()

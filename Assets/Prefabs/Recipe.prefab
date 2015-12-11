@@ -9,7 +9,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 426312}
   - 33: {fileID: 3344206}
-  - 65: {fileID: 6572136}
   - 23: {fileID: 2315334}
   m_Layer: 0
   m_Name: InstructionSheet
@@ -26,9 +25,9 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 466256}
-  - 114: {fileID: 11434848}
+  - 114: {fileID: 11417578}
   m_Layer: 0
-  m_Name: Instruction
+  m_Name: Recipe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -92,19 +91,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 173798}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &6572136
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 173798}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &11434848
+--- !u!114 &11417578
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -112,7 +99,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 185050}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1588ae6876c5e40daa8a2dc841f32e57, type: 3}
+  m_Script: {fileID: 11500000, guid: c0467119c967247fe8a3a140861f3c41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   creature: 0
