@@ -27,6 +27,9 @@ public class GameManager : MonoBehaviour
 	public TerrainManager terrain;
 	// the creatures in the came world
 	public CreatureManager creatures;
+
+	// the set of instructions available in the game world
+	public GameObject instructions;
 	
 	// how width of the space between individual cells
 	public float cellSize = 2;
@@ -41,10 +44,15 @@ public class GameManager : MonoBehaviour
 	// The game state
 	private bool hasWon = false;
 
-	// the current time
+	// The current time
 	private float currentTime;
 	// the next time to take a step
 	private float nextStepTime;
+
+	// The location of all the instructions in the world
+	private IDictionary<Coordinate, Instruction> instructionLocations;
+	// The list of available instructions in the game
+	private IList<CreatureType> availableInstructions;
 
 	void Awake ()
 	{
@@ -64,6 +72,16 @@ public class GameManager : MonoBehaviour
 		if (winnerPanel)
 		{
 			winnerPanel.SetActive(false);
+		}
+
+		instructionLocations = new Dictionary<Coordinate, Instruction>();
+		availableInstructions = new List<CreatureType>();
+		if (instructions)
+		{
+			foreach (var instruction in instructions.GetComponentsInChildren<Instruction>())
+			{
+				instructionLocations[instruction.Coordinate] = instruction;
+			}
 		}
 	
 	}
@@ -94,6 +112,20 @@ public class GameManager : MonoBehaviour
 			// TODO end game
 			Debug.Log("You win!");
 			WinGame();
+		}
+
+		foreach (var entry in instructionLocations)
+		{
+			// If there is a creature at our location, remove this instruction
+			// from the grid and add it to the list of available instructions
+			if (creatures.Creatures.Select(x => x.Position).Contains(entry.Key))
+			{
+				if (!availableInstructions.Contains(entry.Value.creature))
+				{
+					availableInstructions.Add(entry.Value.creature);
+				}
+				Destroy(entry.Value.gameObject);
+			}
 		}
 	}
 
