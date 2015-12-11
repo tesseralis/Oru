@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Util;
 
 
 public class RecipeManager : MonoBehaviour
@@ -86,13 +87,13 @@ public class RecipeManager : MonoBehaviour
 			IDictionary<ResourceType, int> resourceCount = new Dictionary<ResourceType, int>();
 			foreach (var resource in availableResources)
 			{
-				resourceCount = Add(resourceCount, resource);
+				resourceCount = resourceCount.Add(resource);
 			}
 			Debug.LogFormat("Calculated resources: {0}", String.Join("; ", resourceCount.Select(e => e.Key + ": " + e.Value).ToArray()));
 
 			// TODO check if we have enough resources for the recipe
 
-			if (Contains(resourceCount, Recipes.dragonRecipe))
+			if (resourceCount.Contains(Recipes.dragonRecipe))
 			{
 				// If everything passes, add the creature to the list of creatures
 				GameManager.gm.creatures.AddCreature(CreatureType.Dragon, coordinate);
@@ -119,30 +120,7 @@ public class RecipeManager : MonoBehaviour
 		}
 	}
 
-	// Adds up the two multisets into a third multiset.
-	// TODO put this in an extension method or something
-	private static IDictionary<T, int> Add<T>(IDictionary<T, int> first, IDictionary<T, int> second)
-	{
-		var result = new Dictionary<T, int>(first);
-		foreach (var entry in second)
-		{
-			if (result.ContainsKey(entry.Key))
-			{
-				result[entry.Key] += entry.Value;
-			}
-			else
-			{
-				result[entry.Key] = entry.Value;
-			}
-		}
-		return result;
-	}
 
-	// Check if one multiset contains another
-	private static bool Contains<T>(IDictionary<T, int> superset, IDictionary<T, int> subset)
-	{
-		return subset.All(entry => superset.ContainsKey(entry.Key) && superset[entry.Key] >= entry.Value);
-	}
 
 	private static IList<Coordinate> Neighbors(Coordinate coordinate)
 	{
