@@ -20,7 +20,6 @@ public class ResourceManager : MonoBehaviour
 
 	// Use this for initialization
 	void Start () {
-		// TODO this might fail if any other "start" function requires the grid
 		locations = new Dictionary<Coordinate, ResourcePile>();
 		// Assume this grid's children are all terrain blocks
 		foreach (Transform child in gameObject.transform)

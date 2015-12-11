@@ -41,6 +41,11 @@ public class RecipeManager : MonoBehaviour
 		{
 			recipeLocations[instruction.Coordinate()] = instruction;
 		}
+
+		// Set event handlers
+		// TODO add and remove these handlers based on state.
+		GameManager.gm.terrain.OnHover += MoveCreateMarker;
+		GameManager.gm.terrain.OnClick += CreateCreature;
 	}
 
 	// Update the list of available instructions if a creature has walked on it
@@ -67,7 +72,7 @@ public class RecipeManager : MonoBehaviour
 		}
 	}
 
-	public void OnMouseOverTerrain(Coordinate coordinate)
+	void MoveCreateMarker(Coordinate coordinate)
 	{
 		if (createMarker != null && isCreating)
 		{
@@ -76,7 +81,7 @@ public class RecipeManager : MonoBehaviour
 		}
 	}
 
-	public void OnMouseDownTerrain(Coordinate coordinate)
+	void CreateCreature(Coordinate coordinate)
 	{
 		if (createMarker != null && isCreating)
 		{

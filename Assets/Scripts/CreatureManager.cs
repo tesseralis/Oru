@@ -103,13 +103,20 @@ public class CreatureManager : MonoBehaviour
 		// Set this creature to be the new one
 	}
 
-	public void SetSelectedCreatureGoal(Coordinate goal)
+	private void SetSelectedCreatureGoal(Coordinate goal)
 	{
 		if (SelectedCreature)
 		{
 			SelectedCreature.Goal = goal;
 			IsActing = false;
 		}
+	}
+
+	public void Start()
+	{
+		// Hook up the event handler
+		// TODO Change the code to add and remove these event handlers based on state.
+		GameManager.gm.terrain.OnClick += SetSelectedCreatureGoal;
 	}
 
 	/// <summary>

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Util;
@@ -13,6 +14,9 @@ public class TerrainManager : MonoBehaviour
 
 	public GameObject grassPrefab;
 	public GameObject rockPrefab;
+
+	public Action<Coordinate> OnHover;
+	public Action<Coordinate> OnClick;
 
 	public TerrainType this[Coordinate coordinate]
 	{

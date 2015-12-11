@@ -8,19 +8,20 @@ using Util;
 /// </summary>
 public class TerrainBlock: MonoBehaviour
 {
+	private TerrainManager controller {
+		get { return gameObject.GetComponentInParent<TerrainManager>(); }
+	}
 
 	public TerrainType type;
 
 	void OnMouseOver ()
 	{
-		// TODO make this a delegate somehow?
-		GameManager.gm.recipes.OnMouseOverTerrain(this.Coordinate());
+		controller.OnHover(this.Coordinate());
 	}
 	
 	void OnMouseDown ()
 	{
-		GameManager.gm.creatures.SetSelectedCreatureGoal(this.Coordinate());
-		GameManager.gm.recipes.OnMouseDownTerrain(this.Coordinate());
+		controller.OnClick(this.Coordinate());
 	}
 
 }
