@@ -63,7 +63,6 @@ public class TerrainManager : MonoBehaviour
 	// Initialize the grid
 	void Start ()
 	{
-		// TODO this might fail if any other "start" function requires the grid
 		grid = new Dictionary<Coordinate, TerrainBlock>();
 		// Assume this grid's children are all terrain blocks
 		foreach (Transform child in gameObject.transform)
