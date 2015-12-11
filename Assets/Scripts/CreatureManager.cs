@@ -24,6 +24,16 @@ public class CreatureManager : MonoBehaviour
 	// Tells us if we are acting right now.
 	private bool isActing = false;
 
+	public bool IsActing
+	{
+		get { return isActing; }
+		set
+		{
+			isActing = value;
+			if (actionMarkers) { actionMarkers.SetActive(isActing); }
+		}
+	}
+
 	public IList<Creature> Creatures
 	{
 		get
@@ -62,8 +72,8 @@ public class CreatureManager : MonoBehaviour
 				{
 					marker.Action = value.GetComponent<IAction>();
 				}
-				actionMarkers.SetActive(false);
 			}
+			IsActing = false;
 			// Update the info panel
 			infoPanel.Name = value.creatureType.ToString();
 			infoPanel.Description = "Action: " + value.GetComponent<IAction>();
@@ -98,8 +108,7 @@ public class CreatureManager : MonoBehaviour
 		if (SelectedCreature)
 		{
 			SelectedCreature.Goal = goal;
-			isActing = false;
-			actionMarkers.SetActive(isActing);
+			IsActing = false;
 		}
 	}
 
@@ -122,8 +131,7 @@ public class CreatureManager : MonoBehaviour
 			// If the creature is moving, make it stop
 			SelectedCreature.Goal = null;
 			// Toggle the action marker
-			isActing = !isActing;
-			actionMarkers.SetActive(isActing);
+			IsActing = !IsActing;
 		}
 	}
 }

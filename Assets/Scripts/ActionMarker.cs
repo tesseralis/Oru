@@ -14,7 +14,7 @@ public class ActionMarker : MonoBehaviour
 		{
 			Action.Act(GameManager.gm.ToGridCoordinate(position));
 			// Once we're done, deactivate ourselves
-			transform.parent.gameObject.SetActive(false);
+			GameManager.gm.creatures.IsActing = false;
 		}
 	}
 
