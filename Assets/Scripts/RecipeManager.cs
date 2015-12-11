@@ -79,25 +79,32 @@ public class RecipeManager : MonoBehaviour
 	{
 		if (createMarker != null && isCreating)
 		{
-			// TODO use the whole grid of nine blocks
-
-			// TODO un-hardcode the recipe we need
-			var currentRecipe = new Dictionary<ResourceType, int>();
-			currentRecipe[ResourceType.Red] = 3; // we need three red for a dragon
+			// Figure out how many blocks we have available
+			// TODO do a type alias of the multiset.
+			IEnumerable<IDictionary<ResourceType, int>> availableResources = Neighbors(coordinate)
+				.Select(c => GameManager.gm.resources.Contains(c) ? GameManager.gm.resources[c] : new Dictionary<ResourceType, int>());
+			IDictionary<ResourceType, int> resourceCount = new Dictionary<ResourceType, int>();
+			foreach (var resource in availableResources)
+			{
+				resourceCount = Add(resourceCount, resource);
+			}
+			Debug.LogFormat("Calculated resources: {0}", String.Join("; ", resourceCount.Select(e => e.Key + ": " + e.Value).ToArray()));
 
 			// TODO check if we have enough resources for the recipe
-			if (GameManager.gm.resources.Contains(coordinate))
-			{
-				var resourceCount = GameManager.gm.resources[coordinate];
 
-				if (Contains(resourceCount, Recipes.duckRecipe))
-				{
-					// If everything passes, add the creature to the list of creatures
-					GameManager.gm.creatures.AddCreature(CreatureType.Duck, coordinate);
-				}
+			if (Contains(resourceCount, Recipes.dragonRecipe))
+			{
+				// If everything passes, add the creature to the list of creatures
+				GameManager.gm.creatures.AddCreature(CreatureType.Dragon, coordinate);
+			}
+			else
+			{
+				Debug.LogFormat("Did not find enough materials for recipe. Had {0}, needed {1}",
+					resourceCount, Recipes.dragonRecipe);
 			}
 
-				// TODO subtract the blocks needed from the resource manager
+
+			// TODO subtract the blocks needed from the resource manager
 
 		}
 	}
@@ -134,7 +141,16 @@ public class RecipeManager : MonoBehaviour
 	// Check if one multiset contains another
 	private static bool Contains<T>(IDictionary<T, int> superset, IDictionary<T, int> subset)
 	{
-		return subset.All(entry => superset.ContainsKey(entry.Key) && superset[entry.Key] > entry.Value);
+		return subset.All(entry => superset.ContainsKey(entry.Key) && superset[entry.Key] >= entry.Value);
+	}
+
+	private static IList<Coordinate> Neighbors(Coordinate coordinate)
+	{
+		int[] range = {-1, 0, 1};
+		return (from x in range
+			from z in range
+			select coordinate + new Coordinate(x, z)).ToList();
+
 	}
 
 }
