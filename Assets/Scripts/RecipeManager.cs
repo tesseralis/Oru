@@ -1,13 +1,17 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
 
-public class RecipeManager : MonoBehaviour {
+public class RecipeManager : MonoBehaviour
+{
 
 	// the element to use to determine where to create creatures
 	public GameObject createMarker;
+
+	public RecipeListEntry[] recipeList;
 
 	// The location of all the instructions in the world
 	private IDictionary<Coordinate, Recipe> recipeLocations;
@@ -94,4 +98,13 @@ public class RecipeManager : MonoBehaviour {
 		}
 	}
 
+}
+
+// TODO does this make sense as something included in the "recipe" class instead?
+[Serializable]
+public class RecipeListEntry
+{
+	public CreatureType type;
+	public ResourceCount[] recipe;
+	public GameObject prefab;
 }

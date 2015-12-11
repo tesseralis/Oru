@@ -226,6 +226,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   createMarker: {fileID: 1902409563}
+  recipeList:
+  - type: 1
+    recipe:
+    - type: 0
+      count: 2
+    prefab: {fileID: 171066, guid: b0140aef76f004a08af3307b0f025fc2, type: 2}
 --- !u!4 &90700789 stripped
 Transform:
   m_PrefabParentObject: {fileID: 496182, guid: 1afef6a08696149b18c31cdb92c17049, type: 2}
