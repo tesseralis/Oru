@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using UnityEngine;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Util
@@ -28,6 +29,15 @@ namespace Util
 		public static bool Contains<T>(this IDictionary<T, int> superset, IDictionary<T, int> subset)
 		{
 			return subset.All(entry => superset.ContainsKey(entry.Key) && superset[entry.Key] >= entry.Value);
+		}
+	}
+
+	// Defines extension methods related to coordinates
+	public static class Coordinates
+	{
+		public static Coordinate Coordinate(this MonoBehaviour script)
+		{
+			return GameManager.gm.ToGridCoordinate(script.gameObject.transform.position);
 		}
 	}
 }

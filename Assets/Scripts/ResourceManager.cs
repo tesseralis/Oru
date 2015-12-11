@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Util;
 
 public class ResourceManager : MonoBehaviour
 {
@@ -25,7 +26,7 @@ public class ResourceManager : MonoBehaviour
 		foreach (Transform child in gameObject.transform)
 		{
 			ResourcePile block = child.gameObject.GetComponent<ResourcePile>();
-			locations[block.Coordinate] = block;
+			locations[block.Coordinate()] = block;
 		}
 	}
 

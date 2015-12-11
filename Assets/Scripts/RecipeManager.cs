@@ -39,7 +39,7 @@ public class RecipeManager : MonoBehaviour
 
 		foreach (var instruction in GetComponentsInChildren<Recipe>())
 		{
-			recipeLocations[instruction.Coordinate] = instruction;
+			recipeLocations[instruction.Coordinate()] = instruction;
 		}
 	}
 

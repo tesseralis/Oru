@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Util;
 
 /// <summary>
 /// Manages the overall state of the terrain in the game,
@@ -68,7 +69,7 @@ public class TerrainManager : MonoBehaviour
 		foreach (Transform child in gameObject.transform)
 		{
 			TerrainBlock block = child.gameObject.GetComponent<TerrainBlock>();
-			grid[block.Coordinate] = block;
+			grid[block.Coordinate()] = block;
 		}
 	}
 

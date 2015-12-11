@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using Util;
 
 public class GameManager : MonoBehaviour
 {
@@ -97,7 +98,7 @@ public class GameManager : MonoBehaviour
 		recipes.UpdateAvailableRecipes(creatures.Creatures.Select(x => x.Position).ToList());
 
 		if (creatures.Creatures.Where(x => x.creatureType == goal.winningCreatureType)
-			.Select(x => x.Position).Contains(goal.Coordinate))
+			.Select(x => x.Position).Contains(goal.Coordinate()))
 		{
 			// TODO end game
 			Debug.Log("You win!");

@@ -10,11 +10,6 @@ public class Goal : MonoBehaviour
 	// The info panel
 	public InfoPanel infoPanel;
 
-	public Coordinate Coordinate
-	{
-		get { return GameManager.gm.ToGridCoordinate(transform.position); }
-	}
-
 	void OnMouseDown()
 	{
 		// Disable creature markers

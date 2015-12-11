@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 
+// TODO "Recipe" and "Recipes" don't actually have anything to do with each other.
 /// <summary>
 /// Defines the static recipes needed to create each creature.
 /// </summary>
