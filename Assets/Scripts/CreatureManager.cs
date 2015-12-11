@@ -72,6 +72,27 @@ public class CreatureManager : MonoBehaviour
 		}
 	}
 
+	// Add a creature at a specified location
+	public void AddCreature(CreatureType creature, Coordinate location)
+	{
+		GameObject creaturePrefab;
+		switch(creature)
+		{
+		case CreatureType.Duck:
+			creaturePrefab = creaturePrefabs.duckPrefab;
+			break;
+		case CreatureType.Dragon:
+		default:
+			creaturePrefab = creaturePrefabs.dragonPrefab;
+			break;
+		}
+		GameObject newCreature = Instantiate(creaturePrefab);
+		GameManager.gm.SetPosition(newCreature, location);
+		newCreature.transform.SetParent(this.transform);
+
+		// Set this creature to be the new one
+	}
+
 	public void SetSelectedCreatureGoal(Coordinate goal)
 	{
 		if (SelectedCreature)

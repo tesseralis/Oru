@@ -91,8 +91,8 @@ public class RecipeManager : MonoBehaviour
 
 			// TODO check if we have enough resources for the recipe
 
-			// TODO if so, create a new instance of the creature in the prefab
-
+			// If everything passes, add the creature to the list of creatures
+			GameManager.gm.creatures.AddCreature(CreatureType.Duck, coordinate);
 
 		}
 	}
