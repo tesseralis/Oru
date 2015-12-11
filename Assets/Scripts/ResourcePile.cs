@@ -16,6 +16,26 @@ public class ResourcePile : MonoBehaviour
 		}
 	}
 
+	public IDictionary<ResourceType, int> Resources
+	{
+		get
+		{
+			var result = new Dictionary<ResourceType, int>();
+			foreach(var resource in resources)
+			{
+				if (result.ContainsKey(resource.type))
+				{
+					result[resource.type] += resource.count;
+				}
+				else
+				{
+					result[resource.type] = resource.count;
+				}
+			}
+			return result;
+		}
+	}
+
 	void OnMouseOver()
 	{
 		Debug.Log("Going over resources.");

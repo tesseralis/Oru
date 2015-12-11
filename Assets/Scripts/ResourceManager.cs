@@ -5,9 +5,14 @@ using System.Collections.Generic;
 public class ResourceManager : MonoBehaviour
 {
 	// Get the pile of resources at the given coordinate
-	public ResourceCount[] this[Coordinate coordinate]
+	public IDictionary<ResourceType, int> this[Coordinate coordinate]
 	{
-		get { return locations[coordinate].resources; }
+		get { return locations[coordinate].Resources; }
+	}
+
+	public bool Contains(Coordinate coordinate)
+	{
+		return locations.ContainsKey(coordinate);
 	}
 
 	private IDictionary<Coordinate, ResourcePile> locations;

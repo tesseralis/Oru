@@ -85,12 +85,19 @@ public class RecipeManager : MonoBehaviour
 			var currentRecipe = new Dictionary<ResourceType, int>();
 			currentRecipe[ResourceType.Red] = 3; // we need three red for a dragon
 
-			// TODO link the Dragon prefab from somewhere as part of the current recipe
-
 			// TODO check if we have enough resources for the recipe
+			if (GameManager.gm.resources.Contains(coordinate))
+			{
+				var resourceCount = GameManager.gm.resources[coordinate];
 
-			// If everything passes, add the creature to the list of creatures
-			GameManager.gm.creatures.AddCreature(CreatureType.Duck, coordinate);
+				if (Contains(resourceCount, Recipes.duckRecipe))
+				{
+					// If everything passes, add the creature to the list of creatures
+					GameManager.gm.creatures.AddCreature(CreatureType.Duck, coordinate);
+				}
+			}
+
+				// TODO subtract the blocks needed from the resource manager
 
 		}
 	}
@@ -103,6 +110,31 @@ public class RecipeManager : MonoBehaviour
 		{
 			IsCreating = !IsCreating;
 		}
+	}
+
+	// Adds up the two multisets into a third multiset.
+	// TODO put this in an extension method or something
+	private static IDictionary<T, int> Add<T>(IDictionary<T, int> first, IDictionary<T, int> second)
+	{
+		var result = new Dictionary<T, int>(first);
+		foreach (var entry in second)
+		{
+			if (result.ContainsKey(entry.Key))
+			{
+				result[entry.Key] += entry.Value;
+			}
+			else
+			{
+				result[entry.Key] = entry.Value;
+			}
+		}
+		return result;
+	}
+
+	// Check if one multiset contains another
+	private static bool Contains<T>(IDictionary<T, int> superset, IDictionary<T, int> subset)
+	{
+		return subset.All(entry => superset.ContainsKey(entry.Key) && superset[entry.Key] > entry.Value);
 	}
 
 }
