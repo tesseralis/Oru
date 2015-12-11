@@ -11,8 +11,6 @@ public class RecipeManager : MonoBehaviour
 	// the element to use to determine where to create creatures
 	public GameObject createMarker;
 
-	public RecipeListEntry[] recipeList;
-
 	// The location of all the instructions in the world
 	private IDictionary<Coordinate, Recipe> recipeLocations;
 	// The list of available instructions in the game
@@ -109,11 +107,16 @@ public class RecipeManager : MonoBehaviour
 
 }
 
-// TODO this should be *static* and not editable in the UI.
-[Serializable]
-public class RecipeListEntry
+// TODO move this to a separate file
+public static class Recipes
 {
-	public CreatureType type;
-	public ResourceCount[] recipe;
-	public GameObject prefab;
+	public static IDictionary<ResourceType, int> dragonRecipe = new Dictionary<ResourceType, int>()
+	{
+		{ResourceType.Red, 5}
+	};
+
+	public static IDictionary<ResourceType, int> duckRecipe = new Dictionary<ResourceType, int>()
+	{
+		{ResourceType.Yellow, 1}
+	};
 }
