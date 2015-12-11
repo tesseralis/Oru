@@ -13,18 +13,7 @@ public class Creature : MonoBehaviour
 	// The type of terrain this creature is allowed to go on.
 	public TerrainType[] allowedTerrain = {TerrainType.Grass};
 
-	public Coordinate Goal {
-		get
-		{
-			return goal;
-		}
-		set
-		{
-			goal = value;
-			// Disable actions when we move the creature.
-			manager.actionMarkers.SetActive(false);
-		}
-	}
+	public Coordinate Goal { get; set; }
 
 	public Coordinate Position
 	{
@@ -34,8 +23,6 @@ public class Creature : MonoBehaviour
 	private CreatureManager manager;
 
 	private Coordinate position;
-
-	private Coordinate goal;
 
 	void Start()
 	{

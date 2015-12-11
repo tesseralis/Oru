@@ -8,14 +8,18 @@ using System.Collections.Generic;
 /// </summary>
 public class CreatureManager : MonoBehaviour
 {
-
+	// The game object to use to mark the currently selected creature
 	public GameObject creatureMarker;
-
+	// The game object used to show valid locations to do an action on
 	public GameObject actionMarkers;
-
+	// TODO abstract out UI and game logic
+	// The panel to show information about the creature
 	public InfoPanel infoPanel;
 
 	private Creature selectedCreature;
+
+	// Tells us if we are acting right now.
+	private bool isActing = false;
 
 	public IList<Creature> Creatures
 	{
@@ -63,6 +67,13 @@ public class CreatureManager : MonoBehaviour
 		}
 	}
 
+	public void SetSelectedCreatureGoal(Coordinate goal)
+	{
+		SelectedCreature.Goal = goal;
+		isActing = false;
+		actionMarkers.SetActive(isActing);
+	}
+
 	/// <summary>
 	/// Move all the creatures forward one game step.
 	/// </summary>
@@ -82,11 +93,8 @@ public class CreatureManager : MonoBehaviour
 			// If the creature is moving, make it stop
 			SelectedCreature.Goal = null;
 			// Toggle the action marker
-			// FIXME figure out why toggling won't work anymore.
-			Debug.LogFormat("Creature is now set to {0}", actionMarkers.activeSelf);
-			var activeValue = !actionMarkers.activeSelf;
-			Debug.LogFormat("Setting activity to {0}", activeValue);
-			actionMarkers.SetActive(activeValue);
+			isActing = !isActing;
+			actionMarkers.SetActive(isActing);
 		}
 	}
 }

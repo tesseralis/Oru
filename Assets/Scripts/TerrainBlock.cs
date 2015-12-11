@@ -27,14 +27,7 @@ public class TerrainBlock: MonoBehaviour
 	
 	void OnMouseDown ()
 	{
-		// Set the creature's destination to this block.
-		var creature = GameManager.gm.creatures.SelectedCreature;
-		if (creature)
-		{
-			Debug.LogFormat("Setting goal of {0} to {1}", creature, Coordinate);
-			creature.Goal = Coordinate;
-		}
-
+		GameManager.gm.creatures.SetSelectedCreatureGoal(Coordinate);
 		GameManager.gm.recipes.OnMouseDownTerrain(Coordinate);
 	}
 
