@@ -132,17 +132,3 @@ public class RecipeManager : MonoBehaviour
 	}
 
 }
-
-// TODO move this to a separate file
-public static class Recipes
-{
-	public static IDictionary<ResourceType, int> dragonRecipe = new Dictionary<ResourceType, int>()
-	{
-		{ResourceType.Red, 5}
-	};
-
-	public static IDictionary<ResourceType, int> duckRecipe = new Dictionary<ResourceType, int>()
-	{
-		{ResourceType.Yellow, 1}
-	};
-}
