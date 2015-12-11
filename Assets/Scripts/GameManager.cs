@@ -151,5 +151,9 @@ public class GameManager : MonoBehaviour
 		// TODO round instead of floor for consistency?
 		return new Coordinate((int)(position.x / cellSize), (int)(position.z / cellSize));
 	}
-	
+
+	public void SetPosition(GameObject gameObject, Coordinate coordinate)
+	{
+		gameObject.transform.position = new Vector3(coordinate.x * cellSize, gameObject.transform.position.y, coordinate.z * cellSize);
+	}
 }

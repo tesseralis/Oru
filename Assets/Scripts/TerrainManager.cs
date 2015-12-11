@@ -36,10 +36,9 @@ public class TerrainManager : MonoBehaviour
 				prefab = rockPrefab;
 				break;
 			}
-			var cellSize = GameManager.gm.cellSize;
-			var position = new Vector3(coordinate.x * cellSize, gameObject.transform.position.y, coordinate.z * cellSize);
 
-			GameObject terrainObject = (GameObject)Instantiate(prefab, position, Quaternion.identity);
+			GameObject terrainObject = (GameObject)Instantiate(prefab);
+			GameManager.gm.SetPosition(terrainObject, coordinate);
 			terrainObject.transform.parent = gameObject.transform;
 
 			if (!terrainObject.GetComponent<TerrainBlock>())

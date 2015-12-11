@@ -54,12 +54,11 @@ public class Creature : MonoBehaviour
 	{
 		if (Goal != null && (!position.Equals(Goal)))
 		{
-			var cellSize = GameManager.gm.cellSize;
 			var next = NextCoordinate ();
 			position = next;
 
 			// Update the position visually
-			gameObject.transform.position = new Vector3(next.x * cellSize, gameObject.transform.position.y, next.z * cellSize);
+			GameManager.gm.SetPosition(gameObject, next);
 		}
 	}
 
