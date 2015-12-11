@@ -63,13 +63,7 @@ public class Creature : MonoBehaviour
 		while (queue.Count > 0)
 		{
 			var current = queue.Dequeue();
-			// TODO factor out to a separate script
-			Coordinate[] neighbors = {
-				new Coordinate(current.x, current.z + 1),
-				new Coordinate(current.x, current.z - 1),
-				new Coordinate(current.x + 1, current.z),
-				new Coordinate(current.x - 1, current.z)
-			};
+			var neighbors = Coordinate.cardinals.Select(x => x + current);
 			foreach (Coordinate neighbor in neighbors)
 			{
 				// TODO break when we reach the goal

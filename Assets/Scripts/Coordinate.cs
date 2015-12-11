@@ -5,8 +5,8 @@ public struct Coordinate
 		x = _x;
 		z = _z;
 	}
-	public int x { get; }
-	public int z { get; }
+	public int x { get; set; }
+	public int z { get; set; }
 
 	public override string ToString ()
 	{
