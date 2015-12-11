@@ -13,7 +13,7 @@ public class Creature : MonoBehaviour
 	// The type of terrain this creature is allowed to go on.
 	public TerrainType[] allowedTerrain = {TerrainType.Grass};
 
-	public Coordinate Goal { get; set; }
+	public Coordinate? Goal { get; set; }
 
 	public Coordinate Position
 	{
@@ -82,14 +82,15 @@ public class Creature : MonoBehaviour
 			}
 			
 		}
-		var next = Goal;
+
+		var next = Goal ?? Position;
 		// if we can't get to the destination, return the same item
 		if (!parents.ContainsKey(next))
 		{
 			Debug.Log("Can't reach the intended destination.");
 			return position;
 		}
-		while (!parents[next].Equals (position))
+		while (parents[next] != (position))
 		{
 			next = parents[next];
 		}

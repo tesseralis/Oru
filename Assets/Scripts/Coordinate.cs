@@ -1,4 +1,4 @@
-public class Coordinate
+public struct Coordinate
 {
 	public Coordinate(int _x, int _z)
 	{
@@ -10,10 +10,22 @@ public class Coordinate
 	
 	public override bool Equals( object obj )
 	{
-		var other = obj as Coordinate;
-		if( other == null ) return false;
-		
-		return Equals (other);             
+		return obj is Coordinate && this == (Coordinate)obj;
+   
+	}
+
+	public static bool operator ==(Coordinate c1, Coordinate c2) 
+	{
+		return c1.x == c2.x && c1.z == c2.z;
+	}
+	public static bool operator !=(Coordinate c1, Coordinate c2) 
+	{
+		return !(c1 == c2);
+	}
+
+	public static Coordinate operator +(Coordinate c1, Coordinate c2)
+	{
+		return new Coordinate(c1.x + c2.x, c1.z + c2.z);
 	}
 	
 	public override int GetHashCode()
@@ -22,15 +34,6 @@ public class Coordinate
 		hash = (hash * 7) + x;
 		hash = (hash * 11) + z;
 		return hash;
-	}
-
-	public bool Equals( Coordinate other )
-	{
-		if    ( other == null )                    return false;
-		if    ( GetType() != other.GetType()    )    return false;
-		if    ( ReferenceEquals (this, other)    )    return true;
-		if    ( x == other.x && z == other.z    )    return true;
-		return false;
 	}
 
 	public override string ToString ()
