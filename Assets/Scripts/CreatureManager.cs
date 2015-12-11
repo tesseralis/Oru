@@ -64,14 +64,19 @@ public class CreatureManager : MonoBehaviour
 			// Update the info panel
 			infoPanel.Name = value.creatureType.ToString();
 			infoPanel.Description = "Action: " + value.GetComponent<IAction>();
+			// Get rid of other UI
+			GameManager.gm.recipes.IsCreating = false;
 		}
 	}
 
 	public void SetSelectedCreatureGoal(Coordinate goal)
 	{
-		SelectedCreature.Goal = goal;
-		isActing = false;
-		actionMarkers.SetActive(isActing);
+		if (SelectedCreature)
+		{
+			SelectedCreature.Goal = goal;
+			isActing = false;
+			actionMarkers.SetActive(isActing);
+		}
 	}
 
 	/// <summary>

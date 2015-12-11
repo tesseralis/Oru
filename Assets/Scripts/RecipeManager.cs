@@ -21,6 +21,16 @@ public class RecipeManager : MonoBehaviour
 	// True if we are currently creating a new creature
 	private bool isCreating = false;
 
+	public bool IsCreating
+	{
+		get { return isCreating; }
+		set
+		{
+			isCreating = value;
+			if (createMarker) { createMarker.SetActive(isCreating); }
+		}
+	}
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -93,14 +103,13 @@ public class RecipeManager : MonoBehaviour
 		// TODO get rid of this and only call this when a UI button is selected.
 		if (Input.GetKeyDown("space") && (GameManager.gm.creatures.SelectedCreature == null))
 		{
-			isCreating = !isCreating;
-			createMarker.SetActive(isCreating);
+			IsCreating = !IsCreating;
 		}
 	}
 
 }
 
-// TODO does this make sense as something included in the "recipe" class instead?
+// TODO this should be *static* and not editable in the UI.
 [Serializable]
 public class RecipeListEntry
 {
