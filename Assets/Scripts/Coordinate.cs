@@ -5,13 +5,26 @@ public struct Coordinate
 		x = _x;
 		z = _z;
 	}
-	public int x { get; set; }
-	public int z { get; set; }
-	
+	public int x { get; }
+	public int z { get; }
+
+	public override string ToString ()
+	{
+		return string.Format ("[Coordinate: x={0}, z={1}]", x, z);
+	}
+
+	public override int GetHashCode()
+	{
+		int hash = 13;
+		hash = (hash * 7) + x;
+		hash = (hash * 11) + z;
+		return hash;
+	}
+		
 	public override bool Equals( object obj )
 	{
 		return obj is Coordinate && this == (Coordinate)obj;
-   
+
 	}
 
 	public static bool operator ==(Coordinate c1, Coordinate c2) 
@@ -27,17 +40,15 @@ public struct Coordinate
 	{
 		return new Coordinate(c1.x + c2.x, c1.z + c2.z);
 	}
-	
-	public override int GetHashCode()
-	{
-		int hash = 13;
-		hash = (hash * 7) + x;
-		hash = (hash * 11) + z;
-		return hash;
-	}
 
-	public override string ToString ()
+	// Constants for ease of use
+	public static Coordinate up = new Coordinate(0, 1);
+	public static Coordinate down = new Coordinate(0, -1);
+	public static Coordinate left = new Coordinate(-1, 0);
+	public static Coordinate right = new Coordinate(1, 0);
+
+	public static Coordinate[] cardinals
 	{
-		return string.Format ("[Coordinate: x={0}, z={1}]", x, z);
+		get { return new Coordinate[]{up, down, left, right}; }
 	}
 }
