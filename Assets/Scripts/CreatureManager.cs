@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,6 +16,8 @@ public class CreatureManager : MonoBehaviour
 	// TODO abstract out UI and game logic
 	// The panel to show information about the creature
 	public InfoPanel infoPanel;
+
+	public CreaturePrefabOptions creaturePrefabs;
 
 	private Creature selectedCreature;
 
@@ -102,4 +105,11 @@ public class CreatureManager : MonoBehaviour
 			actionMarkers.SetActive(isActing);
 		}
 	}
+}
+
+[Serializable]
+public class CreaturePrefabOptions
+{
+	public GameObject duckPrefab;
+	public GameObject dragonPrefab;
 }

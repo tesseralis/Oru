@@ -1991,6 +1991,9 @@ MonoBehaviour:
   creatureMarker: {fileID: 618320991}
   actionMarkers: {fileID: 17565745}
   infoPanel: {fileID: 149463834}
+  creaturePrefabs:
+    duckPrefab: {fileID: 119976, guid: bb18ab56165c5484aa3d9e65cc7a1ab4, type: 2}
+    dragonPrefab: {fileID: 171066, guid: b0140aef76f004a08af3307b0f025fc2, type: 2}
 --- !u!1 &1820473787
 GameObject:
   m_ObjectHideFlags: 0
