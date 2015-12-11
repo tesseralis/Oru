@@ -100,7 +100,6 @@ public class GameManager : MonoBehaviour
 		if (creatures.Creatures.Where(x => x.creatureType == goal.winningCreatureType)
 			.Select(x => x.Position).Contains(goal.Coordinate()))
 		{
-			// TODO end game
 			Debug.Log("You win!");
 			WinGame();
 		}
@@ -123,8 +122,7 @@ public class GameManager : MonoBehaviour
 
 	public Coordinate ToGridCoordinate(Vector3 position)
 	{
-		// TODO round instead of floor for consistency?
-		return new Coordinate((int)(position.x / cellSize), (int)(position.z / cellSize));
+		return new Coordinate(Mathf.RoundToInt(position.x / cellSize), Mathf.RoundToInt(position.z / cellSize));
 	}
 
 	public void SetPosition(GameObject gameObject, Coordinate coordinate)
