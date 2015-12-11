@@ -17,6 +17,20 @@ public class TerrainBlock: MonoBehaviour
 			return GameManager.gm.ToGridCoordinate(this.transform.position);
 		}
 	}
+
+	void OnMouseOver ()
+	{
+		GameObject createMarker = GameManager.gm.createMarker;
+		var next = Coordinate;
+		if (createMarker)
+		{
+			var cellSize = GameManager.gm.cellSize;
+			// Update the position visually
+			// TODO factor out this method into the GameManager
+			createMarker.transform.position = new Vector3(next.x * cellSize, gameObject.transform.position.y, next.z * cellSize);
+
+		}
+	}
 	
 	void OnMouseDown ()
 	{

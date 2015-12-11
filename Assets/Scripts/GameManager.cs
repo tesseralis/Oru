@@ -30,6 +30,9 @@ public class GameManager : MonoBehaviour
 
 	// the set of instructions available in the game world
 	public GameObject instructions;
+
+	// the element to use to determine where to create creatures
+	public GameObject createMarker;
 	
 	// how width of the space between individual cells
 	public float cellSize = 2;
