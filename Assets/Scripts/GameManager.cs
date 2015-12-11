@@ -32,8 +32,6 @@ public class GameManager : MonoBehaviour
 	// the recipes of the game world
 	public RecipeManager recipes;
 
-	// the element to use to determine where to create creatures
-	public GameObject createMarker;
 	
 	// how width of the space between individual cells
 	public float cellSize = 2;

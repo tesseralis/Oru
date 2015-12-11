@@ -225,6 +225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcceb342e8cbf4212a0f917306996d38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  createMarker: {fileID: 1902409563}
 --- !u!4 &90700789 stripped
 Transform:
   m_PrefabParentObject: {fileID: 496182, guid: 1afef6a08696149b18c31cdb92c17049, type: 2}
@@ -1073,7 +1074,6 @@ MonoBehaviour:
   creatures: {fileID: 1761952226}
   resources: {fileID: 1717210009}
   recipes: {fileID: 77720863}
-  createMarker: {fileID: 1902409563}
   cellSize: 2
   stepInterval: 1
 --- !u!1001 &847562349
