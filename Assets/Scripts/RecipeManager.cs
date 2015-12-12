@@ -85,7 +85,7 @@ public class RecipeManager : MonoBehaviour
 	{
 		if (createMarker != null && isCreating)
 		{
-			var recipe = Recipes.dragonRecipe;
+			var recipe = Creatures.Dragon.Recipe;
 			// Figure out how many blocks we have available
 			var availableResources = Neighbors(coordinate).Select(c => GameManager.gm.resources[c]);
 			var resourceCount = Multiset.Empty<ResourceType>();

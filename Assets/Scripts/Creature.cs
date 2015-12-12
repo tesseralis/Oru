@@ -11,7 +11,7 @@ public class Creature : MonoBehaviour
 	// The type of creature this is.
 	public CreatureType creatureType;
 	// The type of terrain this creature is allowed to go on.
-	public TerrainType[] allowedTerrain = {TerrainType.Grass};
+//	public TerrainType[] allowedTerrain = {TerrainType.Grass};
 
 	public Coordinate? Goal { get; set; }
 
@@ -54,6 +54,7 @@ public class Creature : MonoBehaviour
 	{
 		// TODO do A* search
 		var grid = GameManager.gm.terrain;
+		var allowedTerrain = Creatures.ForType(creatureType).AllowedTerrain;
 		var distance = new Dictionary<Coordinate, int>();
 		var parents = new Dictionary<Coordinate, Coordinate> ();
 		var queue = new Queue<Coordinate> ();

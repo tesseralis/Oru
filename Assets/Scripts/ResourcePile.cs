@@ -40,5 +40,3 @@ public class ResourceCount
 	public ResourceType type;
 	public int count;
 }
-
-public enum ResourceType { Red, Yellow, Green, Blue }
