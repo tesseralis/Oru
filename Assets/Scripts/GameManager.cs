@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
@@ -42,13 +43,25 @@ public class GameManager : MonoBehaviour
 	 */
 
 	// The game state
-	public bool HasWon { get; private set; }
+	public bool HasWon
+	{ 
+		get { return hasWon; }
+		private set
+		{
+			hasWon = value;
+			if (OnWin != null) { OnWin(); }
+		}
+	}
+
+	// Event that is called when we are victorious.
+	public Action OnWin;
 
 	// The current time
 	private float currentTime;
 	// the next time to take a step
 	private float nextStepTime;
 
+	private bool hasWon;
 
 	void Awake ()
 	{

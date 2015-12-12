@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
 
 	public WinnerPanel winnerPanel;
 	public InfoPanel infoPanel;
+	public RecipeListPanel recipePanel;
 
 	// Use this for initialization
 	void Start ()
@@ -18,13 +19,14 @@ public class UIManager : MonoBehaviour
 		}
 		GameManager.Creatures.OnSelect += DisplayCreatureInfo;
 		GameManager.gm.goal.OnClick += DisplayGoalInfo;
+		GameManager.gm.OnWin += DisplayWinInfo;
 	}
-	
-	// Update is called once per frame
-	void Update ()
+
+	void DisplayWinInfo()
 	{
-		// TODO Use an event handler to avoid unecessary calls.
-		winnerPanel.gameObject.SetActive(GameManager.gm.HasWon);
+		winnerPanel.gameObject.SetActive(true);
+		infoPanel.gameObject.SetActive(false);
+		recipePanel.gameObject.SetActive(false);
 	}
 
 	void DisplayCreatureInfo(Creature creature)
