@@ -17,6 +17,11 @@ public class RecipeManager : MonoBehaviour
 	// The list of available instructions in the game
 	private IList<CreatureType> availableRecipes;
 
+	public IList<CreatureType> AvailableRecipes
+	{
+		get { return availableRecipes; }
+	}
+
 	// True if we are currently creating a new creature
 	private bool isCreating = false;
 
@@ -29,6 +34,8 @@ public class RecipeManager : MonoBehaviour
 			if (createMarker) { createMarker.SetActive(isCreating); }
 		}
 	}
+
+	public CreatureType CurrentRecipe { get; set; }
 
 	// Use this for initialization
 	void Start ()
@@ -85,7 +92,7 @@ public class RecipeManager : MonoBehaviour
 	{
 		if (createMarker != null && isCreating)
 		{
-			var recipe = Creatures.Dragon.Recipe;
+			var recipe = Creatures.ForType(CurrentRecipe).Recipe;
 			// Figure out how many blocks we have available
 			var availableResources = Neighbors(coordinate).Select(c => GameManager.gm.resources[c]);
 			var resourceCount = Multiset.Empty<ResourceType>();
@@ -98,7 +105,7 @@ public class RecipeManager : MonoBehaviour
 			if (resourceCount.Contains(recipe))
 			{
 				// If everything passes, add the creature to the list of creatures
-				GameManager.gm.creatures.AddCreature(CreatureType.Dragon, coordinate);
+				GameManager.gm.creatures.AddCreature(CurrentRecipe, coordinate);
 
 				// Remove the items from the neighboring coordinates.
 				var neighbors = Neighbors(coordinate);
@@ -115,6 +122,8 @@ public class RecipeManager : MonoBehaviour
 
 					GameManager.gm.resources[neighbor] = difference;
 				}
+				// We are no longer creating
+				IsCreating = false;
 			}
 			else
 			{
@@ -127,18 +136,6 @@ public class RecipeManager : MonoBehaviour
 
 		}
 	}
-
-	public void Update()
-	{
-		// For now, let's go into the active state when we don't have anything selected.
-		// TODO get rid of this and only call this when a UI button is selected.
-		if (Input.GetKeyDown("space") && (GameManager.gm.creatures.SelectedCreature == null))
-		{
-			IsCreating = !IsCreating;
-		}
-	}
-
-
 
 	private static IList<Coordinate> Neighbors(Coordinate coordinate)
 	{
