@@ -14,6 +14,8 @@ public class TerrainManager : MonoBehaviour
 
 	public GameObject grassPrefab;
 	public GameObject rockPrefab;
+	public GameObject treePrefab;
+	public GameObject waterPrefab;
 
 	public Action<Coordinate> OnHover;
 	public Action<Coordinate> OnClick;

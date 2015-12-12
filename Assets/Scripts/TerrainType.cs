@@ -1,4 +1,4 @@
 /// <summary>
 /// The types of terrain that are available in the game.
 /// </summary>
-public enum TerrainType { Grass, Rock }
+public enum TerrainType { Grass, Rock, Tree, Water }

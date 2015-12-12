@@ -179,7 +179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   creatureType: 0
-  allowedTerrain: 00000000
+  allowedTerrain: 0000000003000000
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -188,8 +188,16 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 0}
+      propertyPath: allowedTerrain.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: m_Name
       value: DuckBody
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: allowedTerrain.Array.data[1]
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
