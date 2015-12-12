@@ -10,7 +10,6 @@ public class ActionMarker : MonoBehaviour
 
 	void OnMouseDown()
 	{
-		Vector3 position = gameObject.transform.position;
 		if (OnClick != null)
 		{
 			OnClick(this.Coordinate());
