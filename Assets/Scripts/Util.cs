@@ -17,6 +17,16 @@ namespace Util
 			return new Dictionary<T, int>();
 		}
 
+		public static bool IsEmpty<T>(this IDictionary<T, int> ms)
+		{
+			return ms.Values.All(c => c == 0);
+		}
+
+		public static bool MultisetEquals<T>(this IDictionary<T, int> first, IDictionary<T, int> second)
+		{
+			return first.Contains(second) && second.Contains(first);
+		}
+
 		// TODO figure out performance implications of making so many dictionaries
 		public static IDictionary<T, int> MultisetAdd<T>(this IDictionary<T, int> ms, T item, int amount)
 		{
@@ -78,7 +88,7 @@ namespace Util
 		// Check if one multiset contains another
 		public static bool Contains<T>(this IDictionary<T, int> superset, IDictionary<T, int> subset)
 		{
-			return subset.All(entry => superset.ContainsKey(entry.Key) && superset[entry.Key] >= entry.Value);
+			return subset.All(entry => entry.Value == 0 || (superset.ContainsKey(entry.Key) && superset[entry.Key] >= entry.Value));
 		}
 	}
 
