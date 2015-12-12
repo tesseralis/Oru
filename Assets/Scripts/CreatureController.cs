@@ -13,9 +13,6 @@ public class CreatureController : MonoBehaviour
 	public GameObject creatureMarker;
 	// The game object used to show valid locations to do an action on
 	public GameObject actionMarkers;
-	// TODO abstract out UI and game logic
-	// The panel to show information about the creature
-	public InfoPanel infoPanel;
 
 	public CreaturePrefabOptions creaturePrefabs;
 
@@ -23,6 +20,8 @@ public class CreatureController : MonoBehaviour
 
 	// Tells us if we are acting right now.
 	private bool isActing = false;
+
+	public Action<Creature> OnSelect;
 
 	public bool IsActing
 	{
@@ -77,11 +76,11 @@ public class CreatureController : MonoBehaviour
 				}
 			}
 			IsActing = false;
-			// Update the info panel
-			infoPanel.Name = value.creatureType.ToString();
-			infoPanel.Description = "Action: " + value.GetComponent<IAbility>();
 			// Get rid of other UI
 			GameManager.Recipes.IsCreating = false;
+
+			// Trigger the UI changes
+			if (OnSelect != null) { OnSelect(value); }
 		}
 	}
 

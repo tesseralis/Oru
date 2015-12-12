@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Linq;
 
 public class InfoPanel : MonoBehaviour
 {
@@ -13,8 +14,6 @@ public class InfoPanel : MonoBehaviour
 	{
 		set {
 			nameDisplay.text = value;
-			// Activate this whenever it's changed
-			gameObject.SetActive(true);
 		}
 		get { return nameDisplay.text; }
 	}
@@ -23,8 +22,6 @@ public class InfoPanel : MonoBehaviour
 	{
 		set {
 			descriptionDisplay.text = value;
-			// Activate this whenever it's changed
-			gameObject.SetActive(true);
 		}
 		get { return descriptionDisplay.text; }
 	}

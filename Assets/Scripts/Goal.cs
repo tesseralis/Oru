@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 
 public class Goal : MonoBehaviour
@@ -11,13 +12,11 @@ public class Goal : MonoBehaviour
 	// The info panel
 	public InfoPanel infoPanel;
 
+	public Action<CreatureType> OnClick;
+
 	void OnMouseDown()
 	{
-		// Disable creature markers
-		GameManager.Creatures.SelectedCreature = null;
-		// Update the info UI
-		infoPanel.Name = "Goal";
-		infoPanel.Description = winningCreatureType + " at this location.";
+		if (OnClick != null) { OnClick(winningCreatureType); }
 	}
 
 }
