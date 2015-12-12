@@ -31,6 +31,13 @@ public class RecipeManager : MonoBehaviour
 		set
 		{
 			isCreating = value;
+			// If we're turning "on", disable all other UI.
+			if (isCreating)
+			{
+				// TODO another space where we'd benefit from a "deselect all" method
+				GameManager.gm.creatures.SelectedCreature = null;
+				GameManager.gm.creatures.IsActing = false;
+			}
 			if (createMarker) { createMarker.SetActive(isCreating); }
 		}
 	}

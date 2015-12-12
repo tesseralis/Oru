@@ -28,9 +28,6 @@ public class RecipeListPanel : MonoBehaviour {
 			{
 					GameManager.gm.recipes.IsCreating = true;
 					GameManager.gm.recipes.CurrentRecipe = recipe;
-					// TODO another space where we'd benefit from a "deselect all" method
-					GameManager.gm.creatures.SelectedCreature = null;
-					GameManager.gm.creatures.IsActing = false;
 			});
 		}
 		for (int i = recipes.Count; i < buttons.Length; i++)
