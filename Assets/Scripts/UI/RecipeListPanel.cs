@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Linq;
 
 public class RecipeListPanel : MonoBehaviour {
 
@@ -30,7 +31,16 @@ public class RecipeListPanel : MonoBehaviour {
 			{
 					recipes.IsCreating = true;
 					recipes.CurrentRecipe = recipe;
+
+					// Display the information
+					// TODO make this a separate listener
+					// TODO do this on mouse hover instead
+					var infoPanel = GetComponentInParent<UIManager>().infoPanel;
+					infoPanel.Name = recipe.ToString();
+					infoPanel.Description = string.Join("\n",
+						Creatures.ForType(recipe).Recipe.Select(e => e.Key + ": " + e.Value).ToArray());
 			});
+			
 		}
 		for (int i = availableRecipes.Count; i < buttons.Length; i++)
 		{
