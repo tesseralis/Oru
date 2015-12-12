@@ -81,7 +81,7 @@ public class CreatureController : MonoBehaviour
 			infoPanel.Name = value.creatureType.ToString();
 			infoPanel.Description = "Action: " + value.GetComponent<IAbility>();
 			// Get rid of other UI
-			GameManager.gm.recipes.IsCreating = false;
+			GameManager.Recipes.IsCreating = false;
 		}
 	}
 
@@ -119,7 +119,7 @@ public class CreatureController : MonoBehaviour
 	{
 		// Hook up the event handler
 		// TODO Change the code to add and remove these event handlers based on state.
-		GameManager.gm.terrain.OnClick += SetSelectedCreatureGoal;
+		GameManager.Terrain.OnClick += SetSelectedCreatureGoal;
 	}
 
 	/// <summary>

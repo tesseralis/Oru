@@ -53,7 +53,7 @@ public class Creature : MonoBehaviour
 	private Coordinate NextCoordinate()
 	{
 		// TODO do A* search
-		var grid = GameManager.gm.terrain;
+		var grid = GameManager.Terrain;
 		var allowedTerrain = Creatures.ForType(creatureType).AllowedTerrain;
 		var distance = new Dictionary<Coordinate, int>();
 		var parents = new Dictionary<Coordinate, Coordinate> ();

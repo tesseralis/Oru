@@ -10,7 +10,7 @@ public class ChangeTerrainAbility : MonoBehaviour, IAbility
 
 	public void Use(Coordinate target)
 	{
-		TerrainController terrain = GameManager.gm.terrain;
+		TerrainController terrain = GameManager.Terrain;
 
 		// Determine whether the creature should be picking up or putting down
 		TerrainType initialType;

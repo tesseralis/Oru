@@ -15,7 +15,7 @@ public class ActionMarker : MonoBehaviour
 			OnClick(this.Coordinate());
 			// Once we're done, deactivate ourselves
 			// TODO make this another delegate, somehow
-			GameManager.gm.creatures.IsActing = false;
+			GameManager.Creatures.IsActing = false;
 		}
 	}
 

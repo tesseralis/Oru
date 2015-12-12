@@ -11,13 +11,15 @@ public class RecipeListPanel : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		var recipes = GameManager.gm.recipes.AvailableRecipes;
+		var recipes = GameManager.Recipes;
+		// TODO rename this; it's confusing to have with the other thing
+		var availableRecipes = recipes.AvailableRecipes;
 
 		var buttons = GetComponentsInChildren<Button>(true);
 
-		for (int i = 0; i < recipes.Count; i++)
+		for (int i = 0; i < availableRecipes.Count; i++)
 		{
-			var recipe = recipes[i];
+			var recipe = availableRecipes[i];
 			var button = buttons[i];
 
 			// TODO figure out how to dynamically create buttons
@@ -26,11 +28,11 @@ public class RecipeListPanel : MonoBehaviour {
 			// TODO Make this a default method from the recipe manager
 			button.onClick.AddListener(() =>
 			{
-					GameManager.gm.recipes.IsCreating = true;
-					GameManager.gm.recipes.CurrentRecipe = recipe;
+					recipes.IsCreating = true;
+					recipes.CurrentRecipe = recipe;
 			});
 		}
-		for (int i = recipes.Count; i < buttons.Length; i++)
+		for (int i = availableRecipes.Count; i < buttons.Length; i++)
 		{
 			var button = buttons[i];
 			button.gameObject.SetActive(false);

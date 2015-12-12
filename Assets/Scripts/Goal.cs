@@ -14,7 +14,7 @@ public class Goal : MonoBehaviour
 	void OnMouseDown()
 	{
 		// Disable creature markers
-		GameManager.gm.creatures.SelectedCreature = null;
+		GameManager.Creatures.SelectedCreature = null;
 		// Update the info UI
 		infoPanel.Name = "Goal";
 		infoPanel.Description = winningCreatureType + " at this location.";

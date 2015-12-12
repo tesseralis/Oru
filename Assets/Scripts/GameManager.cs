@@ -11,6 +11,11 @@ public class GameManager : MonoBehaviour
 	// make game manager accessible throughout the game
 	public static GameManager gm;
 
+	public static TerrainController Terrain { get { return gm.terrainController; } }
+	public static CreatureController Creatures { get { return gm.creatureController; } }
+	public static ResourceController Resources { get { return gm.resourceController; } }
+	public static RecipeController Recipes { get { return gm.recipeController; } }
+
 	/*
 	 * Public members that can be set per level.
 	 */
@@ -24,14 +29,15 @@ public class GameManager : MonoBehaviour
 	// the goal in the world
 	public Goal goal;
 
+	// TODO auto-wire these
 	// the grid of available game blocks
-	public TerrainController terrain;
+	public TerrainController terrainController;
 	// the creatures in the game world
-	public CreatureController creatures;
+	public CreatureController creatureController;
 	// the resources in the game world
-	public ResourceController resources;
+	public ResourceController resourceController;
 	// the recipes of the game world
-	public RecipeController recipes;
+	public RecipeController recipeController;
 
 	
 	// how width of the space between individual cells
@@ -94,10 +100,10 @@ public class GameManager : MonoBehaviour
 	void Step ()
 	{
 		Debug.Log ("Next step: " + nextStepTime);
-		creatures.Step();
-		recipes.UpdateAvailableRecipes(creatures.Creatures.Select(x => x.Position).ToList());
+		creatureController.Step();
+		recipeController.UpdateAvailableRecipes(creatureController.Creatures.Select(x => x.Position).ToList());
 
-		if (creatures.Creatures.Where(x => x.creatureType == goal.winningCreatureType)
+		if (creatureController.Creatures.Where(x => x.creatureType == goal.winningCreatureType)
 			.Select(x => x.Position).Contains(goal.Coordinate()))
 		{
 			Debug.Log("You win!");

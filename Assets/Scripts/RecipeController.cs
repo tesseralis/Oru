@@ -35,8 +35,8 @@ public class RecipeController : MonoBehaviour
 			if (isCreating)
 			{
 				// TODO another space where we'd benefit from a "deselect all" method
-				GameManager.gm.creatures.SelectedCreature = null;
-				GameManager.gm.creatures.IsActing = false;
+				GameManager.Creatures.SelectedCreature = null;
+				GameManager.Creatures.IsActing = false;
 			}
 			if (createMarker) { createMarker.SetActive(isCreating); }
 		}
@@ -58,8 +58,8 @@ public class RecipeController : MonoBehaviour
 
 		// Set event handlers
 		// TODO add and remove these handlers based on state.
-		GameManager.gm.terrain.OnHover += MoveCreateMarker;
-		GameManager.gm.terrain.OnClick += CreateCreature;
+		GameManager.Terrain.OnHover += MoveCreateMarker;
+		GameManager.Terrain.OnClick += CreateCreature;
 	}
 
 	// Update the list of available instructions if a creature has walked on it
@@ -97,11 +97,12 @@ public class RecipeController : MonoBehaviour
 
 	void CreateCreature(Coordinate coordinate)
 	{
+		var resources = GameManager.Resources;
 		if (createMarker != null && isCreating)
 		{
 			var recipe = Creatures.ForType(CurrentRecipe).Recipe;
 			// Figure out how many blocks we have available
-			var availableResources = Neighbors(coordinate).Select(c => GameManager.gm.resources[c]);
+			var availableResources = Neighbors(coordinate).Select(c => resources[c]);
 			var resourceCount = Multiset.Empty<ResourceType>();
 			foreach (var resource in availableResources)
 			{
@@ -112,7 +113,7 @@ public class RecipeController : MonoBehaviour
 			if (resourceCount.Contains(recipe))
 			{
 				// If everything passes, add the creature to the list of creatures
-				GameManager.gm.creatures.AddCreature(CurrentRecipe, coordinate);
+				GameManager.Creatures.AddCreature(CurrentRecipe, coordinate);
 
 				// Remove the items from the neighboring coordinates.
 				var neighbors = Neighbors(coordinate);
@@ -124,10 +125,10 @@ public class RecipeController : MonoBehaviour
 					{
 						break;
 					}
-					var difference = GameManager.gm.resources[neighbor].MultisetSubtract(remainder);
-					remainder = remainder.MultisetSubtract(GameManager.gm.resources[neighbor]);
+					var difference = GameManager.Resources[neighbor].MultisetSubtract(remainder);
+					remainder = remainder.MultisetSubtract(resources[neighbor]);
 
-					GameManager.gm.resources[neighbor] = difference;
+					resources[neighbor] = difference;
 				}
 				// We are no longer creating
 				IsCreating = false;
