@@ -50,8 +50,21 @@ public class UIManager : MonoBehaviour
 		infoPanel.gameObject.SetActive(true);
 		infoPanel.Name = creature.creatureType.ToString();
 		var creatureDefinition = Creatures.ForType(creature.creatureType);
-		infoPanel.Description = string.Format("Allowed Terrain: {0}",
-			string.Join(", ", creatureDefinition.AllowedTerrain.Select(t => t.ToString()).ToArray()));
+		// TODO generalize for all abilities!
+		string ability;
+		if (creature.GetComponent<ChangeTerrainAbility>() != null)
+		{
+			ability = string.Format("Pick up {0}\n\nPress <Space> to activate.",
+				creature.GetComponent<ChangeTerrainAbility>().carryType);
+		}
+		else
+		{
+			ability = "None";
+		}
+
+		infoPanel.Description = string.Format("Allowed Terrain: {0}\nAbility: {1}",
+			string.Join(", ", creatureDefinition.AllowedTerrain.Select(t => t.ToString()).ToArray()),
+			ability);
 	}
 
 	void DisplayGoalInfo(CreatureType type)
