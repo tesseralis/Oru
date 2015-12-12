@@ -53,8 +53,11 @@ public class Creature : MonoBehaviour
 	private Coordinate NextCoordinate()
 	{
 		// TODO do A* search
+		// If we can't get to the destination, just search for our own location
+		var goal = Goal ?? Position;
 		var grid = GameManager.Terrain;
 		var allowedTerrain = Creatures.ForType(creatureType).AllowedTerrain;
+
 		var distance = new Dictionary<Coordinate, int>();
 		var parents = new Dictionary<Coordinate, Coordinate> ();
 		var queue = new Queue<Coordinate> ();
@@ -64,10 +67,9 @@ public class Creature : MonoBehaviour
 		while (queue.Count > 0)
 		{
 			var current = queue.Dequeue();
-			var neighbors = Coordinate.cardinals.Select(x => x + current);
+			var neighbors = Coordinate.cardinals.Select(x => x + current).ToList();
 			foreach (Coordinate neighbor in neighbors)
 			{
-				// TODO break when we reach the goal
 				if (grid.Contains(neighbor) && allowedTerrain.Contains(grid[neighbor]) && !distance.ContainsKey(neighbor))
 				{
 					distance[neighbor] = distance[current] + 1;
@@ -75,11 +77,15 @@ public class Creature : MonoBehaviour
 					queue.Enqueue(neighbor);
 				}
 			}
+			// If we've already found our goal, we do not need to keep searching.
+			if (neighbors.Contains(goal))
+			{
+				break;
+			}
 			
 		}
 
-		var next = Goal ?? Position;
-		// if we can't get to the destination, return the same item
+		var next = goal;
 		if (!parents.ContainsKey(next))
 		{
 			Debug.Log("Can't reach the intended destination.");
