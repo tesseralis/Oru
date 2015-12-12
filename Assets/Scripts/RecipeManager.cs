@@ -85,6 +85,7 @@ public class RecipeManager : MonoBehaviour
 	{
 		if (createMarker != null && isCreating)
 		{
+			var recipe = Recipes.dragonRecipe;
 			// Figure out how many blocks we have available
 			var availableResources = Neighbors(coordinate).Select(c => GameManager.gm.resources[c]);
 			var resourceCount = Multiset.Empty<ResourceType>();
@@ -94,17 +95,31 @@ public class RecipeManager : MonoBehaviour
 			}
 			Debug.LogFormat("Calculated resources: {0}", String.Join("; ", resourceCount.Select(e => e.Key + ": " + e.Value).ToArray()));
 
-			// TODO check if we have enough resources for the recipe
-
-			if (resourceCount.Contains(Recipes.dragonRecipe))
+			if (resourceCount.Contains(recipe))
 			{
 				// If everything passes, add the creature to the list of creatures
 				GameManager.gm.creatures.AddCreature(CreatureType.Dragon, coordinate);
+
+				// Remove the items from the neighboring coordinates.
+				var neighbors = Neighbors(coordinate);
+				var remainder = recipe;
+				// Take items from the adjacent resources until we don't need any more.
+				foreach (var neighbor in neighbors)
+				{
+					if (remainder.IsEmpty())
+					{
+						break;
+					}
+					var difference = GameManager.gm.resources[neighbor].MultisetSubtract(remainder);
+					remainder = remainder.MultisetSubtract(GameManager.gm.resources[neighbor]);
+
+					GameManager.gm.resources[neighbor] = difference;
+				}
 			}
 			else
 			{
 				Debug.LogFormat("Did not find enough materials for recipe. Had {0}, needed {1}",
-					resourceCount, Recipes.dragonRecipe);
+					resourceCount, recipe);
 			}
 
 

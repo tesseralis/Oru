@@ -1247,14 +1247,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6519066, guid: 284e74a3d652a48e6be113e2c67123e6, type: 2}
-      propertyPath: m_Size.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6519066, guid: 284e74a3d652a48e6be113e2c67123e6, type: 2}
-      propertyPath: m_Center.y
-      value: 0.25
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 284e74a3d652a48e6be113e2c67123e6, type: 2}
   m_IsPrefabParent: 0
@@ -2295,6 +2287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04d5479212c904e4b9f188065c551434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resourcePilePrefab: {fileID: 159150, guid: 284e74a3d652a48e6be113e2c67123e6, type: 2}
 --- !u!4 &1752795416 stripped
 Transform:
   m_PrefabParentObject: {fileID: 496182, guid: 1afef6a08696149b18c31cdb92c17049, type: 2}
