@@ -16,6 +16,10 @@ public class ResourcePile : MonoBehaviour
 			return resources.Aggregate(Multiset.Empty<ResourceType>(),
 				(ms, resource) => ms.MultisetAdd(resource.type, resource.count));
 		}
+		set
+		{
+			resources = value.Select(resource => new ResourceCount(resource.Key, resource.Value)).ToArray();
+		}
 	}
 
 	void OnMouseOver()
@@ -27,6 +31,12 @@ public class ResourcePile : MonoBehaviour
 [Serializable]
 public class ResourceCount
 {
+	public ResourceCount(ResourceType _type, int _count)
+	{
+		type = _type;
+		count = _count;
+	}
+
 	public ResourceType type;
 	public int count;
 }
