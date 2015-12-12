@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using Util;
 
 public class ResourcePile : MonoBehaviour
 {
@@ -11,19 +13,8 @@ public class ResourcePile : MonoBehaviour
 	{
 		get
 		{
-			var result = new Dictionary<ResourceType, int>();
-			foreach(var resource in resources)
-			{
-				if (result.ContainsKey(resource.type))
-				{
-					result[resource.type] += resource.count;
-				}
-				else
-				{
-					result[resource.type] = resource.count;
-				}
-			}
-			return result;
+			return resources.Aggregate(Multiset.Empty<ResourceType>(),
+				(ms, resource) => ms.AddMultiple(resource.type, resource.count));
 		}
 	}
 

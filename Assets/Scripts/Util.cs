@@ -4,23 +4,41 @@ using System.Linq;
 
 namespace Util
 {
+	// TODO Move this into its own "multiset" class
 	// Defines extension methods that allow dictionaries to be treated as multisets
 	public static class Multiset
 	{
-		// Adds up the two multisets into a third multiset.
-		public static IDictionary<T, int> Add<T>(this IDictionary<T, int> first, IDictionary<T, int> second)
+		/// <summary>
+		/// Return an empty multiset.
+		/// </summary>
+		/// <typeparam name="T">The type this multiset stores.</typeparam>
+		public static IDictionary<T, int> Empty<T>()
 		{
-			var result = new Dictionary<T, int>(first);
+			return new Dictionary<T, int>();
+		}
+
+		// TODO figure out performance implications of making so many dictionaries
+		public static IDictionary<T, int> AddMultiple<T>(this IDictionary<T, int> ms, T item, int amount)
+		{
+			var result = new Dictionary<T, int>(ms);
+			if (ms.ContainsKey(item))
+			{
+				result[item] += amount;
+			}
+			else
+			{
+				result[item] = amount;
+			}
+			return result;
+		}
+
+		// Adds up the two multisets into a third multiset.
+		public static IDictionary<T, int> AddMultiple<T>(this IDictionary<T, int> first, IDictionary<T, int> second)
+		{
+			IDictionary<T, int> result = new Dictionary<T, int>(first);
 			foreach (var entry in second)
 			{
-				if (result.ContainsKey(entry.Key))
-				{
-					result[entry.Key] += entry.Value;
-				}
-				else
-				{
-					result[entry.Key] = entry.Value;
-				}
+				result = result.AddMultiple(entry.Key, entry.Value);
 			}
 			return result;
 		}

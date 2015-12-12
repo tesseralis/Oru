@@ -86,13 +86,11 @@ public class RecipeManager : MonoBehaviour
 		if (createMarker != null && isCreating)
 		{
 			// Figure out how many blocks we have available
-			// TODO do a type alias of the multiset.
-			IEnumerable<IDictionary<ResourceType, int>> availableResources = Neighbors(coordinate)
-				.Select(c => GameManager.gm.resources.Contains(c) ? GameManager.gm.resources[c] : new Dictionary<ResourceType, int>());
-			IDictionary<ResourceType, int> resourceCount = new Dictionary<ResourceType, int>();
+			var availableResources = Neighbors(coordinate).Select(c => GameManager.gm.resources[c]);
+			var resourceCount = Multiset.Empty<ResourceType>();
 			foreach (var resource in availableResources)
 			{
-				resourceCount = resourceCount.Add(resource);
+				resourceCount = resourceCount.AddMultiple(resource);
 			}
 			Debug.LogFormat("Calculated resources: {0}", String.Join("; ", resourceCount.Select(e => e.Key + ": " + e.Value).ToArray()));
 

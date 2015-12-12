@@ -8,12 +8,17 @@ public class ResourceManager : MonoBehaviour
 	// Get the pile of resources at the given coordinate
 	public IDictionary<ResourceType, int> this[Coordinate coordinate]
 	{
-		get { return locations[coordinate].Resources; }
-	}
-
-	public bool Contains(Coordinate coordinate)
-	{
-		return locations.ContainsKey(coordinate);
+		get
+		{
+			if (locations.ContainsKey(coordinate))
+			{
+				return locations[coordinate].Resources;
+			}
+			else
+			{
+				return Multiset.Empty<ResourceType>();
+			}
+		}
 	}
 
 	private IDictionary<Coordinate, ResourcePile> locations;
