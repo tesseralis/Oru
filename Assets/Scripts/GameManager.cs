@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
 	public float cellSize = 2;
 
 	// how fast the game moves
-	public float stepInterval = 1.0f;
+	public float stepInterval = 0.5f;
 
 	/*
 	 * Internal game state

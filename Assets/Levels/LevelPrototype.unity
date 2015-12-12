@@ -1375,7 +1375,7 @@ MonoBehaviour:
   resources: {fileID: 1717210009}
   recipes: {fileID: 77720863}
   cellSize: 2
-  stepInterval: 1
+  stepInterval: 0.5
 --- !u!1001 &783136412
 Prefab:
   m_ObjectHideFlags: 0
