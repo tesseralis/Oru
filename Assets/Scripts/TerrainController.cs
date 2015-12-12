@@ -11,7 +11,7 @@ using Util;
 /// </summary>
 public class TerrainController : MonoBehaviour
 {
-
+	// TODO make this a dropdown class
 	public GameObject grassPrefab;
 	public GameObject rockPrefab;
 	public GameObject treePrefab;
@@ -31,6 +31,7 @@ public class TerrainController : MonoBehaviour
 			// Delete the old value
 			Destroy(grid[coordinate].gameObject);
 
+			// TODO factor this out into a method
 			// Set the new value
 			GameObject prefab;
 			switch(value)
@@ -70,10 +71,8 @@ public class TerrainController : MonoBehaviour
 	void Start ()
 	{
 		grid = new Dictionary<Coordinate, TerrainBlock>();
-		// Assume this grid's children are all terrain blocks
-		foreach (Transform child in gameObject.transform)
+		foreach (var block in GetComponentsInChildren<TerrainBlock>())
 		{
-			TerrainBlock block = child.gameObject.GetComponent<TerrainBlock>();
 			grid[block.Coordinate()] = block;
 		}
 	}

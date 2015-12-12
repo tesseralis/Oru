@@ -59,10 +59,9 @@ public class ResourceController : MonoBehaviour
 	void Start () {
 		locations = new Dictionary<Coordinate, ResourcePile>();
 		// Assume this grid's children are all terrain blocks
-		foreach (Transform child in gameObject.transform)
+		foreach (var pile in GetComponentsInChildren<ResourcePile>())
 		{
-			ResourcePile block = child.gameObject.GetComponent<ResourcePile>();
-			locations[block.Coordinate()] = block;
+			locations[pile.Coordinate()] = pile;
 		}
 	}
 
