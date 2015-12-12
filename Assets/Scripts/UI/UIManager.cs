@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Linq;
+using Util;
 
 // Main controller for all UI.
 public class UIManager : MonoBehaviour
@@ -32,6 +33,7 @@ public class UIManager : MonoBehaviour
 	{
 		// Add listeners to the necessary game objects.
 		GameManager.Creatures.OnSelect += DisplayCreatureInfo;
+		GameManager.Terrain.OnHover += DisplayPileInfo;
 		GameManager.gm.goal.OnClick += DisplayGoalInfo;
 		GameManager.gm.OnWin += DisplayWinInfo;
 	}
@@ -61,5 +63,16 @@ public class UIManager : MonoBehaviour
 		infoPanel.gameObject.SetActive(true);
 		infoPanel.Name = "Goal";
 		infoPanel.Description = type + " at this location.";
+	}
+
+	void DisplayPileInfo(Coordinate coordinate)
+	{
+		if (!GameManager.Resources[coordinate].IsEmpty())
+		{
+			infoPanel.gameObject.SetActive(true);
+			infoPanel.Name = "Resource Pile";
+			infoPanel.Description = string.Join("\n",
+				GameManager.Resources[coordinate].Select(e => e.Key + ": " + e.Value).ToArray());
+		}
 	}
 }
