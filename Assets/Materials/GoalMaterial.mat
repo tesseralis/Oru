@@ -106,15 +106,15 @@ Material:
       data:
         first:
           name: _Cutoff
-        second: .5
+        second: 0.5
       data:
         first:
           name: _AlphaTestRef
-        second: .5
+        second: 0.5
       data:
         first:
           name: _Parallax
-        second: .0199999996
+        second: 0.02
       data:
         first:
           name: _ZWrite
@@ -122,7 +122,7 @@ Material:
       data:
         first:
           name: _Glossiness
-        second: .100000001
+        second: 0.1
       data:
         first:
           name: _BumpScale
@@ -145,33 +145,33 @@ Material:
         second: 3
       data:
         first:
+          name: _Metallic
+        second: 0.1
+      data:
+        first:
           name: _Lightmapping
         second: 1
       data:
         first:
           name: _EmissionScaleUI
         second: 2
-      data:
-        first:
-          name: _Metallic
-        second: .100000001
     m_Colors:
       data:
         first:
           name: _EmissionColor
-        second: {r: 0, g: 0, b: 0, a: 1.33483374}
+        second: {r: 0, g: 0, b: 0, a: 1.3348337}
       data:
         first:
           name: _Color
-        second: {r: 1, g: 1, b: 1, a: .501960814}
+        second: {r: 1, g: 1, b: 1, a: 0.5882353}
       data:
         first:
           name: _SpecColor
-        second: {r: .117647059, g: .117647059, b: .117647059, a: 1}
+        second: {r: 0.11764706, g: 0.11764706, b: 0.11764706, a: 1}
       data:
         first:
           name: _SpecularColor
-        second: {r: .156862751, g: .156862751, b: .156862751, a: 1}
+        second: {r: 0.15686275, g: 0.15686275, b: 0.15686275, a: 1}
       data:
         first:
           name: _EmissionColorUI
