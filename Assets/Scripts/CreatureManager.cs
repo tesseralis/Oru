@@ -68,9 +68,12 @@ public class CreatureManager : MonoBehaviour
 			{
 				Debug.LogFormat("Setting action markers of {0} to {1}", selectedCreature, actionMarkers);
 				actionMarkers.transform.SetParent(value.gameObject.transform, false);
-				foreach (var marker in actionMarkers.GetComponentsInChildren<ActionMarker>())
+				if (value.GetComponent<IAbility>() != null)
 				{
-					marker.OnClick = value.GetComponent<IAbility>().Use;
+					foreach (var marker in actionMarkers.GetComponentsInChildren<ActionMarker>())
+					{
+						marker.OnClick = value.GetComponent<IAbility>().Use;
+					}
 				}
 			}
 			IsActing = false;
