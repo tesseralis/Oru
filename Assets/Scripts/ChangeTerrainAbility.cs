@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ChangeTerrainAction : MonoBehaviour, IAction
+public class ChangeTerrainAbility : MonoBehaviour, IAbility
 {
 	public TerrainType carryType = TerrainType.Rock;
 	public TerrainType leaveType = TerrainType.Grass;
 
 	private bool isCarrying = false;
 
-	public void Act(Coordinate target)
+	public void Use(Coordinate target)
 	{
 		TerrainManager terrain = GameManager.gm.terrain;
 

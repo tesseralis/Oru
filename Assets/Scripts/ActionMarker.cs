@@ -1,19 +1,21 @@
-﻿using UnityEngine;
+﻿using Util;
+using UnityEngine;
+using System;
 using System.Collections;
 
 public class ActionMarker : MonoBehaviour
 {
 
-	public IAction Action { set; get; }
-
+	public Action<Coordinate> OnClick;
 
 	void OnMouseDown()
 	{
 		Vector3 position = gameObject.transform.position;
-		if (Action != null)
+		if (OnClick != null)
 		{
-			Action.Act(GameManager.gm.ToGridCoordinate(position));
+			OnClick(this.Coordinate());
 			// Once we're done, deactivate ourselves
+			// TODO make this another delegate, somehow
 			GameManager.gm.creatures.IsActing = false;
 		}
 	}

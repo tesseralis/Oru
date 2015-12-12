@@ -70,13 +70,13 @@ public class CreatureManager : MonoBehaviour
 				actionMarkers.transform.SetParent(value.gameObject.transform, false);
 				foreach (var marker in actionMarkers.GetComponentsInChildren<ActionMarker>())
 				{
-					marker.Action = value.GetComponent<IAction>();
+					marker.OnClick = value.GetComponent<IAbility>().Use;
 				}
 			}
 			IsActing = false;
 			// Update the info panel
 			infoPanel.Name = value.creatureType.ToString();
-			infoPanel.Description = "Action: " + value.GetComponent<IAction>();
+			infoPanel.Description = "Action: " + value.GetComponent<IAbility>();
 			// Get rid of other UI
 			GameManager.gm.recipes.IsCreating = false;
 		}
