@@ -9,7 +9,7 @@ using Util;
 public class TerrainBlock: MonoBehaviour
 {
 	private TerrainController controller {
-		get { return gameObject.GetComponentInParent<TerrainController>(); }
+		get { return GetComponentInParent<TerrainController>(); }
 	}
 
 	public TerrainType type;

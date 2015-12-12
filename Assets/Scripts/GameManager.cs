@@ -73,11 +73,8 @@ public class GameManager : MonoBehaviour
 		
 		currentTime = 0;
 		nextStepTime = 0;
-	}
-	
-	// Initialize the controllers if necessary
-	void Start ()
-	{
+
+		// Auto-wire the controllers if necessary
 		if (creatureController == null)
 		{
 			creatureController = GetComponentInChildren<CreatureController>();

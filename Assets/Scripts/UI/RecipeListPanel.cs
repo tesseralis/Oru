@@ -10,6 +10,7 @@ public class RecipeListPanel : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
+	// TODO Use delegates
 	void Update () {
 		var recipes = GameManager.Recipes;
 		var availableRecipes = recipes.AvailableRecipes;

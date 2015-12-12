@@ -10,13 +10,27 @@ public class UIManager : MonoBehaviour
 	public InfoPanel infoPanel;
 	public RecipeListPanel recipePanel;
 
-	// Use this for initialization
-	void Start ()
+	void Awake ()
 	{
+		// Initialize our child components
 		if (winnerPanel == null)
 		{
 			winnerPanel = GetComponentInChildren<WinnerPanel>();
 		}
+		if (infoPanel == null)
+		{
+			infoPanel = GetComponentInChildren<InfoPanel>();
+		}
+		if (recipePanel == null)
+		{
+			recipePanel = GetComponentInChildren<RecipeListPanel>();
+		}
+	}
+
+	// Use this for initialization
+	void Start ()
+	{
+		// Add listeners to the necessary game objects.
 		GameManager.Creatures.OnSelect += DisplayCreatureInfo;
 		GameManager.gm.goal.OnClick += DisplayGoalInfo;
 		GameManager.gm.OnWin += DisplayWinInfo;
