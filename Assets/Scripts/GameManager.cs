@@ -29,7 +29,6 @@ public class GameManager : MonoBehaviour
 	// the goal in the world
 	public Goal goal;
 
-	// TODO auto-wire these
 	// the grid of available game blocks
 	public TerrainController terrainController;
 	// the creatures in the game world
@@ -70,10 +69,26 @@ public class GameManager : MonoBehaviour
 		nextStepTime = 0;
 	}
 	
-	// Use this for initialization
+	// Initialize the controllers if necessary
 	void Start ()
 	{
-
+		if (creatureController == null)
+		{
+			creatureController = GetComponentInChildren<CreatureController>();
+		}
+		if (terrainController == null)
+		{
+			terrainController = GetComponentInChildren<TerrainController>();
+		}
+		if (resourceController == null)
+		{
+			resourceController = GetComponentInChildren<ResourceController>();
+		}
+		if (recipeController == null)
+		{
+			recipeController = GetComponentInChildren<RecipeController>();
+		}
+		// TODO remove UI logic from here; get rid of other UI when you show this panel
 		if (winnerPanel)
 		{
 			winnerPanel.SetActive(false);
