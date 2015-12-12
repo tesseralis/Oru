@@ -90,7 +90,7 @@ public class RecipeManager : MonoBehaviour
 			var resourceCount = Multiset.Empty<ResourceType>();
 			foreach (var resource in availableResources)
 			{
-				resourceCount = resourceCount.AddMultiple(resource);
+				resourceCount = resourceCount.MultisetAdd(resource);
 			}
 			Debug.LogFormat("Calculated resources: {0}", String.Join("; ", resourceCount.Select(e => e.Key + ": " + e.Value).ToArray()));
 

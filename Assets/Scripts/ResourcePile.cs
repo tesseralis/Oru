@@ -14,7 +14,7 @@ public class ResourcePile : MonoBehaviour
 		get
 		{
 			return resources.Aggregate(Multiset.Empty<ResourceType>(),
-				(ms, resource) => ms.AddMultiple(resource.type, resource.count));
+				(ms, resource) => ms.MultisetAdd(resource.type, resource.count));
 		}
 	}
 

@@ -18,7 +18,7 @@ namespace Util
 		}
 
 		// TODO figure out performance implications of making so many dictionaries
-		public static IDictionary<T, int> AddMultiple<T>(this IDictionary<T, int> ms, T item, int amount)
+		public static IDictionary<T, int> MultisetAdd<T>(this IDictionary<T, int> ms, T item, int amount)
 		{
 			var result = new Dictionary<T, int>(ms);
 			if (ms.ContainsKey(item))
@@ -33,12 +33,44 @@ namespace Util
 		}
 
 		// Adds up the two multisets into a third multiset.
-		public static IDictionary<T, int> AddMultiple<T>(this IDictionary<T, int> first, IDictionary<T, int> second)
+		public static IDictionary<T, int> MultisetAdd<T>(this IDictionary<T, int> first, IDictionary<T, int> second)
 		{
 			IDictionary<T, int> result = new Dictionary<T, int>(first);
 			foreach (var entry in second)
 			{
-				result = result.AddMultiple(entry.Key, entry.Value);
+				result = result.MultisetAdd(entry.Key, entry.Value);
+			}
+			return result;
+		}
+
+		// TODO figure out performance implications of making so many dictionaries
+		public static IDictionary<T, int> MultisetSubtract<T>(this IDictionary<T, int> ms, T item, int amount)
+		{
+			var result = new Dictionary<T, int>(ms);
+			if (ms.ContainsKey(item))
+			{
+				var newCount = ms[item] - amount;
+				if (newCount > 0)
+				{
+					result[item] = newCount;
+				}
+				else
+				{
+					result.Remove(item);
+				}
+			}
+			return result;
+		}
+
+		/// <summary>
+		/// Return the set difference of the first multiset from the second.
+		/// </summary>
+		public static IDictionary<T, int> MultisetSubtract<T>(this IDictionary<T, int> first, IDictionary<T, int> second)
+		{
+			IDictionary<T, int> result = new Dictionary<T, int>(first);
+			foreach (var entry in second)
+			{
+				result = result.MultisetSubtract(entry.Key, entry.Value);
 			}
 			return result;
 		}
@@ -51,6 +83,7 @@ namespace Util
 	}
 
 	// Defines extension methods related to coordinates
+	// TODO I don't think an extension method is the right thing to do here. It should be some sort of base class.
 	public static class Coordinates
 	{
 		public static Coordinate Coordinate(this MonoBehaviour script)
