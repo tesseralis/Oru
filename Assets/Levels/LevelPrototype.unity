@@ -1248,16 +1248,12 @@ Prefab:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6519066, guid: 284e74a3d652a48e6be113e2c67123e6, type: 2}
-      propertyPath: m_IsTrigger
-      value: 0
+      propertyPath: m_Size.y
+      value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 11484968, guid: 284e74a3d652a48e6be113e2c67123e6, type: 2}
-      propertyPath: resources.Array.data[1].count
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11484968, guid: 284e74a3d652a48e6be113e2c67123e6, type: 2}
-      propertyPath: resources.Array.data[0].count
-      value: 1
+    - target: {fileID: 6519066, guid: 284e74a3d652a48e6be113e2c67123e6, type: 2}
+      propertyPath: m_Center.y
+      value: 0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 284e74a3d652a48e6be113e2c67123e6, type: 2}
