@@ -6,7 +6,7 @@ using System.Linq;
 using Util;
 
 
-public class RecipeManager : MonoBehaviour
+public class RecipeController : MonoBehaviour
 {
 
 	// the element to use to determine where to create creatures

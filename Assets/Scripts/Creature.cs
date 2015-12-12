@@ -20,7 +20,7 @@ public class Creature : MonoBehaviour
 		get { return position; }
 	}
 
-	private CreatureManager manager;
+	private CreatureController manager;
 
 	private Coordinate position;
 
@@ -29,7 +29,7 @@ public class Creature : MonoBehaviour
 		// Store our initial position
 		position = GameManager.gm.ToGridCoordinate(gameObject.transform.position);
 		// Assume our parent is our manager
-		manager = GetComponentInParent<CreatureManager>();
+		manager = GetComponentInParent<CreatureController>();
 	}
 
 	void OnMouseDown()

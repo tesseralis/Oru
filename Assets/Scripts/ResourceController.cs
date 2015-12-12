@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Util;
 
-public class ResourceManager : MonoBehaviour
+public class ResourceController : MonoBehaviour
 {
 	// The prefab to use to initialize a new marker.
 	public GameObject resourcePilePrefab;

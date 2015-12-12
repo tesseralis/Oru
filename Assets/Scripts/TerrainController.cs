@@ -9,7 +9,7 @@ using Util;
 /// and the interaction between the terrain blocks and other
 /// game elements.
 /// </summary>
-public class TerrainManager : MonoBehaviour
+public class TerrainController : MonoBehaviour
 {
 
 	public GameObject grassPrefab;

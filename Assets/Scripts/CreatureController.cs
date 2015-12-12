@@ -7,7 +7,7 @@ using System.Collections.Generic;
 /// <summary>
 /// Manages interactions between creatures and the rest of the system.
 /// </summary>
-public class CreatureManager : MonoBehaviour
+public class CreatureController : MonoBehaviour
 {
 	// The game object to use to mark the currently selected creature
 	public GameObject creatureMarker;

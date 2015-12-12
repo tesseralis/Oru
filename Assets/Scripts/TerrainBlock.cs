@@ -8,8 +8,8 @@ using Util;
 /// </summary>
 public class TerrainBlock: MonoBehaviour
 {
-	private TerrainManager controller {
-		get { return gameObject.GetComponentInParent<TerrainManager>(); }
+	private TerrainController controller {
+		get { return gameObject.GetComponentInParent<TerrainController>(); }
 	}
 
 	public TerrainType type;

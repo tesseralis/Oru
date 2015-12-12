@@ -25,13 +25,13 @@ public class GameManager : MonoBehaviour
 	public Goal goal;
 
 	// the grid of available game blocks
-	public TerrainManager terrain;
+	public TerrainController terrain;
 	// the creatures in the game world
-	public CreatureManager creatures;
+	public CreatureController creatures;
 	// the resources in the game world
-	public ResourceManager resources;
+	public ResourceController resources;
 	// the recipes of the game world
-	public RecipeManager recipes;
+	public RecipeController recipes;
 
 	
 	// how width of the space between individual cells
