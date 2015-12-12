@@ -12,7 +12,6 @@ public class RecipeListPanel : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		var recipes = GameManager.Recipes;
-		// TODO rename this; it's confusing to have with the other thing
 		var availableRecipes = recipes.AvailableRecipes;
 
 		var buttons = GetComponentsInChildren<Button>(true);

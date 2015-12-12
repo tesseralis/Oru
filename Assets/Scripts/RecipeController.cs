@@ -138,10 +138,6 @@ public class RecipeController : MonoBehaviour
 				Debug.LogFormat("Did not find enough materials for recipe. Had {0}, needed {1}",
 					resourceCount, recipe);
 			}
-
-
-			// TODO subtract the blocks needed from the resource manager
-
 		}
 	}
 
