@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
@@ -19,13 +18,6 @@ public class GameManager : MonoBehaviour
 	/*
 	 * Public members that can be set per level.
 	 */
-
-	// the winner panel to display when you win
-	public GameObject winnerPanel;
-
-	// the level to load when restarting
-	public string playAgainLevelToLoad;
-
 	// the goal in the world
 	public Goal goal;
 
@@ -50,7 +42,7 @@ public class GameManager : MonoBehaviour
 	 */
 
 	// The game state
-	private bool hasWon = false;
+	public bool HasWon { get; private set; }
 
 	// The current time
 	private float currentTime;
@@ -64,6 +56,7 @@ public class GameManager : MonoBehaviour
 		{
 			gm = this.gameObject.GetComponent<GameManager>();
 		}
+		HasWon = false;
 		
 		currentTime = 0;
 		nextStepTime = 0;
@@ -88,19 +81,12 @@ public class GameManager : MonoBehaviour
 		{
 			recipeController = GetComponentInChildren<RecipeController>();
 		}
-		// TODO remove UI logic from here; get rid of other UI when you show this panel
-		if (winnerPanel)
-		{
-			winnerPanel.SetActive(false);
-		}
-
-
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
-		if (!hasWon)
+		if (!HasWon)
 		{
 			currentTime += Time.deltaTime;
 			if (currentTime >= nextStepTime)
@@ -122,23 +108,8 @@ public class GameManager : MonoBehaviour
 			.Select(x => x.Position).Contains(goal.Coordinate()))
 		{
 			Debug.Log("You win!");
-			WinGame();
+			HasWon = true;
 		}
-
-	}
-
-	private void WinGame()
-	{
-		hasWon = true;
-		if (winnerPanel)
-		{
-			winnerPanel.SetActive(true);
-		}
-	}
-
-	public void RestartGame()
-	{
-		SceneManager.LoadScene(playAgainLevelToLoad);
 	}
 
 	public Coordinate ToGridCoordinate(Vector3 position)

@@ -415,6 +415,7 @@ GameObject:
   - 224: {fileID: 223146023}
   - 222: {fileID: 223146025}
   - 114: {fileID: 223146024}
+  - 114: {fileID: 223146026}
   m_Layer: 5
   m_Name: WinnerPanel
   m_TagString: Untagged
@@ -474,6 +475,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 223146022}
+--- !u!114 &223146026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 223146022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84bd3fe44133144aca19fa57b29714cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playAgainLevelToLoad: LevelPrototype
 --- !u!4 &288163797 stripped
 Transform:
   m_PrefabParentObject: {fileID: 496182, guid: 1afef6a08696149b18c31cdb92c17049, type: 2}
@@ -1399,8 +1412,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c97f8271b5de445aa4e67619b379c29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  winnerPanel: {fileID: 223146022}
-  playAgainLevelToLoad: LevelPrototype
   goal: {fileID: 1864752495}
   terrainController: {fileID: 980324998}
   creatureController: {fileID: 1761952226}
@@ -2499,6 +2510,7 @@ GameObject:
   - 223: {fileID: 1522887951}
   - 114: {fileID: 1522887950}
   - 114: {fileID: 1522887949}
+  - 114: {fileID: 1522887952}
   m_Layer: 5
   m_Name: MainCanvas
   m_TagString: Untagged
@@ -2581,6 +2593,18 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1522887952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1522887947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 304c66286c05440448011675d01b92d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  winnerPanel: {fileID: 223146026}
 --- !u!1001 &1573335577
 Prefab:
   m_ObjectHideFlags: 0
@@ -3270,7 +3294,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 725951235}
+      - m_Target: {fileID: 223146026}
         m_MethodName: RestartGame
         m_Mode: 1
         m_Arguments:
