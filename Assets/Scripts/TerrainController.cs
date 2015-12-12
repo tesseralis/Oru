@@ -20,6 +20,8 @@ public class TerrainController : MonoBehaviour
 	public Action<Coordinate> OnHover;
 	public Action<Coordinate> OnClick;
 
+	private IDictionary<Coordinate, TerrainBlock> grid;
+
 	public TerrainType this[Coordinate coordinate]
 	{
 		get
@@ -31,19 +33,7 @@ public class TerrainController : MonoBehaviour
 			// Delete the old value
 			Destroy(grid[coordinate].gameObject);
 
-			// TODO factor this out into a method
-			// Set the new value
-			GameObject prefab;
-			switch(value)
-			{
-			case TerrainType.Grass:
-			default:
-				prefab = grassPrefab;
-				break;
-			case TerrainType.Rock:
-				prefab = rockPrefab;
-				break;
-			}
+			var prefab = PrefabFor (value);
 
 			GameObject terrainObject = (GameObject)Instantiate(prefab);
 			GameManager.gm.SetPosition(terrainObject, coordinate);
@@ -65,8 +55,6 @@ public class TerrainController : MonoBehaviour
 		return grid.ContainsKey(coordinate);
 	}
 
-	private IDictionary<Coordinate, TerrainBlock> grid;
-
 	// Initialize the grid
 	void Start ()
 	{
@@ -76,5 +64,22 @@ public class TerrainController : MonoBehaviour
 			grid[block.Coordinate()] = block;
 		}
 	}
+
+	GameObject PrefabFor (TerrainType type)
+	{
+		switch (type) {
+		case TerrainType.Grass:
+			return grassPrefab;
+		case TerrainType.Rock:
+			return rockPrefab;
+		case TerrainType.Tree:
+			return treePrefab;
+		case TerrainType.Water:
+			return waterPrefab;
+		default:
+			throw new ArgumentException("Illegal terrain type", type.ToString());
+		}
+	}
+
 
 }
