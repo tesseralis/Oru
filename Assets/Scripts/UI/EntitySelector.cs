@@ -9,16 +9,23 @@ using System.Collections;
 public class EntitySelector : MonoBehaviour
 {
 	public GameObject entityMarker;
-	public GameObject actionMarkers;
+	public ActionMarkers actionMarkers;
 
 	private bool isActing;
+
+	void Awake ()
+	{
+		if (actionMarkers == null)
+		{
+			actionMarkers = GetComponentInChildren<ActionMarkers>();
+		}
+	}
 
 	// Use this for initialization
 	void Start () 
 	{
 		if (entityMarker) { entityMarker.SetActive(false); }
-		if (actionMarkers) { actionMarkers.SetActive(false); }
-
+		actionMarkers.Disable();
 		GameManager.Creatures.OnSelect += SelectCreature;
 		GameManager.gm.goal.OnClick += SelectGoal;
 	}
@@ -29,14 +36,12 @@ public class EntitySelector : MonoBehaviour
 		if (entityMarker) { entityMarker.SetActive(true); }
 
 		GameManager.Terrain.OnClick -= SetCurrentCreatureGoal;
-		GameManager.Input.OnSpace -= ToggleAbility;
+		actionMarkers.Disable();
 	}
 
 	public void SelectCreature(Creature creature)
 	{
-		// If the old creature is acting, stop it
-		StopAbility();
-
+		actionMarkers.Disable();
 		// Make this creature our parent
 		transform.SetParent(creature.transform, false);
 		if (entityMarker) { entityMarker.SetActive(true); }
@@ -44,70 +49,30 @@ public class EntitySelector : MonoBehaviour
 		GameManager.Terrain.OnClick += SetCurrentCreatureGoal;
 
 		// Add a listener to the action markers
-		if (creature.GetComponent<IAbility>() != null && actionMarkers)
+		if (creature.GetComponent<IAbility>() != null)
 		{
-			foreach (var marker in actionMarkers.GetComponentsInChildren<ActionMarker>())
-			{
-				marker.OnClick = coordinate => 
-				{
-					creature.GetComponent<IAbility>().Use(coordinate);
-					StopAbility();
-				};
-			}
+			actionMarkers.Enable(creature.GetComponent<IAbility>().Use);
 		}
 
 		// Disable creature creation once we click something
 		UIManager.ui.creatureCreator.StopCreation();
-
-		// Add keyboard shortcut for starting action
-		GameManager.Input.OnSpace += ToggleAbility;
 	}
 
 	public void Deselect()
 	{
 		if (entityMarker) { entityMarker.SetActive(false); }
-		if (actionMarkers) { actionMarkers.SetActive(false); }
+
+		actionMarkers.Disable();
 
 		// remove the goal listener
 		GameManager.Terrain.OnClick -= SetCurrentCreatureGoal;
-		GameManager.Input.OnSpace -= ToggleAbility;
 	}
-
-	// The creature should start doing its ability
-	public void StartAbility()
-	{
-		// TODO what to do if no creature selected?
-		// stop the creature
-		GetComponentInParent<Creature>().Goal = null;
-		isActing = true;
-		if (actionMarkers) { actionMarkers.SetActive(true); }
-	}
-
-	public void StopAbility()
-	{
-		// TODO what to do if no creature selected?
-		isActing = false;
-		if (actionMarkers) { actionMarkers.SetActive(false); }
-	}
-
-	public void ToggleAbility()
-	{
-		isActing = !isActing;
-		if (isActing)
-		{
-			StartAbility();
-		}
-		else
-		{
-			StopAbility();
-		}
-	}
-
+		
 	private void SetCurrentCreatureGoal(Coordinate coordinate)
 	{
 		var creature = GetComponentInParent<Creature>();
 		creature.Goal = coordinate;
-		StopAbility();
+		actionMarkers.StopAbility();
 	}
 
 }

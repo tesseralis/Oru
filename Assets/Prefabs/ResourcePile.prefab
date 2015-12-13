@@ -9,7 +9,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 485554}
   - 33: {fileID: 3370578}
-  - 65: {fileID: 6544836}
   - 23: {fileID: 2304940}
   m_Layer: 0
   m_Name: Cube (3)
@@ -43,7 +42,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 449566}
   - 33: {fileID: 3354844}
-  - 65: {fileID: 6520554}
   - 23: {fileID: 2398502}
   m_Layer: 0
   m_Name: Cube
@@ -61,7 +59,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 454394}
   - 33: {fileID: 3358834}
-  - 65: {fileID: 6511446}
   - 23: {fileID: 2382294}
   m_Layer: 0
   m_Name: Cube (1)
@@ -79,7 +76,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 461196}
   - 33: {fileID: 3338964}
-  - 65: {fileID: 6506264}
   - 23: {fileID: 2318732}
   m_Layer: 0
   m_Name: Cube (2)
@@ -284,54 +280,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 149994}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &6506264
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 192716}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &6511446
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 186510}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &6520554
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 165464}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &6544836
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 149994}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &11484968
 MonoBehaviour:
   m_ObjectHideFlags: 1
