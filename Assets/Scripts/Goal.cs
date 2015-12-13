@@ -12,11 +12,11 @@ public class Goal : MonoBehaviour
 	// The info panel
 	public InfoPanel infoPanel;
 
-	public Action<CreatureType> OnClick;
+	public Action<Goal> OnClick;
 
 	void OnMouseDown()
 	{
-		if (OnClick != null) { OnClick(winningCreatureType); }
+		if (OnClick != null) { OnClick(this); }
 	}
 
 }

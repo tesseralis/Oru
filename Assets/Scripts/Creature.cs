@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,8 +11,6 @@ public class Creature : MonoBehaviour
 {
 	// The type of creature this is.
 	public CreatureType creatureType;
-	// The type of terrain this creature is allowed to go on.
-//	public TerrainType[] allowedTerrain = {TerrainType.Grass};
 
 	public Coordinate? Goal { get; set; }
 
@@ -19,6 +18,8 @@ public class Creature : MonoBehaviour
 	{
 		get { return position; }
 	}
+
+	public Action<Coordinate?> OnSetGoal;
 
 	private CreatureController manager;
 
@@ -28,13 +29,11 @@ public class Creature : MonoBehaviour
 	{
 		// Store our initial position
 		position = GameManager.gm.ToGridCoordinate(gameObject.transform.position);
-		// Assume our parent is our manager
-		manager = GetComponentInParent<CreatureController>();
 	}
 
 	void OnMouseDown()
 	{
-		manager.SelectedCreature = this;
+		GetComponentInParent<CreatureController>().OnSelect(this);
 	}
 
 	public void Step()

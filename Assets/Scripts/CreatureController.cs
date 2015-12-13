@@ -10,78 +10,16 @@ using Util;
 /// </summary>
 public class CreatureController : MonoBehaviour
 {
-	// The game object to use to mark the currently selected creature
-	public GameObject creatureMarker;
-	// The game object used to show valid locations to do an action on
-	public GameObject actionMarkers;
 
 	public CreaturePrefabOptions creaturePrefabs;
 
-	private Creature selectedCreature;
-
-	// Tells us if we are acting right now.
-	private bool isActing = false;
-
 	public Action<Creature> OnSelect;
-
-	public bool IsActing
-	{
-		get { return isActing; }
-		set
-		{
-			isActing = value;
-			if (actionMarkers) { actionMarkers.SetActive(isActing); }
-		}
-	}
 
 	public IList<Creature> CreatureList
 	{
 		get
 		{
 			return new List<Creature>(GetComponentsInChildren<Creature>());
-		}
-	}
-
-	public Creature SelectedCreature
-	{
-		get
-		{
-			return selectedCreature;
-		}
-		set
-		{
-			selectedCreature = value;
-			// If creatures are unselected, get rid of the UI.
-			if (selectedCreature == null)
-			{
-				if (creatureMarker) { creatureMarker.SetActive(false); }
-				if (actionMarkers) { actionMarkers.SetActive(false); }
-				return;
-			}
-			if (creatureMarker)
-			{
-				Debug.LogFormat("Setting creature marker of {0} to {1}", selectedCreature, creatureMarker);
-				creatureMarker.SetActive(true);
-				creatureMarker.transform.SetParent(value.gameObject.transform, false);
-			}
-			if (actionMarkers)
-			{
-				Debug.LogFormat("Setting action markers of {0} to {1}", selectedCreature, actionMarkers);
-				actionMarkers.transform.SetParent(value.gameObject.transform, false);
-				if (value.GetComponent<IAbility>() != null)
-				{
-					foreach (var marker in actionMarkers.GetComponentsInChildren<ActionMarker>())
-					{
-						marker.OnClick = value.GetComponent<IAbility>().Use;
-					}
-				}
-			}
-			IsActing = false;
-			// Get rid of other UI
-			GameManager.Recipes.IsCreating = false;
-
-			// Trigger the UI changes
-			if (OnSelect != null) { OnSelect(value); }
 		}
 	}
 
@@ -134,22 +72,6 @@ public class CreatureController : MonoBehaviour
 
 	}
 
-	private void SetSelectedCreatureGoal(Coordinate goal)
-	{
-		if (SelectedCreature)
-		{
-			SelectedCreature.Goal = goal;
-			IsActing = false;
-		}
-	}
-
-	public void Start()
-	{
-		// Hook up the event handler
-		// TODO Change the code to add and remove these event handlers based on state.
-		GameManager.Terrain.OnClick += SetSelectedCreatureGoal;
-	}
-
 	/// <summary>
 	/// Move all the creatures forward one game step.
 	/// </summary>
@@ -161,19 +83,7 @@ public class CreatureController : MonoBehaviour
 		}
 	}
 
-	public void Update()
-	{
-		if (Input.GetKeyDown("space") && (SelectedCreature != null))
-		{
-			Debug.LogFormat("Detected a space on {0}", SelectedCreature);
-			// If the creature is moving, make it stop
-			SelectedCreature.Goal = null;
-			// Toggle the action marker
-			IsActing = !IsActing;
-		}
-	}
-
-	GameObject PrefabFor (CreatureType creature)
+	private GameObject PrefabFor (CreatureType creature)
 	{
 		switch (creature) {
 		case CreatureType.Duck:

@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using Util;
 
@@ -10,6 +12,10 @@ public class UIManager : MonoBehaviour
 	public WinnerPanel winnerPanel;
 	public InfoPanel infoPanel;
 	public RecipeListPanel recipePanel;
+
+	// TODO separate out Canvas UI from 3D UI
+	public EntitySelector entitySelector;
+	public CreatureCreator creatureCreator;
 
 	void Awake ()
 	{
@@ -34,6 +40,7 @@ public class UIManager : MonoBehaviour
 		// Add listeners to the necessary game objects.
 		GameManager.Creatures.OnSelect += DisplayCreatureInfo;
 		GameManager.Terrain.OnHover += DisplayPileInfo;
+		GameManager.Recipes.OnChange += UpdateRecipeList;
 		GameManager.gm.goal.OnClick += DisplayGoalInfo;
 		GameManager.gm.OnWin += DisplayWinInfo;
 	}
@@ -67,15 +74,12 @@ public class UIManager : MonoBehaviour
 			ability);
 	}
 
-	void DisplayGoalInfo(CreatureType type)
+	void DisplayGoalInfo(Goal goal)
 	{
-		// Disable creature markers
-		// TODO Where does this go?
-		GameManager.Creatures.SelectedCreature = null;
 		// Update the info UI
 		infoPanel.gameObject.SetActive(true);
 		infoPanel.Name = "Goal";
-		infoPanel.Description = type + " at this location.";
+		infoPanel.Description = goal.winningCreatureType + " at this location.";
 	}
 
 	void DisplayPileInfo(Coordinate coordinate)
@@ -86,6 +90,42 @@ public class UIManager : MonoBehaviour
 			infoPanel.Name = "Resource Pile";
 			infoPanel.Description = string.Join("\n",
 				GameManager.Resources[coordinate].Select(e => e.Key + ": " + e.Value).ToArray());
+		}
+	}
+
+	// TODO some of this code should be moved back to the enclosing object.
+	void UpdateRecipeList(IList<CreatureType> availableRecipes)
+	{
+		var buttons = recipePanel.GetComponentsInChildren<Button>(true);
+
+		for (int i = 0; i < availableRecipes.Count; i++)
+		{
+			var recipe = availableRecipes[i];
+			var button = buttons[i];
+
+			// TODO figure out how to dynamically create buttons
+			button.gameObject.SetActive(true);
+			button.GetComponentInChildren<Text>().text = recipe.ToString();
+			// TODO Make this a default method from the recipe manager
+			// TODO doesn't this add multiple listeners?
+			button.onClick.RemoveAllListeners();
+			button.onClick.AddListener(() =>
+				{
+					entitySelector.Deselect();
+					creatureCreator.StartCreation(recipe);
+
+					// Display the information
+					// TODO make this a separate listener
+					// TODO do this on mouse hover instead
+					infoPanel.Name = recipe.ToString();
+					infoPanel.Description = string.Join("\n",
+						Creatures.ForType(recipe).Recipe.Select(e => e.Key + ": " + e.Value).ToArray());
+				});
+
+		}
+		for (int i = availableRecipes.Count; i < buttons.Length; i++)
+		{
+			buttons[i].gameObject.SetActive(false);
 		}
 	}
 }
