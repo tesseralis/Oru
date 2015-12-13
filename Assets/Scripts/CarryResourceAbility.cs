@@ -36,12 +36,11 @@ public class CarryResourceAbility : MonoBehaviour, IAbility
 			var remainingCapacity = capacity;
 			foreach (var resource in resources[target])
 			{
-				var diff = resource.Value - remainingCapacity;
-				if (diff >= 0)
+				if (resource.Value >= remainingCapacity)
 				{
 					// We've reached the remaining capacity, so finalize our changes and break
-					resources[target] = resourcePile.MultisetSubtract(resource.Key, capacity);
-					Carrying = newCarry.MultisetAdd(resource.Key, capacity);
+					resources[target] = resourcePile.MultisetSubtract(resource.Key, remainingCapacity);
+					Carrying = newCarry.MultisetAdd(resource.Key, remainingCapacity);
 					return;
 				}
 				else
@@ -49,8 +48,12 @@ public class CarryResourceAbility : MonoBehaviour, IAbility
 					// Otherwise, accumulate that amount
 					resourcePile = resourcePile.MultisetSubtract(resource.Key, resource.Value);
 					newCarry = newCarry.MultisetAdd(resource.Key, resource.Value);
+					remainingCapacity -= resource.Value;
 				}
 			}
+			// TODO I know there's a more elegant way to phrase this
+			resources[target] = resourcePile;
+			Carrying = newCarry;
 		}
 		else
 		{
