@@ -96,10 +96,12 @@ public class UIManager : MonoBehaviour
 	// TODO some of this code should be moved back to the enclosing object.
 	void UpdateRecipeList(IList<CreatureType> availableRecipes)
 	{
-		var buttons = recipePanel.GetComponentsInChildren<Button>(true);
+		recipePanel.gameObject.SetActive(true);
 
+		var buttons = recipePanel.GetComponentsInChildren<Button>(true);
 		for (int i = 0; i < availableRecipes.Count; i++)
 		{
+			Debug.LogFormat("Updating button at index {0}", i);
 			var recipe = availableRecipes[i];
 			var button = buttons[i];
 
@@ -125,6 +127,7 @@ public class UIManager : MonoBehaviour
 		}
 		for (int i = availableRecipes.Count; i < buttons.Length; i++)
 		{
+			Debug.LogFormat("Disabling button at index {0}", i);
 			buttons[i].gameObject.SetActive(false);
 		}
 	}
