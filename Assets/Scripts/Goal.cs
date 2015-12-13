@@ -9,9 +9,6 @@ public class Goal : MonoBehaviour
 	// TODO generalize this so this can be "any creature" or terrain (or boulders)
 	public CreatureType winningCreatureType;
 
-	// The info panel
-	public InfoPanel infoPanel;
-
 	public Action<Goal> OnClick;
 
 	void OnMouseDown()
