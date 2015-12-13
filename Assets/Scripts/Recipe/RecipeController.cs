@@ -8,11 +8,11 @@ using Util;
 
 public class RecipeController : MonoBehaviour
 {
+	// The list of recipes available to the player
+	public CreatureType[] availableRecipes;
 
 	// The location of all the instructions in the world
 	private IDictionary<Coordinate, Recipe> recipeLocations;
-	// The list of available instructions in the game
-	private IList<CreatureType> availableRecipes;
 
 	public Action<IList<CreatureType>> OnChange;
 
@@ -22,12 +22,18 @@ public class RecipeController : MonoBehaviour
 	void Start ()
 	{
 		recipeLocations = new Dictionary<Coordinate, Recipe>();
-		availableRecipes = new List<CreatureType>();
+
+		if (availableRecipes == null)
+		{
+			availableRecipes = new CreatureType[0];
+		}
 
 		foreach (var instruction in GetComponentsInChildren<Recipe>())
 		{
 			recipeLocations[instruction.Coordinate()] = instruction;
 		}
+		// Trigger the initial change
+		if (OnChange != null) { OnChange(availableRecipes); }
 	}
 
 	// Update the list of available instructions if a creature has walked on it
@@ -42,7 +48,7 @@ public class RecipeController : MonoBehaviour
 			{
 				if (!availableRecipes.Contains(entry.Value.creature))
 				{
-					availableRecipes.Add(entry.Value.creature);
+					availableRecipes = availableRecipes.Union(new CreatureType[] { entry.Value.creature }).ToArray();
 				}
 				removedEntries.Add(entry.Key);
 			}
