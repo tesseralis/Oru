@@ -34,12 +34,14 @@ public class EntitySelector : MonoBehaviour
 
 	public void SelectCreature(Creature creature)
 	{
+		// If the old creature is acting, stop it
+		StopAbility();
+
 		// Make this creature our parent
 		transform.SetParent(creature.transform, false);
 		if (entityMarker) { entityMarker.SetActive(true); }
 
 		GameManager.Terrain.OnClick += SetCurrentCreatureGoal;
-		StopAbility();
 
 		// Add a listener to the action markers
 		if (creature.GetComponent<IAbility>() != null && actionMarkers)
