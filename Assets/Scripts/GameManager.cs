@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
 	public static CreatureController Creatures { get { return gm.creatureController; } }
 	public static ResourceController Resources { get { return gm.resourceController; } }
 	public static RecipeController Recipes { get { return gm.recipeController; } }
+	public static InputController Input { get { return gm.inputController; } }
 
 	/*
 	 * Public members that can be set per level.
@@ -30,7 +31,8 @@ public class GameManager : MonoBehaviour
 	public ResourceController resourceController;
 	// the recipes of the game world
 	public RecipeController recipeController;
-
+	// controlls the input
+	public InputController inputController;
 	
 	// how width of the space between individual cells
 	public float cellSize = 2;
@@ -90,6 +92,10 @@ public class GameManager : MonoBehaviour
 		if (recipeController == null)
 		{
 			recipeController = GetComponentInChildren<RecipeController>();
+		}
+		if (inputController == null)
+		{
+			inputController = GetComponentInChildren<InputController>();
 		}
 	}
 	

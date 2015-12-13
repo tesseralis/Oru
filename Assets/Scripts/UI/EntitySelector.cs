@@ -11,7 +11,7 @@ public class EntitySelector : MonoBehaviour
 	public GameObject entityMarker;
 	public GameObject actionMarkers;
 
-	private Action<Coordinate> moveCreatureAction;
+	private bool isActing;
 
 	// Use this for initialization
 	void Start () 
@@ -28,8 +28,8 @@ public class EntitySelector : MonoBehaviour
 		transform.SetParent(goal.transform, false);
 		if (entityMarker) { entityMarker.SetActive(true); }
 
-		GameManager.Terrain.OnClick -= moveCreatureAction;
-		moveCreatureAction = null;
+		GameManager.Terrain.OnClick -= SetCurrentCreatureGoal;
+		GameManager.Input.OnSpace -= ToggleAbility;
 	}
 
 	public void SelectCreature(Creature creature)
@@ -38,13 +38,8 @@ public class EntitySelector : MonoBehaviour
 		transform.SetParent(creature.transform, false);
 		if (entityMarker) { entityMarker.SetActive(true); }
 
-		GameManager.Terrain.OnClick -= moveCreatureAction;
-		// Add a listener to move this creature
-		moveCreatureAction = coordinate => {
-			creature.Goal = coordinate;
-			StopAbility(); // TODO should this be a different listener?
-		};
-		GameManager.Terrain.OnClick += moveCreatureAction;
+		GameManager.Terrain.OnClick += SetCurrentCreatureGoal;
+		StopAbility();
 
 		// Add a listener to the action markers
 		if (creature.GetComponent<IAbility>() != null && actionMarkers)
@@ -61,6 +56,9 @@ public class EntitySelector : MonoBehaviour
 
 		// Disable creature creation once we click something
 		UIManager.ui.creatureCreator.StopCreation();
+
+		// Add keyboard shortcut for starting action
+		GameManager.Input.OnSpace += ToggleAbility;
 	}
 
 	public void Deselect()
@@ -69,8 +67,8 @@ public class EntitySelector : MonoBehaviour
 		if (actionMarkers) { actionMarkers.SetActive(false); }
 
 		// remove the goal listener
-		GameManager.Terrain.OnClick -= moveCreatureAction;
-		moveCreatureAction = null;
+		GameManager.Terrain.OnClick -= SetCurrentCreatureGoal;
+		GameManager.Input.OnSpace -= ToggleAbility;
 	}
 
 	// The creature should start doing its ability
@@ -103,13 +101,11 @@ public class EntitySelector : MonoBehaviour
 		}
 	}
 
-	// TODO move this to a generic key input controller
-	private bool isActing = false;
-	public void Update()
+	private void SetCurrentCreatureGoal(Coordinate coordinate)
 	{
-		if (Input.GetKeyDown("space"))
-		{
-			ToggleAbility();
-		}
+		var creature = GetComponentInParent<Creature>();
+		creature.Goal = coordinate;
+		StopAbility();
 	}
+
 }
