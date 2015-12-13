@@ -23,7 +23,6 @@ public class EntitySelector : MonoBehaviour
 		GameManager.gm.goal.OnClick += SelectGoal;
 	}
 
-	// TODO disable action markers if we select a goal
 	public void SelectGoal(Goal goal)
 	{
 		transform.SetParent(goal.transform, false);
@@ -33,7 +32,6 @@ public class EntitySelector : MonoBehaviour
 		moveCreatureAction = null;
 	}
 
-	// TODO disable creature creation if we click something
 	public void SelectCreature(Creature creature)
 	{
 		// Make this creature our parent
@@ -60,6 +58,9 @@ public class EntitySelector : MonoBehaviour
 				};
 			}
 		}
+
+		// Disable creature creation once we click something
+		UIManager.ui.creatureCreator.StopCreation();
 	}
 
 	public void Deselect()

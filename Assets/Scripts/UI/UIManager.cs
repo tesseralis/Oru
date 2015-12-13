@@ -8,6 +8,8 @@ using Util;
 // Main controller for all UI.
 public class UIManager : MonoBehaviour
 {
+	// make game manager accessible throughout the game
+	public static UIManager ui;
 
 	public WinnerPanel winnerPanel;
 	public InfoPanel infoPanel;
@@ -18,6 +20,10 @@ public class UIManager : MonoBehaviour
 
 	void Awake ()
 	{
+		if (ui == null)
+		{
+			ui = this.gameObject.GetComponent<UIManager>();
+		}
 		// Initialize our child components
 		if (winnerPanel == null)
 		{
