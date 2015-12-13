@@ -112,9 +112,9 @@ public class GameManager : MonoBehaviour
 	{
 		Debug.Log ("Next step: " + nextStepTime);
 		creatureController.Step();
-		recipeController.UpdateAvailableRecipes(creatureController.Creatures.Select(x => x.Position).ToList());
+		recipeController.UpdateAvailableRecipes(creatureController.CreatureList.Select(x => x.Position).ToList());
 
-		if (creatureController.Creatures.Where(x => x.creatureType == goal.winningCreatureType)
+		if (creatureController.CreatureList.Where(x => x.creatureType == goal.winningCreatureType)
 			.Select(x => x.Position).Contains(goal.Coordinate()))
 		{
 			Debug.Log("You win!");

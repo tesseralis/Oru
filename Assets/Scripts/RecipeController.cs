@@ -97,59 +97,16 @@ public class RecipeController : MonoBehaviour
 
 	void CreateCreature(Coordinate coordinate)
 	{
-		var creatureDefinition = Creatures.ForType(CurrentRecipe);
-		var resources = GameManager.Resources;
 		if (createMarker != null && isCreating)
 		{
-			var recipe = creatureDefinition.Recipe;
-			// Figure out how many blocks we have available
-			var availableResources = Neighbors(coordinate).Select(c => resources[c]);
-			var resourceCount = Multiset.Empty<ResourceType>();
-			foreach (var resource in availableResources)
-			{
-				resourceCount = resourceCount.MultisetAdd(resource);
-			}
-			Debug.LogFormat("Calculated resources: {0}", String.Join("; ", resourceCount.Select(e => e.Key + ": " + e.Value).ToArray()));
-
-			if (resourceCount.Contains(recipe)
-				&& creatureDefinition.AllowedTerrain.Contains(GameManager.Terrain[coordinate]))
+			if (GameManager.Creatures.CanCreateCreature(CurrentRecipe, coordinate))
 			{
 				// If everything passes, add the creature to the list of creatures
-				GameManager.Creatures.AddCreature(CurrentRecipe, coordinate);
-
-				// Remove the items from the neighboring coordinates.
-				var neighbors = Neighbors(coordinate);
-				var remainder = recipe;
-				// Take items from the adjacent resources until we don't need any more.
-				foreach (var neighbor in neighbors)
-				{
-					if (remainder.IsEmpty())
-					{
-						break;
-					}
-					var difference = GameManager.Resources[neighbor].MultisetSubtract(remainder);
-					remainder = remainder.MultisetSubtract(resources[neighbor]);
-
-					resources[neighbor] = difference;
-				}
-				// We are no longer creating
-				IsCreating = false;
-			}
-			else
-			{
-				Debug.LogFormat("Did not find enough materials for recipe. Had {0}, needed {1}",
-					resourceCount, recipe);
+				GameManager.Creatures.CreateCreature(CurrentRecipe, coordinate);
 			}
 		}
-	}
-
-	private static IList<Coordinate> Neighbors(Coordinate coordinate)
-	{
-		int[] range = {-1, 0, 1};
-		return (from x in range
-			from z in range
-			select coordinate + new Coordinate(x, z)).ToList();
-
+		// We are no longer creating
+		IsCreating = false;
 	}
 
 }
