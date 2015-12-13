@@ -13,7 +13,6 @@ public class UIManager : MonoBehaviour
 	public InfoPanel infoPanel;
 	public RecipeListPanel recipePanel;
 
-	// TODO separate out Canvas UI from 3D UI
 	public EntitySelector entitySelector;
 	public CreatureCreator creatureCreator;
 
