@@ -8,15 +8,10 @@ public class ActionMarker : MonoBehaviour
 
 	public Action<Coordinate> OnClick;
 
+	// TODO Maybe we can consolidate most of these "on click" objects?
 	void OnMouseDown()
 	{
-		if (OnClick != null)
-		{
-			OnClick(this.Coordinate());
-			// Once we're done, deactivate ourselves
-			// TODO make this another delegate, somehow
-//			GameManager.Creatures.IsActing = false;
-		}
+		if (OnClick != null) { OnClick(this.Coordinate()); }
 	}
 
 }
