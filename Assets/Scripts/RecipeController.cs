@@ -97,10 +97,11 @@ public class RecipeController : MonoBehaviour
 
 	void CreateCreature(Coordinate coordinate)
 	{
+		var creatureDefinition = Creatures.ForType(CurrentRecipe);
 		var resources = GameManager.Resources;
 		if (createMarker != null && isCreating)
 		{
-			var recipe = Creatures.ForType(CurrentRecipe).Recipe;
+			var recipe = creatureDefinition.Recipe;
 			// Figure out how many blocks we have available
 			var availableResources = Neighbors(coordinate).Select(c => resources[c]);
 			var resourceCount = Multiset.Empty<ResourceType>();
@@ -110,7 +111,8 @@ public class RecipeController : MonoBehaviour
 			}
 			Debug.LogFormat("Calculated resources: {0}", String.Join("; ", resourceCount.Select(e => e.Key + ": " + e.Value).ToArray()));
 
-			if (resourceCount.Contains(recipe))
+			if (resourceCount.Contains(recipe)
+				&& creatureDefinition.AllowedTerrain.Contains(GameManager.Terrain[coordinate]))
 			{
 				// If everything passes, add the creature to the list of creatures
 				GameManager.Creatures.AddCreature(CurrentRecipe, coordinate);
