@@ -49,9 +49,10 @@ public class CreatureCreator : MonoBehaviour {
 			{
 				// If everything passes, add the creature to the list of creatures
 				GameManager.Creatures.CreateCreature(currentCreatureType, coordinate);
+				// We are no longer creating
+				StopCreation();
+				// TODO select the newly created creature
 			}
 		}
-		// We are no longer creating
-		StopCreation();
 	}
 }

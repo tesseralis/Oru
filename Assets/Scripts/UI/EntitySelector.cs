@@ -33,6 +33,7 @@ public class EntitySelector : MonoBehaviour
 		moveCreatureAction = null;
 	}
 
+	// TODO disable creature creation if we click something
 	public void SelectCreature(Creature creature)
 	{
 		// Make this creature our parent
