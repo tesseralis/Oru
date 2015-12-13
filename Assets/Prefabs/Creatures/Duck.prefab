@@ -27,6 +27,7 @@ GameObject:
   - 4: {fileID: 416296}
   - 114: {fileID: 11480100}
   - 65: {fileID: 6510084}
+  - 114: {fileID: 11431526}
   m_Layer: 0
   m_Name: Duck
   m_TagString: Untagged
@@ -167,6 +168,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 1, z: 0.5}
   m_Center: {x: 0, y: 0.75, z: 0}
+--- !u!114 &11431526
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 119976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 935d35ca9644d42599cbffe51c35ab7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  capacity: 1
+  carrying: []
 --- !u!114 &11480100
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -179,7 +193,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   creatureType: 0
-  allowedTerrain: 0000000003000000
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -198,6 +211,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: allowedTerrain.Array.data[1]
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: capacity
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
