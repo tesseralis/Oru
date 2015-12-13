@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using Util;
 
 /// <summary>
 /// Manages interactions between creatures and the rest of the system.
@@ -98,9 +99,7 @@ public class CreatureController : MonoBehaviour
 			creaturePrefab = creaturePrefabs.dragonPrefab;
 			break;
 		}
-		GameObject newCreature = Instantiate(creaturePrefab);
-		GameManager.gm.SetPosition(newCreature, location);
-		newCreature.transform.SetParent(this.transform);
+		this.AddChildWithComponent<Creature>(creaturePrefab, location);
 
 		// Set this creature to be the new one
 	}

@@ -33,19 +33,11 @@ public class TerrainController : MonoBehaviour
 			// Delete the old value
 			Destroy(grid[coordinate].gameObject);
 
+			// Create the new item
 			var prefab = PrefabFor (value);
-
-			GameObject terrainObject = (GameObject)Instantiate(prefab);
-			GameManager.gm.SetPosition(terrainObject, coordinate);
-			terrainObject.transform.parent = gameObject.transform;
-
-			if (!terrainObject.GetComponent<TerrainBlock>())
-			{
-				var block = terrainObject.AddComponent<TerrainBlock>();
-				block.type = value;
-			}
-
-			grid[coordinate] = terrainObject.GetComponent<TerrainBlock>();
+			var block = this.AddChildWithComponent<TerrainBlock>(prefab, coordinate);
+			block.type = value;
+			grid[coordinate] = block;
 
 		}
 	}

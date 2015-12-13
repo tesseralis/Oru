@@ -37,18 +37,10 @@ public class ResourceController : MonoBehaviour
 				if (!locations.ContainsKey(coordinate))
 				{
 					// Instantiate a new marker
-					// TODO factor out all this component creation logic in terrain, resource, and creature
-					var resourcePileObject = Instantiate(resourcePilePrefab);
-					GameManager.gm.SetPosition(resourcePileObject, coordinate);
-					var resourcePile = resourcePileObject.GetComponent<ResourcePile>();
-					if (resourcePile == null)
-					{
-						resourcePile = resourcePileObject.AddComponent<ResourcePile>();
-					}
+					var resourcePile = this.AddChildWithComponent<ResourcePile>(resourcePilePrefab, coordinate);
 					locations[coordinate] = resourcePile;
 				}
 				locations[coordinate].Resources = value;
-
 			}
 		}
 	}
