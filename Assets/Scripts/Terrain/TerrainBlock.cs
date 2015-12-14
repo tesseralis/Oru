@@ -16,12 +16,12 @@ public class TerrainBlock: MonoBehaviour
 
 	void OnMouseOver ()
 	{
-		controller.OnHover(this.Coordinate());
+		if (controller.OnHover != null) { controller.OnHover(this.Coordinate()); }
 	}
 	
 	void OnMouseDown ()
 	{
-		controller.OnClick(this.Coordinate());
+		if (controller.OnClick != null) { controller.OnClick(this.Coordinate()); }
 	}
 
 }
