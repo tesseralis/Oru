@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections;
+using Util;
 
 public class CreatureCreator : MonoBehaviour {
 
@@ -45,6 +46,10 @@ public class CreatureCreator : MonoBehaviour {
 			{
 				if (positiveMarker) { positiveMarker.SetActive(true); }
 				if (negativeMarker) { negativeMarker.SetActive(false); }
+				var prefab = GameManager.Creatures.PrefabFor(currentCreatureType);
+				GameObject newObject = GameObject.Instantiate(prefab);
+				newObject.transform.SetParent(createMarker.transform, false);
+				newObject.GetComponent<BoxCollider>().enabled = false;
 			}
 			else
 			{		
@@ -56,7 +61,14 @@ public class CreatureCreator : MonoBehaviour {
 
 	void HideCreateMarker(Coordinate coordinate)
 	{
-		if (createMarker) { createMarker.SetActive(false); }
+		if (createMarker) {
+			// Destroy the mock creature we made
+			if (createMarker.GetComponentInChildren<Creature>())
+			{
+				Destroy(createMarker.GetComponentInChildren<Creature>().gameObject);
+			}
+			createMarker.SetActive(false);
+		}
 	}
 
 	void CreateCreature(Coordinate coordinate)

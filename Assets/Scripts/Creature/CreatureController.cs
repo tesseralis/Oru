@@ -82,7 +82,7 @@ public class CreatureController : MonoBehaviour
 		}
 	}
 
-	private GameObject PrefabFor (CreatureType creature)
+	public GameObject PrefabFor (CreatureType creature)
 	{
 		switch (creature) {
 		case CreatureType.Duck:
