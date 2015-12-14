@@ -41,6 +41,11 @@ public struct Coordinate
 		return new Coordinate(c1.x + c2.x, c1.z + c2.z);
 	}
 
+	public static Coordinate operator -(Coordinate c1, Coordinate c2)
+	{
+		return new Coordinate(c1.x - c2.x, c1.z - c2.z);
+	}
+
 	// Constants for ease of use
 	public static Coordinate up = new Coordinate(0, 1);
 	public static Coordinate down = new Coordinate(0, -1);
