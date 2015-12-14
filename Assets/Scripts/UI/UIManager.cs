@@ -164,6 +164,7 @@ public class UIManager : MonoBehaviour
 //					// Display the information
 //					// TODO make this a separate listener
 //					// TODO do this on mouse hover instead
+					selectionInfoPanel.gameObject.SetActive(true);
 					selectionInfoPanel.Name = recipe.ToString();
 					selectionInfoPanel.Description = string.Join("\n",
 						Creatures.ForType(recipe).Recipe.Select(e => e.Key + ": " + e.Value).ToArray());
