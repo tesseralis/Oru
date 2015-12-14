@@ -9,6 +9,9 @@ public class ActionMarkers : MonoBehaviour {
 
 	private ActionMarker[] markers;
 
+	public event Action OnStartAbility;
+	public event Action OnStopAbility;
+
 	// Use this for initialization
 	void Awake ()
 	{
@@ -49,14 +52,12 @@ public class ActionMarkers : MonoBehaviour {
 			throw new InvalidOperationException("Actions are not enabled.");
 		}
 		Debug.Log("Engaging creature ability.");
-		// TODO what to do if no creature selected?
-		// stop the creature
-		GetComponentInParent<Creature>().Goal = null;
 		isActing = true;
 		foreach (var marker in markers)
 		{
 			marker.gameObject.SetActive(true);
 		}
+		if (OnStartAbility != null) { OnStartAbility(); }
 	}
 
 	public void StopAbility()
@@ -71,6 +72,7 @@ public class ActionMarkers : MonoBehaviour {
 		{
 			marker.gameObject.SetActive(false);
 		}
+		if (OnStopAbility != null) { OnStopAbility(); }
 	}
 
 	public void ToggleAbility()

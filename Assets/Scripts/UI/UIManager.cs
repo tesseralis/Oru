@@ -44,10 +44,16 @@ public class UIManager : MonoBehaviour
 	{
 		// Add listeners to the necessary game objects.
 		GameManager.Creatures.OnSelect += DisplayCreatureInfo;
+		GameManager.gm.goal.OnClick += DisplayGoalInfo;
+
+		// TODO Also display what type of terrain we have.
 		GameManager.Terrain.OnHover += DisplayPileInfo;
 		GameManager.Recipes.OnChange += UpdateRecipeList;
-		GameManager.gm.goal.OnClick += DisplayGoalInfo;
+
 		GameManager.gm.OnWin += DisplayWinInfo;
+
+		// When we select a creature, we should stop creating
+		entitySelector.OnSelect += x => creatureCreator.StopCreation();
 	}
 
 	void DisplayWinInfo()
@@ -55,6 +61,8 @@ public class UIManager : MonoBehaviour
 		winnerPanel.gameObject.SetActive(true);
 		infoPanel.gameObject.SetActive(false);
 		recipePanel.gameObject.SetActive(false);
+
+		// TODO disable all other UI
 	}
 
 	void DisplayCreatureInfo(Creature creature)
