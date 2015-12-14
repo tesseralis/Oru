@@ -12,7 +12,8 @@ public class UIManager : MonoBehaviour
 	public static UIManager ui;
 
 	public WinnerPanel winnerPanel;
-	public InfoPanel infoPanel;
+	public InfoPanel selectionInfoPanel;
+	public InfoPanel gridInfoPanel;
 	public RecipeListPanel recipePanel;
 
 	public EntitySelector entitySelector;
@@ -28,10 +29,6 @@ public class UIManager : MonoBehaviour
 		if (winnerPanel == null)
 		{
 			winnerPanel = GetComponentInChildren<WinnerPanel>();
-		}
-		if (infoPanel == null)
-		{
-			infoPanel = GetComponentInChildren<InfoPanel>();
 		}
 		if (recipePanel == null)
 		{
@@ -59,16 +56,17 @@ public class UIManager : MonoBehaviour
 	void DisplayWinInfo()
 	{
 		winnerPanel.gameObject.SetActive(true);
-		infoPanel.gameObject.SetActive(false);
+		selectionInfoPanel.gameObject.SetActive(false);
+		gridInfoPanel.gameObject.SetActive(false);
 		recipePanel.gameObject.SetActive(false);
 
-		// TODO disable all other UI
+		// TODO disable all events
 	}
 
 	void DisplayCreatureInfo(Creature creature)
 	{
-		infoPanel.gameObject.SetActive(true);
-		infoPanel.Name = creature.creatureType.ToString();
+		selectionInfoPanel.gameObject.SetActive(true);
+		selectionInfoPanel.Name = creature.creatureType.ToString();
 		var creatureDefinition = Creatures.ForType(creature.creatureType);
 		// TODO generalize for all abilities!
 		string ability;
@@ -87,7 +85,7 @@ public class UIManager : MonoBehaviour
 			ability = "None";
 		}
 
-		infoPanel.Description = string.Format("Allowed Terrain: {0}\nAbility: {1}",
+		selectionInfoPanel.Description = string.Format("Allowed Terrain: {0}\nAbility: {1}",
 			string.Join(", ", creatureDefinition.AllowedTerrain.Select(t => t.ToString()).ToArray()),
 			ability);
 	}
@@ -95,18 +93,19 @@ public class UIManager : MonoBehaviour
 	void DisplayGoalInfo(Goal goal)
 	{
 		// Update the info UI
-		infoPanel.gameObject.SetActive(true);
-		infoPanel.Name = "Goal";
-		infoPanel.Description = goal.winningCreatureType + " at this location.";
+		selectionInfoPanel.gameObject.SetActive(true);
+		selectionInfoPanel.Name = "Goal";
+		selectionInfoPanel.Description = goal.winningCreatureType + " at this location.";
 	}
 
 	void DisplayPileInfo(Coordinate coordinate)
 	{
+		gridInfoPanel.gameObject.SetActive(true);
+		gridInfoPanel.Name = GameManager.Terrain[coordinate].ToString();
+		gridInfoPanel.Description = "";
 		if (!GameManager.Resources[coordinate].IsEmpty())
 		{
-			infoPanel.gameObject.SetActive(true);
-			infoPanel.Name = "Resource Pile";
-			infoPanel.Description = string.Join("\n",
+			gridInfoPanel.Description += string.Join("\n",
 				GameManager.Resources[coordinate].Select(e => e.Key + ": " + e.Value).ToArray());
 		}
 	}
@@ -134,12 +133,12 @@ public class UIManager : MonoBehaviour
 					entitySelector.Deselect();
 					creatureCreator.StartCreation(recipe);
 
-					// Display the information
-					// TODO make this a separate listener
-					// TODO do this on mouse hover instead
-					infoPanel.Name = recipe.ToString();
-					infoPanel.Description = string.Join("\n",
-						Creatures.ForType(recipe).Recipe.Select(e => e.Key + ": " + e.Value).ToArray());
+//					// Display the information
+//					// TODO make this a separate listener
+//					// TODO do this on mouse hover instead
+//					gridInfoPanel.Name = recipe.ToString();
+//					gridInfoPanel.Description = string.Join("\n",
+//						Creatures.ForType(recipe).Recipe.Select(e => e.Key + ": " + e.Value).ToArray());
 				});
 
 		}
