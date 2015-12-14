@@ -41,11 +41,30 @@ public class Creature : MonoBehaviour
 		if (Goal != null && (!position.Equals(Goal)))
 		{
 			var next = NextCoordinate ();
+
+			// Make our creature face the right direction
+			if (next != position)
+			{
+				var direction = next - position;
+				transform.Rotate(new Vector3(0, AngleFor(direction)) - transform.rotation.eulerAngles);
+			}
+
+			// Update our creature's position
 			position = next;
+
 
 			// Update the position visually
 			GameManager.gm.SetPosition(gameObject, next);
 		}
+	}
+
+	private float AngleFor(Coordinate direction)
+	{
+		if (direction == Coordinate.up) { return -90; }
+		if (direction == Coordinate.right) { return 0; }
+		if (direction == Coordinate.down) { return 90; }
+		if (direction == Coordinate.left) { return 180; }
+		throw new ArgumentException("Given coordinate" + direction + " is not a direction", "direction");
 	}
 
 	// do a BFS and figure out the right path
