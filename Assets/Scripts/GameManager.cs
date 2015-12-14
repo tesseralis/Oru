@@ -40,6 +40,8 @@ public class GameManager : MonoBehaviour
 	// how fast the game moves
 	public float stepInterval = 0.5f;
 
+	public float Steps { get; private set; }
+
 	/*
 	 * Internal game state
 	 */
@@ -58,8 +60,6 @@ public class GameManager : MonoBehaviour
 	// Event that is called when we are victorious.
 	public Action OnWin;
 
-	// The current time
-	private float currentTime;
 	// the next time to take a step
 	private float nextStepTime;
 
@@ -72,9 +72,9 @@ public class GameManager : MonoBehaviour
 			gm = this.gameObject.GetComponent<GameManager>();
 		}
 		HasWon = false;
-		
-		currentTime = 0;
+
 		nextStepTime = 0;
+		Steps = 0;
 
 		// Auto-wire the controllers if necessary
 		if (creatureController == null)
@@ -104,8 +104,7 @@ public class GameManager : MonoBehaviour
 	{
 		if (!HasWon)
 		{
-			currentTime += Time.deltaTime;
-			if (currentTime >= nextStepTime)
+			if (Time.timeSinceLevelLoad >= nextStepTime)
 			{
 				nextStepTime += stepInterval;
 				Step ();
@@ -116,7 +115,8 @@ public class GameManager : MonoBehaviour
 	// Move one discrete game step
 	void Step ()
 	{
-		Debug.Log ("Next step: " + nextStepTime);
+		Steps++;
+		Debug.Log("Step: " + Steps);
 		creatureController.Step();
 		recipeController.UpdateAvailableRecipes(creatureController.CreatureList.Select(x => x.Position).ToList());
 
