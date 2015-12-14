@@ -198,7 +198,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   creaturePrefabs:
     duckPrefab: {fileID: 119976, guid: bb18ab56165c5484aa3d9e65cc7a1ab4, type: 2}
-    dragonPrefab: {fileID: 171066, guid: b0140aef76f004a08af3307b0f025fc2, type: 2}
+    dragonPrefab: {fileID: 102854, guid: b0140aef76f004a08af3307b0f025fc2, type: 2}
 --- !u!114 &11452108
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -271,6 +271,10 @@ Prefab:
       propertyPath: inputController
       value: 
       objectReference: {fileID: 11452108}
+    - target: {fileID: 0}
+      propertyPath: creaturePrefabs.dragonPrefab
+      value: 
+      objectReference: {fileID: 102854, guid: b0140aef76f004a08af3307b0f025fc2, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 178926}
