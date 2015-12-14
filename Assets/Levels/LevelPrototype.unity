@@ -535,7 +535,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22428230, guid: 4b5724a31a752493d9901d55c4d3a19b, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 22428230, guid: 4b5724a31a752493d9901d55c4d3a19b, type: 2}
       propertyPath: m_AnchoredPosition.x
@@ -1250,6 +1250,162 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 408060, guid: 92a3a21a799c0462e9eca225f50347c9, type: 2}
   m_PrefabInternal: {fileID: 445352704}
+--- !u!1001 &479891063
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1522887948}
+    m_Modifications:
+    - target: {fileID: 22428230, guid: 4b5724a31a752493d9901d55c4d3a19b, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22428230, guid: 4b5724a31a752493d9901d55c4d3a19b, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22428230, guid: 4b5724a31a752493d9901d55c4d3a19b, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22428230, guid: 4b5724a31a752493d9901d55c4d3a19b, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22428230, guid: 4b5724a31a752493d9901d55c4d3a19b, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22428230, guid: 4b5724a31a752493d9901d55c4d3a19b, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22428230, guid: 4b5724a31a752493d9901d55c4d3a19b, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22428230, guid: 4b5724a31a752493d9901d55c4d3a19b, type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 22428230, guid: 4b5724a31a752493d9901d55c4d3a19b, type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.000030517578
+      objectReference: {fileID: 0}
+    - target: {fileID: 22428230, guid: 4b5724a31a752493d9901d55c4d3a19b, type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.000015258789
+      objectReference: {fileID: 0}
+    - target: {fileID: 22428230, guid: 4b5724a31a752493d9901d55c4d3a19b, type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22428230, guid: 4b5724a31a752493d9901d55c4d3a19b, type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22428230, guid: 4b5724a31a752493d9901d55c4d3a19b, type: 2}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22428230, guid: 4b5724a31a752493d9901d55c4d3a19b, type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22428230, guid: 4b5724a31a752493d9901d55c4d3a19b, type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22428230, guid: 4b5724a31a752493d9901d55c4d3a19b, type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22428230, guid: 4b5724a31a752493d9901d55c4d3a19b, type: 2}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 22428230, guid: 4b5724a31a752493d9901d55c4d3a19b, type: 2}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11483706, guid: 4b5724a31a752493d9901d55c4d3a19b, type: 2}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11483706, guid: 4b5724a31a752493d9901d55c4d3a19b, type: 2}
+      propertyPath: m_Color.g
+      value: 0.72555774
+      objectReference: {fileID: 0}
+    - target: {fileID: 11483706, guid: 4b5724a31a752493d9901d55c4d3a19b, type: 2}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11483706, guid: 4b5724a31a752493d9901d55c4d3a19b, type: 2}
+      propertyPath: m_Color.r
+      value: 0.39705884
+      objectReference: {fileID: 0}
+    - target: {fileID: 191562, guid: 4b5724a31a752493d9901d55c4d3a19b, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22428230, guid: 4b5724a31a752493d9901d55c4d3a19b, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22428230, guid: 4b5724a31a752493d9901d55c4d3a19b, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22428230, guid: 4b5724a31a752493d9901d55c4d3a19b, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 191562, guid: 4b5724a31a752493d9901d55c4d3a19b, type: 2}
+      propertyPath: m_Name
+      value: InstructionPanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 11428904, guid: 4b5724a31a752493d9901d55c4d3a19b, type: 2}
+      propertyPath: m_Text
+      value: 'Create creatures.
+
+        Some creatures have abilities.
+
+        Get the right creature to the goal.'
+      objectReference: {fileID: 0}
+    - target: {fileID: 129502, guid: 4b5724a31a752493d9901d55c4d3a19b, type: 2}
+      propertyPath: m_Name
+      value: InstructionText
+      objectReference: {fileID: 0}
+    - target: {fileID: 11437390, guid: 4b5724a31a752493d9901d55c4d3a19b, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1429077465}
+    - target: {fileID: 11437390, guid: 4b5724a31a752493d9901d55c4d3a19b, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: HideInstructions
+      objectReference: {fileID: 0}
+    - target: {fileID: 150376, guid: 4b5724a31a752493d9901d55c4d3a19b, type: 2}
+      propertyPath: m_Name
+      value: SelectButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 22450340, guid: 4b5724a31a752493d9901d55c4d3a19b, type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 11472622, guid: 4b5724a31a752493d9901d55c4d3a19b, type: 2}
+      propertyPath: m_Text
+      value: Start Game
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 11486384, guid: 4b5724a31a752493d9901d55c4d3a19b, type: 2}
+  m_ParentPrefab: {fileID: 100100000, guid: 4b5724a31a752493d9901d55c4d3a19b, type: 2}
+  m_IsPrefabParent: 0
+--- !u!224 &479891064 stripped
+RectTransform:
+  m_PrefabParentObject: {fileID: 22428230, guid: 4b5724a31a752493d9901d55c4d3a19b,
+    type: 2}
+  m_PrefabInternal: {fileID: 479891063}
 --- !u!1001 &651812984
 Prefab:
   m_ObjectHideFlags: 0
@@ -1999,6 +2155,7 @@ MonoBehaviour:
   selectionInfoPanel: {fileID: 149463834}
   gridInfoPanel: {fileID: 1720501139}
   recipePanel: {fileID: 1152615396}
+  instructionPanel: {fileID: 1604163346}
   entitySelector: {fileID: 722543384}
   creatureCreator: {fileID: 1624502940}
 --- !u!4 &1429077466
@@ -2074,6 +2231,7 @@ RectTransform:
   - {fileID: 149463831}
   - {fileID: 1720501136}
   - {fileID: 1152615393}
+  - {fileID: 479891064}
   - {fileID: 223146023}
   m_Father: {fileID: 1429077466}
   m_RootOrder: 0
@@ -2137,6 +2295,10 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &1604163346 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 191562, guid: 4b5724a31a752493d9901d55c4d3a19b, type: 2}
+  m_PrefabInternal: {fileID: 479891063}
 --- !u!114 &1624502940 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 11487616, guid: 7cab4a070f08441ef9b1b997efc80eeb,

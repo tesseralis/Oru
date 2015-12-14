@@ -18,22 +18,19 @@ public class RecipeController : MonoBehaviour
 
 	public CreatureType CurrentRecipe { get; set; }
 
-	// Use this for initialization
-	void Start ()
+	void Awake ()
 	{
 		recipeLocations = new Dictionary<Coordinate, Recipe>();
-
+		
 		if (availableRecipes == null)
 		{
 			availableRecipes = new CreatureType[0];
 		}
-
+		
 		foreach (var instruction in GetComponentsInChildren<Recipe>())
 		{
 			recipeLocations[instruction.Coordinate()] = instruction;
 		}
-		// Trigger the initial change
-		if (OnChange != null) { OnChange(availableRecipes); }
 	}
 
 	// Update the list of available instructions if a creature has walked on it
