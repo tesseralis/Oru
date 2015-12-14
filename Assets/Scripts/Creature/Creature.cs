@@ -24,11 +24,12 @@ public class Creature : MonoBehaviour
 	private CreatureController manager;
 
 	private Coordinate position;
+	private Coordinate previousPosition;
 
 	void Start()
 	{
 		// Store our initial position
-		position = GameManager.gm.ToGridCoordinate(gameObject.transform.position);
+		previousPosition = position = GameManager.gm.ToGridCoordinate(gameObject.transform.position);
 	}
 
 	void OnMouseDown()
@@ -36,8 +37,23 @@ public class Creature : MonoBehaviour
 		GetComponentInParent<CreatureController>().OnSelect(this);
 	}
 
+	public void Update()
+	{
+		// Animate the creature moving
+		var stepInterval = GameManager.gm.stepInterval;
+		var cellSize = GameManager.gm.cellSize;
+
+		var ratio = (Time.timeSinceLevelLoad % stepInterval) / stepInterval;
+		var direction = position - previousPosition;
+		// TODO I'm sure we can factor this out
+		var translation = new Vector3(direction.x, 0, direction.z) * ratio * cellSize;
+		GameManager.gm.SetPosition(gameObject, previousPosition);
+		transform.position += translation;
+	}
+
 	public void Step()
 	{
+		previousPosition = position;
 		if (Goal != null && (!position.Equals(Goal)))
 		{
 			var next = NextCoordinate ();
@@ -51,10 +67,6 @@ public class Creature : MonoBehaviour
 
 			// Update our creature's position
 			position = next;
-
-
-			// Update the position visually
-			GameManager.gm.SetPosition(gameObject, next);
 		}
 	}
 
