@@ -13,8 +13,8 @@ public class CreatureCreator : MonoBehaviour {
 		isCreating = true;
 		currentCreatureType = creature;
 		if (createMarker) { createMarker.SetActive(true); }
-		GameManager.Terrain.OnHover += MoveCreateMarker;
-		GameManager.Terrain.OnClick += CreateCreature;
+		GameManager.Terrain.MouseEnterBlock += MoveCreateMarker;
+		GameManager.Terrain.ClickBlock += CreateCreature;
 
 		// TODO Deselect all other UI
 	}
@@ -23,8 +23,8 @@ public class CreatureCreator : MonoBehaviour {
 	{
 		isCreating = false;
 		if (createMarker) { createMarker.SetActive(false); }
-		GameManager.Terrain.OnHover -= MoveCreateMarker;
-		GameManager.Terrain.OnClick -= CreateCreature;
+		GameManager.Terrain.MouseEnterBlock -= MoveCreateMarker;
+		GameManager.Terrain.ClickBlock -= CreateCreature;
 	}
 
 	// Use this for initialization

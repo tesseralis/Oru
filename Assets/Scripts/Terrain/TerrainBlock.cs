@@ -14,14 +14,19 @@ public class TerrainBlock: MonoBehaviour
 
 	public TerrainType type;
 
-	void OnMouseOver ()
+	void OnMouseEnter ()
 	{
-		if (controller.OnHover != null) { controller.OnHover(this.Coordinate()); }
+		if (controller.MouseEnterBlock != null) { controller.MouseEnterBlock(this.Coordinate()); }
+	}
+
+	void OnMouseExit ()
+	{
+		if (controller.MouseExitBlock != null) { controller.MouseExitBlock(this.Coordinate()); }
 	}
 	
 	void OnMouseDown ()
 	{
-		if (controller.OnClick != null) { controller.OnClick(this.Coordinate()); }
+		if (controller.ClickBlock != null) { controller.ClickBlock(this.Coordinate()); }
 	}
 
 }

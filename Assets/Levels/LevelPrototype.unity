@@ -420,7 +420,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22428230, guid: 4b5724a31a752493d9901d55c4d3a19b, type: 2}
       propertyPath: m_RootOrder
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 22428230, guid: 4b5724a31a752493d9901d55c4d3a19b, type: 2}
       propertyPath: m_AnchoredPosition.x
@@ -461,6 +461,26 @@ Prefab:
     - target: {fileID: 22428230, guid: 4b5724a31a752493d9901d55c4d3a19b, type: 2}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11483706, guid: 4b5724a31a752493d9901d55c4d3a19b, type: 2}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11483706, guid: 4b5724a31a752493d9901d55c4d3a19b, type: 2}
+      propertyPath: m_Color.g
+      value: 0.72555774
+      objectReference: {fileID: 0}
+    - target: {fileID: 11483706, guid: 4b5724a31a752493d9901d55c4d3a19b, type: 2}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11483706, guid: 4b5724a31a752493d9901d55c4d3a19b, type: 2}
+      propertyPath: m_Color.r
+      value: 0.39705884
+      objectReference: {fileID: 0}
+    - target: {fileID: 191562, guid: 4b5724a31a752493d9901d55c4d3a19b, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4b5724a31a752493d9901d55c4d3a19b, type: 2}
@@ -654,7 +674,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22448390, guid: cafa1983fec934f62893f363d689abfb, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22448390, guid: cafa1983fec934f62893f363d689abfb, type: 2}
       propertyPath: m_AnchoredPosition.x
@@ -1997,7 +2017,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22448390, guid: cafa1983fec934f62893f363d689abfb, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22448390, guid: cafa1983fec934f62893f363d689abfb, type: 2}
       propertyPath: m_AnchoredPosition.x
@@ -2005,7 +2025,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22448390, guid: cafa1983fec934f62893f363d689abfb, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -100
       objectReference: {fileID: 0}
     - target: {fileID: 22448390, guid: cafa1983fec934f62893f363d689abfb, type: 2}
       propertyPath: m_SizeDelta.x
@@ -2013,7 +2033,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22448390, guid: cafa1983fec934f62893f363d689abfb, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 22448390, guid: cafa1983fec934f62893f363d689abfb, type: 2}
       propertyPath: m_AnchorMin.x
@@ -2021,7 +2041,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22448390, guid: cafa1983fec934f62893f363d689abfb, type: 2}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22448390, guid: cafa1983fec934f62893f363d689abfb, type: 2}
       propertyPath: m_AnchorMax.x
@@ -2203,10 +2223,10 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 223146023}
   - {fileID: 149463831}
   - {fileID: 1720501136}
   - {fileID: 1152615393}
+  - {fileID: 223146023}
   m_Father: {fileID: 1429077466}
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
@@ -2260,7 +2280,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 2
   m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 346592266}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -2659,7 +2679,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22407366, guid: c1d3906b9e78344d3a0a4e2d6b81ccb1, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 22407366, guid: c1d3906b9e78344d3a0a4e2d6b81ccb1, type: 2}
       propertyPath: m_AnchoredPosition.x

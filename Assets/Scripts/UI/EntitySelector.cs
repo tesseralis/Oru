@@ -50,7 +50,7 @@ public class EntitySelector : MonoBehaviour
 
 	private void DeselectCreature()
 	{
-		GameManager.Terrain.OnClick -= SetCurrentCreatureGoal;
+		GameManager.Terrain.ClickBlock -= SetCurrentCreatureGoal;
 		actionMarkers.OnStartAbility -= RemoveCurrentCreatureGoal;
 		actionMarkers.Disable();
 	}
@@ -64,7 +64,7 @@ public class EntitySelector : MonoBehaviour
 	{
 		Select(creature.gameObject);
 
-		GameManager.Terrain.OnClick += SetCurrentCreatureGoal;
+		GameManager.Terrain.ClickBlock += SetCurrentCreatureGoal;
 
 		// Add a listener to the action markers
 		if (creature.GetComponent<IAbility>() != null)

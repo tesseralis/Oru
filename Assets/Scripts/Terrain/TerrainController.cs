@@ -17,8 +17,9 @@ public class TerrainController : MonoBehaviour
 	public GameObject treePrefab;
 	public GameObject waterPrefab;
 
-	public Action<Coordinate> OnHover;
-	public Action<Coordinate> OnClick;
+	public Action<Coordinate> MouseEnterBlock;
+	public Action<Coordinate> MouseExitBlock;
+	public Action<Coordinate> ClickBlock;
 
 	private IDictionary<Coordinate, TerrainBlock> grid;
 

@@ -43,8 +43,9 @@ public class UIManager : MonoBehaviour
 		GameManager.Creatures.OnSelect += DisplayCreatureInfo;
 		GameManager.gm.goal.OnClick += DisplayGoalInfo;
 
-		// TODO Also display what type of terrain we have.
-		GameManager.Terrain.OnHover += DisplayPileInfo;
+		GameManager.Terrain.MouseEnterBlock += DisplayCoordinateInfo;
+		GameManager.Terrain.MouseExitBlock += HideCoordinateInfo;
+
 		GameManager.Recipes.OnChange += UpdateRecipeList;
 
 		GameManager.gm.OnWin += DisplayWinInfo;
@@ -98,7 +99,7 @@ public class UIManager : MonoBehaviour
 		selectionInfoPanel.Description = goal.winningCreatureType + " at this location.";
 	}
 
-	void DisplayPileInfo(Coordinate coordinate)
+	void DisplayCoordinateInfo(Coordinate coordinate)
 	{
 		gridInfoPanel.gameObject.SetActive(true);
 		gridInfoPanel.Name = GameManager.Terrain[coordinate].ToString();
@@ -108,6 +109,11 @@ public class UIManager : MonoBehaviour
 			gridInfoPanel.Description += string.Join("\n",
 				GameManager.Resources[coordinate].Select(e => e.Key + ": " + e.Value).ToArray());
 		}
+	}
+
+	void HideCoordinateInfo(Coordinate coordinate)
+	{
+		gridInfoPanel.gameObject.SetActive(false);
 	}
 
 	// TODO some of this code should be moved back to the enclosing object.
@@ -136,9 +142,9 @@ public class UIManager : MonoBehaviour
 //					// Display the information
 //					// TODO make this a separate listener
 //					// TODO do this on mouse hover instead
-//					gridInfoPanel.Name = recipe.ToString();
-//					gridInfoPanel.Description = string.Join("\n",
-//						Creatures.ForType(recipe).Recipe.Select(e => e.Key + ": " + e.Value).ToArray());
+					selectionInfoPanel.Name = recipe.ToString();
+					selectionInfoPanel.Description = string.Join("\n",
+						Creatures.ForType(recipe).Recipe.Select(e => e.Key + ": " + e.Value).ToArray());
 				});
 
 		}
