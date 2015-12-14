@@ -11,7 +11,7 @@ public class EntitySelector : MonoBehaviour
 	public GameObject entityMarker;
 	public ActionMarkers actionMarkers;
 
-	public event Action<GameObject> OnSelect;
+	public event Action<GameObject> Select;
 
 	private bool isActing;
 
@@ -33,7 +33,7 @@ public class EntitySelector : MonoBehaviour
 	}
 
 	// Common actions when something is selected
-	private void Select(GameObject gameObject)
+	private void OnSelect(GameObject gameObject)
 	{
 		// Deselect the previous creature if any
 		DeselectCreature();
@@ -45,7 +45,7 @@ public class EntitySelector : MonoBehaviour
 		if (entityMarker) { entityMarker.SetActive(true); }
 
 		// Run the events in the handler
-		if (OnSelect != null) { OnSelect(gameObject); }
+		if (Select != null) { Select(gameObject); }
 	}
 
 	private void DeselectCreature()
@@ -57,12 +57,12 @@ public class EntitySelector : MonoBehaviour
 
 	public void SelectGoal(Goal goal)
 	{
-		Select(goal.gameObject);
+		OnSelect(goal.gameObject);
 	}
 
 	public void SelectCreature(Creature creature)
 	{
-		Select(creature.gameObject);
+		OnSelect(creature.gameObject);
 
 		GameManager.Terrain.ClickBlock += SetCurrentCreatureGoal;
 

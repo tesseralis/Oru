@@ -1,9 +1,13 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 
 public class CreatureCreator : MonoBehaviour {
 
 	public GameObject createMarker;
+
+	// Handler that is called when the creature is created
+	public event Action<Creature> Created;
 
 	private bool isCreating = false;
 	private CreatureType currentCreatureType;
@@ -15,8 +19,6 @@ public class CreatureCreator : MonoBehaviour {
 		if (createMarker) { createMarker.SetActive(true); }
 		GameManager.Terrain.MouseEnterBlock += MoveCreateMarker;
 		GameManager.Terrain.ClickBlock += CreateCreature;
-
-		// TODO Deselect all other UI
 	}
 
 	public void StopCreation()
@@ -48,10 +50,11 @@ public class CreatureCreator : MonoBehaviour {
 			if (GameManager.Creatures.CanCreateCreature(currentCreatureType, coordinate))
 			{
 				// If everything passes, add the creature to the list of creatures
-				GameManager.Creatures.CreateCreature(currentCreatureType, coordinate);
+				var creature = GameManager.Creatures.CreateCreature(currentCreatureType, coordinate);
 				// We are no longer creating
 				StopCreation();
-				// TODO select the newly created creature
+
+				if (Created != null) { Created(creature); }
 			}
 		}
 	}

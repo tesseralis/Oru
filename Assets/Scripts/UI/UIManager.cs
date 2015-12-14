@@ -39,10 +39,6 @@ public class UIManager : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		// Add listeners to the necessary game objects.
-		GameManager.Creatures.OnSelect += DisplayCreatureInfo;
-		GameManager.gm.goal.OnClick += DisplayGoalInfo;
-
 		GameManager.Terrain.MouseEnterBlock += DisplayCoordinateInfo;
 		GameManager.Terrain.MouseExitBlock += HideCoordinateInfo;
 
@@ -51,7 +47,11 @@ public class UIManager : MonoBehaviour
 		GameManager.gm.OnWin += DisplayWinInfo;
 
 		// When we select a creature, we should stop creating
-		entitySelector.OnSelect += x => creatureCreator.StopCreation();
+		entitySelector.Select += x => creatureCreator.StopCreation();
+		entitySelector.Select += DisplayInfo;
+
+		// Select a creature if it's created
+		creatureCreator.Created += entitySelector.SelectCreature;
 	}
 
 	void DisplayWinInfo()
@@ -62,6 +62,18 @@ public class UIManager : MonoBehaviour
 		recipePanel.gameObject.SetActive(false);
 
 		// TODO disable all events
+	}
+
+	void DisplayInfo(GameObject gameObject)
+	{
+		if (gameObject.GetComponent<Creature>())
+		{
+			DisplayCreatureInfo(gameObject.GetComponent<Creature>());
+		}
+		else if (gameObject.GetComponent<Goal>())
+		{
+			DisplayGoalInfo(gameObject.GetComponent<Goal>());
+		}
 	}
 
 	void DisplayCreatureInfo(Creature creature)

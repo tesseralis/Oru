@@ -42,7 +42,7 @@ public class CreatureController : MonoBehaviour
 	}
 
 	// Add a creature at a specified location if possible
-	public void CreateCreature(CreatureType creature, Coordinate location)
+	public Creature CreateCreature(CreatureType creature, Coordinate location)
 	{
 		if (!CanCreateCreature(creature, location))
 		{
@@ -50,9 +50,6 @@ public class CreatureController : MonoBehaviour
 				creature, location));
 		}
 		var resources = GameManager.Resources;
-		this.AddChildWithComponent<Creature>(PrefabFor (creature), location);
-
-		// Set this creature to be the new one
 
 		// Remove the items from the neighboring coordinates.
 		var neighbors = Neighbors(location);
@@ -69,6 +66,8 @@ public class CreatureController : MonoBehaviour
 
 			resources[neighbor] = difference;
 		}
+
+		return this.AddChildWithComponent<Creature>(PrefabFor (creature), location);
 
 	}
 
