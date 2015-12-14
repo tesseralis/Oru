@@ -130,7 +130,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   creatureType: 1
-  allowedTerrain: 0000000001000000
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -141,6 +140,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: creatureType
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: carryType
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
