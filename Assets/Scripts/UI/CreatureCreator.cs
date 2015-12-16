@@ -46,10 +46,11 @@ public class CreatureCreator : MonoBehaviour {
 			{
 				if (positiveMarker) { positiveMarker.SetActive(true); }
 				if (negativeMarker) { negativeMarker.SetActive(false); }
-				var prefab = GameManager.Creatures.PrefabFor(currentCreatureType);
-				GameObject newObject = GameObject.Instantiate(prefab);
-				newObject.transform.SetParent(createMarker.transform, false);
-				newObject.GetComponent<BoxCollider>().enabled = false;
+				// TODO fix the creature preview
+//				var prefab = GameManager.Creatures.PrefabFor(currentCreatureType);
+//				GameObject newObject = GameObject.Instantiate(prefab);
+//				newObject.transform.SetParent(createMarker.transform, false);
+//				newObject.GetComponent<BoxCollider>().enabled = false;
 			}
 			else
 			{		
