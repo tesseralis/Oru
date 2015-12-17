@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Util;
 
 public class ResourceController : MonoBehaviour
 {
-	// The prefab to use to initialize a new marker.
-	public GameObject resourcePilePrefab;
+	// the prefabs to use to initialize different types of resources
+	public ResourcePrefabOptions resourcePrefabs;
 
 	// Get the pile of resources at the given coordinate
 	public IDictionary<ResourceType, int> this[Coordinate coordinate]
@@ -37,7 +38,7 @@ public class ResourceController : MonoBehaviour
 				if (!locations.ContainsKey(coordinate))
 				{
 					// Instantiate a new marker
-					var resourcePile = this.AddChildWithComponent<ResourcePile>(resourcePilePrefab, coordinate);
+					var resourcePile = this.AddChildWithComponent<ResourcePile>(new GameObject(), coordinate);
 					locations[coordinate] = resourcePile;
 				}
 				locations[coordinate].Resources = value;
@@ -57,4 +58,35 @@ public class ResourceController : MonoBehaviour
 		}
 	}
 
+
+	// TODO should this be a method of the Options class?
+	public GameObject PrefabFor(ResourceType resource)
+	{
+		switch(resource)
+		{
+		case ResourceType.Energy:
+			return resourcePrefabs.energyPrefab;
+		case ResourceType.Red:
+			return resourcePrefabs.redPrefab;
+		case ResourceType.Yellow:
+			return resourcePrefabs.yellowPrefab;
+		case ResourceType.Green:
+			return resourcePrefabs.greenPrefab;
+		case ResourceType.Blue:
+			return resourcePrefabs.bluePrefab;
+		default:
+			throw new ArgumentException("Resource type not supported: " + resource, "resource");
+		}
+	}
+
+}
+
+[Serializable]
+public class ResourcePrefabOptions
+{
+	public GameObject energyPrefab;
+	public GameObject redPrefab;
+	public GameObject yellowPrefab;
+	public GameObject bluePrefab;
+	public GameObject greenPrefab;
 }
