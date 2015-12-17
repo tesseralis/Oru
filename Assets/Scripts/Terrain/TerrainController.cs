@@ -75,7 +75,6 @@ public class TerrainController : MonoBehaviour
 [Serializable]
 public class TerrainPrefabOptions
 {
-	// TODO make this a dropdown class
 	public GameObject grassPrefab;
 	public GameObject rockPrefab;
 	public GameObject treePrefab;
