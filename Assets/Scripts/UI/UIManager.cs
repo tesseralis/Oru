@@ -12,7 +12,7 @@ public class UIManager : MonoBehaviour
 	public static UIManager ui;
 
 	public WinnerPanel winnerPanel;
-	public InfoPanel selectionInfoPanel;
+	public CreatureInfo creatureInfo;
 	public CoordinateInfo coordinateInfo;
 	public RecipeListPanel recipePanel;
 
@@ -54,7 +54,7 @@ public class UIManager : MonoBehaviour
 
 		// When we select a creature, we should stop creating
 		entitySelector.Select += x => creatureCreator.StopCreation();
-		entitySelector.Select += DisplayCreatureInfo;
+		entitySelector.Select += creatureInfo.DisplayCreatureInfo;
 
 		// Select a creature if it's created
 		creatureCreator.Created += entitySelector.SelectCreature;
@@ -67,42 +67,16 @@ public class UIManager : MonoBehaviour
 
 	}
 
+	// TODO make the win text an in-world panel like the original game?
 	void DisplayWinInfo()
 	{
 		winnerPanel.gameObject.SetActive(true);
-		selectionInfoPanel.gameObject.SetActive(false);
+		creatureInfo.gameObject.SetActive(false);
 		recipePanel.gameObject.SetActive(false);
 
 		coordinateInfo.Hide();
 
 		// TODO disable all events
-	}
-
-	void DisplayCreatureInfo(Creature creature)
-	{
-		selectionInfoPanel.gameObject.SetActive(true);
-		selectionInfoPanel.Name = creature.creatureType.ToString();
-		var creatureDefinition = Creatures.ForType(creature.creatureType);
-		// TODO generalize for all abilities!
-		string ability;
-		if (creature.GetComponent<ChangeTerrainAbility>() != null)
-		{
-			ability = string.Format("Pick up {0}\n\nPress <Space> to activate.",
-				creature.GetComponent<ChangeTerrainAbility>().carryType);
-		}
-		else if (creature.GetComponent<CarryResourceAbility>() != null)
-		{
-			ability = string.Format("Pick up {0} resources\n\nPress <Space> to activate.",
-				creature.GetComponent<CarryResourceAbility>().capacity);
-		}
-		else
-		{
-			ability = "None";
-		}
-
-		selectionInfoPanel.Description = string.Format("Allowed Terrain: {0}\nAbility: {1}",
-			string.Join(", ", creatureDefinition.AllowedTerrain.Select(t => t.ToString()).ToArray()),
-			ability);
 	}
 
 	// Pan our camera in the specified direction

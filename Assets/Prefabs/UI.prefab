@@ -12,12 +12,12 @@ GameObject:
   - 114: {fileID: 11450416}
   - 114: {fileID: 11403318}
   m_Layer: 5
-  m_Name: RecipeListPanel
+  m_Name: RecipeList
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &100784
 GameObject:
   m_ObjectHideFlags: 1
@@ -96,7 +96,7 @@ GameObject:
   - 114: {fileID: 11463638}
   - 114: {fileID: 11410730}
   m_Layer: 5
-  m_Name: SelectionInfoPanel
+  m_Name: CreatureInfo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1284,7 +1284,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 113142}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57641b152c74249369c8a28ba03e0bdf, type: 3}
+  m_Script: {fileID: 11500000, guid: 6236c234c1a304a79b3c074916ef6def, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nameDisplay: {fileID: 11409438}
@@ -2161,7 +2161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   winnerPanel: {fileID: 11461500}
-  selectionInfoPanel: {fileID: 11410730}
+  creatureInfo: {fileID: 11410730}
   coordinateInfo: {fileID: 11487726}
   recipePanel: {fileID: 11403318}
   entitySelector: {fileID: 11444846}
