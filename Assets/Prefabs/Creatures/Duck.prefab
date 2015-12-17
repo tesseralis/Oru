@@ -179,7 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 935d35ca9644d42599cbffe51c35ab7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  capacity: 1
+  capacity: 5
   carrying: []
 --- !u!114 &11480100
 MonoBehaviour:
@@ -214,7 +214,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: capacity
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

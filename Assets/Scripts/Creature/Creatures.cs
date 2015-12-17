@@ -8,14 +8,14 @@ public static class Creatures
 	public static readonly CreatureDefinition Duck = new CreatureDefinition
 	{
 		Type = CreatureType.Duck,
-		Recipe = new Dictionary<ResourceType, int>() { {ResourceType.Yellow, 1} },
+		Recipe = new Dictionary<ResourceType, int>() { {ResourceType.Energy, 1}, {ResourceType.Yellow, 4} },
 		AllowedTerrain = new TerrainType[]{ TerrainType.Grass, TerrainType.Water }
 	};
 
 	public static readonly CreatureDefinition Dragon = new CreatureDefinition
 	{
 		Type = CreatureType.Dragon,
-		Recipe = new Dictionary<ResourceType, int>() { {ResourceType.Red, 5} },
+		Recipe = new Dictionary<ResourceType, int>() { {ResourceType.Energy, 1}, {ResourceType.Red, 25} },
 		AllowedTerrain = new TerrainType[]{ TerrainType.Grass, TerrainType.Rock }
 	};
 

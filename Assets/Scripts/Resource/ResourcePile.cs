@@ -65,9 +65,6 @@ public class ResourcePile : MonoBehaviour
 
 			// Set the height correctly
 			obj.transform.Translate(Vector3.up * numResourceTypes * heightGap);
-//			var position = obj.gameObject.transform.position;
-//			obj.gameObject.transform.position.Set(position.x, numResourceTypes * heightGap, position.z);
-//			obj.gameObject.transform.position.y = numResourceTypes * heightGap;
 		}
 
 		if (hasEnergy)
@@ -76,10 +73,6 @@ public class ResourcePile : MonoBehaviour
 			numResourceTypes++;
 			var obj = this.AddChildWithComponent<MonoBehaviour>(controller.PrefabFor(ResourceType.Energy), this.Coordinate());
 			obj.transform.Translate(Vector3.up * numResourceTypes * heightGap);
-//
-//			var position = obj.gameObject.transform.position;
-//			obj.gameObject.transform.position.Set(position.x, numResourceTypes * heightGap, position.z);
-			//			obj.gameObject.transform.position.y = numResourceTypes * heightGap;
 		}
 	}
 }
