@@ -12,9 +12,8 @@ public class ResourcePile : MonoBehaviour
 {
 	public ResourceCount[] resources;
 
-	// TODO make this publicly alterable
-	// Find the right height for things
-	private float heightGap = 0.1f;
+	// Height between separate resource types
+	public float heightGap = 0.1f;
 
 	public IDictionary<ResourceType, int> Resources
 	{
