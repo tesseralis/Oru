@@ -2241,6 +2241,22 @@ Prefab:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 346592266}
+    - target: {fileID: 11437324, guid: 9fcb869508e024b4c883df85ccbacc4d, type: 2}
+      propertyPath: m_FontData.m_FontSize
+      value: 72
+      objectReference: {fileID: 0}
+    - target: {fileID: 11437324, guid: 9fcb869508e024b4c883df85ccbacc4d, type: 2}
+      propertyPath: m_FontData.m_MinSize
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11437324, guid: 9fcb869508e024b4c883df85ccbacc4d, type: 2}
+      propertyPath: m_FontData.m_MaxSize
+      value: 72
+      objectReference: {fileID: 0}
+    - target: {fileID: 11437324, guid: 9fcb869508e024b4c883df85ccbacc4d, type: 2}
+      propertyPath: m_FontData.m_FontStyle
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9fcb869508e024b4c883df85ccbacc4d, type: 2}
   m_IsPrefabParent: 0
