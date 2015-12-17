@@ -218,7 +218,7 @@ GameObject:
   - 114: {fileID: 11419102}
   - 114: {fileID: 11404950}
   m_Layer: 0
-  m_Name: Panel
+  m_Name: GridInfoPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2886,10 +2886,10 @@ RectTransform:
   - {fileID: 22496534}
   m_Father: {fileID: 22477402}
   m_RootOrder: 0
-  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -80, y: -100}
-  m_SizeDelta: {x: 160, y: 200}
+  m_AnchoredPosition: {x: -80, y: 0}
+  m_SizeDelta: {x: 160, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22494110
 RectTransform:
