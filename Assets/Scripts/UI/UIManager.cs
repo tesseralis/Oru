@@ -15,7 +15,6 @@ public class UIManager : MonoBehaviour
 	public InfoPanel selectionInfoPanel;
 	public InfoPanel gridInfoPanel;
 	public RecipeListPanel recipePanel;
-	public GameObject instructionPanel;
 
 	public EntitySelector entitySelector;
 	public CreatureCreator creatureCreator;
@@ -40,9 +39,6 @@ public class UIManager : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		// Show instruction
-		instructionPanel.SetActive(true);
-		
 		GameManager.Terrain.MouseEnterBlock += DisplayCoordinateInfo;
 		GameManager.Terrain.MouseExitBlock += HideCoordinateInfo;
 
@@ -57,11 +53,6 @@ public class UIManager : MonoBehaviour
 
 		// Select a creature if it's created
 		creatureCreator.Created += entitySelector.SelectCreature;
-	}
-
-	public void HideInstructions()
-	{
-		instructionPanel.SetActive(false);
 	}
 
 	void DisplayWinInfo()
