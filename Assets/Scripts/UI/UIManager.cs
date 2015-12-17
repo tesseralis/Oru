@@ -114,14 +114,16 @@ public class UIManager : MonoBehaviour
 
 	void DisplayCoordinateInfo(Coordinate coordinate)
 	{
-		gridInfoPanel.gameObject.SetActive(true);
-		gridInfoPanel.Name = GameManager.Terrain[coordinate].ToString();
-		gridInfoPanel.Description = "";
 		if (!GameManager.Resources[coordinate].IsEmpty())
 		{
-			gridInfoPanel.Description += string.Join("\n",
+			gridInfoPanel.gameObject.SetActive(true);
+			gridInfoPanel.Name = "";
+			gridInfoPanel.Description = string.Join("\n",
 				GameManager.Resources[coordinate].Select(e => e.Key + ": " + e.Value).ToArray());
 		}
+
+		// TODO genericize and stuffs
+		GameManager.gm.SetPosition(gridInfoPanel.transform.parent.gameObject, coordinate);
 	}
 
 	void HideCoordinateInfo(Coordinate coordinate)
