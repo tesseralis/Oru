@@ -11,11 +11,7 @@ using Util;
 /// </summary>
 public class TerrainController : MonoBehaviour
 {
-	// TODO make this a dropdown class
-	public GameObject grassPrefab;
-	public GameObject rockPrefab;
-	public GameObject treePrefab;
-	public GameObject waterPrefab;
+	public TerrainPrefabOptions terrainPrefabs;
 
 	public Action<Coordinate> MouseEnterBlock;
 	public Action<Coordinate> MouseExitBlock;
@@ -62,17 +58,26 @@ public class TerrainController : MonoBehaviour
 	{
 		switch (type) {
 		case TerrainType.Grass:
-			return grassPrefab;
+			return terrainPrefabs.grassPrefab;
 		case TerrainType.Rock:
-			return rockPrefab;
+			return terrainPrefabs.rockPrefab;
 		case TerrainType.Tree:
-			return treePrefab;
+			return terrainPrefabs.treePrefab;
 		case TerrainType.Water:
-			return waterPrefab;
+			return terrainPrefabs.waterPrefab;
 		default:
 			throw new ArgumentException("Illegal terrain type", type.ToString());
 		}
 	}
 
+}
 
+[Serializable]
+public class TerrainPrefabOptions
+{
+	// TODO make this a dropdown class
+	public GameObject grassPrefab;
+	public GameObject rockPrefab;
+	public GameObject treePrefab;
+	public GameObject waterPrefab;
 }

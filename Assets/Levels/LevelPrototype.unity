@@ -1381,10 +1381,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a225df01a7061447298ac4b1a7518825, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grassPrefab: {fileID: 177414, guid: 1afef6a08696149b18c31cdb92c17049, type: 2}
-  rockPrefab: {fileID: 186096, guid: db38fd54633eb409d9e6eea9e3658871, type: 2}
-  treePrefab: {fileID: 151468, guid: f43072b24dd4b4708a998e61da781689, type: 2}
-  waterPrefab: {fileID: 147072, guid: 78c95faed1037499a8265c378fd4f448, type: 2}
+  terrainPrefabs:
+    grassPrefab: {fileID: 177414, guid: 1afef6a08696149b18c31cdb92c17049, type: 2}
+    rockPrefab: {fileID: 186096, guid: db38fd54633eb409d9e6eea9e3658871, type: 2}
+    treePrefab: {fileID: 151468, guid: f43072b24dd4b4708a998e61da781689, type: 2}
+    waterPrefab: {fileID: 147072, guid: 78c95faed1037499a8265c378fd4f448, type: 2}
 --- !u!4 &976342099
 Transform:
   m_ObjectHideFlags: 0

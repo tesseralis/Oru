@@ -184,7 +184,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3dfc812526304a379c6b82c9fe69bb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resourcePilePrefab: {fileID: 159150, guid: 284e74a3d652a48e6be113e2c67123e6, type: 2}
+  resourcePrefabs:
+    energyPrefab: {fileID: 0}
+    redPrefab: {fileID: 0}
+    yellowPrefab: {fileID: 0}
+    bluePrefab: {fileID: 0}
+    greenPrefab: {fileID: 0}
 --- !u!114 &11417982
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -252,10 +257,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a225df01a7061447298ac4b1a7518825, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grassPrefab: {fileID: 177414, guid: 1afef6a08696149b18c31cdb92c17049, type: 2}
-  rockPrefab: {fileID: 186096, guid: db38fd54633eb409d9e6eea9e3658871, type: 2}
-  treePrefab: {fileID: 151468, guid: f43072b24dd4b4708a998e61da781689, type: 2}
-  waterPrefab: {fileID: 147072, guid: 78c95faed1037499a8265c378fd4f448, type: 2}
+  terrainPrefabs:
+    grassPrefab: {fileID: 177414, guid: 1afef6a08696149b18c31cdb92c17049, type: 2}
+    rockPrefab: {fileID: 186096, guid: db38fd54633eb409d9e6eea9e3658871, type: 2}
+    treePrefab: {fileID: 151468, guid: f43072b24dd4b4708a998e61da781689, type: 2}
+    waterPrefab: {fileID: 147072, guid: 78c95faed1037499a8265c378fd4f448, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -275,6 +281,22 @@ Prefab:
       propertyPath: creaturePrefabs.dragonPrefab
       value: 
       objectReference: {fileID: 102854, guid: b0140aef76f004a08af3307b0f025fc2, type: 2}
+    - target: {fileID: 0}
+      propertyPath: terrainPrefabs.grassPrefab
+      value: 
+      objectReference: {fileID: 177414, guid: 1afef6a08696149b18c31cdb92c17049, type: 2}
+    - target: {fileID: 0}
+      propertyPath: terrainPrefabs.rockPrefab
+      value: 
+      objectReference: {fileID: 186096, guid: db38fd54633eb409d9e6eea9e3658871, type: 2}
+    - target: {fileID: 0}
+      propertyPath: terrainPrefabs.treePrefab
+      value: 
+      objectReference: {fileID: 151468, guid: f43072b24dd4b4708a998e61da781689, type: 2}
+    - target: {fileID: 0}
+      propertyPath: terrainPrefabs.waterPrefab
+      value: 
+      objectReference: {fileID: 147072, guid: 78c95faed1037499a8265c378fd4f448, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 178926}
