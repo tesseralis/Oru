@@ -24,7 +24,7 @@ public class ActionMarkers : MonoBehaviour {
 	public void Enable(Action<Coordinate> action)
 	{
 		isEnabled = true;
-		GameManager.Input.OnSpace += ToggleAbility;
+		GameManager.Input.Key[KeyCode.Space] += ToggleAbility;
 		foreach (var marker in markers)
 		{
 			marker.OnClick = coordinate => {
@@ -41,7 +41,7 @@ public class ActionMarkers : MonoBehaviour {
 			StopAbility();
 		}
 		isEnabled = false;
-		GameManager.Input.OnSpace -= ToggleAbility;
+		GameManager.Input.Key[KeyCode.Space] -= ToggleAbility;
 	}
 
 	// The creature should start doing its ability
