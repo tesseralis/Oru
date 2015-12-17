@@ -13,7 +13,7 @@ public class UIManager : MonoBehaviour
 
 	public WinnerPanel winnerPanel;
 	public InfoPanel selectionInfoPanel;
-	public InfoPanel gridInfoPanel;
+	public CoordinateInfo coordinateInfo;
 	public RecipeListPanel recipePanel;
 
 	public EntitySelector entitySelector;
@@ -42,8 +42,8 @@ public class UIManager : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		GameManager.Terrain.MouseEnterBlock += DisplayCoordinateInfo;
-		GameManager.Terrain.MouseExitBlock += HideCoordinateInfo;
+		GameManager.Terrain.MouseEnterBlock += coordinateInfo.Show;
+		GameManager.Terrain.MouseExitBlock += x => coordinateInfo.Hide();
 
 		GameManager.Recipes.OnChange += UpdateRecipeList;
 		UpdateRecipeList(GameManager.Recipes.availableRecipes);
@@ -69,8 +69,9 @@ public class UIManager : MonoBehaviour
 	{
 		winnerPanel.gameObject.SetActive(true);
 		selectionInfoPanel.gameObject.SetActive(false);
-		gridInfoPanel.gameObject.SetActive(false);
 		recipePanel.gameObject.SetActive(false);
+
+		coordinateInfo.Hide();
 
 		// TODO disable all events
 	}
@@ -100,38 +101,6 @@ public class UIManager : MonoBehaviour
 		selectionInfoPanel.Description = string.Format("Allowed Terrain: {0}\nAbility: {1}",
 			string.Join(", ", creatureDefinition.AllowedTerrain.Select(t => t.ToString()).ToArray()),
 			ability);
-	}
-
-	void DisplayCoordinateInfo(Coordinate coordinate)
-	{
-		if (!GameManager.Resources[coordinate].IsEmpty())
-		{
-			gridInfoPanel.gameObject.SetActive(true);
-			gridInfoPanel.Name = "";
-			gridInfoPanel.Description = string.Join("\n",
-				GameManager.Resources[coordinate].Select(e => e.Key + ": " + e.Value).ToArray());
-		}
-		if (GameManager.Recipes[coordinate] != null)
-		{
-			gridInfoPanel.gameObject.SetActive(true);
-			gridInfoPanel.Name = "???";
-			gridInfoPanel.Description = "Move a creature here to pick up this recipe.";
-		}
-
-		if (GameManager.gm.goal.Coordinate() == coordinate)
-		{
-			gridInfoPanel.gameObject.SetActive(true);
-			gridInfoPanel.Name = "Goal";
-			gridInfoPanel.Description = string.Format("{0} at this location.", GameManager.gm.goal.winningCreatureType);
-		}
-
-		// TODO genericize and stuffs
-		GameManager.gm.SetPosition(gridInfoPanel.transform.parent.gameObject, coordinate);
-	}
-
-	void HideCoordinateInfo(Coordinate coordinate)
-	{
-		gridInfoPanel.gameObject.SetActive(false);
 	}
 
 	// TODO some of this code should be moved back to the enclosing object.
