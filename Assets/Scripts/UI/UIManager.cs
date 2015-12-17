@@ -45,8 +45,10 @@ public class UIManager : MonoBehaviour
 		GameManager.Terrain.MouseEnterBlock += coordinateInfo.Show;
 		GameManager.Terrain.MouseExitBlock += x => coordinateInfo.Hide();
 
-		GameManager.Recipes.OnChange += UpdateRecipeList;
-		UpdateRecipeList(GameManager.Recipes.availableRecipes);
+		// Deselect creatures when we start creation
+		recipePanel.RecipeClicked += (t) => entitySelector.Deselect();
+		// Start creating the recipe
+		recipePanel.RecipeClicked += creatureCreator.StartCreation;
 
 		GameManager.gm.OnWin += DisplayWinInfo;
 
@@ -101,46 +103,6 @@ public class UIManager : MonoBehaviour
 		selectionInfoPanel.Description = string.Format("Allowed Terrain: {0}\nAbility: {1}",
 			string.Join(", ", creatureDefinition.AllowedTerrain.Select(t => t.ToString()).ToArray()),
 			ability);
-	}
-
-	// TODO some of this code should be moved back to the enclosing object.
-	void UpdateRecipeList(IList<CreatureType> availableRecipes)
-	{
-		recipePanel.gameObject.SetActive(true);
-
-		var buttons = recipePanel.GetComponentsInChildren<Button>(true);
-		for (int i = 0; i < availableRecipes.Count; i++)
-		{
-			Debug.LogFormat("Updating button at index {0}", i);
-			var recipe = availableRecipes[i];
-			var button = buttons[i];
-
-			// TODO figure out how to dynamically create buttons
-			button.gameObject.SetActive(true);
-			button.GetComponentInChildren<Text>().text = recipe.ToString();
-			// TODO Make this a default method from the recipe manager
-			// TODO doesn't this add multiple listeners?
-			button.onClick.RemoveAllListeners();
-			button.onClick.AddListener(() =>
-				{
-					entitySelector.Deselect();
-					creatureCreator.StartCreation(recipe);
-
-//					// Display the information
-//					// TODO make this a separate listener
-//					// TODO do this on mouse hover instead
-					selectionInfoPanel.gameObject.SetActive(true);
-					selectionInfoPanel.Name = recipe.ToString();
-					selectionInfoPanel.Description = string.Join("\n",
-						Creatures.ForType(recipe).Recipe.Select(e => e.Key + ": " + e.Value).ToArray());
-				});
-
-		}
-		for (int i = availableRecipes.Count; i < buttons.Length; i++)
-		{
-			Debug.LogFormat("Disabling button at index {0}", i);
-			buttons[i].gameObject.SetActive(false);
-		}
 	}
 
 	// Pan our camera in the specified direction
