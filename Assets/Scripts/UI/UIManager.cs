@@ -49,7 +49,7 @@ public class UIManager : MonoBehaviour
 
 		// When we select a creature, we should stop creating
 		entitySelector.Select += x => creatureCreator.StopCreation();
-		entitySelector.Select += DisplayInfo;
+		entitySelector.Select += DisplayCreatureInfo;
 
 		// Select a creature if it's created
 		creatureCreator.Created += entitySelector.SelectCreature;
@@ -63,18 +63,6 @@ public class UIManager : MonoBehaviour
 		recipePanel.gameObject.SetActive(false);
 
 		// TODO disable all events
-	}
-
-	void DisplayInfo(GameObject gameObject)
-	{
-		if (gameObject.GetComponent<Creature>())
-		{
-			DisplayCreatureInfo(gameObject.GetComponent<Creature>());
-		}
-		else if (gameObject.GetComponent<Goal>())
-		{
-			DisplayGoalInfo(gameObject.GetComponent<Goal>());
-		}
 	}
 
 	void DisplayCreatureInfo(Creature creature)
@@ -104,14 +92,6 @@ public class UIManager : MonoBehaviour
 			ability);
 	}
 
-	void DisplayGoalInfo(Goal goal)
-	{
-		// Update the info UI
-		selectionInfoPanel.gameObject.SetActive(true);
-		selectionInfoPanel.Name = "Goal";
-		selectionInfoPanel.Description = goal.winningCreatureType + " at this location.";
-	}
-
 	void DisplayCoordinateInfo(Coordinate coordinate)
 	{
 		if (!GameManager.Resources[coordinate].IsEmpty())
@@ -120,6 +100,13 @@ public class UIManager : MonoBehaviour
 			gridInfoPanel.Name = "";
 			gridInfoPanel.Description = string.Join("\n",
 				GameManager.Resources[coordinate].Select(e => e.Key + ": " + e.Value).ToArray());
+		}
+
+		if (GameManager.gm.goal.Coordinate() == coordinate)
+		{
+			gridInfoPanel.gameObject.SetActive(true);
+			gridInfoPanel.Name = "Goal";
+			gridInfoPanel.Description = string.Format("{0} at this location.", GameManager.gm.goal.winningCreatureType);
 		}
 
 		// TODO genericize and stuffs
