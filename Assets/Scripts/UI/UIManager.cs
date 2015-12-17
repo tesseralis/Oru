@@ -101,6 +101,12 @@ public class UIManager : MonoBehaviour
 			gridInfoPanel.Description = string.Join("\n",
 				GameManager.Resources[coordinate].Select(e => e.Key + ": " + e.Value).ToArray());
 		}
+		if (GameManager.Recipes[coordinate] != null)
+		{
+			gridInfoPanel.gameObject.SetActive(true);
+			gridInfoPanel.Name = "???";
+			gridInfoPanel.Description = "Move a creature here to pick up this recipe.";
+		}
 
 		if (GameManager.gm.goal.Coordinate() == coordinate)
 		{

@@ -18,6 +18,21 @@ public class RecipeController : MonoBehaviour
 
 	public CreatureType CurrentRecipe { get; set; }
 
+	public CreatureType? this[Coordinate coordinate]
+	{
+		get
+		{
+			if (recipeLocations.ContainsKey(coordinate))
+			{
+				return recipeLocations[coordinate].creature;
+			}
+			else
+			{
+				return null;
+			}
+		}
+	}
+
 	void Awake ()
 	{
 		recipeLocations = new Dictionary<Coordinate, Recipe>();
