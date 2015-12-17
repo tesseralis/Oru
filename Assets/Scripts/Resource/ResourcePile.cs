@@ -52,25 +52,24 @@ public class ResourcePile : MonoBehaviour
 		bool hasEnergy = false;
 		foreach (var resource in Resources.Keys)
 		{
+			// Handle the energy differently: put it on top of the rest
 			if (resource == ResourceType.Energy)
 			{
-				// Handle the energy differently: put it on top of the rest
 				hasEnergy = true;
 				continue;
 			}
 			numResourceTypes++;
-			// TODO need to refactor this to not require a component to be attached
-			var obj = this.AddChildWithComponent<MonoBehaviour>(controller.PrefabFor(resource), this.Coordinate());
+			var obj = this.AddChild(controller.PrefabFor(resource), this.Coordinate());
 
 			// Set the height correctly
 			obj.transform.Translate(Vector3.up * numResourceTypes * heightGap);
 		}
 
+		// Put the energy resource on top of everything else
 		if (hasEnergy)
 		{
-			// Put the energy resource on top of everything else
 			numResourceTypes++;
-			var obj = this.AddChildWithComponent<MonoBehaviour>(controller.PrefabFor(ResourceType.Energy), this.Coordinate());
+			var obj = this.AddChild(controller.PrefabFor(ResourceType.Energy), this.Coordinate());
 			obj.transform.Translate(Vector3.up * numResourceTypes * heightGap);
 		}
 	}

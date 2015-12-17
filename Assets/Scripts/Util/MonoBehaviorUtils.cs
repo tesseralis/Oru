@@ -15,15 +15,25 @@ namespace Util
 		}
 
 		/// <summary>
+		/// Add a child object to the script, using the given prefab.
+		/// </summary>
+		/// <returns>The child GameObject.</returns>
+		public static GameObject AddChild(this MonoBehaviour script, GameObject prefab, Coordinate coordinate)
+		{
+			GameObject newObject = GameObject.Instantiate(prefab);
+			GameManager.gm.SetPosition(newObject, coordinate);
+			newObject.transform.SetParent(script.transform);
+			return newObject;
+		}
+
+		/// <summary>
 		/// Add a child object to the script with the given component, using the given prefab.
 		/// </summary>
 		/// <returns>The component belonging to the child that was added.</returns>
 		/// <typeparam name="T">The type of component to add.</typeparam>
 		public static T AddChildWithComponent<T>(this MonoBehaviour script, GameObject prefab, Coordinate coordinate) where T : Component
 		{
-			GameObject newObject = GameObject.Instantiate(prefab);
-			GameManager.gm.SetPosition(newObject, coordinate);
-			newObject.transform.SetParent(script.transform);
+			GameObject newObject = script.AddChild(prefab, coordinate);
 
 			if (newObject.GetComponent<T>() == null)
 			{
