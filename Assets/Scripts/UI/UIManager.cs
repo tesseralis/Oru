@@ -19,9 +19,6 @@ public class UIManager : MonoBehaviour
 	public EntitySelector entitySelector;
 	public CreatureCreator creatureCreator;
 
-	// TODO move this and the corresponding function to a different class
-	public float cameraTranslateFactor = 0.25f;
-
 	void Awake ()
 	{
 		if (ui == null)
@@ -59,12 +56,6 @@ public class UIManager : MonoBehaviour
 		// Select a creature if it's created
 		creatureCreator.Created += entitySelector.SelectCreature;
 
-		// Add map controls
-		GameManager.Input.Key[KeyCode.DownArrow] += () => TranslateCamera(Vector2.down);
-		GameManager.Input.Key[KeyCode.UpArrow] += () => TranslateCamera(Vector2.up);
-		GameManager.Input.Key[KeyCode.LeftArrow] += () => TranslateCamera(Vector2.left);
-		GameManager.Input.Key[KeyCode.RightArrow] += () => TranslateCamera(Vector2.right);
-
 	}
 
 	// TODO make the win text an in-world panel like the original game?
@@ -79,10 +70,4 @@ public class UIManager : MonoBehaviour
 		// TODO disable all events
 	}
 
-	// Pan our camera in the specified direction
-	void TranslateCamera(Vector2 direction)
-	{
-		var camera = GameObject.FindGameObjectWithTag("MainCamera");
-		camera.transform.Translate(new Vector3(direction.x, direction.y, direction.x) * cameraTranslateFactor);
-	}
 }
