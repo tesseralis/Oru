@@ -1544,25 +1544,13 @@ Prefab:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 346592266}
-    - target: {fileID: 135400, guid: 9fcb869508e024b4c883df85ccbacc4d, type: 2}
-      propertyPath: m_Name
-      value: GridInfoPanel
-      objectReference: {fileID: 0}
     - target: {fileID: 113142, guid: 9fcb869508e024b4c883df85ccbacc4d, type: 2}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 22492760, guid: 9fcb869508e024b4c883df85ccbacc4d, type: 2}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 22492760, guid: 9fcb869508e024b4c883df85ccbacc4d, type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 22492760, guid: 9fcb869508e024b4c883df85ccbacc4d, type: 2}
-      propertyPath: m_SizeDelta.y
-      value: 0
+    - target: {fileID: 11463638, guid: 9fcb869508e024b4c883df85ccbacc4d, type: 2}
+      propertyPath: m_Color.a
+      value: 0.78431374
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9fcb869508e024b4c883df85ccbacc4d, type: 2}
