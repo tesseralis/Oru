@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System;
 using System.Linq;
 using System.Collections;
@@ -53,7 +54,13 @@ public class GameManager : MonoBehaviour
 		private set
 		{
 			hasWon = value;
-			if (OnWin != null) { OnWin(); }
+			if (hasWon)
+			{
+				if (OnWin != null) { OnWin(); }
+				// Save that we have won this level
+				PersistentDataController.controller.SetCompletion(SceneManager.GetActiveScene(), true);
+				PersistentDataController.controller.Save();
+			}
 		}
 	}
 
