@@ -68,7 +68,17 @@ public class CreatureController : MonoBehaviour
 		}
 
 		return this.AddChildWithComponent<Creature>(creaturePrefabs.PrefabFor (creature), location);
+	}
 
+	public void DestroyCreature(Creature creature)
+	{
+		var coordinate = creature.Position;
+
+		// Recycle the creature's components
+		GameManager.Resources[coordinate] = GameManager.Resources[coordinate].MultisetAdd(Creatures.ForType(creature.creatureType).Recipe);
+
+		// Remove from the creature list
+		Destroy(creature.gameObject);
 	}
 
 	/// <summary>
@@ -81,9 +91,7 @@ public class CreatureController : MonoBehaviour
 			creature.Step();
 		}
 	}
-
-
-
+		
 	private static IList<Coordinate> Neighbors(Coordinate coordinate)
 	{
 		int[] range = {-1, 0, 1};

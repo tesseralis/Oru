@@ -15,6 +15,8 @@ public class EntitySelector : MonoBehaviour
 
 	private bool isActing;
 
+	public Creature SelectedCreature { get; private set; }
+
 	void Awake ()
 	{
 		if (actionMarkers == null)
@@ -36,12 +38,16 @@ public class EntitySelector : MonoBehaviour
 		GameManager.Terrain.ClickBlock -= SetCurrentCreatureGoal;
 		actionMarkers.OnStartAbility -= RemoveCurrentCreatureGoal;
 		actionMarkers.Disable();
+		SelectedCreature = null;
+		transform.SetParent(null, false);
 	}
 
 	public void SelectCreature(Creature creature)
 	{
 		// Deselect the previous creature if any
 		DeselectCreature();
+
+		SelectedCreature = creature;
 
 		// Make this a child of the object
 		transform.SetParent(creature.transform, false);
@@ -74,15 +80,13 @@ public class EntitySelector : MonoBehaviour
 		
 	private void SetCurrentCreatureGoal(Coordinate coordinate)
 	{
-		var creature = GetComponentInParent<Creature>();
-		creature.Goal = coordinate;
+		SelectedCreature.Goal = coordinate;
 		actionMarkers.StopAbility();
 	}
 
 	private void RemoveCurrentCreatureGoal()
 	{
-		var creature = GetComponentInParent<Creature>();
-		creature.Goal = null;
+		SelectedCreature.Goal = null;
 	}
 
 }
