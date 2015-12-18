@@ -10,6 +10,8 @@ public class CreatureInfo : MonoBehaviour
 
 	public Text descriptionDisplay;
 
+	public DelegateButton destroyCreatureButton;
+
 	public void DisplayCreatureInfo(Creature creature)
 	{
 		gameObject.SetActive(true);

@@ -56,15 +56,16 @@ public class UIManager : MonoBehaviour
 		// Select a creature if it's created
 		creatureCreator.Created += entitySelector.SelectCreature;
 
-		// Destroy creature on key shortcut
-		// TODO this should be a button on the creature info panel
-		GameManager.Input.KeyDown[KeyCode.Backspace] += () =>
-		{
-			var creature = entitySelector.SelectedCreature;
-			entitySelector.Deselect();
-			GameManager.Creatures.DestroyCreature(creature);
-		};
+		// Add handlers for destroying the creature
+		GameManager.Input.KeyDown[KeyCode.Backspace] += DestroySelectedCreature;
+		creatureInfo.destroyCreatureButton.Click += DestroySelectedCreature;
+	}
 
+	void DestroySelectedCreature()
+	{
+		var creature = entitySelector.SelectedCreature;
+		entitySelector.Deselect(); // TODO this deselect method goes somewhere else?
+		GameManager.Creatures.DestroyCreature(creature);
 	}
 
 	// TODO make the win text an in-world panel like the original game?
