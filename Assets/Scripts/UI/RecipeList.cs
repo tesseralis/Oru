@@ -50,7 +50,7 @@ public class RecipeList : MonoBehaviour
 			transform.anchoredPosition += Vector2.down * i * buttonSpacing;
 
 			// Set the component to do the hooked in action when clicked
-			var createButton = newButton.GetComponent<CreationButton>();
+			var createButton = newButton.GetComponent<DelegateButton>();
 			createButton.Click += () => RecipeClicked(recipe);
 
 			// Add mouse enter/exit events to display the selection panel

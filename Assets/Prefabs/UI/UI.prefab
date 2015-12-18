@@ -1724,7 +1724,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Back To Menu
+  m_Text: Menu
 --- !u!114 &11434026
 MonoBehaviour:
   m_ObjectHideFlags: 1
