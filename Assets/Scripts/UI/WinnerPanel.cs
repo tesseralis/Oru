@@ -4,10 +4,15 @@ using System.Collections;
 
 public class WinnerPanel : MonoBehaviour {
 
-	public string playAgainLevelToLoad = "LevelPrototype";
+	public string menuScene = "Menu";
 
-	public void RestartGame()
+	public void ReturnToMenu()
 	{
-		SceneManager.LoadScene(playAgainLevelToLoad);
+		SceneManager.LoadScene(menuScene);
+	}
+
+	public void RestartLevel()
+	{
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 	}
 }
