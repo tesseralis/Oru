@@ -56,6 +56,10 @@ public class UIManager : MonoBehaviour
 		// Select a creature if it's created
 		creatureCreator.Created += entitySelector.SelectCreature;
 
+		// Add handlers for using ability
+		// TODO disable this when you the selected creature does not have an ability
+		creatureInfo.useAbilityButton.Click += entitySelector.actionMarkers.ToggleAbility;
+
 		// Add handlers for destroying the creature
 		GameManager.Input.KeyDown[KeyCode.Backspace] += DestroySelectedCreature;
 		creatureInfo.destroyCreatureButton.Click += DestroySelectedCreature;
