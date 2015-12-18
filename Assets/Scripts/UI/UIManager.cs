@@ -58,7 +58,7 @@ public class UIManager : MonoBehaviour
 
 		// Destroy creature on key shortcut
 		// TODO this should be a button on the creature info panel
-		GameManager.Input.KeyDown[KeyCode.Delete] += () =>
+		GameManager.Input.KeyDown[KeyCode.Backspace] += () =>
 		{
 			var creature = entitySelector.SelectedCreature;
 			entitySelector.Deselect();
