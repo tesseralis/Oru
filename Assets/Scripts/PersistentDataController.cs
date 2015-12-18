@@ -14,23 +14,23 @@ public class PersistentDataController : MonoBehaviour {
 	public string completionDataFile = "completionData.dat";
 
 	// Privately represent the completion data as a list of completed levels
-	private int[] completionData = new int[0];
+	public string[] completionData = new string[0];
 
-	public bool GetCompletion(Scene level)
+	public bool GetCompletion(String level)
 	{
-		return completionData.Contains(level.buildIndex);
+		return new HashSet<string>(completionData).Contains(level);
 	}
 
-	public void SetCompletion(Scene level, bool value)
+	public void SetCompletion(String level, bool value)
 	{
-		var completionSet = new HashSet<int>(completionData);
+		var completionSet = new HashSet<string>(completionData);
 		if (value)
 		{
-			completionSet.Add(level.buildIndex);
+			completionSet.Add(level);
 		}
 		else
 		{
-			completionSet.Remove(level.buildIndex);
+			completionSet.Remove(level);
 		}
 		completionData = completionSet.ToArray();
 	}
@@ -75,7 +75,7 @@ public class PersistentDataController : MonoBehaviour {
 		{
 			BinaryFormatter bf = new BinaryFormatter();
 			FileStream file = File.Open(SaveFilePath(), FileMode.Open);
-			completionData = (int[])bf.Deserialize(file);
+			completionData = (string[])bf.Deserialize(file);
 			file.Close();
 		}
 	}

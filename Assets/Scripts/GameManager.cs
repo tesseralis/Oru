@@ -58,7 +58,8 @@ public class GameManager : MonoBehaviour
 			{
 				if (OnWin != null) { OnWin(); }
 				// Save that we have won this level
-				PersistentDataController.controller.SetCompletion(SceneManager.GetActiveScene(), true);
+				Debug.Log("Won this level! Saving...");
+				PersistentDataController.controller.SetCompletion(SceneManager.GetActiveScene().name, true);
 				PersistentDataController.controller.Save();
 			}
 		}
