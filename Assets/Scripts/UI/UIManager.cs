@@ -14,7 +14,7 @@ public class UIManager : MonoBehaviour
 	public WinnerPanel winnerPanel;
 	public CreatureInfo creatureInfo;
 	public CoordinateInfo coordinateInfo;
-	public RecipeListPanel recipePanel;
+	public RecipeList recipeList;
 
 	public EntitySelector entitySelector;
 	public CreatureCreator creatureCreator;
@@ -30,9 +30,9 @@ public class UIManager : MonoBehaviour
 		{
 			winnerPanel = GetComponentInChildren<WinnerPanel>();
 		}
-		if (recipePanel == null)
+		if (recipeList == null)
 		{
-			recipePanel = GetComponentInChildren<RecipeListPanel>();
+			recipeList = GetComponentInChildren<RecipeList>();
 		}
 	}
 
@@ -43,9 +43,9 @@ public class UIManager : MonoBehaviour
 		GameManager.Terrain.MouseExitBlock += x => coordinateInfo.Hide();
 
 		// Deselect creatures when we start creation
-		recipePanel.RecipeClicked += (t) => entitySelector.Deselect();
+		recipeList.RecipeClicked += (t) => entitySelector.Deselect();
 		// Start creating the recipe
-		recipePanel.RecipeClicked += creatureCreator.StartCreation;
+		recipeList.RecipeClicked += creatureCreator.StartCreation;
 
 		GameManager.gm.OnWin += DisplayWinInfo;
 
@@ -63,7 +63,7 @@ public class UIManager : MonoBehaviour
 	{
 		winnerPanel.gameObject.SetActive(true);
 		creatureInfo.gameObject.SetActive(false);
-		recipePanel.gameObject.SetActive(false);
+		recipeList.gameObject.SetActive(false);
 
 		coordinateInfo.Hide();
 
