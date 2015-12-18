@@ -27,15 +27,12 @@ public class InputController : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		foreach (KeyCode keycode in keyDownEvents.Keys)
+		foreach (KeyCode keycode in Enum.GetValues(typeof(KeyCode)))
 		{
 			if (Input.GetKeyDown(keycode))
 			{
 				if (keyDownEvents[keycode] != null) { keyDownEvents[keycode](); }
 			}
-		}
-		foreach (KeyCode keycode in keyEvents.Keys)
-		{
 			if (Input.GetKey(keycode))
 			{
 				if (keyEvents[keycode] != null) { keyEvents[keycode](); }
