@@ -19,6 +19,16 @@ public class Creature : MonoBehaviour
 		get { return position; }
 	}
 
+	public bool HasAbility()
+	{
+		return GetComponent<IAbility>() != null;
+	}
+
+	public IAbility Ability
+	{
+		get { return GetComponent<IAbility>(); }
+	}
+
 	public Action<Coordinate?> OnSetGoal;
 
 	private CreatureController manager;

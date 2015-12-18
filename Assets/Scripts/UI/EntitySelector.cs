@@ -58,9 +58,9 @@ public class EntitySelector : MonoBehaviour
 		GameManager.Terrain.ClickBlock += SetCurrentCreatureGoal;
 
 		// Add a listener to the action markers
-		if (creature.GetComponent<IAbility>() != null)
+		if (creature.HasAbility())
 		{
-			actionMarkers.Enable(creature.GetComponent<IAbility>().Use);
+			actionMarkers.Enable(creature.Ability.Use);
 			actionMarkers.OnStartAbility += RemoveCurrentCreatureGoal;
 		}
 		else
@@ -81,7 +81,7 @@ public class EntitySelector : MonoBehaviour
 	private void SetCurrentCreatureGoal(Coordinate coordinate)
 	{
 		SelectedCreature.Goal = coordinate;
-		actionMarkers.StopAbility();
+		if (SelectedCreature.HasAbility()) { actionMarkers.StopAbility(); }
 	}
 
 	private void RemoveCurrentCreatureGoal()

@@ -12,17 +12,12 @@ public class ActionMarkers : MonoBehaviour {
 	public event Action OnStartAbility;
 	public event Action OnStopAbility;
 
-	// Use this for initialization
-	void Awake ()
+	public void Enable(Action<Coordinate> action)
 	{
 		if (markers == null)
 		{
 			markers = GetComponentsInChildren<ActionMarker>(true);
 		}
-	}
-
-	public void Enable(Action<Coordinate> action)
-	{
 		isEnabled = true;
 		GameManager.Input.KeyDown[KeyCode.Space] += ToggleAbility;
 		foreach (var marker in markers)
@@ -53,10 +48,7 @@ public class ActionMarkers : MonoBehaviour {
 		}
 		Debug.Log("Engaging creature ability.");
 		isActing = true;
-		foreach (var marker in markers)
-		{
-			marker.gameObject.SetActive(true);
-		}
+		gameObject.SetActive(true);
 		if (OnStartAbility != null) { OnStartAbility(); }
 	}
 
@@ -68,10 +60,7 @@ public class ActionMarkers : MonoBehaviour {
 		}
 		Debug.Log("Stopping creature ability.");
 		isActing = false;
-		foreach (var marker in markers)
-		{
-			marker.gameObject.SetActive(false);
-		}
+		gameObject.SetActive(false);
 		if (OnStopAbility != null) { OnStopAbility(); }
 	}
 
