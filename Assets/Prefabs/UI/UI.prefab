@@ -1662,7 +1662,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Play Again
+  m_Text: Menu
 --- !u!114 &11434026
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1894,7 +1894,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84bd3fe44133144aca19fa57b29714cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playAgainLevelToLoad: LevelPrototype
+  playAgainLevelToLoad: Menu
 --- !u!114 &11462194
 MonoBehaviour:
   m_ObjectHideFlags: 1
