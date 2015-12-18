@@ -10,10 +10,10 @@ using Util;
 /// </summary>
 public class ResourcePile : MonoBehaviour
 {
-	public ResourceCount[] resources;
 
 	// Height between separate resource types
 	public float heightGap = 0.1f;
+	public ResourceCount[] resources;
 
 	public IDictionary<ResourceType, int> Resources
 	{
@@ -59,7 +59,7 @@ public class ResourcePile : MonoBehaviour
 				continue;
 			}
 			numResourceTypes++;
-			var obj = this.AddChild(controller.PrefabFor(resource), this.Coordinate());
+			var obj = this.AddChild(controller.resourcePrefabs.PrefabFor(resource), this.Coordinate());
 
 			// Set the height correctly
 			obj.transform.Translate(Vector3.up * numResourceTypes * heightGap);
@@ -69,7 +69,7 @@ public class ResourcePile : MonoBehaviour
 		if (hasEnergy)
 		{
 			numResourceTypes++;
-			var obj = this.AddChild(controller.PrefabFor(ResourceType.Energy), this.Coordinate());
+			var obj = this.AddChild(controller.resourcePrefabs.PrefabFor(ResourceType.Energy), this.Coordinate());
 			obj.transform.Translate(Vector3.up * numResourceTypes * heightGap);
 		}
 	}

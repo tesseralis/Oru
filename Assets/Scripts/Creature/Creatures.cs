@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 /// <summary>
@@ -5,30 +6,44 @@ using System.Collections.Generic;
 /// </summary>
 public static class Creatures
 {
-	public static readonly CreatureDefinition Duck = new CreatureDefinition
+	public static readonly CreatureDefinition Crane = new CreatureDefinition
 	{
-		Type = CreatureType.Duck,
-		Recipe = new Dictionary<ResourceType, int>() { {ResourceType.Energy, 1}, {ResourceType.Yellow, 4} },
-		AllowedTerrain = new TerrainType[]{ TerrainType.Grass, TerrainType.Water }
+		Type = CreatureType.Crane,
+		Recipe = new Dictionary<ResourceType, int>() { {ResourceType.Energy, 1}, {ResourceType.Blue, 4} },
+		AllowedTerrain = new TerrainType[]{ TerrainType.Land, TerrainType.Water }
+	};
+	
+	public static readonly CreatureDefinition Turtle = new CreatureDefinition
+	{
+		Type = CreatureType.Turtle,
+		Recipe = new Dictionary<ResourceType, int>() { {ResourceType.Energy, 1}, {ResourceType.Green, 9} },
+		AllowedTerrain = new TerrainType[]{ TerrainType.Water }
 	};
 
-	public static readonly CreatureDefinition Dragon = new CreatureDefinition
+	public static readonly CreatureDefinition Horse = new CreatureDefinition
 	{
-		Type = CreatureType.Dragon,
-		Recipe = new Dictionary<ResourceType, int>() { {ResourceType.Energy, 1}, {ResourceType.Red, 25} },
-		AllowedTerrain = new TerrainType[]{ TerrainType.Grass, TerrainType.Rock }
+		Type = CreatureType.Horse,
+		Recipe = new Dictionary<ResourceType, int>() { {ResourceType.Energy, 1}, {ResourceType.Red, 9} },
+		AllowedTerrain = new TerrainType[]{ TerrainType.Land, TerrainType.Rock }
+	};
+
+	public static readonly CreatureDefinition Elephant = new CreatureDefinition
+	{
+		Type = CreatureType.Elephant,
+		Recipe = new Dictionary<ResourceType, int>() { {ResourceType.Energy, 1}, {ResourceType.Blue, 25} },
+		AllowedTerrain = new TerrainType[]{ TerrainType.Land }
 	};
 
 	public static CreatureDefinition ForType(CreatureType type)
 	{
 		switch(type)
 		{
-		case CreatureType.Duck:
-			return Duck;
-		case CreatureType.Dragon:
-			return Dragon;
-		default:
-			throw new System.ArgumentException("Passed in an invalid creature type", type.ToString());
+		case CreatureType.Crane: return Crane;
+		case CreatureType.Turtle: return Turtle;
+		case CreatureType.Horse: return Horse;
+		case CreatureType.Elephant: return Elephant;
+		default: throw new ArgumentException("Passed in an invalid creature type: " + type, "type");
 		}
 	}
+
 }
