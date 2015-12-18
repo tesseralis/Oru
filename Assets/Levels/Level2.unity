@@ -522,11 +522,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11484968, guid: 284e74a3d652a48e6be113e2c67123e6, type: 2}
       propertyPath: resources.Array.data[1].count
-      value: 4
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 11484968, guid: 284e74a3d652a48e6be113e2c67123e6, type: 2}
       propertyPath: resources.Array.data[2].count
-      value: 9
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 11484968, guid: 284e74a3d652a48e6be113e2c67123e6, type: 2}
       propertyPath: resources.Array.data[1].type
