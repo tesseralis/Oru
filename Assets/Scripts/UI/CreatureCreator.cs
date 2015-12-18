@@ -16,6 +16,10 @@ public class CreatureCreator : MonoBehaviour {
 
 	public void StartCreation(CreatureType creature)
 	{
+		// Ensure that we never double-click
+		StopCreation();
+
+		// Do the actual creation
 		currentCreatureType = creature;
 		GameManager.Terrain.MouseEnterBlock += ShowCreateMarker;
 		GameManager.Terrain.MouseExitBlock += HideCreateMarker;
