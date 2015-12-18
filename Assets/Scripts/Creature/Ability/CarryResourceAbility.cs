@@ -59,8 +59,11 @@ public class CarryResourceAbility : MonoBehaviour, IAbility
 		{
 			// Otherwise, put down what we're carrying right now
 			// Put down what we're carrying on the coordinate
-			resources[target] = resources[target].MultisetAdd(Carrying);
-			Carrying = Multiset.Empty<ResourceType>();
+			if (GameManager.Terrain.Contains(target) && GameManager.Terrain[target] != TerrainType.Tree)
+			{
+				resources[target] = resources[target].MultisetAdd(Carrying);
+				Carrying = Multiset.Empty<ResourceType>();
+			}
 
 		}
 	}
