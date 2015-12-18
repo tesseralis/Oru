@@ -59,25 +59,7 @@ public class ResourceController : MonoBehaviour
 	}
 
 
-	// TODO should this be a method of the Options class?
-	public GameObject PrefabFor(ResourceType resource)
-	{
-		switch(resource)
-		{
-		case ResourceType.Energy:
-			return resourcePrefabs.energyPrefab;
-		case ResourceType.Red:
-			return resourcePrefabs.redPrefab;
-		case ResourceType.Yellow:
-			return resourcePrefabs.yellowPrefab;
-		case ResourceType.Green:
-			return resourcePrefabs.greenPrefab;
-		case ResourceType.Blue:
-			return resourcePrefabs.bluePrefab;
-		default:
-			throw new ArgumentException("Resource type not supported: " + resource, "resource");
-		}
-	}
+
 
 }
 
@@ -89,4 +71,23 @@ public class ResourcePrefabOptions
 	public GameObject yellowPrefab;
 	public GameObject bluePrefab;
 	public GameObject greenPrefab;
+
+	public GameObject PrefabFor(ResourceType resource)
+	{
+		switch(resource)
+		{
+		case ResourceType.Energy:
+			return energyPrefab;
+		case ResourceType.Red:
+			return redPrefab;
+		case ResourceType.Yellow:
+			return yellowPrefab;
+		case ResourceType.Green:
+			return greenPrefab;
+		case ResourceType.Blue:
+			return bluePrefab;
+		default:
+			throw new ArgumentException("Resource type not supported: " + resource, "resource");
+		}
+	}
 }

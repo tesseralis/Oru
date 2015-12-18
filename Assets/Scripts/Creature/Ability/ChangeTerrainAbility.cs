@@ -4,7 +4,7 @@ using System.Collections;
 public class ChangeTerrainAbility : MonoBehaviour, IAbility
 {
 	public TerrainType carryType = TerrainType.Rock;
-	public TerrainType leaveType = TerrainType.Grass;
+	public TerrainType leaveType = TerrainType.Land;
 
 	private bool isCarrying = false;
 

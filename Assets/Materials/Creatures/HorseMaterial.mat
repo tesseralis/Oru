@@ -6,10 +6,9 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: DuckBeakMaterial
+  m_Name: HorseMaterial
   m_Shader: {fileID: 45, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: _EMISSIONMAP _LIGHTMAPPING_DYNAMIC_LIGHTMAPS _LIGHTMAPPING_REALTIME
-    _UVSEC_UV1
+  m_ShaderKeywords: _LIGHTMAPPING_DYNAMIC_LIGHTMAPS _LIGHTMAPPING_REALTIME _UVSEC_UV1
   m_LightmapFlags: 5
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -20,7 +19,7 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: 8b939c5b46fae7e49af7d85f731ba4ec, type: 3}
+          m_Texture: {fileID: 2800000, guid: 9d0b29cecf2678b41982d2173d3670ff, type: 3}
           m_Scale: {x: 4, y: 4}
           m_Offset: {x: 0, y: 0}
       data:
@@ -74,13 +73,6 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _SpecGlossMap
-        second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
           name: _Occlusion
         second:
           m_Texture: {fileID: 0}
@@ -89,6 +81,13 @@ Material:
       data:
         first:
           name: _MetallicGlossMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _SpecGlossMap
         second:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
@@ -105,15 +104,15 @@ Material:
       data:
         first:
           name: _Cutoff
-        second: .5
+        second: 0.5
       data:
         first:
           name: _AlphaTestRef
-        second: .5
+        second: 0.5
       data:
         first:
           name: _Parallax
-        second: .0199999996
+        second: 0.02
       data:
         first:
           name: _ZWrite
@@ -121,7 +120,7 @@ Material:
       data:
         first:
           name: _Glossiness
-        second: .100000001
+        second: 0.1
       data:
         first:
           name: _BumpScale
@@ -144,33 +143,33 @@ Material:
         second: 0
       data:
         first:
+          name: _Metallic
+        second: 0.1
+      data:
+        first:
           name: _Lightmapping
         second: 1
       data:
         first:
           name: _EmissionScaleUI
-        second: 2
-      data:
-        first:
-          name: _Metallic
-        second: .100000001
+        second: 0
     m_Colors:
       data:
         first:
           name: _EmissionColor
-        second: {r: 0, g: 0, b: 0, a: 1.33483374}
+        second: {r: 0, g: 0, b: 0, a: 0}
       data:
         first:
           name: _Color
-        second: {r: 1, g: 1, b: 1, a: 1}
+        second: {r: 0.31617647, g: 0.045791082, b: 0, a: 1}
       data:
         first:
           name: _SpecColor
-        second: {r: .117647059, g: .117647059, b: .117647059, a: 1}
+        second: {r: 0.11764706, g: 0.11764706, b: 0.11764706, a: 1}
       data:
         first:
           name: _SpecularColor
-        second: {r: .156862751, g: .156862751, b: .156862751, a: 1}
+        second: {r: 0.15686275, g: 0.15686275, b: 0.15686275, a: 1}
       data:
         first:
           name: _EmissionColorUI

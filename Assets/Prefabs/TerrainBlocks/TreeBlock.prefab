@@ -29,7 +29,6 @@ GameObject:
   - 4: {fileID: 461514}
   - 33: {fileID: 3302356}
   - 23: {fileID: 2389736}
-  - 65: {fileID: 6540684}
   m_Layer: 0
   m_Name: TreeTrunk
   m_TagString: Untagged
@@ -46,7 +45,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 480280}
   - 33: {fileID: 3340502}
-  - 135: {fileID: 13528024}
   - 23: {fileID: 2334680}
   m_Layer: 0
   m_Name: TreeLeaves
@@ -192,18 +190,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 155930}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &6540684
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 153150}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 2, z: 1}
-  m_Center: {x: 0.000001206994, y: 1, z: 0}
 --- !u!65 &6556832
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -228,18 +214,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
---- !u!135 &13528024
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 155930}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

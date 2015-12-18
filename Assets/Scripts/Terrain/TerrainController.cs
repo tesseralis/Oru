@@ -31,7 +31,7 @@ public class TerrainController : MonoBehaviour
 			Destroy(grid[coordinate].gameObject);
 
 			// Create the new item
-			var prefab = PrefabFor (value);
+			var prefab = terrainPrefabs.PrefabFor (value);
 			var block = this.AddChildWithComponent<TerrainBlock>(prefab, coordinate);
 			block.type = value;
 			grid[coordinate] = block;
@@ -54,29 +54,31 @@ public class TerrainController : MonoBehaviour
 		}
 	}
 
-	GameObject PrefabFor (TerrainType type)
-	{
-		switch (type) {
-		case TerrainType.Grass:
-			return terrainPrefabs.grassPrefab;
-		case TerrainType.Rock:
-			return terrainPrefabs.rockPrefab;
-		case TerrainType.Tree:
-			return terrainPrefabs.treePrefab;
-		case TerrainType.Water:
-			return terrainPrefabs.waterPrefab;
-		default:
-			throw new ArgumentException("Illegal terrain type", type.ToString());
-		}
-	}
 
 }
 
 [Serializable]
 public class TerrainPrefabOptions
 {
-	public GameObject grassPrefab;
+	public GameObject landPrefab;
 	public GameObject rockPrefab;
 	public GameObject treePrefab;
 	public GameObject waterPrefab;
+
+
+	public GameObject PrefabFor (TerrainType type)
+	{
+		switch (type) {
+		case TerrainType.Land:
+			return landPrefab;
+		case TerrainType.Rock:
+			return rockPrefab;
+		case TerrainType.Tree:
+			return treePrefab;
+		case TerrainType.Water:
+			return waterPrefab;
+		default:
+			throw new ArgumentException("Illegal terrain type: " + type, "type");
+		}
+	}
 }

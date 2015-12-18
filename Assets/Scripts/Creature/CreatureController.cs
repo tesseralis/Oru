@@ -67,7 +67,7 @@ public class CreatureController : MonoBehaviour
 			resources[neighbor] = difference;
 		}
 
-		return this.AddChildWithComponent<Creature>(PrefabFor (creature), location);
+		return this.AddChildWithComponent<Creature>(creaturePrefabs.PrefabFor (creature), location);
 
 	}
 
@@ -82,17 +82,7 @@ public class CreatureController : MonoBehaviour
 		}
 	}
 
-	public GameObject PrefabFor (CreatureType creature)
-	{
-		switch (creature) {
-		case CreatureType.Duck:
-			return creaturePrefabs.duckPrefab;
-		case CreatureType.Dragon:
-			return creaturePrefabs.dragonPrefab;
-		default:
-			throw new ArgumentException("Illegal creature type", creature.ToString());
-		}
-	}
+
 
 	private static IList<Coordinate> Neighbors(Coordinate coordinate)
 	{
@@ -107,6 +97,19 @@ public class CreatureController : MonoBehaviour
 [Serializable]
 public class CreaturePrefabOptions
 {
-	public GameObject duckPrefab;
-	public GameObject dragonPrefab;
+	public GameObject cranePrefab;
+	public GameObject turtlePrefab;
+	public GameObject horsePrefab;
+	public GameObject elephantPrefab;
+
+	public GameObject PrefabFor (CreatureType creature)
+	{
+		switch (creature) {
+		case CreatureType.Crane: return cranePrefab;
+		case CreatureType.Turtle: return turtlePrefab;
+		case CreatureType.Horse: return horsePrefab;
+		case CreatureType.Elephant: return elephantPrefab;
+		default: throw new ArgumentException("Illegal creature type: " + creature, "creature");
+		}
+	}
 }

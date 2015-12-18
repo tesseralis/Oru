@@ -13,7 +13,7 @@ GameObject:
   - 65: {fileID: 6596842}
   - 114: {fileID: 11490468}
   m_Layer: 0
-  m_Name: GrassBlock
+  m_Name: LandBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

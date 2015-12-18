@@ -1,4 +1,4 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum CreatureType { Duck, Dragon }
+public enum CreatureType { Crane, Turtle, Horse, Elephant }
