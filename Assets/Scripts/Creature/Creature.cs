@@ -29,6 +29,12 @@ public class Creature : MonoBehaviour
 		get { return GetComponent<IAbility>(); }
 	}
 
+	// Convenience method to get the creature's definition
+	public CreatureDefinition Definition
+	{
+		get { return Creatures.ForType(creatureType); }
+	}
+
 	public Action<Coordinate?> OnSetGoal;
 
 	private CreatureController manager;
@@ -86,53 +92,79 @@ public class Creature : MonoBehaviour
 		throw new ArgumentException("Given coordinate" + direction + " is not a direction", "direction");
 	}
 
-	// do a BFS and figure out the right path
-	private Coordinate NextCoordinate()
+	private delegate bool CoordinatePredicate(Coordinate coordinate);
+	private static IDictionary<Coordinate, Coordinate> DoBFS(Coordinate start, Coordinate end, CoordinatePredicate neighborPredicate)
 	{
-		// TODO do A* search
-		// If we can't get to the destination, just search for our own location
-		var goal = Goal ?? Position;
-		var grid = GameManager.Terrain;
-		var allowedTerrain = Creatures.ForType(creatureType).AllowedTerrain;
-
+		// Initialize BFS data structures
 		var distance = new Dictionary<Coordinate, int>();
 		var parents = new Dictionary<Coordinate, Coordinate> ();
 		var queue = new Queue<Coordinate> ();
-		distance [position] = 0;
-		queue.Enqueue (position);
-		
+
+		// Input our start coordinate
+		distance [start] = 0;
+		queue.Enqueue (start);
+
 		while (queue.Count > 0)
 		{
 			var current = queue.Dequeue();
 			var neighbors = Coordinate.cardinals.Select(x => x + current).ToList();
 			foreach (Coordinate neighbor in neighbors)
 			{
-				if (grid.Contains(neighbor) && allowedTerrain.Contains(grid[neighbor]) && !distance.ContainsKey(neighbor))
+				if (!distance.ContainsKey(neighbor) && neighborPredicate(neighbor))
 				{
 					distance[neighbor] = distance[current] + 1;
 					parents[neighbor] = current;
 					queue.Enqueue(neighbor);
 				}
 			}
-			// If we've already found our goal, we do not need to keep searching.
-			if (neighbors.Contains(goal))
+			// If we've already found the last coordinate, we do not need to keep searching.
+			if (neighbors.Contains(end))
 			{
 				break;
 			}
-			
 		}
+		return parents;
+	}
 
-		var next = goal;
-		if (!parents.ContainsKey(next))
+	// do a BFS and figure out the right path
+	private Coordinate NextCoordinate()
+	{
+		// If the creature has no goal, just stick to the current position
+		// TODO maybe make the creature's initial goal its position?
+		if (Goal == null)
 		{
-			Debug.Log("Can't reach the intended destination.");
 			return position;
 		}
-		while (parents[next] != (position))
+		var goal = Goal ?? Position;
+		var parents = DoBFS(position, goal, (neighbor) =>
+			GameManager.Terrain.Contains(neighbor)
+			&& Definition.AllowedTerrain.Contains(GameManager.Terrain[neighbor]));
+
+		Coordinate next;
+		// If we can reach the goal, then move the creature to the next step towards that goal
+		if (parents.ContainsKey(goal))
+		{
+			next = goal;
+			while (parents[next] != position)
+			{
+				next = parents[next];
+			}
+			return next;
+		}
+
+		// Otherwise, do another BFS not accounting for terrain restrictions and try to move the creature there
+		parents = DoBFS(position, goal, (neighbor) => GameManager.Terrain.Contains(neighbor));
+		// TODO assert that the level is fully connected
+		next = goal;
+		while (parents[next] != position)
 		{
 			next = parents[next];
 		}
-		return next;
+		if (Definition.AllowedTerrain.Contains(GameManager.Terrain[next]))
+		{
+			return next;
+		}
+		return position;
 	}
 
 }
