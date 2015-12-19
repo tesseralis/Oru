@@ -14,38 +14,33 @@ public class Creature : MonoBehaviour
 
 	public Coordinate? Goal { get; set; }
 
-	public Coordinate Position
-	{
-		get { return position; }
-	}
+	public Coordinate Position { get; private set; }
 
+	public Action<Coordinate?> OnSetGoal;
+
+	private CreatureController manager;
+	private Coordinate nextPosition;
+	
 	public bool HasAbility()
 	{
 		return GetComponent<IAbility>() != null;
 	}
-
+	
 	public IAbility Ability
 	{
 		get { return GetComponent<IAbility>(); }
 	}
-
+	
 	// Convenience method to get the creature's definition
 	public CreatureDefinition Definition
 	{
 		get { return Creatures.ForType(creatureType); }
 	}
 
-	public Action<Coordinate?> OnSetGoal;
-
-	private CreatureController manager;
-
-	private Coordinate position;
-	private Coordinate nextPosition;
-
 	void Start()
 	{
 		// Store our initial position
-		nextPosition = position = GameManager.gm.ToGridCoordinate(gameObject.transform.position);
+		nextPosition = Position = GameManager.gm.ToGridCoordinate(gameObject.transform.position);
 	}
 
 	void OnMouseDown()
@@ -60,24 +55,24 @@ public class Creature : MonoBehaviour
 		var cellSize = GameManager.gm.cellSize;
 
 		var ratio = (Time.timeSinceLevelLoad % stepInterval) / stepInterval;
-		var direction = nextPosition - position;
+		var direction = nextPosition - Position;
 		// TODO I'm sure we can factor this out
 		var translation = new Vector3(direction.x, 0, direction.z) * ratio * cellSize;
-		GameManager.gm.SetPosition(gameObject, position);
+		GameManager.gm.SetPosition(gameObject, Position);
 		transform.position += translation;
 	}
 
 	public void Step()
 	{
-		position = nextPosition;
-		if (Goal != null && (!position.Equals(Goal)))
+		Position = nextPosition;
+		if (Goal != null && (!Position.Equals(Goal)))
 		{
 			nextPosition = NextCoordinate ();
 
 			// Make our creature face the right direction
-			if (nextPosition != position)
+			if (nextPosition != Position)
 			{
-				var direction = nextPosition - position;
+				var direction = nextPosition - Position;
 				transform.Rotate(new Vector3(0, AngleFor(direction)) - transform.rotation.eulerAngles);
 			}
 		}
@@ -133,10 +128,10 @@ public class Creature : MonoBehaviour
 		// TODO maybe make the creature's initial goal its position?
 		if (Goal == null)
 		{
-			return position;
+			return Position;
 		}
 		var goal = Goal ?? Position;
-		var parents = DoBFS(position, goal, (neighbor) =>
+		var parents = DoBFS(Position, goal, (neighbor) =>
 			GameManager.Terrain.Contains(neighbor)
 			&& Definition.AllowedTerrain.Contains(GameManager.Terrain[neighbor]));
 
@@ -145,7 +140,7 @@ public class Creature : MonoBehaviour
 		if (parents.ContainsKey(goal))
 		{
 			next = goal;
-			while (parents[next] != position)
+			while (parents[next] != Position)
 			{
 				next = parents[next];
 			}
@@ -153,10 +148,10 @@ public class Creature : MonoBehaviour
 		}
 
 		// Otherwise, do another BFS not accounting for terrain restrictions and try to move the creature there
-		parents = DoBFS(position, goal, (neighbor) => GameManager.Terrain.Contains(neighbor));
+		parents = DoBFS(Position, goal, (neighbor) => GameManager.Terrain.Contains(neighbor));
 		// TODO assert that the level is fully connected
 		next = goal;
-		while (parents[next] != position)
+		while (parents[next] != Position)
 		{
 			next = parents[next];
 		}
@@ -164,7 +159,7 @@ public class Creature : MonoBehaviour
 		{
 			return next;
 		}
-		return position;
+		return Position;
 	}
 
 }
