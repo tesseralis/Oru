@@ -41,15 +41,14 @@ public class RecipeController : MonoBehaviour
 		{
 			availableRecipes = new CreatureType[0];
 		}
-		
-		foreach (var instruction in GetComponentsInChildren<Recipe>())
-		{
-			recipeLocations[instruction.Coordinate()] = instruction;
-		}
 	}
 
 	void Start()
 	{
+		foreach (var instruction in GetComponentsInChildren<Recipe>())
+		{
+			recipeLocations[instruction.Coordinate()] = instruction;
+		}
 		GameManager.gm.Step += StepRecipes;
 	}
 
