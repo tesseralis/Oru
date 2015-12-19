@@ -80,7 +80,10 @@ public class EntitySelector : MonoBehaviour
 		
 	private void SetCurrentCreatureGoal(Coordinate coordinate)
 	{
-		SelectedCreature.Goal = coordinate;
+		if (SelectedCreature.CanReach(coordinate))
+		{
+			SelectedCreature.Goal = coordinate;
+		}
 		if (SelectedCreature.HasAbility()) { actionMarkers.StopAbility(); }
 	}
 

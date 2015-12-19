@@ -78,6 +78,13 @@ public class Creature : MonoBehaviour
 		}
 	}
 
+	// Returns true if this creature can reach the specified goal coordinate
+	public bool CanReach(Coordinate goal)
+	{
+		var parents = DoBFS(Position, goal, IsValidCoordinate);
+		return parents.Keys.Contains(goal);
+	}
+
 	private float AngleFor(Coordinate direction)
 	{
 		if (direction == Coordinate.up) { return -90; }
