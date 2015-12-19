@@ -216,6 +216,10 @@ Prefab:
       propertyPath: clickParticlePrefab
       value: 
       objectReference: {fileID: 166660, guid: 22d15bc638da047959c747b5699dcc42, type: 2}
+    - target: {fileID: 11449534, guid: cd9830b50e3d74a29970d40875dc8638, type: 2}
+      propertyPath: clickAudio
+      value: 
+      objectReference: {fileID: 8300000, guid: 6ee7c76d493c544b596e68cba58a67f4, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cd9830b50e3d74a29970d40875dc8638, type: 2}
   m_IsPrefabParent: 0
