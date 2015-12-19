@@ -131,9 +131,7 @@ public class Creature : MonoBehaviour
 			return Position;
 		}
 		var goal = Goal ?? Position;
-		var parents = DoBFS(Position, goal, (neighbor) =>
-			GameManager.Terrain.Contains(neighbor)
-			&& Definition.AllowedTerrain.Contains(GameManager.Terrain[neighbor]));
+		var parents = DoBFS(Position, goal, IsValidCoordinate);
 
 		Coordinate next;
 		// If we can reach the goal, then move the creature to the next step towards that goal
@@ -148,18 +146,22 @@ public class Creature : MonoBehaviour
 		}
 
 		// Otherwise, do another BFS not accounting for terrain restrictions and try to move the creature there
-		parents = DoBFS(Position, goal, (neighbor) => GameManager.Terrain.Contains(neighbor));
+		parents = DoBFS(Position, goal, GameManager.Terrain.Contains);
 		// TODO assert that the level is fully connected
 		next = goal;
 		while (parents[next] != Position)
 		{
 			next = parents[next];
 		}
-		if (Definition.AllowedTerrain.Contains(GameManager.Terrain[next]))
-		{
-			return next;
-		}
-		return Position;
+		return IsValidCoordinate(next) ? next : Position;
+	}
+
+	// Returns true if we the creature is allowed to go to this coordinate
+	private bool IsValidCoordinate(Coordinate coordinate)
+	{
+		return GameManager.Terrain.Contains(coordinate)
+			&& Definition.AllowedTerrain.Contains(GameManager.Terrain[coordinate])
+			&& !GameManager.Creatures.CreatureList.Any(x => x != this && x.Position == coordinate);
 	}
 
 }

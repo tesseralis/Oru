@@ -37,7 +37,8 @@ public class CreatureController : MonoBehaviour
 			resourceCount = resourceCount.MultisetAdd(resource);
 		}
 		return resourceCount.Contains(recipe)
-			&& creatureDefinition.AllowedTerrain.Contains(GameManager.Terrain[coordinate]);
+			&& creatureDefinition.AllowedTerrain.Contains(GameManager.Terrain[coordinate])
+			&& !CreatureList.Any(x => x.Position == coordinate);
 
 	}
 
