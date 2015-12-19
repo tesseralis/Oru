@@ -23,6 +23,11 @@ public class CreatureController : MonoBehaviour
 		}
 	}
 
+	void Start()
+	{
+		GameManager.gm.Step += StepCreatures;
+	}
+
 	// Returns true if we can add a creature at the given coordinate
 	public bool CanCreateCreature(CreatureType creature, Coordinate coordinate)
 	{
@@ -85,7 +90,7 @@ public class CreatureController : MonoBehaviour
 	/// <summary>
 	/// Move all the creatures forward one game step.
 	/// </summary>
-	public void Step()
+	void StepCreatures()
 	{
 		foreach(Creature creature in CreatureList)
 		{

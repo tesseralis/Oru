@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections;
+using System.Linq;
+using Util;
 
 public class Goal : MonoBehaviour
 {
@@ -9,11 +11,19 @@ public class Goal : MonoBehaviour
 	// TODO generalize this so this can be "any creature" or terrain (or boulders)
 	public CreatureType winningCreatureType;
 
-	public Action<Goal> OnClick;
-
-	void OnMouseDown()
+	void Start()
 	{
-		if (OnClick != null) { OnClick(this); }
+		GameManager.gm.Step += StepGoal;
+	}
+
+	private void StepGoal()
+	{
+		if (GameManager.Creatures.CreatureList.Where(x => x.creatureType == winningCreatureType)
+			.Select(x => x.Position).Contains(this.Coordinate()))
+		{
+			Debug.Log("You win!");
+			GameManager.gm.HasWon = true;
+		}
 	}
 
 }

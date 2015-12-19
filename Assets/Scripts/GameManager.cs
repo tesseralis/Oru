@@ -43,6 +43,8 @@ public class GameManager : MonoBehaviour
 
 	public float Steps { get; private set; }
 
+	public event Action Step;
+
 	/*
 	 * Internal game state
 	 */
@@ -51,7 +53,7 @@ public class GameManager : MonoBehaviour
 	public bool HasWon
 	{ 
 		get { return hasWon; }
-		private set
+		set
 		{
 			hasWon = value;
 			if (hasWon)
@@ -115,27 +117,14 @@ public class GameManager : MonoBehaviour
 			if (Time.timeSinceLevelLoad >= nextStepTime)
 			{
 				nextStepTime += stepInterval;
-				Step ();
+				Steps++;
+				Debug.Log("Current step: " + Steps);
+				Step();
 			}
 		}
 	}
 
-	// Move one discrete game step
-	void Step ()
-	{
-		Steps++;
-		Debug.Log("Step: " + Steps);
-		creatureController.Step();
-		recipeController.UpdateAvailableRecipes(creatureController.CreatureList.Select(x => x.Position).ToList());
-
-		if (creatureController.CreatureList.Where(x => x.creatureType == goal.winningCreatureType)
-			.Select(x => x.Position).Contains(goal.Coordinate()))
-		{
-			Debug.Log("You win!");
-			HasWon = true;
-		}
-	}
-
+	// TODO put this in Utils
 	public Coordinate ToGridCoordinate(Vector3 position)
 	{
 		return new Coordinate(Mathf.RoundToInt(position.x / cellSize), Mathf.RoundToInt(position.z / cellSize));

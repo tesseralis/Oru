@@ -48,6 +48,16 @@ public class RecipeController : MonoBehaviour
 		}
 	}
 
+	void Start()
+	{
+		GameManager.gm.Step += StepRecipes;
+	}
+
+	private void StepRecipes ()
+	{
+		UpdateAvailableRecipes(GameManager.Creatures.CreatureList.Select(x => x.Position).ToList());
+	}
+
 	// Update the list of available instructions if a creature has walked on it
 	public void UpdateAvailableRecipes(ICollection<Coordinate> creaturePositions)
 	{
