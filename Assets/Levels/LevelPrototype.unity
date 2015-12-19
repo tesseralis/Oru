@@ -212,6 +212,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11449534, guid: cd9830b50e3d74a29970d40875dc8638, type: 2}
+      propertyPath: clickParticlePrefab
+      value: 
+      objectReference: {fileID: 166660, guid: 22d15bc638da047959c747b5699dcc42, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cd9830b50e3d74a29970d40875dc8638, type: 2}
   m_IsPrefabParent: 0
@@ -1417,6 +1421,10 @@ Prefab:
     - target: {fileID: 22405430, guid: 9fcb869508e024b4c883df85ccbacc4d, type: 2}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 160328, guid: 9fcb869508e024b4c883df85ccbacc4d, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9fcb869508e024b4c883df85ccbacc4d, type: 2}
