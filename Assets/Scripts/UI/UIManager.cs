@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
 	public CreatureInfo creatureInfo;
 	public CoordinateInfo coordinateInfo;
 	public RecipeList recipeList;
+	public GameObject menuPanel;
 
 	public EntitySelector entitySelector;
 	public CreatureCreator creatureCreator;
@@ -78,6 +79,7 @@ public class UIManager : MonoBehaviour
 		winnerPanel.gameObject.SetActive(true);
 		creatureInfo.gameObject.SetActive(false);
 		recipeList.gameObject.SetActive(false);
+		menuPanel.gameObject.SetActive(false);
 
 		coordinateInfo.Hide();
 

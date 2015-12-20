@@ -2695,6 +2695,7 @@ MonoBehaviour:
   creatureInfo: {fileID: 11410730}
   coordinateInfo: {fileID: 11487726}
   recipeList: {fileID: 11403318}
+  menuPanel: {fileID: 194836}
   entitySelector: {fileID: 11444846}
   creatureCreator: {fileID: 11400168}
 --- !u!114 &11483318
