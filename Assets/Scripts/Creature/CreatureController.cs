@@ -83,6 +83,14 @@ public class CreatureController : MonoBehaviour
 		// Recycle the creature's components
 		GameManager.Resources[coordinate] = GameManager.Resources[coordinate].MultisetAdd(Creatures.ForType(creature.creatureType).Recipe);
 
+		// Do anything the creature's ability's state says we should do.
+		// TODO generalize this so that we can account for more abilities
+		if (creature.GetComponent<CarryResourceAbility>() != null)
+		{
+			var ability = creature.GetComponent<CarryResourceAbility>();
+			GameManager.Resources[coordinate] = GameManager.Resources[coordinate].MultisetAdd(ability.Carrying);
+		}
+
 		// Remove from the creature list
 		Destroy(creature.gameObject);
 	}

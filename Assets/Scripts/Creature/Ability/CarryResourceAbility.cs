@@ -11,7 +11,7 @@ public class CarryResourceAbility : MonoBehaviour, IAbility
 
 	// Convert to a multiset
 	// TODO refactor with the same methods in ResourcePile
-	private IDictionary<ResourceType, int> Carrying
+	public IDictionary<ResourceType, int> Carrying
 	{
 		get
 		{
