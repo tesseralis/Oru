@@ -20,6 +20,8 @@ public class Creature : MonoBehaviour
 
 	private CreatureController manager;
 	private Coordinate nextPosition;
+
+	private bool isMoving = false;
 	
 	public bool HasAbility()
 	{
@@ -74,6 +76,23 @@ public class Creature : MonoBehaviour
 			{
 				var direction = nextPosition - Position;
 				transform.Rotate(new Vector3(0, AngleFor(direction)) - transform.rotation.eulerAngles);
+			}
+
+			// Animate our creature if it has animation
+			if (GetComponentInChildren<Animator>() && !isMoving)
+			{
+				isMoving = true;
+				Debug.Log("Animating the creature moving.");
+				GetComponentInChildren<Animator>().SetTrigger("StartMove");
+			}
+		}
+		else
+		{
+			if (GetComponentInChildren<Animator>() && isMoving)
+			{
+				isMoving = false;
+				Debug.Log("Animating the creature stopping.");
+				GetComponentInChildren<Animator>().SetTrigger("StopMove");
 			}
 		}
 	}
