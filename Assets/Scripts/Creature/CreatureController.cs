@@ -72,7 +72,7 @@ public class CreatureController : MonoBehaviour
 
 			resources[neighbor] = difference;
 		}
-
+		// TODO sync this up with the steps so we don't accidentally win ahead of time
 		return this.AddChildWithComponent<Creature>(creaturePrefabs.PrefabFor (creature), location);
 	}
 
