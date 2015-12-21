@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using Util;
 
@@ -13,12 +14,12 @@ public class Goal : MonoBehaviour
 
 	void Start()
 	{
-		GameManager.gm.Step += StepGoal;
+		GameManager.Creatures.UpdateCreatures += CheckGoalCondition;
 	}
 
-	private void StepGoal()
+	private void CheckGoalCondition(IList<Creature> creatureList)
 	{
-		if (GameManager.Creatures.CreatureList.Where(x => x.creatureType == winningCreatureType)
+		if (creatureList.Where(x => x.creatureType == winningCreatureType)
 			.Select(x => x.Position).Contains(this.Coordinate()))
 		{
 			Debug.Log("You win!");

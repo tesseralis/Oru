@@ -49,17 +49,13 @@ public class RecipeController : MonoBehaviour
 		{
 			recipeLocations[instruction.Coordinate()] = instruction;
 		}
-		GameManager.gm.Step += StepRecipes;
-	}
-
-	private void StepRecipes ()
-	{
-		UpdateAvailableRecipes(GameManager.Creatures.CreatureList.Select(x => x.Position).ToList());
+		GameManager.Creatures.UpdateCreatures += UpdateAvailableRecipes;
 	}
 
 	// Update the list of available instructions if a creature has walked on it
-	public void UpdateAvailableRecipes(ICollection<Coordinate> creaturePositions)
+	private void UpdateAvailableRecipes(IList<Creature> creatureList)
 	{
+		var creaturePositions = creatureList.Select(x => x.Position).ToList();
 		var removedEntries = new List<Coordinate>();
 		foreach (var entry in recipeLocations)
 		{

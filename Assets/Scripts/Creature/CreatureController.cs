@@ -15,6 +15,8 @@ public class CreatureController : MonoBehaviour
 
 	public Action<Creature> OnSelect;
 
+	public event Action<IList<Creature>> UpdateCreatures;
+
 	public IList<Creature> CreatureList
 	{
 		get
@@ -104,6 +106,7 @@ public class CreatureController : MonoBehaviour
 		{
 			creature.Step();
 		}
+		if (UpdateCreatures != null) { UpdateCreatures(CreatureList); }
 	}
 		
 	private static IList<Coordinate> Neighbors(Coordinate coordinate)
