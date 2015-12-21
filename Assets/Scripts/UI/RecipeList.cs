@@ -15,7 +15,6 @@ public class RecipeList : MonoBehaviour
 	public RecipeInfo recipeInfo;
 
 	public float buttonSpacing = 30f;
-	public event Action<CreatureType> RecipeClicked;
 
 	// Use this for initialization
 	void Start ()
@@ -51,7 +50,7 @@ public class RecipeList : MonoBehaviour
 
 			// Set the component to do the hooked in action when clicked
 			var createButton = newButton.GetComponent<DelegateButton>();
-			createButton.Click += () => RecipeClicked(recipe);
+			createButton.Click += () => UXManager.State.Creator.StartCreation(recipe);
 
 			// Add mouse enter/exit events to display the selection panel
 			createButton.MouseEnter += () => ShowRecipeInfoPanel(recipe);

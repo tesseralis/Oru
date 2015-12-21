@@ -7,14 +7,26 @@ public class CreatureInfo : MonoBehaviour
 {
 
 	public Text nameDisplay;
-
 	public Text descriptionDisplay;
-
 	public DelegateButton useAbilityButton;
-
 	public DelegateButton destroyCreatureButton;
 
-	public void DisplayCreatureInfo(Creature creature)
+	public void Start()
+	{
+		UXManager.State.Selector.Deselected += HideCreatureInfo;
+		UXManager.State.Selector.Selected += DisplayCreatureInfo;
+
+		// Add handlers for using ability
+		useAbilityButton.Click += UXManager.State.Selector.actionMarkers.ToggleAbility;
+
+		// Add handlers for destroying the creature
+		destroyCreatureButton.Click += UXManager.State.Selector.DestroySelectedCreature;
+
+		// Finally, hide ourselves until a creature is selected
+		HideCreatureInfo();
+	}
+
+	private void DisplayCreatureInfo(Creature creature)
 	{
 		gameObject.SetActive(true);
 		nameDisplay.text = creature.creatureType.ToString();
@@ -23,16 +35,19 @@ public class CreatureInfo : MonoBehaviour
 		string ability;
 		if (creature.GetComponent<ChangeTerrainAbility>() != null)
 		{
+			useAbilityButton.gameObject.SetActive(true);
 			ability = string.Format("Pick up {0}\n\nPress <Space> to activate.",
 				creature.GetComponent<ChangeTerrainAbility>().carryType);
 		}
 		else if (creature.GetComponent<CarryResourceAbility>() != null)
 		{
+			useAbilityButton.gameObject.SetActive(true);
 			ability = string.Format("Pick up {0} resources\n\nPress <Space> to activate.",
 				creature.GetComponent<CarryResourceAbility>().capacity);
 		}
 		else
 		{
+			useAbilityButton.gameObject.SetActive(false);
 			ability = "None";
 		}
 
@@ -41,7 +56,7 @@ public class CreatureInfo : MonoBehaviour
 			ability);
 	}
 
-	public void HideCreatureInfo()
+	private void HideCreatureInfo()
 	{
 		gameObject.SetActive(false);
 	}

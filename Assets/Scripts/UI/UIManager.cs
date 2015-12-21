@@ -39,26 +39,10 @@ public class UIManager : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		LevelManager.Terrain.MouseEnterBlock += coordinateInfo.Show;
-		LevelManager.Terrain.MouseExitBlock += x => coordinateInfo.Hide();
-
 		// Start creating the recipe
 		// TODO propagate this to the recipe list class itself
-		recipeList.RecipeClicked += UXManager.State.Creator.StartCreation;
 
 		LevelManager.level.OnWin += DisplayWinInfo;
-
-	// When we deselect a creature, we should hide the info panel
-		UXManager.State.Selector.Deselected += creatureInfo.HideCreatureInfo;
-		UXManager.State.Selector.Selected += creatureInfo.DisplayCreatureInfo;
-
-
-		// Add handlers for using ability
-		// TODO disable this when you the selected creature does not have an ability
-		creatureInfo.useAbilityButton.Click += UXManager.State.Selector.actionMarkers.ToggleAbility;
-
-		// Add handlers for destroying the creature
-		creatureInfo.destroyCreatureButton.Click += UXManager.State.Selector.DestroySelectedCreature;
 	}
 
 	// TODO make the win text an in-world panel like the original game?
@@ -69,7 +53,6 @@ public class UIManager : MonoBehaviour
 		recipeList.gameObject.SetActive(false);
 		menuPanel.gameObject.SetActive(false);
 
-		coordinateInfo.Hide();
 	}
 
 }

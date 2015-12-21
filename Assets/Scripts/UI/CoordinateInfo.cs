@@ -15,8 +15,16 @@ public class CoordinateInfo : MonoBehaviour
 		if (content == null) { content = GetComponentInChildren<Text>(); }
 	}
 
+	void Start()
+	{
+		gameObject.SetActive(false);
+
+		LevelManager.Terrain.MouseEnterBlock += Show;
+		LevelManager.Terrain.MouseExitBlock += x => Hide();
+	}
+
 	// Show the panel for the given coordinate
-	public void Show(Coordinate coordinate)
+	void Show(Coordinate coordinate)
 	{
 		if (!LevelManager.Resources[coordinate].IsEmpty())
 		{
@@ -42,7 +50,7 @@ public class CoordinateInfo : MonoBehaviour
 	}
 
 	// Hide the panel
-	public void Hide()
+	void Hide()
 	{
 		gameObject.SetActive(false);
 	}
