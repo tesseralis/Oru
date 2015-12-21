@@ -11,7 +11,6 @@ GameObject:
   - 33: {fileID: 3323974}
   - 23: {fileID: 2331158}
   - 114: {fileID: 11431678}
-  - 135: {fileID: 13570486}
   m_Layer: 0
   m_Name: Goal
   m_TagString: Untagged
@@ -76,18 +75,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   winningCreatureType: 0
---- !u!135 &13570486
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 186800}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
