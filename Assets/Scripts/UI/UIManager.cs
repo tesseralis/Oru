@@ -18,7 +18,7 @@ public class UIManager : MonoBehaviour
 	public RecipeList recipeList;
 	public GameObject menuPanel;
 
-	public EntitySelector entitySelector;
+	public CreatureSelector entitySelector;
 	public CreatureCreator creatureCreator;
 
 	// TODO these should be factored out to a separate Audio and Particles class

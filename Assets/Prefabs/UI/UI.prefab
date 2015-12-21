@@ -113,7 +113,7 @@ GameObject:
   - 4: {fileID: 416706}
   - 114: {fileID: 11444846}
   m_Layer: 0
-  m_Name: EntitySelector
+  m_Name: CreatureSelector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -674,7 +674,7 @@ GameObject:
   - 33: {fileID: 3331282}
   - 23: {fileID: 2383388}
   m_Layer: 0
-  m_Name: EntityMarker
+  m_Name: CreatureMarker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2322,10 +2322,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 112972}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 391869bd73a3e4af5b7a8efd99a205cb, type: 3}
+  m_Script: {fileID: 11500000, guid: ed112cbabe76e439b85b720672b55317, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entityMarker: {fileID: 184374}
+  creatureMarker: {fileID: 184374}
   actionMarkers: {fileID: 11424478}
 --- !u!114 &11445012
 MonoBehaviour:

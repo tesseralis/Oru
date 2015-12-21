@@ -6,9 +6,9 @@ using System.Collections;
 /// The entity selector is responsible for the visual display of when something
 /// is "selected" and acting.
 /// </summary>
-public class EntitySelector : MonoBehaviour
+public class CreatureSelector : MonoBehaviour
 {
-	public GameObject entityMarker;
+	public GameObject creatureMarker;
 	public ActionMarkers actionMarkers;
 
 	public event Action<Creature> Selected;
@@ -30,7 +30,7 @@ public class EntitySelector : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		if (entityMarker) { entityMarker.SetActive(false); }
+		if (creatureMarker) { creatureMarker.SetActive(false); }
 		actionMarkers.Disable();
 		GameManager.Creatures.CreatureSelected += SelectCreature;
 		GameManager.Creatures.CreatureDestroyed += (x) => Deselect();
@@ -56,7 +56,7 @@ public class EntitySelector : MonoBehaviour
 		transform.SetParent(creature.transform, false);
 
 		// Make the entity marker visible
-		if (entityMarker) { entityMarker.SetActive(true); }
+		if (creatureMarker) { creatureMarker.SetActive(true); }
 
 		GameManager.Terrain.ClickBlock += SetCurrentCreatureGoal;
 
@@ -83,7 +83,7 @@ public class EntitySelector : MonoBehaviour
 	public void Deselect()
 	{
 		DeselectCreature();
-		if (entityMarker) { entityMarker.SetActive(false); }
+		if (creatureMarker) { creatureMarker.SetActive(false); }
 
 		// Run the events in the handler
 		if (Deselected != null) { Deselected(); }
