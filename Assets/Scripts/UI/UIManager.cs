@@ -21,8 +21,9 @@ public class UIManager : MonoBehaviour
 	public EntitySelector entitySelector;
 	public CreatureCreator creatureCreator;
 
-	// TODO these should be factored out to a separate Audio class
-	public SoundEffectOptions sfxOptions;
+	// TODO these should be factored out to a separate Audio and Particles class
+	public SoundEffectOptions soundOptions;
+	public ParticleEffectOptions particleOptions;
 
 	void Awake ()
 	{
@@ -73,12 +74,17 @@ public class UIManager : MonoBehaviour
 		creatureInfo.destroyCreatureButton.Click += DestroySelectedCreature;
 
 		// Play sounds when the creature takes actions
-		GameManager.Creatures.CreatureCreated += x => PlaySound(sfxOptions.createAudio);
-		GameManager.Creatures.CreatureDestroyed += () => PlaySound(sfxOptions.destroyAudio);
-		entitySelector.Selected += x => PlaySound(sfxOptions.creatureSelectAudio);
-		entitySelector.GoalSet += (x, y) => PlaySound(sfxOptions.setCreatureGoalAudio);
-		GameManager.Recipes.RecipesUpdated += (obj) => PlaySound(sfxOptions.pickupRecipeAudio);
-		entitySelector.actionMarkers.AbilityUsed += () => PlaySound(sfxOptions.useAbilityAudio);
+		GameManager.Creatures.CreatureCreated += (x, y) => PlaySound(soundOptions.createAudio);
+		GameManager.Creatures.CreatureDestroyed += (pos) => PlaySound(soundOptions.destroyAudio);
+		entitySelector.Selected += x => PlaySound(soundOptions.creatureSelectAudio);
+		entitySelector.GoalSet += (x, y) => PlaySound(soundOptions.setCreatureGoalAudio);
+		GameManager.Recipes.RecipesUpdated += (obj) => PlaySound(soundOptions.pickupRecipeAudio);
+		entitySelector.actionMarkers.AbilityUsed += () => PlaySound(soundOptions.useAbilityAudio);
+
+		// Add particles on certain effects
+		GameManager.Creatures.CreatureCreated += (x, pos) => CreateParticle(particleOptions.createParticles, pos);
+		GameManager.Creatures.CreatureDestroyed += (pos) => CreateParticle(particleOptions.destroyParticles, pos);
+		entitySelector.GoalSet += (creature, pos) => CreateParticle(particleOptions.setCreatureGoalParticles, pos);
 	}
 
 	void DestroySelectedCreature()
@@ -110,6 +116,14 @@ public class UIManager : MonoBehaviour
 		}
 	}
 
+	void CreateParticle(GameObject particles, Coordinate coordinate)
+	{
+		// FIXME this should be its own class
+		if (particles)
+		{
+			GameManager.gm.gameObject.AddChild(particles, coordinate);
+		}
+	}
 }
 
 [Serializable]
@@ -122,4 +136,12 @@ public class SoundEffectOptions
 	public AudioClip setCreatureGoalAudio;
 	// TODO separate audio for different abilities
 	public AudioClip useAbilityAudio;
+}
+
+[Serializable]
+public class ParticleEffectOptions
+{
+	public GameObject createParticles;
+	public GameObject destroyParticles;
+	public GameObject setCreatureGoalParticles;
 }

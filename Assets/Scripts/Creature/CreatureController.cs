@@ -16,9 +16,9 @@ public class CreatureController : MonoBehaviour
 	// Called when a creature has been clicked
 	public Action<Creature> CreatureSelected;
 	// Called when a creature is destroyed
-	public event Action CreatureDestroyed;
+	public event Action<Coordinate> CreatureDestroyed;
 	// Called when a creature is created
-	public event Action<Creature> CreatureCreated;
+	public event Action<Creature, Coordinate> CreatureCreated;
 	// Called when all the creatures have updated their steps
 	public event Action<IList<Creature>> CreaturesUpdated;
 
@@ -88,11 +88,12 @@ public class CreatureController : MonoBehaviour
 		creatureList.Add(newCreature);
 
 		// Call any necessary events
-		if (CreatureCreated != null) { CreatureCreated(newCreature); }
+		if (CreatureCreated != null) { CreatureCreated(newCreature, location); }
 
 		return newCreature;
 	}
 
+	// TODO figure out why this creates stray GameObjects
 	public void DestroyCreature(Creature creature)
 	{
 		var coordinate = creature.Position;
@@ -115,7 +116,7 @@ public class CreatureController : MonoBehaviour
 		Destroy(creature.gameObject);
 
 		// Answer any event handlers
-		if (CreatureDestroyed != null) { CreatureDestroyed(); }
+		if (CreatureDestroyed != null) { CreatureDestroyed(coordinate); }
 	}
 
 	/// <summary>

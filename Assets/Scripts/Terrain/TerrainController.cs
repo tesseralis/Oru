@@ -11,7 +11,6 @@ using Util;
 /// </summary>
 public class TerrainController : MonoBehaviour
 {
-	public GameObject clickParticlePrefab;
 	public TerrainPrefabOptions terrainPrefabs;
 
 	public Action<Coordinate> MouseEnterBlock;
@@ -52,17 +51,6 @@ public class TerrainController : MonoBehaviour
 		foreach (var block in GetComponentsInChildren<TerrainBlock>())
 		{
 			grid[block.gameObject.Coordinate()] = block;
-		}
-
-		ClickBlock += SpawnParticles;
-	}
-
-	void SpawnParticles(Coordinate coordinate)
-	{
-		// Set the particles to play whenever we click
-		if (clickParticlePrefab)
-		{
-			gameObject.AddChild(clickParticlePrefab, coordinate);
 		}
 	}
 
