@@ -15,6 +15,10 @@ public class CreatureController : MonoBehaviour
 
 	public Action<Creature> OnSelect;
 
+	public event Action CreatureDestroyed;
+	public event Action<Creature> CreatureCreated;
+
+	// TODO rename "creatures updated"
 	public event Action<IList<Creature>> UpdateCreatures;
 
 	public IList<Creature> CreatureList
@@ -75,7 +79,12 @@ public class CreatureController : MonoBehaviour
 			resources[neighbor] = difference;
 		}
 		// TODO sync this up with the steps so we don't accidentally win ahead of time
-		return gameObject.AddChildWithComponent<Creature>(creaturePrefabs.PrefabFor (creature), location);
+		var newCreature = gameObject.AddChildWithComponent<Creature>(creaturePrefabs.PrefabFor (creature), location);
+
+		// Call any necessary events
+		if (CreatureCreated != null) { CreatureCreated(newCreature); }
+
+		return newCreature;
 	}
 
 	public void DestroyCreature(Creature creature)
@@ -95,6 +104,9 @@ public class CreatureController : MonoBehaviour
 
 		// Remove from the creature list
 		Destroy(creature.gameObject);
+
+		// Answer any event handlers
+		if (CreatureDestroyed != null) { CreatureDestroyed(); }
 	}
 
 	/// <summary>

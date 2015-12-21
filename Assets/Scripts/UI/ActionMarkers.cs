@@ -11,6 +11,7 @@ public class ActionMarkers : MonoBehaviour {
 
 	public event Action OnStartAbility;
 	public event Action OnStopAbility;
+	public event Action AbilityUsed;
 
 	public void Enable(Action<Coordinate> action)
 	{
@@ -24,6 +25,7 @@ public class ActionMarkers : MonoBehaviour {
 		{
 			marker.OnClick = coordinate => {
 				action(coordinate);
+				if (AbilityUsed != null) { AbilityUsed(); }
 				StopAbility();
 			};
 		}

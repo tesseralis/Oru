@@ -58,9 +58,6 @@ public class ResourceController : MonoBehaviour
 		}
 	}
 
-
-
-
 }
 
 [Serializable]

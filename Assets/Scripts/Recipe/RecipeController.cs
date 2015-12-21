@@ -14,7 +14,7 @@ public class RecipeController : MonoBehaviour
 	// The location of all the instructions in the world
 	private IDictionary<Coordinate, Recipe> recipeLocations;
 
-	public Action<IList<CreatureType>> OnChange;
+	public event Action<IList<CreatureType>> RecipesUpdated;
 
 	public CreatureType CurrentRecipe { get; set; }
 
@@ -75,9 +75,11 @@ public class RecipeController : MonoBehaviour
 			Destroy(recipeLocations[coord].gameObject);
 			recipeLocations.Remove(coord);
 		}
+
+		// Fire off events if a new recipe is added to the list.
 		if (removedEntries.Count > 0)
 		{
-			if (OnChange != null) { OnChange(availableRecipes); }
+			if (RecipesUpdated != null) { RecipesUpdated(availableRecipes); }
 		}
 	}
 

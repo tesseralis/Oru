@@ -13,6 +13,7 @@ public class EntitySelector : MonoBehaviour
 
 	public event Action<Creature> Selected;
 	public event Action Deselected;
+	public event Action<Creature, Coordinate> GoalSet;
 
 	private bool isActing;
 
@@ -87,6 +88,7 @@ public class EntitySelector : MonoBehaviour
 		if (SelectedCreature.CanReach(coordinate))
 		{
 			SelectedCreature.Goal = coordinate;
+			if (GoalSet != null) { GoalSet(SelectedCreature, coordinate); }
 		}
 		if (SelectedCreature.HasAbility()) { actionMarkers.StopAbility(); }
 	}

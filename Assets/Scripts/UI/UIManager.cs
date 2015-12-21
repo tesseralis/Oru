@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,9 @@ public class UIManager : MonoBehaviour
 
 	public EntitySelector entitySelector;
 	public CreatureCreator creatureCreator;
+
+	// TODO these should be factored out to a separate Audio class
+	public SoundEffectOptions sfxOptions;
 
 	void Awake ()
 	{
@@ -67,6 +71,14 @@ public class UIManager : MonoBehaviour
 		// Add handlers for destroying the creature
 		GameManager.Input.KeyDown[KeyCode.Backspace] += DestroySelectedCreature;
 		creatureInfo.destroyCreatureButton.Click += DestroySelectedCreature;
+
+		// Play sounds when the creature takes actions
+		GameManager.Creatures.CreatureCreated += x => PlaySound(sfxOptions.createAudio);
+		GameManager.Creatures.CreatureDestroyed += () => PlaySound(sfxOptions.destroyAudio);
+		entitySelector.Selected += x => PlaySound(sfxOptions.creatureSelectAudio);
+		entitySelector.GoalSet += (x, y) => PlaySound(sfxOptions.setCreatureGoalAudio);
+		GameManager.Recipes.RecipesUpdated += (obj) => PlaySound(sfxOptions.pickupRecipeAudio);
+		entitySelector.actionMarkers.AbilityUsed += () => PlaySound(sfxOptions.useAbilityAudio);
 	}
 
 	void DestroySelectedCreature()
@@ -89,4 +101,25 @@ public class UIManager : MonoBehaviour
 		// TODO disable all events
 	}
 
+	// Play the given sound
+	void PlaySound(AudioClip clip)
+	{
+		if (clip)
+		{
+			Camera.main.GetComponent<AudioSource>().PlayOneShot(clip);
+		}
+	}
+
+}
+
+[Serializable]
+public class SoundEffectOptions
+{
+	public AudioClip destroyAudio;
+	public AudioClip createAudio;
+	public AudioClip creatureSelectAudio;
+	public AudioClip pickupRecipeAudio;
+	public AudioClip setCreatureGoalAudio;
+	// TODO separate audio for different abilities
+	public AudioClip useAbilityAudio;
 }

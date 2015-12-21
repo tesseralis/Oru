@@ -11,7 +11,6 @@ using Util;
 /// </summary>
 public class TerrainController : MonoBehaviour
 {
-	public AudioClip clickAudio;
 	public GameObject clickParticlePrefab;
 	public TerrainPrefabOptions terrainPrefabs;
 
@@ -56,7 +55,6 @@ public class TerrainController : MonoBehaviour
 		}
 
 		ClickBlock += SpawnParticles;
-		ClickBlock += PlaySound;
 	}
 
 	void SpawnParticles(Coordinate coordinate)
@@ -65,15 +63,6 @@ public class TerrainController : MonoBehaviour
 		if (clickParticlePrefab)
 		{
 			gameObject.AddChild(clickParticlePrefab, coordinate);
-		}
-	}
-
-	// Play a sound whenever we click terrain
-	void PlaySound(Coordinate coordinate)
-	{
-		if (clickAudio)
-		{
-			Camera.main.GetComponent<AudioSource>().PlayOneShot(clickAudio);
 		}
 	}
 

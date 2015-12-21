@@ -20,7 +20,7 @@ public class RecipeList : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		GameManager.Recipes.OnChange += UpdateRecipeList;
+		GameManager.Recipes.RecipesUpdated += UpdateRecipeList;
 		UpdateRecipeList(GameManager.Recipes.availableRecipes);
 	}
 

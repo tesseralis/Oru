@@ -2790,6 +2790,15 @@ MonoBehaviour:
   menuPanel: {fileID: 194836}
   entitySelector: {fileID: 11444846}
   creatureCreator: {fileID: 11400168}
+  sfxOptions:
+    destroyAudio: {fileID: 8300000, guid: 85a4cb02fb100454dbba68fa79e58ef3, type: 3}
+    createAudio: {fileID: 8300000, guid: 35d95709db9fe4f7f80461c49285d840, type: 3}
+    creatureSelectAudio: {fileID: 8300000, guid: a442c94ab224549e6819278f2f8e2005,
+      type: 3}
+    pickupRecipeAudio: {fileID: 8300000, guid: f30f4525d12c74e3f895f418a503ebd8, type: 3}
+    setCreatureGoalAudio: {fileID: 8300000, guid: 0fc6b75f4b5444c64b89acf2348e3d46,
+      type: 3}
+    useAbilityAudio: {fileID: 8300000, guid: 636d568ebdcfe4b9b9c4d4c0d1a5b3bc, type: 3}
 --- !u!114 &11483318
 MonoBehaviour:
   m_ObjectHideFlags: 1
