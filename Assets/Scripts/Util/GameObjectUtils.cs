@@ -11,14 +11,14 @@ namespace Util
 	{
 		public static Coordinate Coordinate(this GameObject gameObject)
 		{
-			var cellSize = GameManager.gm.cellSize;
+			var cellSize = LevelController.gm.cellSize;
 			var position = gameObject.gameObject.transform.position;
 			return new Coordinate(Mathf.RoundToInt(position.x / cellSize), Mathf.RoundToInt(position.z / cellSize));
 		}
 
 		public static void SetPosition(this GameObject gameObject, Coordinate coordinate)
 		{
-			var cellSize = GameManager.gm.cellSize;
+			var cellSize = LevelController.gm.cellSize;
 			gameObject.transform.position = new Vector3(coordinate.x * cellSize, gameObject.transform.position.y, coordinate.z * cellSize);
 		}
 
@@ -28,7 +28,7 @@ namespace Util
 		/// <returns>The child GameObject.</returns>
 		public static GameObject AddChild(this GameObject gameObject, GameObject prefab, Coordinate coordinate)
 		{
-			var cellSize = GameManager.gm.cellSize;
+			var cellSize = LevelController.gm.cellSize;
 			var position = new Vector3(coordinate.x * cellSize, 0, coordinate.z * cellSize);
 			GameObject newObject = (GameObject)GameObject.Instantiate(prefab, position, Quaternion.identity);
 			newObject.transform.SetParent(gameObject.transform);

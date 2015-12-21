@@ -32,13 +32,13 @@ public class CreatureSelector : MonoBehaviour
 	{
 		if (creatureMarker) { creatureMarker.SetActive(false); }
 		actionMarkers.Disable();
-		GameManager.Creatures.CreatureSelected += SelectCreature;
-		GameManager.Creatures.CreatureDestroyed += (x) => Deselect();
+		LevelController.Creatures.CreatureSelected += SelectCreature;
+		LevelController.Creatures.CreatureDestroyed += (x) => Deselect();
 	}
 
 	private void DeselectCreature()
 	{
-		GameManager.Terrain.ClickBlock -= SetCurrentCreatureGoal;
+		LevelController.Terrain.ClickBlock -= SetCurrentCreatureGoal;
 		actionMarkers.OnStartAbility -= RemoveCurrentCreatureGoal;
 		actionMarkers.Disable();
 		SelectedCreature = null;
@@ -58,7 +58,7 @@ public class CreatureSelector : MonoBehaviour
 		// Make the entity marker visible
 		if (creatureMarker) { creatureMarker.SetActive(true); }
 
-		GameManager.Terrain.ClickBlock += SetCurrentCreatureGoal;
+		LevelController.Terrain.ClickBlock += SetCurrentCreatureGoal;
 
 		// Add a listener to the action markers
 		if (creature.HasAbility())
@@ -77,7 +77,7 @@ public class CreatureSelector : MonoBehaviour
 
 	public void DestroySelectedCreature()
 	{
-		GameManager.Creatures.DestroyCreature(SelectedCreature);
+		LevelController.Creatures.DestroyCreature(SelectedCreature);
 	}
 
 	public void Deselect()

@@ -21,17 +21,17 @@ public class CreatureCreator : MonoBehaviour {
 
 		// Do the actual creation
 		currentCreatureType = creature;
-		GameManager.Terrain.MouseEnterBlock += ShowCreateMarker;
-		GameManager.Terrain.MouseExitBlock += HideCreateMarker;
-		GameManager.Terrain.ClickBlock += CreateCreature;
+		LevelController.Terrain.MouseEnterBlock += ShowCreateMarker;
+		LevelController.Terrain.MouseExitBlock += HideCreateMarker;
+		LevelController.Terrain.ClickBlock += CreateCreature;
 	}
 
 	public void StopCreation()
 	{
 		if (createMarker) { createMarker.SetActive(false); }
-		GameManager.Terrain.MouseEnterBlock -= ShowCreateMarker;
-		GameManager.Terrain.MouseExitBlock -= HideCreateMarker;
-		GameManager.Terrain.ClickBlock -= CreateCreature;
+		LevelController.Terrain.MouseEnterBlock -= ShowCreateMarker;
+		LevelController.Terrain.MouseExitBlock -= HideCreateMarker;
+		LevelController.Terrain.ClickBlock -= CreateCreature;
 	}
 
 	// Use this for initialization
@@ -46,7 +46,7 @@ public class CreatureCreator : MonoBehaviour {
 			createMarker.SetActive(true);
 			// Update the position visually
 			createMarker.SetPosition(coordinate);
-			if (GameManager.Creatures.CanCreateCreature(currentCreatureType, coordinate))
+			if (LevelController.Creatures.CanCreateCreature(currentCreatureType, coordinate))
 			{
 				if (positiveMarker) { positiveMarker.SetActive(true); }
 				if (negativeMarker) { negativeMarker.SetActive(false); }
@@ -78,10 +78,10 @@ public class CreatureCreator : MonoBehaviour {
 
 	void CreateCreature(Coordinate coordinate)
 	{
-		if (GameManager.Creatures.CanCreateCreature(currentCreatureType, coordinate))
+		if (LevelController.Creatures.CanCreateCreature(currentCreatureType, coordinate))
 		{
 			// If everything passes, add the creature to the list of creatures
-			var creature = GameManager.Creatures.CreateCreature(currentCreatureType, coordinate);
+			var creature = LevelController.Creatures.CreateCreature(currentCreatureType, coordinate);
 			// We are no longer creating
 			StopCreation();
 		

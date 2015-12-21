@@ -49,7 +49,7 @@ public class RecipeController : MonoBehaviour
 		{
 			recipeLocations[instruction.gameObject.Coordinate()] = instruction;
 		}
-		GameManager.Creatures.CreaturesUpdated += UpdateAvailableRecipes;
+		LevelController.Creatures.CreaturesUpdated += UpdateAvailableRecipes;
 	}
 
 	// Update the list of available instructions if a creature has walked on it

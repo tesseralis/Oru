@@ -45,15 +45,15 @@ public class UIManager : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		GameManager.Terrain.MouseEnterBlock += coordinateInfo.Show;
-		GameManager.Terrain.MouseExitBlock += x => coordinateInfo.Hide();
+		LevelController.Terrain.MouseEnterBlock += coordinateInfo.Show;
+		LevelController.Terrain.MouseExitBlock += x => coordinateInfo.Hide();
 
 		// Deselect creatures when we start creation
 		recipeList.RecipeClicked += (t) => entitySelector.Deselect();
 		// Start creating the recipe
 		recipeList.RecipeClicked += creatureCreator.StartCreation;
 
-		GameManager.gm.OnWin += DisplayWinInfo;
+		LevelController.gm.OnWin += DisplayWinInfo;
 
 		// When we select a creature, we should stop creating
 		entitySelector.Selected += x => creatureCreator.StopCreation();
@@ -70,20 +70,20 @@ public class UIManager : MonoBehaviour
 		creatureInfo.useAbilityButton.Click += entitySelector.actionMarkers.ToggleAbility;
 
 		// Add handlers for destroying the creature
-		GameManager.Input.KeyDown[KeyCode.Backspace] += entitySelector.DestroySelectedCreature;
+		LevelController.Input.KeyDown[KeyCode.Backspace] += entitySelector.DestroySelectedCreature;
 		creatureInfo.destroyCreatureButton.Click += entitySelector.DestroySelectedCreature;
 
 		// Play sounds when the creature takes actions
-		GameManager.Creatures.CreatureCreated += (x, y) => PlaySound(soundOptions.createAudio);
-		GameManager.Creatures.CreatureDestroyed += (pos) => PlaySound(soundOptions.destroyAudio);
+		LevelController.Creatures.CreatureCreated += (x, y) => PlaySound(soundOptions.createAudio);
+		LevelController.Creatures.CreatureDestroyed += (pos) => PlaySound(soundOptions.destroyAudio);
 		entitySelector.Selected += x => PlaySound(soundOptions.creatureSelectAudio);
 		entitySelector.GoalSet += (x, y) => PlaySound(soundOptions.setCreatureGoalAudio);
-		GameManager.Recipes.RecipesUpdated += (obj) => PlaySound(soundOptions.pickupRecipeAudio);
+		LevelController.Recipes.RecipesUpdated += (obj) => PlaySound(soundOptions.pickupRecipeAudio);
 		entitySelector.actionMarkers.AbilityUsed += () => PlaySound(soundOptions.useAbilityAudio);
 
 		// Add particles on certain effects
-		GameManager.Creatures.CreatureCreated += (x, pos) => CreateParticle(particleOptions.createParticles, pos);
-		GameManager.Creatures.CreatureDestroyed += (pos) => CreateParticle(particleOptions.destroyParticles, pos);
+		LevelController.Creatures.CreatureCreated += (x, pos) => CreateParticle(particleOptions.createParticles, pos);
+		LevelController.Creatures.CreatureDestroyed += (pos) => CreateParticle(particleOptions.destroyParticles, pos);
 		entitySelector.GoalSet += (creature, pos) => CreateParticle(particleOptions.setCreatureGoalParticles, pos);
 	}
 
@@ -112,7 +112,7 @@ public class UIManager : MonoBehaviour
 		// FIXME this should be its own class
 		if (particles)
 		{
-			GameManager.gm.gameObject.AddChild(particles, coordinate);
+			LevelController.gm.gameObject.AddChild(particles, coordinate);
 		}
 	}
 }

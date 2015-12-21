@@ -26,7 +26,7 @@ public class CarryResourceAbility : MonoBehaviour, IAbility
 
 	public void Use(Coordinate target)
 	{
-		var resources = GameManager.Resources;
+		var resources = LevelController.Resources;
 
 		// If we're not carrying anything, pick up things
 		if (Carrying.IsEmpty())
@@ -58,7 +58,7 @@ public class CarryResourceAbility : MonoBehaviour, IAbility
 		{
 			// Otherwise, put down what we're carrying right now
 			// Put down what we're carrying on the coordinate
-			if (GameManager.Terrain.Contains(target) && GameManager.Terrain[target] != TerrainType.Tree)
+			if (LevelController.Terrain.Contains(target) && LevelController.Terrain[target] != TerrainType.Tree)
 			{
 				resources[target] = resources[target].MultisetAdd(Carrying);
 				Carrying = Multiset.Empty<ResourceType>();

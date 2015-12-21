@@ -10,10 +10,10 @@ public class Pan : MonoBehaviour
 	void Start ()
 	{
 		// Add map controls
-		GameManager.Input.Key[KeyCode.DownArrow] += () => DoPan(Vector2.down);
-		GameManager.Input.Key[KeyCode.UpArrow] += () => DoPan(Vector2.up);
-		GameManager.Input.Key[KeyCode.LeftArrow] += () => DoPan(Vector2.left);
-		GameManager.Input.Key[KeyCode.RightArrow] += () => DoPan(Vector2.right);
+		LevelController.Input.Key[KeyCode.DownArrow] += () => DoPan(Vector2.down);
+		LevelController.Input.Key[KeyCode.UpArrow] += () => DoPan(Vector2.up);
+		LevelController.Input.Key[KeyCode.LeftArrow] += () => DoPan(Vector2.left);
+		LevelController.Input.Key[KeyCode.RightArrow] += () => DoPan(Vector2.right);
 	}
 
 	// Pan our camera in the specified direction

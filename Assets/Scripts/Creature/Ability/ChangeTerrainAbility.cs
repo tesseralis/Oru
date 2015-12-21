@@ -12,7 +12,7 @@ public class ChangeTerrainAbility : MonoBehaviour, IAbility
 
 	public void Use(Coordinate target)
 	{
-		TerrainController terrain = GameManager.Terrain;
+		TerrainController terrain = LevelController.Terrain;
 
 		// Determine whether the creature should be picking up or putting down
 		TerrainType initialType;
@@ -29,7 +29,7 @@ public class ChangeTerrainAbility : MonoBehaviour, IAbility
 		// Pick up or put down the terrain.
 		isCarrying = !isCarrying;
 		if (terrain.Contains(target) && terrain[target] == initialType
-			&& GameManager.Resources[target].IsEmpty()
+			&& LevelController.Resources[target].IsEmpty()
 			&& CanSetCoordinate(target, finalType))
 		{
 			terrain[target] = finalType;
@@ -39,7 +39,7 @@ public class ChangeTerrainAbility : MonoBehaviour, IAbility
 	// Returns true if you can set the coordinate to the specified terrain type
 	private bool CanSetCoordinate(Coordinate target, TerrainType terrain)
 	{
-		return !GameManager.Creatures.CreatureList.Any(x => (x.Position == target || x.NextPosition == target)
+		return !LevelController.Creatures.CreatureList.Any(x => (x.Position == target || x.NextPosition == target)
 			&& !x.Definition.AllowedTerrain.Contains(terrain));
 	}
 

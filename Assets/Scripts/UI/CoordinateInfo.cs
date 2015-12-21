@@ -18,22 +18,22 @@ public class CoordinateInfo : MonoBehaviour
 	// Show the panel for the given coordinate
 	public void Show(Coordinate coordinate)
 	{
-		if (!GameManager.Resources[coordinate].IsEmpty())
+		if (!LevelController.Resources[coordinate].IsEmpty())
 		{
 			gameObject.SetActive(true);
 			content.text = string.Join("\n",
-				GameManager.Resources[coordinate].Select(e => e.Key + ": " + e.Value).ToArray());
+				LevelController.Resources[coordinate].Select(e => e.Key + ": " + e.Value).ToArray());
 		}
-		if (GameManager.Recipes[coordinate] != null)
+		if (LevelController.Recipes[coordinate] != null)
 		{
 			gameObject.SetActive(true);
 			content.text = "?";
 		}
 
-		if (GameManager.gm.goal.gameObject.Coordinate() == coordinate)
+		if (LevelController.gm.goal.gameObject.Coordinate() == coordinate)
 		{
 			gameObject.SetActive(true);
-			content.text = string.Format("Goal: {0} at this location.", GameManager.gm.goal.winningCreatureType);
+			content.text = string.Format("Goal: {0} at this location.", LevelController.gm.goal.winningCreatureType);
 		}
 
 		// Move ourselves to the new location

@@ -6,16 +6,17 @@ using System.Collections;
 using System.Collections.Generic;
 using Util;
 
-public class GameManager : MonoBehaviour
+public class LevelController : MonoBehaviour
 {
 
 	// make game manager accessible throughout the game
-	public static GameManager gm;
+	public static LevelController gm;
 
 	public static TerrainController Terrain { get { return gm.terrainController; } }
 	public static CreatureController Creatures { get { return gm.creatureController; } }
 	public static ResourceController Resources { get { return gm.resourceController; } }
 	public static RecipeController Recipes { get { return gm.recipeController; } }
+	// FIXME move input elsewhere
 	public static InputController Input { get { return gm.inputController; } }
 
 	/*
@@ -79,7 +80,7 @@ public class GameManager : MonoBehaviour
 	{
 		if (gm == null)
 		{
-			gm = this.gameObject.GetComponent<GameManager>();
+			gm = this.gameObject.GetComponent<LevelController>();
 		}
 		HasWon = false;
 

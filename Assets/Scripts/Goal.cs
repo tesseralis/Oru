@@ -14,7 +14,7 @@ public class Goal : MonoBehaviour
 
 	void Start()
 	{
-		GameManager.Creatures.CreaturesUpdated += CheckGoalCondition;
+		LevelController.Creatures.CreaturesUpdated += CheckGoalCondition;
 	}
 
 	private void CheckGoalCondition(IList<Creature> creatureList)
@@ -22,7 +22,7 @@ public class Goal : MonoBehaviour
 		if (GoalConditionMet(creatureList))
 		{
 			Debug.Log("You win!");
-			GameManager.gm.HasWon = true;
+			LevelController.gm.HasWon = true;
 		}
 	}
 
