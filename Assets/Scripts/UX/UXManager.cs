@@ -17,7 +17,10 @@ public class UXManager : MonoBehaviour
 	void Awake()
 	{
 		if (ux == null) { ux = this; }
-		// FIXME auto-instantiate controllers
+
+		if (!audioController) { audioController = GetComponentInChildren<AudioController>(); }
+		if (!inputController) { inputController = GetComponentInChildren<InputController>(); }
+		if (!particleController) { particleController = GetComponent<ParticleController>(); }
 	}
 
 }
