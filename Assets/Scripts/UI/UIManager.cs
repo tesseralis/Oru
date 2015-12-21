@@ -96,8 +96,6 @@ public class UIManager : MonoBehaviour
 		menuPanel.gameObject.SetActive(false);
 
 		coordinateInfo.Hide();
-
-		// TODO disable all events
 	}
 
 	// Play the given sound

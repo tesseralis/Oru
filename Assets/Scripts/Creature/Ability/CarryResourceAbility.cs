@@ -51,7 +51,6 @@ public class CarryResourceAbility : MonoBehaviour, IAbility
 					remainingCapacity -= resource.Value;
 				}
 			}
-			// TODO I know there's a more elegant way to phrase this
 			resources[target] = resourcePile;
 			Carrying = newCarry;
 		}

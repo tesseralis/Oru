@@ -5,7 +5,6 @@ using System;
 /// </summary>
 public interface IAbility
 {
-	// TODO Genericize this once you have a better idea of different kinds of abilities
 	/// <summary>
 	/// Use the ability on the specified coordinate.
 	/// </summary>

@@ -55,7 +55,6 @@ public class Creature : MonoBehaviour
 
 		var ratio = (Time.timeSinceLevelLoad % stepInterval) / stepInterval;
 		var direction = NextPosition - Position;
-		// TODO I'm sure we can factor this out
 		var translation = new Vector3(direction.x, 0, direction.z) * ratio * cellSize;
 		gameObject.SetPosition(Position);
 		transform.position += translation;
@@ -148,7 +147,6 @@ public class Creature : MonoBehaviour
 	private Coordinate NextCoordinate()
 	{
 		// If the creature has no goal, just stick to the current position
-		// TODO maybe make the creature's initial goal its position?
 		if (Goal == null)
 		{
 			return Position;
