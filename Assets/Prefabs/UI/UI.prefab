@@ -545,7 +545,7 @@ GameObject:
   m_IsActive: 0
 --- !u!1 &163128
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -976,7 +976,6 @@ Transform:
   m_Children:
   - {fileID: 22477402}
   - {fileID: 458072}
-  - {fileID: 22443610}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &426370
@@ -1120,6 +1119,7 @@ Transform:
   m_Children:
   - {fileID: 416706}
   - {fileID: 479306}
+  - {fileID: 22443610}
   m_Father: {fileID: 423834}
   m_RootOrder: 1
 --- !u!4 &460370
@@ -3604,7 +3604,7 @@ RectTransform:
   m_LocalScale: {x: 0.005, y: 0.005, z: 0.005}
   m_Children:
   - {fileID: 22406844}
-  m_Father: {fileID: 423834}
+  m_Father: {fileID: 458072}
   m_RootOrder: 2
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
