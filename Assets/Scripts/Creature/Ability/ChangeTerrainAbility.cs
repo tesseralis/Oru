@@ -25,6 +25,7 @@ public class ChangeTerrainAbility : MonoBehaviour, IAbility
 		}
 
 		// Pick up or put down the terrain.
+		// FIXME make sure that the new location can support the creature that is there now
 		isCarrying = !isCarrying;
 		if (terrain.Contains(target) && terrain[target] == initialType)
 		{
