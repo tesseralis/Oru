@@ -32,7 +32,7 @@ public class CreatureController : MonoBehaviour
 	void Start()
 	{
 		// Update all our creatures when we tick
-		LevelController.gm.Step += StepCreatures;
+		LevelManager.level.Step += StepCreatures;
 
 		// Add all the creatures we have on the board right now
 		creatureList = GetComponentsInChildren<Creature>().ToList();
@@ -42,7 +42,7 @@ public class CreatureController : MonoBehaviour
 	public bool CanCreateCreature(CreatureType creature, Coordinate coordinate)
 	{
 		var creatureDefinition = Creatures.ForType(creature);
-		var resources = LevelController.Resources;
+		var resources = LevelManager.Resources;
 		var recipe = creatureDefinition.Recipe;
 		// Figure out how many blocks we have available
 		var availableResources = Neighbors(coordinate).Select(c => resources[c]);
@@ -52,7 +52,7 @@ public class CreatureController : MonoBehaviour
 			resourceCount = resourceCount.MultisetAdd(resource);
 		}
 		return resourceCount.Contains(recipe)
-			&& creatureDefinition.AllowedTerrain.Contains(LevelController.Terrain[coordinate])
+			&& creatureDefinition.AllowedTerrain.Contains(LevelManager.Terrain[coordinate])
 			&& !CreatureList.Any(x => x.Position == coordinate);
 
 	}
@@ -65,7 +65,7 @@ public class CreatureController : MonoBehaviour
 			throw new ArgumentException(string.Format("Cannot create {0} at {1}.",
 				creature, location));
 		}
-		var resources = LevelController.Resources;
+		var resources = LevelManager.Resources;
 
 		// Remove the items from the neighboring coordinates.
 		var neighbors = Neighbors(location);
@@ -77,7 +77,7 @@ public class CreatureController : MonoBehaviour
 			{
 				break;
 			}
-			var difference = LevelController.Resources[neighbor].MultisetSubtract(remainder);
+			var difference = LevelManager.Resources[neighbor].MultisetSubtract(remainder);
 			remainder = remainder.MultisetSubtract(resources[neighbor]);
 
 			resources[neighbor] = difference;
@@ -102,14 +102,14 @@ public class CreatureController : MonoBehaviour
 		if (CreatureDestroyed != null) { CreatureDestroyed(coordinate); }
 
 		// Recycle the creature's components
-		LevelController.Resources[coordinate] = LevelController.Resources[coordinate].MultisetAdd(Creatures.ForType(creature.creatureType).Recipe);
+		LevelManager.Resources[coordinate] = LevelManager.Resources[coordinate].MultisetAdd(Creatures.ForType(creature.creatureType).Recipe);
 
 		// Do anything the creature's ability's state says we should do.
 		// TODO generalize this so that we can account for more abilities
 		if (creature.GetComponent<CarryResourceAbility>() != null)
 		{
 			var ability = creature.GetComponent<CarryResourceAbility>();
-			LevelController.Resources[coordinate] = LevelController.Resources[coordinate].MultisetAdd(ability.Carrying);
+			LevelManager.Resources[coordinate] = LevelManager.Resources[coordinate].MultisetAdd(ability.Carrying);
 		}
 
 		// Remove from our list of creatures

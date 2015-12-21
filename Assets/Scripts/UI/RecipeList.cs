@@ -20,8 +20,8 @@ public class RecipeList : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		LevelController.Recipes.RecipesUpdated += UpdateRecipeList;
-		UpdateRecipeList(LevelController.Recipes.availableRecipes);
+		LevelManager.Recipes.RecipesUpdated += UpdateRecipeList;
+		UpdateRecipeList(LevelManager.Recipes.availableRecipes);
 	}
 
 	void UpdateRecipeList(IList<CreatureType> availableRecipes)

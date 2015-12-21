@@ -20,7 +20,7 @@ public class ActionMarkers : MonoBehaviour {
 			markers = GetComponentsInChildren<ActionMarker>(true);
 		}
 		isEnabled = true;
-		LevelController.Input.KeyDown[KeyCode.Space] += ToggleAbility;
+		UXManager.Input.KeyDown[KeyCode.Space] += ToggleAbility;
 		foreach (var marker in markers)
 		{
 			marker.OnClick = coordinate => {
@@ -38,7 +38,7 @@ public class ActionMarkers : MonoBehaviour {
 			StopAbility();
 		}
 		isEnabled = false;
-		LevelController.Input.KeyDown[KeyCode.Space] -= ToggleAbility;
+		UXManager.Input.KeyDown[KeyCode.Space] -= ToggleAbility;
 	}
 
 	// The creature should start doing its ability

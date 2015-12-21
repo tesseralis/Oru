@@ -2790,18 +2790,6 @@ MonoBehaviour:
   menuPanel: {fileID: 194836}
   entitySelector: {fileID: 11444846}
   creatureCreator: {fileID: 11400168}
-  soundOptions:
-    destroyAudio: {fileID: 0}
-    createAudio: {fileID: 0}
-    creatureSelectAudio: {fileID: 0}
-    pickupRecipeAudio: {fileID: 0}
-    setCreatureGoalAudio: {fileID: 0}
-    useAbilityAudio: {fileID: 0}
-  particleOptions:
-    createParticles: {fileID: 174366, guid: 09268116f21b84dfb95d046de4f5d363, type: 2}
-    destroyParticles: {fileID: 189986, guid: c77e72afb954e430eaf8cc1f97fafe50, type: 2}
-    setCreatureGoalParticles: {fileID: 166660, guid: 22d15bc638da047959c747b5699dcc42,
-      type: 2}
 --- !u!114 &11483318
 MonoBehaviour:
   m_ObjectHideFlags: 1

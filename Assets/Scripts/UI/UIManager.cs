@@ -21,10 +21,6 @@ public class UIManager : MonoBehaviour
 	public CreatureSelector entitySelector;
 	public CreatureCreator creatureCreator;
 
-	// TODO these should be factored out to a separate Audio and Particles class
-	public SoundEffectOptions soundOptions;
-	public ParticleEffectOptions particleOptions;
-
 	void Awake ()
 	{
 		if (ui == null)
@@ -45,15 +41,15 @@ public class UIManager : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		LevelController.Terrain.MouseEnterBlock += coordinateInfo.Show;
-		LevelController.Terrain.MouseExitBlock += x => coordinateInfo.Hide();
+		LevelManager.Terrain.MouseEnterBlock += coordinateInfo.Show;
+		LevelManager.Terrain.MouseExitBlock += x => coordinateInfo.Hide();
 
 		// Deselect creatures when we start creation
 		recipeList.RecipeClicked += (t) => entitySelector.Deselect();
 		// Start creating the recipe
 		recipeList.RecipeClicked += creatureCreator.StartCreation;
 
-		LevelController.gm.OnWin += DisplayWinInfo;
+		LevelManager.level.OnWin += DisplayWinInfo;
 
 		// When we select a creature, we should stop creating
 		entitySelector.Selected += x => creatureCreator.StopCreation();
@@ -70,21 +66,8 @@ public class UIManager : MonoBehaviour
 		creatureInfo.useAbilityButton.Click += entitySelector.actionMarkers.ToggleAbility;
 
 		// Add handlers for destroying the creature
-		LevelController.Input.KeyDown[KeyCode.Backspace] += entitySelector.DestroySelectedCreature;
+		UXManager.Input.KeyDown[KeyCode.Backspace] += entitySelector.DestroySelectedCreature;
 		creatureInfo.destroyCreatureButton.Click += entitySelector.DestroySelectedCreature;
-
-		// Play sounds when the creature takes actions
-		LevelController.Creatures.CreatureCreated += (x, y) => PlaySound(soundOptions.createAudio);
-		LevelController.Creatures.CreatureDestroyed += (pos) => PlaySound(soundOptions.destroyAudio);
-		entitySelector.Selected += x => PlaySound(soundOptions.creatureSelectAudio);
-		entitySelector.GoalSet += (x, y) => PlaySound(soundOptions.setCreatureGoalAudio);
-		LevelController.Recipes.RecipesUpdated += (obj) => PlaySound(soundOptions.pickupRecipeAudio);
-		entitySelector.actionMarkers.AbilityUsed += () => PlaySound(soundOptions.useAbilityAudio);
-
-		// Add particles on certain effects
-		LevelController.Creatures.CreatureCreated += (x, pos) => CreateParticle(particleOptions.createParticles, pos);
-		LevelController.Creatures.CreatureDestroyed += (pos) => CreateParticle(particleOptions.destroyParticles, pos);
-		entitySelector.GoalSet += (creature, pos) => CreateParticle(particleOptions.setCreatureGoalParticles, pos);
 	}
 
 	// TODO make the win text an in-world panel like the original game?
@@ -98,41 +81,6 @@ public class UIManager : MonoBehaviour
 		coordinateInfo.Hide();
 	}
 
-	// Play the given sound
-	void PlaySound(AudioClip clip)
-	{
-		if (clip)
-		{
-			Camera.main.GetComponent<AudioSource>().PlayOneShot(clip);
-		}
-	}
-
-	void CreateParticle(GameObject particles, Coordinate coordinate)
-	{
-		// FIXME this should be its own class
-		if (particles)
-		{
-			LevelController.gm.gameObject.AddChild(particles, coordinate);
-		}
-	}
 }
 
-[Serializable]
-public class SoundEffectOptions
-{
-	public AudioClip destroyAudio;
-	public AudioClip createAudio;
-	public AudioClip creatureSelectAudio;
-	public AudioClip pickupRecipeAudio;
-	public AudioClip setCreatureGoalAudio;
-	// TODO separate audio for different abilities
-	public AudioClip useAbilityAudio;
-}
 
-[Serializable]
-public class ParticleEffectOptions
-{
-	public GameObject createParticles;
-	public GameObject destroyParticles;
-	public GameObject setCreatureGoalParticles;
-}

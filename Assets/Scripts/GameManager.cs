@@ -7,9 +7,9 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 
-public class GameController : MonoBehaviour {
+public class GameManager : MonoBehaviour {
 
-	public static GameController controller;
+	public static GameManager game;
 
 	public string completionDataFile = "completionData.dat";
 
@@ -38,13 +38,13 @@ public class GameController : MonoBehaviour {
 	// Make sure there's only one controller in a scene
 	void Awake ()
 	{
-		if (controller == null)
+		if (game == null)
 		{
 			DontDestroyOnLoad(gameObject);
-			controller = this;
+			game = this;
 			Load();
 		}
-		else if (controller != this)
+		else if (game != this)
 		{
 			Destroy(gameObject);
 		}
