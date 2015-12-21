@@ -13,10 +13,10 @@ public class LevelSelector : MonoBehaviour {
 
 	void Start()
 	{
-		PersistentDataController.controller.Load();
+		GameController.controller.Load();
 		foreach (string level in levels)
 		{
-			Debug.LogFormat("{0}: {1}", level, PersistentDataController.controller.GetCompletion(level));
+			Debug.LogFormat("{0}: {1}", level, GameController.controller.GetCompletion(level));
 		}
 
 	}
@@ -27,7 +27,7 @@ public class LevelSelector : MonoBehaviour {
 		{
 			var button = levelButtons[i];
 			var level = levels[i];
-			if (PersistentDataController.controller.GetCompletion(level))
+			if (GameController.controller.GetCompletion(level))
 			{
 				button.image.sprite = finishedSprite;
 			}
@@ -47,9 +47,9 @@ public class LevelSelector : MonoBehaviour {
 	{
 		foreach (string level in levels)
 		{
-			PersistentDataController.controller.SetCompletion(level, false);
+			GameController.controller.SetCompletion(level, false);
 		}
-		PersistentDataController.controller.Save();
+		GameController.controller.Save();
 	}
 
 }

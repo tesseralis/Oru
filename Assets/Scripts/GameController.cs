@@ -7,9 +7,9 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 
-public class PersistentDataController : MonoBehaviour {
+public class GameController : MonoBehaviour {
 
-	public static PersistentDataController controller;
+	public static GameController controller;
 
 	public string completionDataFile = "completionData.dat";
 
