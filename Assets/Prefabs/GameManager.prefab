@@ -91,7 +91,6 @@ GameObject:
   - 33: {fileID: 3306254}
   - 23: {fileID: 2367568}
   - 114: {fileID: 11452918}
-  - 135: {fileID: 13554196}
   m_Layer: 0
   m_Name: Goal
   m_TagString: Untagged
@@ -282,8 +281,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a225df01a7061447298ac4b1a7518825, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clickAudio: {fileID: 8300000, guid: 6ee7c76d493c544b596e68cba58a67f4, type: 3}
-  clickParticlePrefab: {fileID: 166660, guid: 22d15bc638da047959c747b5699dcc42, type: 2}
   terrainPrefabs:
     landPrefab: {fileID: 177414, guid: 1afef6a08696149b18c31cdb92c17049, type: 2}
     rockPrefab: {fileID: 186096, guid: db38fd54633eb409d9e6eea9e3658871, type: 2}
@@ -300,7 +297,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0390f25ec92454656860a22cde3d6e43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  winningCreatureType: 0
 --- !u!114 &11461140
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -343,18 +339,6 @@ MonoBehaviour:
   inputController: {fileID: 11466036}
   cellSize: 2
   stepInterval: 0.5
---- !u!135 &13554196
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 191518}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
