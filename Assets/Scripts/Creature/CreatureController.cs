@@ -22,17 +22,20 @@ public class CreatureController : MonoBehaviour
 	// Called when all the creatures have updated their steps
 	public event Action<IList<Creature>> CreaturesUpdated;
 
+	private IList<Creature> creatureList;
+
 	public IList<Creature> CreatureList
 	{
-		get
-		{
-			return new List<Creature>(GetComponentsInChildren<Creature>());
-		}
+		get { return creatureList; }
 	}
 
 	void Start()
 	{
+		// Update all our creatures when we tick
 		GameManager.gm.Step += StepCreatures;
+
+		// Add all the creatures we have on the board right now
+		creatureList = GetComponentsInChildren<Creature>().ToList();
 	}
 
 	// Returns true if we can add a creature at the given coordinate
@@ -79,8 +82,10 @@ public class CreatureController : MonoBehaviour
 
 			resources[neighbor] = difference;
 		}
-		// TODO sync this up with the steps so we don't accidentally win ahead of time
 		var newCreature = gameObject.AddChildWithComponent<Creature>(creaturePrefabs.PrefabFor (creature), location);
+
+		// Add the creature to our list
+		creatureList.Add(newCreature);
 
 		// Call any necessary events
 		if (CreatureCreated != null) { CreatureCreated(newCreature); }
@@ -103,7 +108,10 @@ public class CreatureController : MonoBehaviour
 			GameManager.Resources[coordinate] = GameManager.Resources[coordinate].MultisetAdd(ability.Carrying);
 		}
 
-		// Remove from the creature list
+		// Remove from our list of creatures
+		creatureList.Remove(creature);
+
+		// Remove from the hierarchy
 		Destroy(creature.gameObject);
 
 		// Answer any event handlers

@@ -181,7 +181,7 @@ public class Creature : MonoBehaviour
 		return IsValidCoordinate(next) ? next : Position;
 	}
 
-	// Returns true if we the creature is allowed to go to this coordinate
+	// Returns true if this creature is allowed to go to this coordinate
 	private bool IsValidCoordinate(Coordinate coordinate)
 	{
 		return GameManager.Terrain.Contains(coordinate)
