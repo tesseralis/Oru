@@ -43,7 +43,6 @@ public class GameManager : MonoBehaviour
 
 	public float Steps { get; private set; }
 
-	// TODO move most things that depend on this to depend on the creatures stepping
 	public event Action Step;
 
 	/*

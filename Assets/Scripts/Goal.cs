@@ -9,8 +9,8 @@ public class Goal : MonoBehaviour
 {
 
 	// What creature is needed to win the game
-	// TODO generalize this so this can be "any creature" or terrain (or boulders)
-	public CreatureType winningCreatureType;
+	// TODO generalize this so that we can do terrain or boulders as well
+	public CreatureType? winningCreatureType;
 
 	void Start()
 	{
@@ -19,12 +19,17 @@ public class Goal : MonoBehaviour
 
 	private void CheckGoalCondition(IList<Creature> creatureList)
 	{
-		if (creatureList.Where(x => x.creatureType == winningCreatureType)
-			.Select(x => x.Position).Contains(gameObject.Coordinate()))
+		if (GoalConditionMet(creatureList))
 		{
 			Debug.Log("You win!");
 			GameManager.gm.HasWon = true;
 		}
+	}
+
+	private bool GoalConditionMet(IList<Creature> creatureList)
+	{
+		return creatureList.Any(x => x.Position == gameObject.Coordinate()
+			&& x.creatureType == (winningCreatureType ?? x.creatureType));
 	}
 
 }
