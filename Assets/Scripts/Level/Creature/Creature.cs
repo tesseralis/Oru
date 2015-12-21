@@ -50,8 +50,8 @@ public class Creature : MonoBehaviour
 	public void Update()
 	{
 		// Animate the creature moving
-		var stepInterval = LevelController.gm.stepInterval;
-		var cellSize = LevelController.gm.cellSize;
+		var stepInterval = LevelManager.level.stepInterval;
+		var cellSize = LevelManager.level.cellSize;
 
 		var ratio = (Time.timeSinceLevelLoad % stepInterval) / stepInterval;
 		var direction = NextPosition - Position;
@@ -167,7 +167,7 @@ public class Creature : MonoBehaviour
 		}
 
 		// Otherwise, do another BFS not accounting for terrain restrictions and try to move the creature there
-		parents = DoBFS(Position, goal, LevelController.Terrain.Contains);
+		parents = DoBFS(Position, goal, LevelManager.Terrain.Contains);
 		// TODO assert that the level is fully connected
 		next = goal;
 		while (parents[next] != Position)
@@ -180,9 +180,9 @@ public class Creature : MonoBehaviour
 	// Returns true if this creature is allowed to go to this coordinate
 	private bool IsValidCoordinate(Coordinate coordinate)
 	{
-		return LevelController.Terrain.Contains(coordinate)
-			&& Definition.AllowedTerrain.Contains(LevelController.Terrain[coordinate])
-			&& !LevelController.Creatures.CreatureList.Any(x => x != this && (x.Position == coordinate || x.NextPosition == coordinate));
+		return LevelManager.Terrain.Contains(coordinate)
+			&& Definition.AllowedTerrain.Contains(LevelManager.Terrain[coordinate])
+			&& !LevelManager.Creatures.CreatureList.Any(x => x != this && (x.Position == coordinate || x.NextPosition == coordinate));
 	}
 
 }

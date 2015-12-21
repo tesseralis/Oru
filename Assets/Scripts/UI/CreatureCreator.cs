@@ -21,17 +21,17 @@ public class CreatureCreator : MonoBehaviour {
 
 		// Do the actual creation
 		currentCreatureType = creature;
-		LevelController.Terrain.MouseEnterBlock += ShowCreateMarker;
-		LevelController.Terrain.MouseExitBlock += HideCreateMarker;
-		LevelController.Terrain.ClickBlock += CreateCreature;
+		LevelManager.Terrain.MouseEnterBlock += ShowCreateMarker;
+		LevelManager.Terrain.MouseExitBlock += HideCreateMarker;
+		LevelManager.Terrain.ClickBlock += CreateCreature;
 	}
 
 	public void StopCreation()
 	{
 		if (createMarker) { createMarker.SetActive(false); }
-		LevelController.Terrain.MouseEnterBlock -= ShowCreateMarker;
-		LevelController.Terrain.MouseExitBlock -= HideCreateMarker;
-		LevelController.Terrain.ClickBlock -= CreateCreature;
+		LevelManager.Terrain.MouseEnterBlock -= ShowCreateMarker;
+		LevelManager.Terrain.MouseExitBlock -= HideCreateMarker;
+		LevelManager.Terrain.ClickBlock -= CreateCreature;
 	}
 
 	// Use this for initialization
@@ -46,7 +46,7 @@ public class CreatureCreator : MonoBehaviour {
 			createMarker.SetActive(true);
 			// Update the position visually
 			createMarker.SetPosition(coordinate);
-			if (LevelController.Creatures.CanCreateCreature(currentCreatureType, coordinate))
+			if (LevelManager.Creatures.CanCreateCreature(currentCreatureType, coordinate))
 			{
 				if (positiveMarker) { positiveMarker.SetActive(true); }
 				if (negativeMarker) { negativeMarker.SetActive(false); }
@@ -78,10 +78,10 @@ public class CreatureCreator : MonoBehaviour {
 
 	void CreateCreature(Coordinate coordinate)
 	{
-		if (LevelController.Creatures.CanCreateCreature(currentCreatureType, coordinate))
+		if (LevelManager.Creatures.CanCreateCreature(currentCreatureType, coordinate))
 		{
 			// If everything passes, add the creature to the list of creatures
-			var creature = LevelController.Creatures.CreateCreature(currentCreatureType, coordinate);
+			var creature = LevelManager.Creatures.CreateCreature(currentCreatureType, coordinate);
 			// We are no longer creating
 			StopCreation();
 		

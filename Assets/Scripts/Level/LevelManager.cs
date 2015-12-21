@@ -6,24 +6,23 @@ using System.Collections;
 using System.Collections.Generic;
 using Util;
 
-public class LevelController : MonoBehaviour
+public class LevelManager : MonoBehaviour
 {
 
 	// make game manager accessible throughout the game
-	public static LevelController gm;
+	public static LevelManager level;
 
-	public static TerrainController Terrain { get { return gm.terrainController; } }
-	public static CreatureController Creatures { get { return gm.creatureController; } }
-	public static ResourceController Resources { get { return gm.resourceController; } }
-	public static RecipeController Recipes { get { return gm.recipeController; } }
-	// FIXME move input elsewhere
-	public static InputController Input { get { return gm.inputController; } }
+	public static TerrainController Terrain { get { return level.terrainController; } }
+	public static CreatureController Creatures { get { return level.creatureController; } }
+	public static ResourceController Resources { get { return level.resourceController; } }
+	public static RecipeController Recipes { get { return level.recipeController; } }
+	public static GoalController Goals { get { return level.goalController; } }
 
 	/*
 	 * Public members that can be set per level.
 	 */
 	// the goal in the world
-	public Goal goal;
+//	public Goal goal;
 
 	// the grid of available game blocks
 	public TerrainController terrainController;
@@ -33,8 +32,8 @@ public class LevelController : MonoBehaviour
 	public ResourceController resourceController;
 	// the recipes of the game world
 	public RecipeController recipeController;
-	// controlls the input
-	public InputController inputController;
+	// the goals of the game world
+	public GoalController goalController;
 	
 	// how width of the space between individual cells
 	public float cellSize = 2;
@@ -62,8 +61,8 @@ public class LevelController : MonoBehaviour
 				if (OnWin != null) { OnWin(); }
 				// Save that we have won this level
 				Debug.Log("Won this level! Saving...");
-				GameController.controller.SetCompletion(SceneManager.GetActiveScene().name, true);
-				GameController.controller.Save();
+				GameManager.game.SetCompletion(SceneManager.GetActiveScene().name, true);
+				GameManager.game.Save();
 			}
 		}
 	}
@@ -78,10 +77,7 @@ public class LevelController : MonoBehaviour
 
 	void Awake ()
 	{
-		if (gm == null)
-		{
-			gm = this.gameObject.GetComponent<LevelController>();
-		}
+		if (level == null) { level = this; }
 		HasWon = false;
 
 		nextStepTime = 0;
@@ -104,9 +100,9 @@ public class LevelController : MonoBehaviour
 		{
 			recipeController = GetComponentInChildren<RecipeController>();
 		}
-		if (inputController == null)
+		if (goalController == null)
 		{
-			inputController = GetComponentInChildren<InputController>();
+			goalController = GetComponentInChildren<GoalController>();
 		}
 	}
 	
