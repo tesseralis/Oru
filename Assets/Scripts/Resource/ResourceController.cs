@@ -38,7 +38,7 @@ public class ResourceController : MonoBehaviour
 				if (!locations.ContainsKey(coordinate))
 				{
 					// Instantiate a new marker
-					var resourcePile = this.AddChildWithComponent<ResourcePile>(new GameObject(), coordinate);
+					var resourcePile = gameObject.AddChildWithComponent<ResourcePile>(new GameObject(), coordinate);
 					locations[coordinate] = resourcePile;
 				}
 				locations[coordinate].Resources = value;
@@ -54,7 +54,7 @@ public class ResourceController : MonoBehaviour
 		// Assume this grid's children are all terrain blocks
 		foreach (var pile in GetComponentsInChildren<ResourcePile>())
 		{
-			locations[pile.Coordinate()] = pile;
+			locations[pile.gameObject.Coordinate()] = pile;
 		}
 	}
 

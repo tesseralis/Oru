@@ -30,14 +30,14 @@ public class CoordinateInfo : MonoBehaviour
 			content.text = "?";
 		}
 
-		if (GameManager.gm.goal.Coordinate() == coordinate)
+		if (GameManager.gm.goal.gameObject.Coordinate() == coordinate)
 		{
 			gameObject.SetActive(true);
 			content.text = string.Format("Goal: {0} at this location.", GameManager.gm.goal.winningCreatureType);
 		}
 
 		// Move ourselves to the new location
-		GameManager.gm.SetPosition(gameObject, coordinate);
+		gameObject.SetPosition(coordinate);
 
 	}
 

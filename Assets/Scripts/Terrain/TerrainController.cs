@@ -34,7 +34,7 @@ public class TerrainController : MonoBehaviour
 
 			// Create the new item
 			var prefab = terrainPrefabs.PrefabFor (value);
-			var block = this.AddChildWithComponent<TerrainBlock>(prefab, coordinate);
+			var block = gameObject.AddChildWithComponent<TerrainBlock>(prefab, coordinate);
 			block.type = value;
 			grid[coordinate] = block;
 
@@ -52,7 +52,7 @@ public class TerrainController : MonoBehaviour
 		grid = new Dictionary<Coordinate, TerrainBlock>();
 		foreach (var block in GetComponentsInChildren<TerrainBlock>())
 		{
-			grid[block.Coordinate()] = block;
+			grid[block.gameObject.Coordinate()] = block;
 		}
 
 		ClickBlock += SpawnParticles;
@@ -64,7 +64,7 @@ public class TerrainController : MonoBehaviour
 		// Set the particles to play whenever we click
 		if (clickParticlePrefab)
 		{
-			this.AddChild(clickParticlePrefab, coordinate);
+			gameObject.AddChild(clickParticlePrefab, coordinate);
 		}
 	}
 

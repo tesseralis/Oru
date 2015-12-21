@@ -59,7 +59,7 @@ public class ResourcePile : MonoBehaviour
 				continue;
 			}
 			numResourceTypes++;
-			var obj = this.AddChild(controller.resourcePrefabs.PrefabFor(resource), this.Coordinate());
+			var obj = gameObject.AddChild(controller.resourcePrefabs.PrefabFor(resource), gameObject.Coordinate());
 
 			// Set the height correctly
 			obj.transform.Translate(Vector3.up * numResourceTypes * heightGap);
@@ -69,7 +69,7 @@ public class ResourcePile : MonoBehaviour
 		if (hasEnergy)
 		{
 			numResourceTypes++;
-			var obj = this.AddChild(controller.resourcePrefabs.PrefabFor(ResourceType.Energy), this.Coordinate());
+			var obj = gameObject.AddChild(controller.resourcePrefabs.PrefabFor(ResourceType.Energy), gameObject.Coordinate());
 			obj.transform.Translate(Vector3.up * numResourceTypes * heightGap);
 		}
 	}

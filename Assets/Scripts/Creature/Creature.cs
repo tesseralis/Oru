@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using Util;
 
 /// <summary>
 /// A creature represents a single movable unit in the game, whether friendly or not.
@@ -42,7 +43,7 @@ public class Creature : MonoBehaviour
 	void Start()
 	{
 		// Store our initial position
-		nextPosition = Position = GameManager.gm.ToGridCoordinate(gameObject.transform.position);
+		nextPosition = Position = gameObject.Coordinate();
 	}
 
 	void OnMouseDown()
@@ -60,7 +61,7 @@ public class Creature : MonoBehaviour
 		var direction = nextPosition - Position;
 		// TODO I'm sure we can factor this out
 		var translation = new Vector3(direction.x, 0, direction.z) * ratio * cellSize;
-		GameManager.gm.SetPosition(gameObject, Position);
+		gameObject.SetPosition(Position);
 		transform.position += translation;
 	}
 

@@ -11,7 +11,7 @@ public class ActionMarker : MonoBehaviour
 	// TODO Maybe we can consolidate most of these "on click" objects?
 	void OnMouseDown()
 	{
-		if (OnClick != null) { OnClick(this.Coordinate()); }
+		if (OnClick != null) { OnClick(gameObject.Coordinate()); }
 	}
 
 }

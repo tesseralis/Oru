@@ -47,7 +47,7 @@ public class RecipeController : MonoBehaviour
 	{
 		foreach (var instruction in GetComponentsInChildren<Recipe>())
 		{
-			recipeLocations[instruction.Coordinate()] = instruction;
+			recipeLocations[instruction.gameObject.Coordinate()] = instruction;
 		}
 		GameManager.Creatures.UpdateCreatures += UpdateAvailableRecipes;
 	}

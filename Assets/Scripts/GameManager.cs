@@ -125,14 +125,4 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
-	// TODO put this in Utils
-	public Coordinate ToGridCoordinate(Vector3 position)
-	{
-		return new Coordinate(Mathf.RoundToInt(position.x / cellSize), Mathf.RoundToInt(position.z / cellSize));
-	}
-
-	public void SetPosition(GameObject gameObject, Coordinate coordinate)
-	{
-		gameObject.transform.position = new Vector3(coordinate.x * cellSize, gameObject.transform.position.y, coordinate.z * cellSize);
-	}
 }

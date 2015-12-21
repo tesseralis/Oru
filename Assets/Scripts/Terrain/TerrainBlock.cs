@@ -16,17 +16,17 @@ public class TerrainBlock: MonoBehaviour
 
 	void OnMouseEnter ()
 	{
-		if (controller.MouseEnterBlock != null) { controller.MouseEnterBlock(this.Coordinate()); }
+		if (controller.MouseEnterBlock != null) { controller.MouseEnterBlock(gameObject.Coordinate()); }
 	}
 
 	void OnMouseExit ()
 	{
-		if (controller.MouseExitBlock != null) { controller.MouseExitBlock(this.Coordinate()); }
+		if (controller.MouseExitBlock != null) { controller.MouseExitBlock(gameObject.Coordinate()); }
 	}
 	
 	void OnMouseDown ()
 	{
-		if (controller.ClickBlock != null) { controller.ClickBlock(this.Coordinate()); }
+		if (controller.ClickBlock != null) { controller.ClickBlock(gameObject.Coordinate()); }
 	}
 
 }

@@ -20,7 +20,7 @@ public class Goal : MonoBehaviour
 	private void CheckGoalCondition(IList<Creature> creatureList)
 	{
 		if (creatureList.Where(x => x.creatureType == winningCreatureType)
-			.Select(x => x.Position).Contains(this.Coordinate()))
+			.Select(x => x.Position).Contains(gameObject.Coordinate()))
 		{
 			Debug.Log("You win!");
 			GameManager.gm.HasWon = true;

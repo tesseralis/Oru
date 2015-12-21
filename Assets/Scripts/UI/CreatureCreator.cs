@@ -45,7 +45,7 @@ public class CreatureCreator : MonoBehaviour {
 		{
 			createMarker.SetActive(true);
 			// Update the position visually
-			GameManager.gm.SetPosition(createMarker, coordinate);
+			createMarker.SetPosition(coordinate);
 			if (GameManager.Creatures.CanCreateCreature(currentCreatureType, coordinate))
 			{
 				if (positiveMarker) { positiveMarker.SetActive(true); }
