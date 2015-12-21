@@ -14,7 +14,7 @@ public class Goal : MonoBehaviour
 
 	void Start()
 	{
-		GameManager.Creatures.UpdateCreatures += CheckGoalCondition;
+		GameManager.Creatures.CreaturesUpdated += CheckGoalCondition;
 	}
 
 	private void CheckGoalCondition(IList<Creature> creatureList)

@@ -17,8 +17,6 @@ public class Creature : MonoBehaviour
 
 	public Coordinate Position { get; private set; }
 
-	public Action<Coordinate?> OnSetGoal;
-
 	private CreatureController manager;
 	private Coordinate nextPosition;
 
@@ -48,7 +46,7 @@ public class Creature : MonoBehaviour
 
 	void OnMouseDown()
 	{
-		GetComponentInParent<CreatureController>().OnSelect(this);
+		GetComponentInParent<CreatureController>().CreatureSelected(this);
 	}
 
 	public void Update()

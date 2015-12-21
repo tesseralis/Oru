@@ -32,7 +32,7 @@ public class EntitySelector : MonoBehaviour
 	{
 		if (entityMarker) { entityMarker.SetActive(false); }
 		actionMarkers.Disable();
-		GameManager.Creatures.OnSelect += SelectCreature;
+		GameManager.Creatures.CreatureSelected += SelectCreature;
 	}
 
 	private void DeselectCreature()

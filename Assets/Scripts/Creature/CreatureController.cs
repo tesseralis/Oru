@@ -13,13 +13,14 @@ public class CreatureController : MonoBehaviour
 
 	public CreaturePrefabOptions creaturePrefabs;
 
-	public Action<Creature> OnSelect;
-
+	// Called when a creature has been clicked
+	public Action<Creature> CreatureSelected;
+	// Called when a creature is destroyed
 	public event Action CreatureDestroyed;
+	// Called when a creature is created
 	public event Action<Creature> CreatureCreated;
-
-	// TODO rename "creatures updated"
-	public event Action<IList<Creature>> UpdateCreatures;
+	// Called when all the creatures have updated their steps
+	public event Action<IList<Creature>> CreaturesUpdated;
 
 	public IList<Creature> CreatureList
 	{
@@ -118,7 +119,7 @@ public class CreatureController : MonoBehaviour
 		{
 			creature.Step();
 		}
-		if (UpdateCreatures != null) { UpdateCreatures(CreatureList); }
+		if (CreaturesUpdated != null) { CreaturesUpdated(CreatureList); }
 	}
 		
 	private static IList<Coordinate> Neighbors(Coordinate coordinate)
