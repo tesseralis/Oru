@@ -21,10 +21,6 @@ public class UIManager : MonoBehaviour
 	public CreatureSelector entitySelector;
 	public CreatureCreator creatureCreator;
 
-	// TODO these should be factored out to a separate Audio and Particles class
-	public SoundEffectOptions soundOptions;
-	public ParticleEffectOptions particleOptions;
-
 	void Awake ()
 	{
 		if (ui == null)
@@ -72,19 +68,6 @@ public class UIManager : MonoBehaviour
 		// Add handlers for destroying the creature
 		UXManager.Input.KeyDown[KeyCode.Backspace] += entitySelector.DestroySelectedCreature;
 		creatureInfo.destroyCreatureButton.Click += entitySelector.DestroySelectedCreature;
-
-		// Play sounds when the creature takes actions
-		LevelManager.Creatures.CreatureCreated += (x, y) => PlaySound(soundOptions.createAudio);
-		LevelManager.Creatures.CreatureDestroyed += (pos) => PlaySound(soundOptions.destroyAudio);
-		entitySelector.Selected += x => PlaySound(soundOptions.creatureSelectAudio);
-		entitySelector.GoalSet += (x, y) => PlaySound(soundOptions.setCreatureGoalAudio);
-		LevelManager.Recipes.RecipesUpdated += (obj) => PlaySound(soundOptions.pickupRecipeAudio);
-		entitySelector.actionMarkers.AbilityUsed += () => PlaySound(soundOptions.useAbilityAudio);
-
-		// Add particles on certain effects
-		LevelManager.Creatures.CreatureCreated += (x, pos) => CreateParticle(particleOptions.createParticles, pos);
-		LevelManager.Creatures.CreatureDestroyed += (pos) => CreateParticle(particleOptions.destroyParticles, pos);
-		entitySelector.GoalSet += (creature, pos) => CreateParticle(particleOptions.setCreatureGoalParticles, pos);
 	}
 
 	// TODO make the win text an in-world panel like the original game?
@@ -98,41 +81,6 @@ public class UIManager : MonoBehaviour
 		coordinateInfo.Hide();
 	}
 
-	// Play the given sound
-	void PlaySound(AudioClip clip)
-	{
-		if (clip)
-		{
-			Camera.main.GetComponent<AudioSource>().PlayOneShot(clip);
-		}
-	}
-
-	void CreateParticle(GameObject particles, Coordinate coordinate)
-	{
-		// FIXME this should be its own class
-		if (particles)
-		{
-			LevelManager.level.gameObject.AddChild(particles, coordinate);
-		}
-	}
 }
 
-[Serializable]
-public class SoundEffectOptions
-{
-	public AudioClip destroyAudio;
-	public AudioClip createAudio;
-	public AudioClip creatureSelectAudio;
-	public AudioClip pickupRecipeAudio;
-	public AudioClip setCreatureGoalAudio;
-	// TODO separate audio for different abilities
-	public AudioClip useAbilityAudio;
-}
 
-[Serializable]
-public class ParticleEffectOptions
-{
-	public GameObject createParticles;
-	public GameObject destroyParticles;
-	public GameObject setCreatureGoalParticles;
-}

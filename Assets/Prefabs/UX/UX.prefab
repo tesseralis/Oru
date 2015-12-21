@@ -423,6 +423,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a995bcea13a01401d8b12970f15a8d64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  particleOptions:
+    createCreature: {fileID: 174366, guid: 09268116f21b84dfb95d046de4f5d363, type: 2}
+    destroyCreature: {fileID: 189986, guid: c77e72afb954e430eaf8cc1f97fafe50, type: 2}
+    setCreatureGoal: {fileID: 166660, guid: 22d15bc638da047959c747b5699dcc42, type: 2}
 --- !u!114 &11472456
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -434,6 +438,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4d0adff27fe34561815bb473c056620, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundOptions:
+    destroyCreature: {fileID: 8300000, guid: 85a4cb02fb100454dbba68fa79e58ef3, type: 3}
+    createCreature: {fileID: 8300000, guid: 35d95709db9fe4f7f80461c49285d840, type: 3}
+    selectCreature: {fileID: 8300000, guid: a442c94ab224549e6819278f2f8e2005, type: 3}
+    pickupRecipe: {fileID: 8300000, guid: f30f4525d12c74e3f895f418a503ebd8, type: 3}
+    setCreatureGoal: {fileID: 8300000, guid: 0fc6b75f4b5444c64b89acf2348e3d46, type: 3}
+    useAbility: {fileID: 8300000, guid: 636d568ebdcfe4b9b9c4d4c0d1a5b3bc, type: 3}
 --- !u!114 &11495526
 MonoBehaviour:
   m_ObjectHideFlags: 1
