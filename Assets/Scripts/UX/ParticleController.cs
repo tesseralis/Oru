@@ -12,8 +12,7 @@ public class ParticleController : MonoBehaviour
 		// Add particles on certain effects
 		LevelManager.Creatures.CreatureCreated += (x, pos) => CreateParticle(particleOptions.createCreature, pos);
 		LevelManager.Creatures.CreatureDestroyed += (pos) => CreateParticle(particleOptions.destroyCreature, pos);
-		// FIXME Should UX have a dependence on UI?
-		UIManager.ui.entitySelector.GoalSet += (creature, pos) => CreateParticle(particleOptions.setCreatureGoal, pos);
+		UXManager.State.Selector.GoalSet += (creature, pos) => CreateParticle(particleOptions.setCreatureGoal, pos);
 	}
 
 	private void CreateParticle(GameObject particles, Coordinate coordinate)

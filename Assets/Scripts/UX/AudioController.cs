@@ -13,14 +13,9 @@ public class AudioController : MonoBehaviour {
 		LevelManager.Creatures.CreatureCreated += (x, y) => PlaySound(soundOptions.createCreature);
 		LevelManager.Creatures.CreatureDestroyed += (pos) => PlaySound(soundOptions.destroyCreature);
 		LevelManager.Recipes.RecipesUpdated += (obj) => PlaySound(soundOptions.pickupRecipe);
-		UIManager.ui.entitySelector.Selected += x => PlaySound(soundOptions.selectCreature);
-		UIManager.ui.entitySelector.GoalSet += (x, y) => PlaySound(soundOptions.setCreatureGoal);
-		UIManager.ui.entitySelector.actionMarkers.AbilityUsed += () => PlaySound(soundOptions.useAbility);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+		UXManager.State.Selector.Selected += x => PlaySound(soundOptions.selectCreature);
+		UXManager.State.Selector.GoalSet += (x, y) => PlaySound(soundOptions.setCreatureGoal);
+		UXManager.State.Selector.actionMarkers.AbilityUsed += () => PlaySound(soundOptions.useAbility);
 	}
 
 	// Play the given sound
@@ -32,6 +27,7 @@ public class AudioController : MonoBehaviour {
 			Camera.main.GetComponent<AudioSource>().PlayOneShot(clip);
 		}
 	}
+
 }
 
 [Serializable]

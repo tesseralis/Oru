@@ -18,8 +18,6 @@ public class UIManager : MonoBehaviour
 	public RecipeList recipeList;
 	public GameObject menuPanel;
 
-	public CreatureSelector entitySelector;
-	public CreatureCreator creatureCreator;
 
 	void Awake ()
 	{
@@ -44,30 +42,23 @@ public class UIManager : MonoBehaviour
 		LevelManager.Terrain.MouseEnterBlock += coordinateInfo.Show;
 		LevelManager.Terrain.MouseExitBlock += x => coordinateInfo.Hide();
 
-		// Deselect creatures when we start creation
-		recipeList.RecipeClicked += (t) => entitySelector.Deselect();
 		// Start creating the recipe
-		recipeList.RecipeClicked += creatureCreator.StartCreation;
+		// TODO propagate this to the recipe list class itself
+		recipeList.RecipeClicked += UXManager.State.Creator.StartCreation;
 
 		LevelManager.level.OnWin += DisplayWinInfo;
 
-		// When we select a creature, we should stop creating
-		entitySelector.Selected += x => creatureCreator.StopCreation();
-		entitySelector.Selected += creatureInfo.DisplayCreatureInfo;
+	// When we deselect a creature, we should hide the info panel
+		UXManager.State.Selector.Deselected += creatureInfo.HideCreatureInfo;
+		UXManager.State.Selector.Selected += creatureInfo.DisplayCreatureInfo;
 
-		// When we deselect a creature, we should hide the info panel
-		entitySelector.Deselected += creatureInfo.HideCreatureInfo;
-
-		// Select a creature if it's created
-		creatureCreator.Created += entitySelector.SelectCreature;
 
 		// Add handlers for using ability
 		// TODO disable this when you the selected creature does not have an ability
-		creatureInfo.useAbilityButton.Click += entitySelector.actionMarkers.ToggleAbility;
+		creatureInfo.useAbilityButton.Click += UXManager.State.Selector.actionMarkers.ToggleAbility;
 
 		// Add handlers for destroying the creature
-		UXManager.Input.KeyDown[KeyCode.Backspace] += entitySelector.DestroySelectedCreature;
-		creatureInfo.destroyCreatureButton.Click += entitySelector.DestroySelectedCreature;
+		creatureInfo.destroyCreatureButton.Click += UXManager.State.Selector.DestroySelectedCreature;
 	}
 
 	// TODO make the win text an in-world panel like the original game?

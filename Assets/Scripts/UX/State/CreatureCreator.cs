@@ -11,12 +11,17 @@ public class CreatureCreator : MonoBehaviour {
 
 	// Handler that is called when the creature is created
 	public event Action<Creature> Created;
+	// Handler that is called when creation has started
+	public event Action<CreatureType> CreationStarted;
+	// Handler that is called when creation has stopped
+	public event Action CreationStopped;
 
 	private CreatureType currentCreatureType;
 
 	public void StartCreation(CreatureType creature)
 	{
 		// Ensure that we never double-click
+		// TODO refactor this to store an internal "is-creating" state
 		StopCreation();
 
 		// Do the actual creation
@@ -24,6 +29,8 @@ public class CreatureCreator : MonoBehaviour {
 		LevelManager.Terrain.MouseEnterBlock += ShowCreateMarker;
 		LevelManager.Terrain.MouseExitBlock += HideCreateMarker;
 		LevelManager.Terrain.ClickBlock += CreateCreature;
+
+		if (CreationStarted != null) { CreationStarted(creature); }
 	}
 
 	public void StopCreation()
@@ -32,6 +39,8 @@ public class CreatureCreator : MonoBehaviour {
 		LevelManager.Terrain.MouseEnterBlock -= ShowCreateMarker;
 		LevelManager.Terrain.MouseExitBlock -= HideCreateMarker;
 		LevelManager.Terrain.ClickBlock -= CreateCreature;
+
+		if (CreationStopped != null) { CreationStopped(); }
 	}
 
 	// Use this for initialization
