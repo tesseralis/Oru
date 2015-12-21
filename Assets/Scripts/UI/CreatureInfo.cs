@@ -41,4 +41,9 @@ public class CreatureInfo : MonoBehaviour
 			ability);
 	}
 
+	public void HideCreatureInfo()
+	{
+		gameObject.SetActive(false);
+	}
+
 }

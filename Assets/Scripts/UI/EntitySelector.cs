@@ -11,7 +11,8 @@ public class EntitySelector : MonoBehaviour
 	public GameObject entityMarker;
 	public ActionMarkers actionMarkers;
 
-	public event Action<Creature> Select;
+	public event Action<Creature> Selected;
+	public event Action Deselected;
 
 	private bool isActing;
 
@@ -69,13 +70,16 @@ public class EntitySelector : MonoBehaviour
 		}
 
 		// Run the events in the handler
-		if (Select != null) { Select(creature); }
+		if (Selected != null) { Selected(creature); }
 	}
 
 	public void Deselect()
 	{
 		DeselectCreature();
 		if (entityMarker) { entityMarker.SetActive(false); }
+
+		// Run the events in the handler
+		if (Deselected != null) { Deselected(); }
 	}
 		
 	private void SetCurrentCreatureGoal(Coordinate coordinate)

@@ -51,8 +51,11 @@ public class UIManager : MonoBehaviour
 		GameManager.gm.OnWin += DisplayWinInfo;
 
 		// When we select a creature, we should stop creating
-		entitySelector.Select += x => creatureCreator.StopCreation();
-		entitySelector.Select += creatureInfo.DisplayCreatureInfo;
+		entitySelector.Selected += x => creatureCreator.StopCreation();
+		entitySelector.Selected += creatureInfo.DisplayCreatureInfo;
+
+		// When we deselect a creature, we should hide the info panel
+		entitySelector.Deselected += creatureInfo.HideCreatureInfo;
 
 		// Select a creature if it's created
 		creatureCreator.Created += entitySelector.SelectCreature;
