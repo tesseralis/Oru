@@ -16,9 +16,7 @@ public class Creature : MonoBehaviour
 	public Coordinate? Goal { get; set; }
 
 	public Coordinate Position { get; private set; }
-
-	private CreatureController manager;
-	private Coordinate nextPosition;
+	public Coordinate NextPosition { get; private set; }
 
 	private bool isMoving = false;
 	
@@ -41,7 +39,7 @@ public class Creature : MonoBehaviour
 	void Start()
 	{
 		// Store our initial position
-		nextPosition = Position = gameObject.Coordinate();
+		NextPosition = Position = gameObject.Coordinate();
 	}
 
 	void OnMouseDown()
@@ -56,7 +54,7 @@ public class Creature : MonoBehaviour
 		var cellSize = GameManager.gm.cellSize;
 
 		var ratio = (Time.timeSinceLevelLoad % stepInterval) / stepInterval;
-		var direction = nextPosition - Position;
+		var direction = NextPosition - Position;
 		// TODO I'm sure we can factor this out
 		var translation = new Vector3(direction.x, 0, direction.z) * ratio * cellSize;
 		gameObject.SetPosition(Position);
@@ -65,15 +63,15 @@ public class Creature : MonoBehaviour
 
 	public void Step()
 	{
-		Position = nextPosition;
+		Position = NextPosition;
 		if (Goal != null && (!Position.Equals(Goal)))
 		{
-			nextPosition = NextCoordinate ();
+			NextPosition = NextCoordinate ();
 
 			// Make our creature face the right direction
-			if (nextPosition != Position)
+			if (NextPosition != Position)
 			{
-				var direction = nextPosition - Position;
+				var direction = NextPosition - Position;
 				transform.Rotate(new Vector3(0, AngleFor(direction)) - transform.rotation.eulerAngles);
 			}
 
@@ -186,7 +184,7 @@ public class Creature : MonoBehaviour
 	{
 		return GameManager.Terrain.Contains(coordinate)
 			&& Definition.AllowedTerrain.Contains(GameManager.Terrain[coordinate])
-			&& !GameManager.Creatures.CreatureList.Any(x => x != this && x.Position == coordinate);
+			&& !GameManager.Creatures.CreatureList.Any(x => x != this && (x.Position == coordinate || x.NextPosition == coordinate));
 	}
 
 }
