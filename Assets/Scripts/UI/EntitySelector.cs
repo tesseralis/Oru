@@ -33,6 +33,7 @@ public class EntitySelector : MonoBehaviour
 		if (entityMarker) { entityMarker.SetActive(false); }
 		actionMarkers.Disable();
 		GameManager.Creatures.CreatureSelected += SelectCreature;
+		GameManager.Creatures.CreatureDestroyed += (x) => Deselect();
 	}
 
 	private void DeselectCreature()
@@ -72,6 +73,11 @@ public class EntitySelector : MonoBehaviour
 
 		// Run the events in the handler
 		if (Selected != null) { Selected(creature); }
+	}
+
+	public void DestroySelectedCreature()
+	{
+		GameManager.Creatures.DestroyCreature(SelectedCreature);
 	}
 
 	public void Deselect()

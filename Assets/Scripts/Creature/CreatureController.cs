@@ -98,6 +98,9 @@ public class CreatureController : MonoBehaviour
 	{
 		var coordinate = creature.Position;
 
+		// Answer any event handlers
+		if (CreatureDestroyed != null) { CreatureDestroyed(coordinate); }
+
 		// Recycle the creature's components
 		GameManager.Resources[coordinate] = GameManager.Resources[coordinate].MultisetAdd(Creatures.ForType(creature.creatureType).Recipe);
 
@@ -114,9 +117,6 @@ public class CreatureController : MonoBehaviour
 
 		// Remove from the hierarchy
 		Destroy(creature.gameObject);
-
-		// Answer any event handlers
-		if (CreatureDestroyed != null) { CreatureDestroyed(coordinate); }
 	}
 
 	/// <summary>

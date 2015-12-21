@@ -70,8 +70,8 @@ public class UIManager : MonoBehaviour
 		creatureInfo.useAbilityButton.Click += entitySelector.actionMarkers.ToggleAbility;
 
 		// Add handlers for destroying the creature
-		GameManager.Input.KeyDown[KeyCode.Backspace] += DestroySelectedCreature;
-		creatureInfo.destroyCreatureButton.Click += DestroySelectedCreature;
+		GameManager.Input.KeyDown[KeyCode.Backspace] += entitySelector.DestroySelectedCreature;
+		creatureInfo.destroyCreatureButton.Click += entitySelector.DestroySelectedCreature;
 
 		// Play sounds when the creature takes actions
 		GameManager.Creatures.CreatureCreated += (x, y) => PlaySound(soundOptions.createAudio);
@@ -85,13 +85,6 @@ public class UIManager : MonoBehaviour
 		GameManager.Creatures.CreatureCreated += (x, pos) => CreateParticle(particleOptions.createParticles, pos);
 		GameManager.Creatures.CreatureDestroyed += (pos) => CreateParticle(particleOptions.destroyParticles, pos);
 		entitySelector.GoalSet += (creature, pos) => CreateParticle(particleOptions.setCreatureGoalParticles, pos);
-	}
-
-	void DestroySelectedCreature()
-	{
-		var creature = entitySelector.SelectedCreature;
-		entitySelector.Deselect(); // TODO this deselect method goes somewhere else?
-		GameManager.Creatures.DestroyCreature(creature);
 	}
 
 	// TODO make the win text an in-world panel like the original game?
