@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
+using Util;
 
 public class ChangeTerrainAbility : MonoBehaviour, IAbility
 {
@@ -25,11 +27,20 @@ public class ChangeTerrainAbility : MonoBehaviour, IAbility
 		}
 
 		// Pick up or put down the terrain.
-		// FIXME make sure that the new location can support the creature that is there now
 		isCarrying = !isCarrying;
-		if (terrain.Contains(target) && terrain[target] == initialType)
+		if (terrain.Contains(target) && terrain[target] == initialType
+			&& GameManager.Resources[target].IsEmpty()
+			&& CanSetCoordinate(target, finalType))
 		{
 			terrain[target] = finalType;
 		}
 	}
+
+	// Returns true if you can set the coordinate to the specified terrain type
+	private bool CanSetCoordinate(Coordinate target, TerrainType terrain)
+	{
+		return !GameManager.Creatures.CreatureList.Any(x => (x.Position == target || x.NextPosition == target)
+			&& !x.Definition.AllowedTerrain.Contains(terrain));
+	}
+
 }
