@@ -9,6 +9,11 @@ public class UIManager : MonoBehaviour
 
 	public string menuScene = "Menu";
 
+	void Awake()
+	{
+		if (ui == null) { ui = this; }
+	}
+
 	public void ReturnToMenu()
 	{
 		SceneManager.LoadScene(menuScene);
