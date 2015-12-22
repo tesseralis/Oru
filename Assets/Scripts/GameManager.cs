@@ -7,6 +7,10 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 
+/// <summary>
+/// Manages state that persists throughout the entire game, i.e. in the menus
+/// and across multiple levels.
+/// </summary>
 public class GameManager : MonoBehaviour {
 
 	public static GameManager game;

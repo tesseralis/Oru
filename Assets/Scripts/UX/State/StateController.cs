@@ -1,9 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Controls the selection of game objects and keeps track of what part of the
+/// game is currently in focus.
+/// </summary>
 public class StateController : MonoBehaviour
 {
-
+	// TODO "SelectionController" is probably a more apt name.
 	public CreatureSelector creatureSelector;
 	public CreatureCreator creatureCreator;
 

@@ -5,10 +5,14 @@ using System.Collections;
 using System.Collections.Generic;
 using Util;
 
+/// <summary>
+/// Manages state specific to individual levels: the terrain layout, the set of
+/// creatures, resources, and recipes, and the win conditions of each level.
+/// 
+/// Also manages the internal game clock, putting it into discrete steps.
+/// </summary>
 public class LevelManager : MonoBehaviour
 {
-
-	// make game manager accessible throughout the game
 	public static LevelManager level;
 
 	public static TerrainController Terrain { get { return level.terrainController; } }
@@ -41,41 +45,24 @@ public class LevelManager : MonoBehaviour
 
 	public event Action Step;
 
-	/*
-	 * Internal game state
-	 */
 	// the next time to take a step
 	private float nextStepTime;
-
 
 	void Awake ()
 	{
 		if (level == null) { level = this; }
 
+		// Auto-wire the controllers if necessary
+		if (!creatureController) { creatureController = GetComponentInChildren<CreatureController>(); }
+		if (!terrainController) { terrainController = GetComponentInChildren<TerrainController>(); }
+		if (!resourceController) { resourceController = GetComponentInChildren<ResourceController>(); }
+		if (!recipeController) { recipeController = GetComponentInChildren<RecipeController>(); }
+		if (!goalController) { goalController = GetComponentInChildren<GoalController>(); }
+
+		// Set up time management
+		// TODO Time should also be factored out somewhere else
 		nextStepTime = 0;
 		Steps = 0;
-
-		// Auto-wire the controllers if necessary
-		if (creatureController == null)
-		{
-			creatureController = GetComponentInChildren<CreatureController>();
-		}
-		if (terrainController == null)
-		{
-			terrainController = GetComponentInChildren<TerrainController>();
-		}
-		if (resourceController == null)
-		{
-			resourceController = GetComponentInChildren<ResourceController>();
-		}
-		if (recipeController == null)
-		{
-			recipeController = GetComponentInChildren<RecipeController>();
-		}
-		if (goalController == null)
-		{
-			goalController = GetComponentInChildren<GoalController>();
-		}
 	}
 	
 	// Update is called once per frame

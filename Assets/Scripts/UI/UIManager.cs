@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-// Main controller for all UI.
+/// <summary>
+/// Manages the UI (Canvas) components of the game.
+/// </summary>
 public class UIManager : MonoBehaviour
 {
 	// make game manager accessible throughout the game
