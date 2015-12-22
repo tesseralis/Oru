@@ -1,19 +1,16 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 using System.Collections;
 
-public class WinnerPanel : MonoBehaviour {
-
-	public string menuScene = "Menu";
-
-	// TODO refactor these methods so that they can be used at any point in the level
-	public void ReturnToMenu()
+public class WinnerPanel : MonoBehaviour
+{
+	void Start ()
 	{
-		SceneManager.LoadScene(menuScene);
+		// Start creating the recipe
+		LevelManager.Goals.OnWin += DisplayWinInfo;
 	}
 
-	public void RestartLevel()
+	void DisplayWinInfo()
 	{
-		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+		gameObject.SetActive(true);
 	}
 }
