@@ -7,6 +7,7 @@ public class WinnerPanel : MonoBehaviour
 	{
 		// Start creating the recipe
 		LevelManager.Goals.OnWin += DisplayWinInfo;
+		gameObject.SetActive(false);
 	}
 
 	void DisplayWinInfo()
