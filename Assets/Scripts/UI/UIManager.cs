@@ -1,11 +1,5 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using Util;
 
 // Main controller for all UI.
 public class UIManager : MonoBehaviour
