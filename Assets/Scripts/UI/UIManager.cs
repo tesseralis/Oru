@@ -42,7 +42,7 @@ public class UIManager : MonoBehaviour
 		// Start creating the recipe
 		// TODO propagate this to the recipe list class itself
 
-		LevelManager.level.OnWin += DisplayWinInfo;
+		LevelManager.Goals.OnWin += DisplayWinInfo;
 	}
 
 	// TODO make the win text an in-world panel like the original game?

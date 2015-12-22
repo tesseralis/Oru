@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 using System;
 using System.Linq;
 using System.Collections;
@@ -21,9 +20,6 @@ public class LevelManager : MonoBehaviour
 	/*
 	 * Public members that can be set per level.
 	 */
-	// the goal in the world
-//	public Goal goal;
-
 	// the grid of available game blocks
 	public TerrainController terrainController;
 	// the creatures in the game world
@@ -48,37 +44,13 @@ public class LevelManager : MonoBehaviour
 	/*
 	 * Internal game state
 	 */
-
-	// The game state
-	public bool HasWon
-	{ 
-		get { return hasWon; }
-		set
-		{
-			hasWon = value;
-			if (hasWon)
-			{
-				if (OnWin != null) { OnWin(); }
-				// Save that we have won this level
-				Debug.Log("Won this level! Saving...");
-				GameManager.game.SetCompletion(SceneManager.GetActiveScene().name, true);
-				GameManager.game.Save();
-			}
-		}
-	}
-
-	// Event that is called when we are victorious.
-	public Action OnWin;
-
 	// the next time to take a step
 	private float nextStepTime;
 
-	private bool hasWon;
 
 	void Awake ()
 	{
 		if (level == null) { level = this; }
-		HasWon = false;
 
 		nextStepTime = 0;
 		Steps = 0;
@@ -109,15 +81,12 @@ public class LevelManager : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		if (!HasWon)
+		if (Time.timeSinceLevelLoad >= nextStepTime)
 		{
-			if (Time.timeSinceLevelLoad >= nextStepTime)
-			{
-				nextStepTime += stepInterval;
-				Steps++;
-				Debug.Log("Current step: " + Steps);
-				Step();
-			}
+			nextStepTime += stepInterval;
+			Steps++;
+			Debug.Log("Current step: " + Steps);
+			Step();
 		}
 	}
 
