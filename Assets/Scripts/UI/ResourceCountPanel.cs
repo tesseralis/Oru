@@ -10,7 +10,6 @@ public class ResourceCountPanel : MonoBehaviour {
 
 	public void SetContents(ResourceType type, int count)
 	{
-		Debug.Log(type + " " + count);
 		// Fill in the contents
 		image.color = GetColor(type);
 		text.text = count.ToString();
@@ -21,7 +20,7 @@ public class ResourceCountPanel : MonoBehaviour {
 		switch(resource)
 		{
 		case ResourceType.Energy: return Color.white;
-		case ResourceType.Red: return Color.blue;
+		case ResourceType.Red: return Color.red;
 		case ResourceType.Yellow: return Color.yellow;
 		case ResourceType.Green: return Color.green;
 		case ResourceType.Blue: return Color.blue;

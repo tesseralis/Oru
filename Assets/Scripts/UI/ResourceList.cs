@@ -26,7 +26,7 @@ public class ResourceList : MonoBehaviour
 			// Translate the new object by the index amount
 			var transform = newResource.GetComponent<RectTransform>();
 			transform.anchoredPosition += Vector2.down * i * resourceSpacing;
-			GetComponentInChildren<ResourceCountPanel>().SetContents(entry.Key, entry.Value);
+			newResource.GetComponent<ResourceCountPanel>().SetContents(entry.Key, entry.Value);
 			i++;
 		}
 	}
