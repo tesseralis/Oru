@@ -5,13 +5,15 @@ using System.Collections;
 
 public class ResourceCountPanel : MonoBehaviour {
 
+	public Image image;
+	public Text text;
+
 	public void SetContents(ResourceType type, int count)
 	{
 		Debug.Log(type + " " + count);
 		// Fill in the contents
-		// TODO don't rely on the panel having this shape
-		GetComponentInChildren<Image>().color = GetColor(type);
-		GetComponentInChildren<Text>().text = count.ToString();
+		image.color = GetColor(type);
+		text.text = count.ToString();
 	}
 
 	private Color GetColor(ResourceType resource)
