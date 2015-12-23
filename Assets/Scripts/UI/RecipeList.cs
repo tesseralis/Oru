@@ -26,16 +26,7 @@ public class RecipeList : MonoBehaviour
 	void UpdateRecipeList(IList<CreatureType> availableRecipes)
 	{
 		gameObject.SetActive(true);
-
-		// Delete the existing children first
-		// TODO refactor child deletion and child selection
-		var children = new List<GameObject>();
-		foreach (Transform child in buttonContainer.transform)
-		{
-			children.Add(child.gameObject);
-		}
-		// Delete the previously existing children
-		children.ForEach(x => Destroy(x));
+		buttonContainer.DestroyAllChildren();
 
 		// Populate the UI with buttons corresponding with the recipes
 		for (int i = 0; i < availableRecipes.Count; i++)

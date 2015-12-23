@@ -8,6 +8,7 @@ public class CreatureInfo : MonoBehaviour
 
 	public Text nameDisplay;
 	public Text descriptionDisplay;
+	public ResourceList resourceList;
 	public DelegateButton useAbilityButton;
 	public DelegateButton destroyCreatureButton;
 
@@ -50,6 +51,8 @@ public class CreatureInfo : MonoBehaviour
 			useAbilityButton.gameObject.SetActive(false);
 			ability = "None";
 		}
+
+		resourceList.SetContents(creatureDefinition.Recipe);
 
 		descriptionDisplay.text = string.Format("Allowed Terrain: {0}\nAbility: {1}",
 			string.Join(", ", creatureDefinition.AllowedTerrain.Select(t => t.ToString()).ToArray()),

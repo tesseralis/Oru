@@ -26,11 +26,14 @@ public class CoordinateInfo : MonoBehaviour
 	// Show the panel for the given coordinate
 	void Show(Coordinate coordinate)
 	{
+		content.gameObject.SetActive(true);
 		if (!LevelManager.Resources[coordinate].IsEmpty())
 		{
 			gameObject.SetActive(true);
-			content.text = string.Join("\n",
-				LevelManager.Resources[coordinate].Select(e => e.Key + ": " + e.Value).ToArray());
+			content.gameObject.SetActive(false);
+			gameObject.GetComponentInChildren<ResourceList>().SetContents(LevelManager.Resources[coordinate]);
+//			content.text = string.Join("\n",
+//				LevelManager.Resources[coordinate].Select(e => e.Key + ": " + e.Value).ToArray());
 		}
 		if (LevelManager.Recipes[coordinate] != null)
 		{
