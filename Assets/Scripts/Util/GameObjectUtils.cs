@@ -51,5 +51,17 @@ namespace Util
 			return newObject.GetComponent<T>();
 		}
 
+		public static void DestroyAllChildren(this GameObject gameObject)
+		{
+			// Delete the existing children first
+			var children = new List<GameObject>();
+			foreach (Transform child in gameObject.transform)
+			{
+				children.Add(child.gameObject);
+			}
+			// Delete the previously existing children
+			children.ForEach(x => GameObject.Destroy(x));
+		}
+
 	}
 }
