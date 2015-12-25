@@ -12,8 +12,9 @@ public class ResourceList : MonoBehaviour
 	public float resourceSpacing = 30f;
 
 	// TODO a lot of this can be factored with the methods in RecipeList
-	public void SetContents(IDictionary<ResourceType, int> recipe)
+	public void ShowResources(IDictionary<ResourceType, int> recipe)
 	{
+		gameObject.SetActive(true);
 		// Delete all the children
 		gameObject.DestroyAllChildren();
 
@@ -29,6 +30,11 @@ public class ResourceList : MonoBehaviour
 			newResource.GetComponent<ResourceCountPanel>().SetContents(entry.Key, entry.Value);
 			i++;
 		}
+	}
+
+	public void Hide()
+	{
+		gameObject.SetActive(false);
 	}
 
 }

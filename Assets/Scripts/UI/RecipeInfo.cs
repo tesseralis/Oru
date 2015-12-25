@@ -15,6 +15,6 @@ public class RecipeInfo : MonoBehaviour
 		gameObject.SetActive(true);
 		nameDisplay.text = creatureType.ToString();
 		var creatureDefinition = Creatures.ForType(creatureType);
-		GetComponentInChildren<ResourceList>().SetContents(creatureDefinition.Recipe);
+		GetComponentInChildren<ResourceList>().ShowResources(creatureDefinition.Recipe);
 	}
 }

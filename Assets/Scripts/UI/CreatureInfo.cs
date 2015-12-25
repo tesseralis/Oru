@@ -52,7 +52,7 @@ public class CreatureInfo : MonoBehaviour
 			ability = "None";
 		}
 
-		resourceList.SetContents(creatureDefinition.Recipe);
+		resourceList.ShowResources(creatureDefinition.Recipe);
 
 		descriptionDisplay.text = string.Format("Allowed Terrain: {0}\nAbility: {1}",
 			string.Join(", ", creatureDefinition.AllowedTerrain.Select(t => t.ToString()).ToArray()),

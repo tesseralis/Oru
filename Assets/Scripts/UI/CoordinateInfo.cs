@@ -9,10 +9,12 @@ public class CoordinateInfo : MonoBehaviour
 {
 
 	public Text content;
+	public ResourceList resourceList;
 
 	void Awake ()
 	{
 		if (content == null) { content = GetComponentInChildren<Text>(); }
+		if (resourceList == null) { resourceList = GetComponentInChildren<ResourceList>(); }
 	}
 
 	void Start()
@@ -31,20 +33,20 @@ public class CoordinateInfo : MonoBehaviour
 		{
 			gameObject.SetActive(true);
 			content.gameObject.SetActive(false);
-			gameObject.GetComponentInChildren<ResourceList>().SetContents(LevelManager.Resources[coordinate]);
-//			content.text = string.Join("\n",
-//				LevelManager.Resources[coordinate].Select(e => e.Key + ": " + e.Value).ToArray());
+			resourceList.ShowResources(LevelManager.Resources[coordinate]);
 		}
 		if (LevelManager.Recipes[coordinate] != null)
 		{
 			gameObject.SetActive(true);
 			content.text = "?";
+			resourceList.Hide();
 		}
 
 		if (LevelManager.Goals.goal.gameObject.Coordinate() == coordinate)
 		{
 			gameObject.SetActive(true);
 			content.text = string.Format("Goal: {0} at this location.", LevelManager.Goals.goal.winningCreatureType);
+			resourceList.Hide();
 		}
 
 		// Move ourselves to the new location
