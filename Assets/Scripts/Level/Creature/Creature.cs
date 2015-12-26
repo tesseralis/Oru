@@ -33,7 +33,7 @@ public class Creature : MonoBehaviour
 	// Convenience method to get the creature's definition
 	public CreatureDefinition Definition
 	{
-		get { return Creatures.ForType(creatureType); }
+		get { return CreatureDefinitions.ForType(creatureType); }
 	}
 
 	void Start()

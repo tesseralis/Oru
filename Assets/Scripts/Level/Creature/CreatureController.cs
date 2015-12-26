@@ -41,7 +41,7 @@ public class CreatureController : MonoBehaviour
 	// Returns true if we can add a creature at the given coordinate
 	public bool CanCreateCreature(CreatureType creature, Coordinate coordinate)
 	{
-		var creatureDefinition = Creatures.ForType(creature);
+		var creatureDefinition = CreatureDefinitions.ForType(creature);
 		var resources = LevelManager.Resources;
 		var recipe = creatureDefinition.Recipe;
 		// Figure out how many blocks we have available
@@ -69,7 +69,7 @@ public class CreatureController : MonoBehaviour
 
 		// Remove the items from the neighboring coordinates.
 		var neighbors = Neighbors(location);
-		var remainder = Creatures.ForType(creature).Recipe;
+		var remainder = CreatureDefinitions.ForType(creature).Recipe;
 		// Take items from the adjacent resources until we don't need any more.
 		foreach (var neighbor in neighbors)
 		{
@@ -102,7 +102,7 @@ public class CreatureController : MonoBehaviour
 		if (CreatureDestroyed != null) { CreatureDestroyed(coordinate); }
 
 		// Recycle the creature's components
-		LevelManager.Resources[coordinate] = LevelManager.Resources[coordinate].MultisetAdd(Creatures.ForType(creature.creatureType).Recipe);
+		LevelManager.Resources[coordinate] = LevelManager.Resources[coordinate].MultisetAdd(CreatureDefinitions.ForType(creature.creatureType).Recipe);
 
 		// Do anything the creature's ability's state says we should do.
 		// TODO generalize this so that we can account for more abilities

@@ -31,7 +31,7 @@ public class CreatureInfo : MonoBehaviour
 	{
 		gameObject.SetActive(true);
 		nameDisplay.text = creature.creatureType.ToString();
-		var creatureDefinition = Creatures.ForType(creature.creatureType);
+		var creatureDefinition = CreatureDefinitions.ForType(creature.creatureType);
 		// TODO generalize for all abilities!
 		string ability;
 		if (creature.GetComponent<ChangeTerrainAbility>() != null)
