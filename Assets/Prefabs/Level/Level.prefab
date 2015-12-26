@@ -185,10 +185,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   terrainPrefabs:
-    landPrefab: {fileID: 177414, guid: 1afef6a08696149b18c31cdb92c17049, type: 2}
-    rockPrefab: {fileID: 186096, guid: db38fd54633eb409d9e6eea9e3658871, type: 2}
-    treePrefab: {fileID: 151468, guid: f43072b24dd4b4708a998e61da781689, type: 2}
-    waterPrefab: {fileID: 147072, guid: 78c95faed1037499a8265c378fd4f448, type: 2}
+    landPrefab: {fileID: 169600, guid: 4846c59ae40124e678cc218d3c419d49, type: 2}
+    rockPrefab: {fileID: 157974, guid: cf72ffd597e424d04807c9863c982987, type: 2}
+    treePrefab: {fileID: 124650, guid: bfbbf356d98144194acdf2ab240f53a9, type: 2}
+    waterPrefab: {fileID: 136356, guid: 78c95faed1037499a8265c378fd4f448, type: 2}
 --- !u!114 &11422028
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -270,7 +270,23 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: terrainPrefabs.landPrefab
+      value: 
+      objectReference: {fileID: 169600, guid: 4846c59ae40124e678cc218d3c419d49, type: 2}
+    - target: {fileID: 0}
+      propertyPath: terrainPrefabs.rockPrefab
+      value: 
+      objectReference: {fileID: 157974, guid: cf72ffd597e424d04807c9863c982987, type: 2}
+    - target: {fileID: 0}
+      propertyPath: terrainPrefabs.waterPrefab
+      value: 
+      objectReference: {fileID: 136356, guid: 78c95faed1037499a8265c378fd4f448, type: 2}
+    - target: {fileID: 0}
+      propertyPath: terrainPrefabs.treePrefab
+      value: 
+      objectReference: {fileID: 124650, guid: bfbbf356d98144194acdf2ab240f53a9, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 180142}
