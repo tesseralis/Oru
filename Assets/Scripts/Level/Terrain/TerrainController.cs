@@ -17,7 +17,7 @@ public class TerrainController : MonoBehaviour
 	public Action<Coordinate> MouseExitBlock;
 	public Action<Coordinate> ClickBlock;
 
-	private IDictionary<Coordinate, TerrainBlock> grid;
+	private IDictionary<Coordinate, TerrainTile> grid;
 
 	public TerrainType this[Coordinate coordinate]
 	{
@@ -32,7 +32,7 @@ public class TerrainController : MonoBehaviour
 
 			// Create the new item
 			var prefab = terrainPrefabs.PrefabFor (value);
-			var block = gameObject.AddChildWithComponent<TerrainBlock>(prefab, coordinate);
+			var block = gameObject.AddChildWithComponent<TerrainTile>(prefab, coordinate);
 			block.type = value;
 			grid[coordinate] = block;
 
@@ -47,8 +47,8 @@ public class TerrainController : MonoBehaviour
 	// Initialize the grid
 	void Start ()
 	{
-		grid = new Dictionary<Coordinate, TerrainBlock>();
-		foreach (var block in GetComponentsInChildren<TerrainBlock>())
+		grid = new Dictionary<Coordinate, TerrainTile>();
+		foreach (var block in GetComponentsInChildren<TerrainTile>())
 		{
 			grid[block.gameObject.Coordinate()] = block;
 		}

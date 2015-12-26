@@ -6,7 +6,7 @@ using Util;
 /// <summary>
 /// Behavior for a single terrain block (a space that can hold a creature).
 /// </summary>
-public class TerrainBlock: MonoBehaviour
+public class TerrainTile: MonoBehaviour
 {
 	private TerrainController controller {
 		get { return GetComponentInParent<TerrainController>(); }
