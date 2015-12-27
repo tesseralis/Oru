@@ -1110,8 +1110,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 11435164}
   m_HandleRect: {fileID: 22404138}
   m_Direction: 2
-  m_Value: 0.99999976
-  m_Size: 0.60999995
+  m_Value: 1
+  m_Size: 0.6100001
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1452,7 +1452,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Destroy
+  m_Text: Unfold
 --- !u!114 &11445012
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2099,6 +2099,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   content: {fileID: 11437324}
+  resourceList: {fileID: 0}
 --- !u!114 &11488044
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2265,10 +2266,10 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: c18acfa054d19457baa7f4f0e8968564, type: 3}
-    m_FontSize: 42
+    m_FontSize: 36
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 3
+    m_MinSize: 0
     m_MaxSize: 48
     m_Alignment: 1
     m_AlignByGeometry: 0
@@ -2276,7 +2277,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Recipes
+  m_Text: Blueprints
 --- !u!222 &22202020
 CanvasRenderer:
   m_ObjectHideFlags: 1
