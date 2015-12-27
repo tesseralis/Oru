@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 using System.Linq;
+using Util;
 
 public class CreatureInfo : MonoBehaviour
 {
@@ -22,6 +23,9 @@ public class CreatureInfo : MonoBehaviour
 
 		// Add handlers for destroying the creature
 		destroyCreatureButton.Click += UXManager.State.Selector.DestroySelectedCreature;
+
+		UXManager.State.Selector.actionMarkers.AbilityUsed += () =>
+			DisplayAbilityText(UXManager.State.Selector.SelectedCreature);
 
 		// Finally, hide ourselves until a creature is selected
 		HideCreatureInfo();
@@ -57,6 +61,36 @@ public class CreatureInfo : MonoBehaviour
 		descriptionDisplay.text = string.Format("Allowed Terrain: {0}\nAbility: {1}",
 			string.Join(", ", creatureDefinition.AllowedTerrain.Select(t => t.ToString()).ToArray()),
 			ability);
+		DisplayAbilityText(creature);
+	}
+
+	private void DisplayAbilityText(Creature creature)
+	{
+		var text = useAbilityButton.GetComponentInChildren<Text>();
+		if (creature.GetComponent<ChangeTerrainAbility>() != null)
+		{
+			var changeTerrain = creature.GetComponent<ChangeTerrainAbility>();
+			if (changeTerrain.IsCarrying)
+			{
+				text.text = "Put down " + changeTerrain.carryType;
+			}
+			else
+			{
+				text.text = "Pick up " + changeTerrain.carryType;
+			}
+		}
+		else if (creature.GetComponent<CarryResourceAbility>() != null)
+		{
+			var carryResource = creature.GetComponent<CarryResourceAbility>();
+			if (carryResource.Carrying.IsEmpty())
+			{
+				text.text = "Pick up " + carryResource.capacity;
+			}
+			else
+			{
+				text.text = "Put down " + carryResource.capacity;
+			}
+		}
 	}
 
 	private void HideCreatureInfo()
