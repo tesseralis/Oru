@@ -63,8 +63,10 @@ public class CreatureSelector : MonoBehaviour
 		// Add a listener to the action markers
 		if (creature.HasAbility())
 		{
-			actionMarkers.Enable(creature.Ability.Use);
+			actionMarkers.Enable(creature);
 			actionMarkers.OnStartAbility += RemoveCurrentCreatureGoal;
+			actionMarkers.OnStartAbility += DisableGoalSetting;
+			actionMarkers.OnStopAbility += EnableGoalSetting;
 		}
 		else
 		{
@@ -102,6 +104,17 @@ public class CreatureSelector : MonoBehaviour
 	private void RemoveCurrentCreatureGoal()
 	{
 		SelectedCreature.Goal = null;
+	}
+
+	// TODO This looks really icky to me
+	private void EnableGoalSetting()
+	{
+		LevelManager.Terrain.ClickBlock += SetCurrentCreatureGoal;
+	}
+
+	private void DisableGoalSetting()
+	{
+		LevelManager.Terrain.ClickBlock -= SetCurrentCreatureGoal;
 	}
 
 }

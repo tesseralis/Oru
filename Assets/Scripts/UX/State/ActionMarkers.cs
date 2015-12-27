@@ -8,27 +8,29 @@ public class ActionMarkers : MonoBehaviour {
 	private bool isActing = false;
 
 	private ActionMarker[] markers;
+	private Creature creature;
 
 	public event Action OnStartAbility;
 	public event Action OnStopAbility;
 	public event Action AbilityUsed;
 
-	public void Enable(Action<Coordinate> action)
+	public void Enable(Creature creature)
 	{
 		if (markers == null)
 		{
 			markers = GetComponentsInChildren<ActionMarker>(true);
 		}
 		isEnabled = true;
+		this.creature = creature;
 		UXManager.Input.KeyDown[KeyCode.Space] += ToggleAbility;
-		foreach (var marker in markers)
-		{
-			marker.OnClick = coordinate => {
-				action(coordinate);
-				if (AbilityUsed != null) { AbilityUsed(); }
-				StopAbility();
-			};
-		}
+//		foreach (var marker in markers)
+//		{
+//			marker.OnClick = coordinate => {
+//				action(coordinate);
+//				if (AbilityUsed != null) { AbilityUsed(); }
+//				StopAbility();
+//			};
+//		}
 	}
 
 	public void Disable()
@@ -51,6 +53,7 @@ public class ActionMarkers : MonoBehaviour {
 		Debug.Log("Engaging creature ability.");
 		isActing = true;
 		gameObject.SetActive(true);
+		LevelManager.Terrain.ClickBlock += creature.UseAbility;
 		if (OnStartAbility != null) { OnStartAbility(); }
 	}
 
@@ -63,6 +66,7 @@ public class ActionMarkers : MonoBehaviour {
 		Debug.Log("Stopping creature ability.");
 		isActing = false;
 		gameObject.SetActive(false);
+		LevelManager.Terrain.ClickBlock -= creature.UseAbility;
 		if (OnStopAbility != null) { OnStopAbility(); }
 	}
 
