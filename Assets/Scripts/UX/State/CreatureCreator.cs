@@ -28,7 +28,7 @@ public class CreatureCreator : MonoBehaviour {
 		currentCreatureType = creature;
 		LevelManager.Terrain.MouseEnterBlock += ShowCreateMarker;
 		LevelManager.Terrain.MouseExitBlock += HideCreateMarker;
-		LevelManager.Terrain.ClickBlock += CreateCreature;
+		UXManager.Input.TerrainClicked += CreateCreature;
 
 		if (CreationStarted != null) { CreationStarted(creature); }
 	}
@@ -38,7 +38,7 @@ public class CreatureCreator : MonoBehaviour {
 		if (createMarker) { createMarker.SetActive(false); }
 		LevelManager.Terrain.MouseEnterBlock -= ShowCreateMarker;
 		LevelManager.Terrain.MouseExitBlock -= HideCreateMarker;
-		LevelManager.Terrain.ClickBlock -= CreateCreature;
+		UXManager.Input.TerrainClicked -= CreateCreature;
 
 		if (CreationStopped != null) { CreationStopped(); }
 	}

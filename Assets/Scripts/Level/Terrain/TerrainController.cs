@@ -15,7 +15,6 @@ public class TerrainController : MonoBehaviour
 
 	public Action<Coordinate> MouseEnterBlock;
 	public Action<Coordinate> MouseExitBlock;
-	public Action<Coordinate> ClickBlock;
 
 	private IDictionary<Coordinate, TerrainTile> grid;
 
