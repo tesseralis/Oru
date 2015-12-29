@@ -109,7 +109,7 @@ public class Creature : MonoBehaviour
 		}
 		// TODO generalize this so that it works on all coordinates
 		var direction = coordinate - Position;
-		if (Coordinate.cardinals.Contains(direction))
+		if (Coordinate.cardinals.Contains(direction) || coordinate == Position)
 		{
 			Ability.Use(coordinate);
 		}
