@@ -2,7 +2,8 @@
 using System;
 using System.Collections;
 
-public class ActionMarkers : MonoBehaviour {
+public class ActionMarkers : MonoBehaviour
+{
 
 	private bool isEnabled = false;
 	public bool IsActing { get; private set; }
