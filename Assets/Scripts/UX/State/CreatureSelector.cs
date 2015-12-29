@@ -14,8 +14,7 @@ public class CreatureSelector : MonoBehaviour
 	public event Action<Creature> Selected;
 	public event Action Deselected;
 	public event Action<Creature, Coordinate> GoalSet;
-
-	private bool isActing;
+	public event Action AbilityUsed;
 
 	public Creature SelectedCreature { get; private set; }
 
@@ -38,8 +37,7 @@ public class CreatureSelector : MonoBehaviour
 
 	private void DeselectCreature()
 	{
-		LevelManager.Terrain.ClickBlock -= SetCurrentCreatureGoal;
-		actionMarkers.OnStartAbility -= RemoveCurrentCreatureGoal;
+		LevelManager.Terrain.ClickBlock -= OnClickBlock;
 		actionMarkers.Disable();
 		SelectedCreature = null;
 		transform.SetParent(null, false);
@@ -58,13 +56,12 @@ public class CreatureSelector : MonoBehaviour
 		// Make the entity marker visible
 		if (creatureMarker) { creatureMarker.SetActive(true); }
 
-		LevelManager.Terrain.ClickBlock += SetCurrentCreatureGoal;
+		LevelManager.Terrain.ClickBlock += OnClickBlock;
 
 		// Add a listener to the action markers
 		if (creature.HasAbility())
 		{
-			actionMarkers.Enable(creature.Ability.Use);
-			actionMarkers.OnStartAbility += RemoveCurrentCreatureGoal;
+			actionMarkers.Enable(creature);
 		}
 		else
 		{
@@ -88,6 +85,25 @@ public class CreatureSelector : MonoBehaviour
 		// Run the events in the handler
 		if (Deselected != null) { Deselected(); }
 	}
+
+	private void OnClickBlock(Coordinate coordinate)
+	{
+		if (actionMarkers.IsActing)
+		{
+			UseCreatureAbility(coordinate);
+		}
+		else
+		{
+			SetCurrentCreatureGoal(coordinate);
+		}
+	}
+
+	private void UseCreatureAbility(Coordinate coordinate)
+	{
+		SelectedCreature.UseAbility(coordinate);
+		actionMarkers.StopAbility();
+		if (AbilityUsed != null) { AbilityUsed(); }
+	}
 		
 	private void SetCurrentCreatureGoal(Coordinate coordinate)
 	{
@@ -96,7 +112,6 @@ public class CreatureSelector : MonoBehaviour
 			SelectedCreature.Goal = coordinate;
 			if (GoalSet != null) { GoalSet(SelectedCreature, coordinate); }
 		}
-		if (SelectedCreature.HasAbility()) { actionMarkers.StopAbility(); }
 	}
 
 	private void RemoveCurrentCreatureGoal()

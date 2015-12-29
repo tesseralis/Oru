@@ -24,7 +24,7 @@ public class CreatureInfo : MonoBehaviour
 		// Add handlers for destroying the creature
 		destroyCreatureButton.Click += UXManager.State.Selector.DestroySelectedCreature;
 
-		UXManager.State.Selector.actionMarkers.AbilityUsed += () =>
+		UXManager.State.Selector.AbilityUsed += () =>
 			DisplayAbilityText(UXManager.State.Selector.SelectedCreature);
 
 		// Finally, hide ourselves until a creature is selected

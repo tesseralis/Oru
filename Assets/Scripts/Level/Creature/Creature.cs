@@ -20,10 +20,6 @@ public class Creature : MonoBehaviour
 
 	private bool isMoving = false;
 	
-	public bool HasAbility()
-	{
-		return GetComponent<IAbility>() != null;
-	}
 	
 	public IAbility Ability
 	{
@@ -98,6 +94,25 @@ public class Creature : MonoBehaviour
 	{
 		var parents = DoBFS(Position, goal, IsValidCoordinate);
 		return parents.Keys.Contains(goal);
+	}
+
+	public bool HasAbility()
+	{
+		return GetComponent<IAbility>() != null;
+	}
+
+	public void UseAbility(Coordinate coordinate)
+	{
+		if (!HasAbility())
+		{
+			throw new InvalidOperationException("This creature does not have an ability");
+		}
+		// TODO generalize this so that it works on all coordinates
+		var direction = coordinate - Position;
+		if (Coordinate.cardinals.Contains(direction))
+		{
+			Ability.Use(coordinate);
+		}
 	}
 
 	private float AngleFor(Coordinate direction)

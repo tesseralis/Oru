@@ -15,7 +15,7 @@ public class AudioController : MonoBehaviour {
 		LevelManager.Recipes.RecipesUpdated += (obj) => PlaySound(soundOptions.pickupRecipe);
 		UXManager.State.Selector.Selected += x => PlaySound(soundOptions.selectCreature);
 		UXManager.State.Selector.GoalSet += (x, y) => PlaySound(soundOptions.setCreatureGoal);
-		UXManager.State.Selector.actionMarkers.AbilityUsed += () => PlaySound(soundOptions.useAbility);
+		UXManager.State.Selector.AbilityUsed += () => PlaySound(soundOptions.useAbility);
 	}
 
 	// Play the given sound
