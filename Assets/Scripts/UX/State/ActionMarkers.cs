@@ -5,41 +5,23 @@ using System.Collections;
 public class ActionMarkers : MonoBehaviour {
 
 	private bool isEnabled = false;
-	private bool isActing = false;
-
-	private ActionMarker[] markers;
-	private Creature creature;
-
-	public event Action OnStartAbility;
-	public event Action OnStopAbility;
-	public event Action AbilityUsed;
+	public bool IsActing { get; private set; }
 
 	public void Enable(Creature creature)
 	{
-		if (markers == null)
-		{
-			markers = GetComponentsInChildren<ActionMarker>(true);
-		}
 		isEnabled = true;
-		this.creature = creature;
+		IsActing = false;
 		UXManager.Input.KeyDown[KeyCode.Space] += ToggleAbility;
-//		foreach (var marker in markers)
-//		{
-//			marker.OnClick = coordinate => {
-//				action(coordinate);
-//				if (AbilityUsed != null) { AbilityUsed(); }
-//				StopAbility();
-//			};
-//		}
 	}
 
 	public void Disable()
 	{
-		if (isEnabled && isActing)
+		if (isEnabled && IsActing)
 		{
 			StopAbility();
 		}
 		isEnabled = false;
+		IsActing = false;
 		UXManager.Input.KeyDown[KeyCode.Space] -= ToggleAbility;
 	}
 
@@ -51,10 +33,8 @@ public class ActionMarkers : MonoBehaviour {
 			throw new InvalidOperationException("Actions are not enabled.");
 		}
 		Debug.Log("Engaging creature ability.");
-		isActing = true;
+		IsActing = true;
 		gameObject.SetActive(true);
-		LevelManager.Terrain.ClickBlock += creature.UseAbility;
-		if (OnStartAbility != null) { OnStartAbility(); }
 	}
 
 	public void StopAbility()
@@ -64,15 +44,13 @@ public class ActionMarkers : MonoBehaviour {
 			throw new InvalidOperationException("Actions are not enabled.");
 		}
 		Debug.Log("Stopping creature ability.");
-		isActing = false;
+		IsActing = false;
 		gameObject.SetActive(false);
-		LevelManager.Terrain.ClickBlock -= creature.UseAbility;
-		if (OnStopAbility != null) { OnStopAbility(); }
 	}
 
 	public void ToggleAbility()
 	{
-		if (!isActing)
+		if (!IsActing)
 		{
 			StartAbility();
 		}
