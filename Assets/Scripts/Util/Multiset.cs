@@ -5,7 +5,6 @@ using System.Linq;
 namespace Util
 {
 	// Defines extension methods that allow dictionaries to be treated as multisets
-	// TODO figure out performance implications of making so many dictionaries
 	public static class Multiset
 	{
 		/// <summary>
