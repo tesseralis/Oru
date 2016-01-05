@@ -264,6 +264,7 @@ MonoBehaviour:
     yellowPrefab: {fileID: 192110, guid: a6734951fc922471fac580d20d9f2425, type: 2}
     bluePrefab: {fileID: 178862, guid: 5d57f5de74f2f428c8a3d23c14031489, type: 2}
     greenPrefab: {fileID: 109198, guid: c3a6731d2693845fdad2bb637e78d30d, type: 2}
+  resourcePilePrefab: {fileID: 159150, guid: 284e74a3d652a48e6be113e2c67123e6, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -287,6 +288,10 @@ Prefab:
       propertyPath: terrainPrefabs.treePrefab
       value: 
       objectReference: {fileID: 124650, guid: bfbbf356d98144194acdf2ab240f53a9, type: 2}
+    - target: {fileID: 0}
+      propertyPath: resourcePilePrefab
+      value: 
+      objectReference: {fileID: 159150, guid: 284e74a3d652a48e6be113e2c67123e6, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 180142}

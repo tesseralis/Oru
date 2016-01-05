@@ -9,6 +9,24 @@ public class CarryResourceAbility : MonoBehaviour, IAbility
 	public int capacity;
 	public ResourceCount[] carrying;
 
+	public class Definition : IAbilityDefinition
+	{
+		public int Capacity { get; set; }
+		public string Description()
+		{
+			return "Pick up " + Capacity + " resources";
+		}
+
+		public IAbility AddToCreature(Creature creature)
+		{
+			var ability = creature.gameObject.AddComponent<CarryResourceAbility>();
+			// TODO figure out if there is a way to structure this without leaving these variables public
+			ability.capacity = Capacity;
+			ability.carrying = new ResourceCount[0];
+			return ability;
+		}
+	}
+
 	// Convert to a multiset
 	// TODO refactor with the same methods in ResourcePile
 	public IDictionary<ResourceType, int> Carrying
@@ -21,6 +39,18 @@ public class CarryResourceAbility : MonoBehaviour, IAbility
 		set
 		{
 			carrying = value.Select(resource => new ResourceCount(resource.Key, resource.Value)).ToArray();
+		}
+	}
+
+	public string Description()
+	{
+		if (Carrying.IsEmpty())
+		{
+			return "Pick up " + capacity;
+		}
+		else
+		{
+			return "Put down " + capacity;
 		}
 	}
 

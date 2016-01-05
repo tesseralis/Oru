@@ -8,12 +8,27 @@ public class ChangeTerrainAbility : MonoBehaviour, IAbility
 	public TerrainType carryType = TerrainType.Rock;
 	public TerrainType leaveType = TerrainType.Land;
 
-	public bool IsCarrying { get; private set; }
-
-	public void Awake()
+	public class Definition : IAbilityDefinition
 	{
-		IsCarrying = false;
+		public TerrainType CarryType { get; set; }
+		public TerrainType LeaveType { get; set; }
+
+		public string Description()
+		{
+			return "Pick up " + CarryType;
+		}
+
+		public IAbility AddToCreature(Creature creature)
+		{
+			var ability = creature.gameObject.AddComponent<ChangeTerrainAbility>();
+			ability.carryType = CarryType;
+			ability.leaveType = LeaveType;
+			return ability;
+		}
 	}
+
+	public bool isCarrying;
+
 
 	public void Use(Coordinate target)
 	{
@@ -22,7 +37,7 @@ public class ChangeTerrainAbility : MonoBehaviour, IAbility
 		// Determine whether the creature should be picking up or putting down
 		TerrainType initialType;
 		TerrainType finalType;
-		if (IsCarrying)
+		if (isCarrying)
 		{
 			initialType = leaveType;
 			finalType = carryType;
@@ -32,7 +47,7 @@ public class ChangeTerrainAbility : MonoBehaviour, IAbility
 		}
 
 		// Pick up or put down the terrain.
-		IsCarrying = !IsCarrying;
+		isCarrying = !isCarrying;
 		if (terrain.Contains(target) && terrain[target] == initialType
 			&& LevelManager.Resources[target].IsEmpty()
 			&& CanSetCoordinate(target, finalType))
@@ -46,6 +61,18 @@ public class ChangeTerrainAbility : MonoBehaviour, IAbility
 	{
 		return !LevelManager.Creatures.CreatureList.Any(x => (x.Position == target || x.NextPosition == target)
 			&& !x.Definition.AllowedTerrain.Contains(terrain));
+	}
+
+	public string Description()
+	{
+		if (isCarrying)
+		{
+			return "Put down " + carryType;
+		}
+		else
+		{
+			return "Pick up " + carryType;
+		}
 	}
 
 }

@@ -9,6 +9,7 @@ public static class CreatureDefinitions
 	public static readonly CreatureDefinition Crane = new CreatureDefinition
 	{
 		Type = CreatureType.Crane,
+		Description = "The basic origami crane",
 		Recipe = new Dictionary<ResourceType, int>() { {ResourceType.Blue, 1} },
 		AllowedTerrain = new TerrainType[]{ TerrainType.Land, TerrainType.Water }
 	};
@@ -16,22 +17,32 @@ public static class CreatureDefinitions
 	public static readonly CreatureDefinition Turtle = new CreatureDefinition
 	{
 		Type = CreatureType.Turtle,
+		Description = "A seabound unit that can carry resources",
 		Recipe = new Dictionary<ResourceType, int>() { {ResourceType.Green, 1} },
-		AllowedTerrain = new TerrainType[]{ TerrainType.Water }
+		AllowedTerrain = new TerrainType[]{ TerrainType.Water },
+		Ability = new CarryResourceAbility.Definition { Capacity = 5 }
 	};
 
 	public static readonly CreatureDefinition Horse = new CreatureDefinition
 	{
 		Type = CreatureType.Horse,
+		Description = "A versatile land unit that can carry resources",
 		Recipe = new Dictionary<ResourceType, int>() { {ResourceType.Red, 4} },
-		AllowedTerrain = new TerrainType[]{ TerrainType.Land, TerrainType.Rock }
+		AllowedTerrain = new TerrainType[]{ TerrainType.Land, TerrainType.Rock },
+		Ability = new CarryResourceAbility.Definition { Capacity = 5 }
 	};
 
 	public static readonly CreatureDefinition Elephant = new CreatureDefinition
 	{
 		Type = CreatureType.Elephant,
+		Description = "A large unit that can uproot and move trees",
 		Recipe = new Dictionary<ResourceType, int>() { {ResourceType.Blue, 9} },
-		AllowedTerrain = new TerrainType[]{ TerrainType.Land }
+		AllowedTerrain = new TerrainType[]{ TerrainType.Land },
+		Ability = new ChangeTerrainAbility.Definition
+		{
+			CarryType = TerrainType.Tree,
+			LeaveType = TerrainType.Land
+		}
 	};
 
 	public static CreatureDefinition ForType(CreatureType type)

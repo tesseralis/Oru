@@ -43,7 +43,6 @@ GameObject:
   - 4: {fileID: 409384}
   - 65: {fileID: 6535684}
   - 114: {fileID: 11449260}
-  - 114: {fileID: 11461334}
   m_Layer: 0
   m_Name: Horse
   m_TagString: Untagged
@@ -478,19 +477,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   creatureType: 2
---- !u!114 &11461334
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 126128}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 935d35ca9644d42599cbffe51c35ab7d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  capacity: 5
-  carrying: []
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

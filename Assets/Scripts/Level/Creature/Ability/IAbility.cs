@@ -10,4 +10,10 @@ public interface IAbility
 	/// </summary>
 	/// <param name="coordinate">Coordinate.</param>
 	void Use(Coordinate coordinate);
+
+	/// <summary>
+	/// Description of what happens when you use the ability.
+	/// </summary>
+	/// <returns>The ability description.</returns>
+	string Description();
 }
