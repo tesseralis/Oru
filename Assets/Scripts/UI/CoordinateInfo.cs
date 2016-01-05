@@ -20,7 +20,6 @@ public class CoordinateInfo : MonoBehaviour
 	void Update()
 	{
 		Coordinate? hit = UXManager.Input.CurrentCoordinate();
-		Debug.Log(hit);
 		if (hit.HasValue)
 		{
 			Show(hit.Value);

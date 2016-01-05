@@ -49,7 +49,6 @@ public class InputController : MonoBehaviour
 			RaycastHit hit;
 			if (Physics.Raycast(ray, out hit) && !EventSystem.current.IsPointerOverGameObject())
 			{
-				// TODO I think I'll use (typesafe) tags instead
 				if (hit.transform.GetComponent<TerrainTile>() && TerrainClicked != null)
 				{
 					TerrainClicked(hit.transform.gameObject.Coordinate());
@@ -66,7 +65,6 @@ public class InputController : MonoBehaviour
 		RaycastHit hit;
 		if (Physics.Raycast(ray, out hit))
 		{
-			// TODO I think I'll use (typesafe) tags instead
 			if (hit.transform.GetComponent<TerrainTile>())
 			{
 				return hit.transform.gameObject.Coordinate();
