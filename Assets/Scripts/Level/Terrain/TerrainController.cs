@@ -13,9 +13,6 @@ public class TerrainController : MonoBehaviour
 {
 	public TerrainPrefabOptions terrainPrefabs;
 
-	public Action<Coordinate> MouseEnterBlock;
-	public Action<Coordinate> MouseExitBlock;
-
 	private IDictionary<Coordinate, TerrainTile> grid;
 
 	public TerrainType this[Coordinate coordinate]
