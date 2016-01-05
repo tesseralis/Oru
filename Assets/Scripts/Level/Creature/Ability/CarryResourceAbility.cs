@@ -14,12 +14,13 @@ public class CarryResourceAbility : MonoBehaviour, IAbility
 		public int Capacity { get; set; }
 		public string Description()
 		{
-			return "Pick up " + Capacity;
+			return "Pick up " + Capacity + " resources";
 		}
 
 		public IAbility AddToCreature(Creature creature)
 		{
 			var ability = creature.gameObject.AddComponent<CarryResourceAbility>();
+			// TODO figure out if there is a way to structure this without leaving these variables public
 			ability.capacity = Capacity;
 			ability.carrying = new ResourceCount[0];
 			return ability;

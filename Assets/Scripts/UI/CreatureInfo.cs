@@ -36,31 +36,14 @@ public class CreatureInfo : MonoBehaviour
 		gameObject.SetActive(true);
 		nameDisplay.text = creature.creatureType.ToString();
 		var creatureDefinition = CreatureDefinitions.ForType(creature.creatureType);
-		// TODO generalize for all abilities!
-		string ability;
-		if (creature.GetComponent<ChangeTerrainAbility>() != null)
-		{
-			useAbilityButton.gameObject.SetActive(true);
-			ability = string.Format("Pick up {0}\n\nPress <Space> to activate.",
-				creature.GetComponent<ChangeTerrainAbility>().carryType);
-		}
-		else if (creature.GetComponent<CarryResourceAbility>() != null)
-		{
-			useAbilityButton.gameObject.SetActive(true);
-			ability = string.Format("Pick up {0} resources\n\nPress <Space> to activate.",
-				creature.GetComponent<CarryResourceAbility>().capacity);
-		}
-		else
-		{
-			useAbilityButton.gameObject.SetActive(false);
-			ability = "None";
-		}
-
-		resourceList.ShowResources(creatureDefinition.Recipe);
-
+		useAbilityButton.gameObject.SetActive(creature.HasAbility());
+		string ability = creature.HasAbility() ? creature.Definition.Ability.Description() : "None";
 		descriptionDisplay.text = string.Format("Allowed Terrain: {0}\nAbility: {1}",
 			string.Join(", ", creatureDefinition.AllowedTerrain.Select(t => t.ToString()).ToArray()),
 			ability);
+
+		resourceList.ShowResources(creatureDefinition.Recipe);
+
 		DisplayAbilityText(creature);
 	}
 
