@@ -9,6 +9,23 @@ public class CarryResourceAbility : MonoBehaviour, IAbility
 	public int capacity;
 	public ResourceCount[] carrying;
 
+	public class Definition : IAbilityDefinition
+	{
+		public int Capacity { get; set; }
+		public string Description()
+		{
+			return "Pick up " + Capacity;
+		}
+
+		public IAbility AddToCreature(Creature creature)
+		{
+			var ability = creature.gameObject.AddComponent<CarryResourceAbility>();
+			ability.capacity = Capacity;
+			ability.carrying = new ResourceCount[0];
+			return ability;
+		}
+	}
+
 	// Convert to a multiset
 	// TODO refactor with the same methods in ResourcePile
 	public IDictionary<ResourceType, int> Carrying

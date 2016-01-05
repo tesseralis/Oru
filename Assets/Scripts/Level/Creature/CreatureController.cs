@@ -60,6 +60,7 @@ public class CreatureController : MonoBehaviour
 	// Add a creature at a specified location if possible
 	public Creature CreateCreature(CreatureType creature, Coordinate location)
 	{
+		var definition = CreatureDefinitions.ForType(creature);
 		if (!CanCreateCreature(creature, location))
 		{
 			throw new ArgumentException(string.Format("Cannot create {0} at {1}.",
@@ -69,7 +70,7 @@ public class CreatureController : MonoBehaviour
 
 		// Remove the items from the neighboring coordinates.
 		var neighbors = Neighbors(location);
-		var remainder = CreatureDefinitions.ForType(creature).Recipe;
+		var remainder = definition.Recipe;
 		// Take items from the adjacent resources until we don't need any more.
 		foreach (var neighbor in neighbors)
 		{

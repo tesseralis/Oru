@@ -17,21 +17,28 @@ public static class CreatureDefinitions
 	{
 		Type = CreatureType.Turtle,
 		Recipe = new Dictionary<ResourceType, int>() { {ResourceType.Green, 1} },
-		AllowedTerrain = new TerrainType[]{ TerrainType.Water }
+		AllowedTerrain = new TerrainType[]{ TerrainType.Water },
+		Ability = new CarryResourceAbility.Definition { Capacity = 5 }
 	};
 
 	public static readonly CreatureDefinition Horse = new CreatureDefinition
 	{
 		Type = CreatureType.Horse,
 		Recipe = new Dictionary<ResourceType, int>() { {ResourceType.Red, 4} },
-		AllowedTerrain = new TerrainType[]{ TerrainType.Land, TerrainType.Rock }
+		AllowedTerrain = new TerrainType[]{ TerrainType.Land, TerrainType.Rock },
+		Ability = new CarryResourceAbility.Definition { Capacity = 5 }
 	};
 
 	public static readonly CreatureDefinition Elephant = new CreatureDefinition
 	{
 		Type = CreatureType.Elephant,
 		Recipe = new Dictionary<ResourceType, int>() { {ResourceType.Blue, 9} },
-		AllowedTerrain = new TerrainType[]{ TerrainType.Land }
+		AllowedTerrain = new TerrainType[]{ TerrainType.Land },
+		Ability = new ChangeTerrainAbility.Definition
+		{
+			CarryType = TerrainType.Tree,
+			LeaveType = TerrainType.Land
+		}
 	};
 
 	public static CreatureDefinition ForType(CreatureType type)

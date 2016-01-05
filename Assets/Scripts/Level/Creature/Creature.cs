@@ -21,15 +21,21 @@ public class Creature : MonoBehaviour
 	private bool isMoving = false;
 	
 	
-	public IAbility Ability
-	{
-		get { return GetComponent<IAbility>(); }
-	}
+	public IAbility Ability { get; private set; }
 	
 	// Convenience method to get the creature's definition
 	public CreatureDefinition Definition
 	{
 		get { return CreatureDefinitions.ForType(creatureType); }
+	}
+
+	void Awake()
+	{
+		// Make sure we have the right ability attached
+		if (Definition.Ability != null)
+		{
+			Ability = Definition.Ability.AddToCreature(this);
+		}
 	}
 
 	void Start()

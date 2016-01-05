@@ -8,6 +8,25 @@ public class ChangeTerrainAbility : MonoBehaviour, IAbility
 	public TerrainType carryType = TerrainType.Rock;
 	public TerrainType leaveType = TerrainType.Land;
 
+	public class Definition : IAbilityDefinition
+	{
+		public TerrainType CarryType { get; set; }
+		public TerrainType LeaveType { get; set; }
+
+		public string Description()
+		{
+			return "Pick up " + CarryType;
+		}
+
+		public IAbility AddToCreature(Creature creature)
+		{
+			var ability = creature.gameObject.AddComponent<ChangeTerrainAbility>();
+			ability.carryType = CarryType;
+			ability.leaveType = LeaveType;
+			return ability;
+		}
+	}
+
 	public bool IsCarrying { get; private set; }
 
 	public void Awake()

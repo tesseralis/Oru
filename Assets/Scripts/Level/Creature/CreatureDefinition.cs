@@ -7,5 +7,6 @@ public class CreatureDefinition
 {
 	public CreatureType Type { get; set; }
 	public IDictionary<ResourceType, int> Recipe { get; set; }
-	public TerrainType[] AllowedTerrain { get; set; }	
+	public TerrainType[] AllowedTerrain { get; set; }
+	public IAbilityDefinition Ability { get; set; }
 }
