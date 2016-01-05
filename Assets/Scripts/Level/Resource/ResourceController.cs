@@ -9,6 +9,8 @@ public class ResourceController : MonoBehaviour
 	// the prefabs to use to initialize different types of resources
 	public ResourcePrefabOptions resourcePrefabs;
 
+	public GameObject resourcePilePrefab;
+
 	// Get the pile of resources at the given coordinate
 	public IDictionary<ResourceType, int> this[Coordinate coordinate]
 	{
@@ -38,7 +40,7 @@ public class ResourceController : MonoBehaviour
 				if (!locations.ContainsKey(coordinate))
 				{
 					// Instantiate a new marker
-					var resourcePile = gameObject.AddChildWithComponent<ResourcePile>(new GameObject(), coordinate);
+					var resourcePile = gameObject.AddChildWithComponent<ResourcePile>(resourcePilePrefab, coordinate);
 					locations[coordinate] = resourcePile;
 				}
 				locations[coordinate].Resources = value;
