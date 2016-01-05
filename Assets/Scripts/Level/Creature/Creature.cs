@@ -42,12 +42,6 @@ public class Creature : MonoBehaviour
 		Goal = NextPosition = Position = gameObject.Coordinate();
 	}
 
-	// TODO move this to ray cast
-	void OnMouseDown()
-	{
-		GetComponentInParent<CreatureController>().CreatureSelected(this);
-	}
-
 	public void Update()
 	{
 		// Animate the creature moving

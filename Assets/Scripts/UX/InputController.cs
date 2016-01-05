@@ -15,6 +15,7 @@ public class InputController : MonoBehaviour
 	public IDictionary<KeyCode, Action> KeyDown { get { return keyDownEvents; } }
 
 	public Action<Coordinate> TerrainClicked;
+	public Action<Creature> CreatureClicked;
 
 	void Awake ()
 	{
@@ -52,6 +53,11 @@ public class InputController : MonoBehaviour
 				if (hit.transform.GetComponent<TerrainTile>() && TerrainClicked != null)
 				{
 					TerrainClicked(hit.transform.gameObject.Coordinate());
+				}
+				// TODO make it so you figure out if there is a creature on the tile instead
+				if (hit.transform.GetComponent<Creature>() && CreatureClicked != null)
+				{
+					CreatureClicked(hit.transform.GetComponent<Creature>());
 				}
 			}
 		}

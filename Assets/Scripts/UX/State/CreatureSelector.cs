@@ -31,7 +31,7 @@ public class CreatureSelector : MonoBehaviour
 	{
 		if (creatureMarker) { creatureMarker.SetActive(false); }
 		actionMarkers.Disable();
-		LevelManager.Creatures.CreatureSelected += SelectCreature;
+		UXManager.Input.CreatureClicked += SelectCreature;
 		LevelManager.Creatures.CreatureDestroyed += (x) => Deselect();
 	}
 
