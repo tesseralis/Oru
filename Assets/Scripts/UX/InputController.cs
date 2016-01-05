@@ -57,4 +57,21 @@ public class InputController : MonoBehaviour
 			}
 		}
 	}
+
+	// Return the current coordinate we are selecting, if any
+	public Coordinate? CurrentCoordinate()
+	{
+		// TODO refactor with the other method
+		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		RaycastHit hit;
+		if (Physics.Raycast(ray, out hit))
+		{
+			// TODO I think I'll use (typesafe) tags instead
+			if (hit.transform.GetComponent<TerrainTile>())
+			{
+				return hit.transform.gameObject.Coordinate();
+			}
+		}
+		return null;
+	}
 }
