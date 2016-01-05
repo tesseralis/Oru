@@ -6,14 +6,9 @@ public class Pan : MonoBehaviour
 
 	public float translateFactor = 0.25f;
 
-	// Use this for initialization
-	void Start ()
+	void Update()
 	{
-		// Add map controls
-		UXManager.Input.Key[KeyCode.DownArrow] += () => DoPan(Vector2.down);
-		UXManager.Input.Key[KeyCode.UpArrow] += () => DoPan(Vector2.up);
-		UXManager.Input.Key[KeyCode.LeftArrow] += () => DoPan(Vector2.left);
-		UXManager.Input.Key[KeyCode.RightArrow] += () => DoPan(Vector2.right);
+		DoPan(UXManager.Input.PanDirection());
 	}
 
 	// Pan our camera in the specified direction

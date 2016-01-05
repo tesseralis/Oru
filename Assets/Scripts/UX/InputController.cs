@@ -8,10 +8,8 @@ using Util;
 // Defines handlers for input
 public class InputController : MonoBehaviour
 {
-	private IDictionary<KeyCode, Action> keyEvents;
 	private IDictionary<KeyCode, Action> keyDownEvents;
 
-	public IDictionary<KeyCode, Action> Key { get { return keyEvents; } }
 	public IDictionary<KeyCode, Action> KeyDown { get { return keyDownEvents; } }
 
 	public Action<Coordinate> TerrainClicked;
@@ -19,12 +17,10 @@ public class InputController : MonoBehaviour
 
 	void Awake ()
 	{
-		keyEvents = new Dictionary<KeyCode, Action>();
 		keyDownEvents = new Dictionary<KeyCode, Action>();
 		// Initialize events we want to use
 		foreach (KeyCode key in Enum.GetValues(typeof(KeyCode)))
 		{
-			keyEvents[key] = null;
 			keyDownEvents[key] = null;
 		}
 	}
@@ -37,10 +33,6 @@ public class InputController : MonoBehaviour
 			if (Input.GetKeyDown(keycode))
 			{
 				if (keyDownEvents[keycode] != null) { keyDownEvents[keycode](); }
-			}
-			if (Input.GetKey(keycode))
-			{
-				if (keyEvents[keycode] != null) { keyEvents[keycode](); }
 			}
 		}
 
@@ -77,5 +69,11 @@ public class InputController : MonoBehaviour
 			}
 		}
 		return null;
+	}
+
+	// Returns the input direction for panning
+	public Vector2 PanDirection()
+	{
+		return new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 	}
 }
