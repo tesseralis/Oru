@@ -13,15 +13,13 @@ public class Creature : MonoBehaviour
 	// The type of creature this is.
 	public CreatureType creatureType;
 
-	public Coordinate? Goal { get; set; }
-
 	public Coordinate Position { get; private set; }
 	public Coordinate NextPosition { get; private set; }
+	public Coordinate Goal { get; private set; }
+	public IAbility Ability { get; private set; }
 
 	private bool isMoving = false;
-	
-	
-	public IAbility Ability { get; private set; }
+	private bool usingAbility = false;
 	
 	// Convenience method to get the creature's definition
 	public CreatureDefinition Definition
@@ -41,9 +39,10 @@ public class Creature : MonoBehaviour
 	void Start()
 	{
 		// Store our initial position
-		NextPosition = Position = gameObject.Coordinate();
+		Goal = NextPosition = Position = gameObject.Coordinate();
 	}
 
+	// TODO move this to ray cast
 	void OnMouseDown()
 	{
 		GetComponentInParent<CreatureController>().CreatureSelected(this);
@@ -65,7 +64,14 @@ public class Creature : MonoBehaviour
 	public void Step()
 	{
 		Position = NextPosition;
-		if (Goal != null && (!Position.Equals(Goal)))
+		if (usingAbility && Neighbors(Position).Contains(Goal))
+		{
+			// Use the ability now
+			Ability.Use(Goal);
+			usingAbility = false;
+			Goal = Position;
+		}
+		else if (!Position.Equals(Goal))
 		{
 			NextPosition = NextCoordinate ();
 
@@ -77,6 +83,7 @@ public class Creature : MonoBehaviour
 			}
 
 			// Animate our creature if it has animation
+			// TODO factor out animation into a UX class
 			if (GetComponentInChildren<Animator>() && !isMoving)
 			{
 				isMoving = true;
@@ -93,6 +100,13 @@ public class Creature : MonoBehaviour
 				GetComponentInChildren<Animator>().SetTrigger("StopMove");
 			}
 		}
+	}
+
+	public void SetGoal(Coordinate coordinate)
+	{
+		Goal = coordinate;
+		// If a new goal is set, forget that we were trying to use an ability
+		usingAbility = false;
 	}
 
 	// Returns true if this creature can reach the specified goal coordinate
@@ -113,11 +127,16 @@ public class Creature : MonoBehaviour
 		{
 			throw new InvalidOperationException("This creature does not have an ability");
 		}
-		// TODO generalize this so that it works on all coordinates
 		var direction = coordinate - Position;
 		if (Coordinate.cardinals.Contains(direction) || coordinate == Position)
 		{
 			Ability.Use(coordinate);
+		}
+		else
+		{
+			// Otherwise, try to set the location as a goal
+			Goal = coordinate;
+			usingAbility = true;
 		}
 	}
 
@@ -145,7 +164,7 @@ public class Creature : MonoBehaviour
 		while (queue.Count > 0)
 		{
 			var current = queue.Dequeue();
-			var neighbors = Coordinate.cardinals.Select(x => x + current).ToList();
+			var neighbors = Neighbors(current);
 			foreach (Coordinate neighbor in neighbors)
 			{
 				if (!distance.ContainsKey(neighbor) && neighborPredicate(neighbor))
@@ -164,22 +183,27 @@ public class Creature : MonoBehaviour
 		return parents;
 	}
 
+	private static IList<Coordinate> Neighbors(Coordinate coordinate)
+	{
+		return Coordinate.cardinals.Select(x => x + coordinate).ToList();
+	}
+
 	// do a BFS and figure out the right path
 	private Coordinate NextCoordinate()
 	{
 		// If the creature has no goal, just stick to the current position
-		if (Goal == null)
+		if (Goal == Position)
 		{
 			return Position;
 		}
-		var goal = Goal ?? Position;
-		var parents = DoBFS(Position, goal, IsValidCoordinate);
+
+		var parents = DoBFS(Position, Goal, IsValidCoordinate);
 
 		Coordinate next;
 		// If we can reach the goal, then move the creature to the next step towards that goal
-		if (parents.ContainsKey(goal))
+		if (parents.ContainsKey(Goal))
 		{
-			next = goal;
+			next = Goal;
 			while (parents[next] != Position)
 			{
 				next = parents[next];
@@ -188,9 +212,9 @@ public class Creature : MonoBehaviour
 		}
 
 		// Otherwise, do another BFS not accounting for terrain restrictions and try to move the creature there
-		parents = DoBFS(Position, goal, LevelManager.Terrain.Contains);
+		parents = DoBFS(Position, Goal, LevelManager.Terrain.Contains);
 		// TODO assert that the level is fully connected
-		next = goal;
+		next = Goal;
 		while (parents[next] != Position)
 		{
 			next = parents[next];

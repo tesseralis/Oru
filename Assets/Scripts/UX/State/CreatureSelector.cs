@@ -110,14 +110,9 @@ public class CreatureSelector : MonoBehaviour
 	{
 		if (SelectedCreature.CanReach(coordinate))
 		{
-			SelectedCreature.Goal = coordinate;
+			SelectedCreature.SetGoal(coordinate);
 			if (GoalSet != null) { GoalSet(SelectedCreature, coordinate); }
 		}
-	}
-
-	private void RemoveCurrentCreatureGoal()
-	{
-		SelectedCreature.Goal = null;
 	}
 
 }
