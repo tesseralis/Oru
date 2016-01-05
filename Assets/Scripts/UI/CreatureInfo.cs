@@ -50,29 +50,9 @@ public class CreatureInfo : MonoBehaviour
 	private void DisplayAbilityText(Creature creature)
 	{
 		var text = useAbilityButton.GetComponentInChildren<Text>();
-		if (creature.GetComponent<ChangeTerrainAbility>() != null)
+		if (creature.HasAbility())
 		{
-			var changeTerrain = creature.GetComponent<ChangeTerrainAbility>();
-			if (changeTerrain.IsCarrying)
-			{
-				text.text = "Put down " + changeTerrain.carryType;
-			}
-			else
-			{
-				text.text = "Pick up " + changeTerrain.carryType;
-			}
-		}
-		else if (creature.GetComponent<CarryResourceAbility>() != null)
-		{
-			var carryResource = creature.GetComponent<CarryResourceAbility>();
-			if (carryResource.Carrying.IsEmpty())
-			{
-				text.text = "Pick up " + carryResource.capacity;
-			}
-			else
-			{
-				text.text = "Put down " + carryResource.capacity;
-			}
+			text.text = creature.Ability.Description();
 		}
 	}
 

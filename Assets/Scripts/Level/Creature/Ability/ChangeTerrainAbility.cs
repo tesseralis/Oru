@@ -67,4 +67,16 @@ public class ChangeTerrainAbility : MonoBehaviour, IAbility
 			&& !x.Definition.AllowedTerrain.Contains(terrain));
 	}
 
+	public string Description()
+	{
+		if (IsCarrying)
+		{
+			return "Put down " + carryType;
+		}
+		else
+		{
+			return "Pick up " + carryType;
+		}
+	}
+
 }

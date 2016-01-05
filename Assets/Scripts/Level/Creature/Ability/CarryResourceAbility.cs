@@ -42,6 +42,18 @@ public class CarryResourceAbility : MonoBehaviour, IAbility
 		}
 	}
 
+	public string Description()
+	{
+		if (Carrying.IsEmpty())
+		{
+			return "Pick up " + capacity;
+		}
+		else
+		{
+			return "Put down " + capacity;
+		}
+	}
+
 	public void Use(Coordinate target)
 	{
 		var resources = LevelManager.Resources;
