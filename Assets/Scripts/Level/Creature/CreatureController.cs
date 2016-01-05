@@ -13,8 +13,6 @@ public class CreatureController : MonoBehaviour
 
 	public CreaturePrefabOptions creaturePrefabs;
 
-	// Called when a creature has been clicked
-	public Action<Creature> CreatureSelected;
 	// Called when a creature is destroyed
 	public event Action<Coordinate> CreatureDestroyed;
 	// Called when a creature is created

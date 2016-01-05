@@ -8,25 +8,5 @@ using Util;
 /// </summary>
 public class TerrainTile: MonoBehaviour
 {
-	private TerrainController controller {
-		get { return GetComponentInParent<TerrainController>(); }
-	}
-
 	public TerrainType type;
-
-	void OnMouseEnter ()
-	{
-		if (controller.MouseEnterBlock != null) { controller.MouseEnterBlock(gameObject.Coordinate()); }
-	}
-
-	void OnMouseExit ()
-	{
-		if (controller.MouseExitBlock != null) { controller.MouseExitBlock(gameObject.Coordinate()); }
-	}
-	
-	void OnMouseDown ()
-	{
-		if (controller.ClickBlock != null) { controller.ClickBlock(gameObject.Coordinate()); }
-	}
-
 }

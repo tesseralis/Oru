@@ -17,35 +17,47 @@ public class CreatureCreator : MonoBehaviour {
 	public event Action CreationStopped;
 
 	private CreatureType currentCreatureType;
+	private bool isCreating = false;
 
 	public void StartCreation(CreatureType creature)
 	{
 		// Ensure that we never double-click
-		// TODO refactor this to store an internal "is-creating" state
-		StopCreation();
+		if (isCreating) { return; }
 
+		isCreating = true;
 		// Do the actual creation
 		currentCreatureType = creature;
-		LevelManager.Terrain.MouseEnterBlock += ShowCreateMarker;
-		LevelManager.Terrain.MouseExitBlock += HideCreateMarker;
-		LevelManager.Terrain.ClickBlock += CreateCreature;
+		UXManager.Input.TerrainClicked += CreateCreature;
 
 		if (CreationStarted != null) { CreationStarted(creature); }
 	}
 
 	public void StopCreation()
 	{
+		isCreating = false;
 		if (createMarker) { createMarker.SetActive(false); }
-		LevelManager.Terrain.MouseEnterBlock -= ShowCreateMarker;
-		LevelManager.Terrain.MouseExitBlock -= HideCreateMarker;
-		LevelManager.Terrain.ClickBlock -= CreateCreature;
+		UXManager.Input.TerrainClicked -= CreateCreature;
 
 		if (CreationStopped != null) { CreationStopped(); }
 	}
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+	{
 		if (createMarker) { createMarker.SetActive(false); }
+	}
+
+	void Update()
+	{
+		var coordinate = UXManager.Input.CurrentCoordinate();
+		if (isCreating && coordinate.HasValue)
+		{
+			ShowCreateMarker(coordinate.Value);
+		}
+		else
+		{
+			HideCreateMarker();
+		}
 	}
 
 	void ShowCreateMarker(Coordinate coordinate)
@@ -73,7 +85,7 @@ public class CreatureCreator : MonoBehaviour {
 		}
 	}
 
-	void HideCreateMarker(Coordinate coordinate)
+	void HideCreateMarker()
 	{
 		if (createMarker) {
 			// Destroy the mock creature we made
