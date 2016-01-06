@@ -43,6 +43,7 @@ public class CreatureSelector : MonoBehaviour
 			if (creatureMarker) { creatureMarker.SetActive(true); }
 			// Add a listener for terrain clicks
 			UXManager.Input.TerrainClicked += OnClickBlock;
+			UXManager.Input.CancelButton += Deselect;
 		}
 		SelectedCreature = creature;
 
@@ -71,6 +72,7 @@ public class CreatureSelector : MonoBehaviour
 	public void Deselect()
 	{
 		UXManager.Input.TerrainClicked -= OnClickBlock;
+		UXManager.Input.CancelButton -= Deselect;
 		actionMarkers.Disable();
 		SelectedCreature = null;
 		transform.SetParent(null, false);

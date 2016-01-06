@@ -11,6 +11,7 @@ public class InputController : MonoBehaviour
 	public Action<Coordinate> TerrainClicked;
 	public Action<Creature> CreatureClicked;
 	public Action ActionButton;
+	public Action CancelButton;
 
 	// Update is called once per frame
 	void Update ()
@@ -18,6 +19,10 @@ public class InputController : MonoBehaviour
 		if (Input.GetButtonDown("Jump"))
 		{
 			if (ActionButton != null) { ActionButton(); }
+		}
+		if (Input.GetButtonDown("Cancel"))
+		{
+			if (CancelButton != null) { CancelButton(); }
 		}
 
 		if (Input.GetButtonDown("Fire1"))
