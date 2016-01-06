@@ -35,28 +35,19 @@ public class CreatureSelector : MonoBehaviour
 		LevelManager.Creatures.CreatureDestroyed += (x) => Deselect();
 	}
 
-	private void DeselectCreature()
-	{
-		UXManager.Input.TerrainClicked -= OnClickBlock;
-		actionMarkers.Disable();
-		SelectedCreature = null;
-		transform.SetParent(null, false);
-	}
-
 	public void SelectCreature(Creature creature)
 	{
-		// Deselect the previous creature if any
-		DeselectCreature();
-
+		if (SelectedCreature == null)
+		{
+			// Make the entity marker visible
+			if (creatureMarker) { creatureMarker.SetActive(true); }
+			// Add a listener for terrain clicks
+			UXManager.Input.TerrainClicked += OnClickBlock;
+		}
 		SelectedCreature = creature;
 
 		// Make this a child of the object
 		transform.SetParent(creature.transform, false);
-
-		// Make the entity marker visible
-		if (creatureMarker) { creatureMarker.SetActive(true); }
-
-		UXManager.Input.TerrainClicked += OnClickBlock;
 
 		// Add a listener to the action markers
 		if (creature.HasAbility())
@@ -79,7 +70,11 @@ public class CreatureSelector : MonoBehaviour
 
 	public void Deselect()
 	{
-		DeselectCreature();
+		UXManager.Input.TerrainClicked -= OnClickBlock;
+		actionMarkers.Disable();
+		SelectedCreature = null;
+		transform.SetParent(null, false);
+
 		if (creatureMarker) { creatureMarker.SetActive(false); }
 
 		// Run the events in the handler
