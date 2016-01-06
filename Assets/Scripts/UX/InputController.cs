@@ -8,32 +8,16 @@ using Util;
 // Defines handlers for input
 public class InputController : MonoBehaviour
 {
-	private IDictionary<KeyCode, Action> keyDownEvents;
-
-	public IDictionary<KeyCode, Action> KeyDown { get { return keyDownEvents; } }
-
 	public Action<Coordinate> TerrainClicked;
 	public Action<Creature> CreatureClicked;
-
-	void Awake ()
-	{
-		keyDownEvents = new Dictionary<KeyCode, Action>();
-		// Initialize events we want to use
-		foreach (KeyCode key in Enum.GetValues(typeof(KeyCode)))
-		{
-			keyDownEvents[key] = null;
-		}
-	}
+	public Action ActionButton;
 
 	// Update is called once per frame
 	void Update ()
 	{
-		foreach (KeyCode keycode in Enum.GetValues(typeof(KeyCode)))
+		if (Input.GetButtonDown("Jump"))
 		{
-			if (Input.GetKeyDown(keycode))
-			{
-				if (keyDownEvents[keycode] != null) { keyDownEvents[keycode](); }
-			}
+			if (ActionButton != null) { ActionButton(); }
 		}
 
 		if (Input.GetButtonDown("Fire1"))

@@ -12,7 +12,7 @@ public class ActionMarkers : MonoBehaviour
 	{
 		isEnabled = true;
 		IsActing = false;
-		UXManager.Input.KeyDown[KeyCode.Space] += ToggleAbility;
+		UXManager.Input.ActionButton += ToggleAbility;
 	}
 
 	public void Disable()
@@ -23,7 +23,7 @@ public class ActionMarkers : MonoBehaviour
 		}
 		isEnabled = false;
 		IsActing = false;
-		UXManager.Input.KeyDown[KeyCode.Space] -= ToggleAbility;
+		UXManager.Input.ActionButton -= ToggleAbility;
 	}
 
 	// The creature should start doing its ability
