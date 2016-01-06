@@ -12,6 +12,8 @@ public class Creature : MonoBehaviour
 {
 	// The type of creature this is.
 	public CreatureType creatureType;
+	// TODO health value should be determined by the energy we created this from
+	public int health = 20;
 
 	public Coordinate Position { get; private set; }
 	public Coordinate NextPosition { get; private set; }
@@ -65,9 +67,10 @@ public class Creature : MonoBehaviour
 			usingAbility = false;
 			Goal = Position;
 		}
-		else if (!Position.Equals(Goal))
+		else if (!Position.Equals(Goal) && health > 0)
 		{
 			NextPosition = NextCoordinate ();
+			health -= 1;
 
 			// Make our creature face the right direction
 			if (NextPosition != Position)
@@ -93,6 +96,13 @@ public class Creature : MonoBehaviour
 				Debug.Log("Animating the creature stopping.");
 				GetComponentInChildren<Animator>().SetTrigger("StopMove");
 			}
+		}
+
+		// If the creature loses all health, set it to an idle state
+		if (health == 0)
+		{
+			Goal = Position;
+			usingAbility = false;
 		}
 	}
 
