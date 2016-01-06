@@ -38,9 +38,10 @@ public class CreatureInfo : MonoBehaviour
 		var creatureDefinition = CreatureDefinitions.ForType(creature.creatureType);
 		useAbilityButton.gameObject.SetActive(creature.HasAbility());
 		string ability = creature.HasAbility() ? creature.Definition.Ability.Description() : "None";
-		descriptionDisplay.text = string.Format("Allowed Terrain: {0}\nAbility: {1}",
+		descriptionDisplay.text = string.Format("Allowed Terrain: {0}\nAbility: {1}\n\nHealth: {2}",
 			string.Join(", ", creatureDefinition.AllowedTerrain.Select(t => t.ToString()).ToArray()),
-			ability);
+			ability,
+			creature.health);
 
 		resourceList.ShowResources(creatureDefinition.Recipe);
 
