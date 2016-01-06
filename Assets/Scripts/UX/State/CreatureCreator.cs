@@ -21,12 +21,13 @@ public class CreatureCreator : MonoBehaviour {
 
 	public void StartCreation(CreatureType creature)
 	{
+		currentCreatureType = creature;
+
 		// Ensure that we never double-click
 		if (isCreating) { return; }
 
 		isCreating = true;
 		// Do the actual creation
-		currentCreatureType = creature;
 		UXManager.Input.TerrainClicked += CreateCreature;
 		UXManager.Input.CancelButton += StopCreation;
 
