@@ -29,8 +29,5 @@ public class StateController : MonoBehaviour
 		creatureCreator.CreationStarted += x => creatureSelector.Deselect();
 		// Select a creature if it's created
 		creatureCreator.Created += creatureSelector.SelectCreature;
-
-		// TODO Where *do* keyboard shortcuts go?
-		UXManager.Input.KeyDown[KeyCode.Backspace] += creatureSelector.DestroySelectedCreature;
 	}
 }
