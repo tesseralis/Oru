@@ -5,24 +5,24 @@ using System.Collections;
 public class ActionMarkers : MonoBehaviour
 {
 
-	private bool isEnabled = false;
-	public bool IsActing { get; private set; }
+	public bool isEnabled = false;
+	public bool isActing = false;
 
 	public void Enable(Creature creature)
 	{
+		if (!isEnabled) { UXManager.Input.ActionButton += ToggleAbility; }
 		isEnabled = true;
-		IsActing = false;
-		UXManager.Input.ActionButton += ToggleAbility;
+		StopAbility();
 	}
 
 	public void Disable()
 	{
-		if (isEnabled && IsActing)
+		if (isEnabled && isActing)
 		{
 			StopAbility();
 		}
 		isEnabled = false;
-		IsActing = false;
+		isActing = false;
 		UXManager.Input.ActionButton -= ToggleAbility;
 	}
 
@@ -34,7 +34,7 @@ public class ActionMarkers : MonoBehaviour
 			throw new InvalidOperationException("Actions are not enabled.");
 		}
 		Debug.Log("Engaging creature ability.");
-		IsActing = true;
+		isActing = true;
 		gameObject.SetActive(true);
 	}
 
@@ -45,13 +45,13 @@ public class ActionMarkers : MonoBehaviour
 			throw new InvalidOperationException("Actions are not enabled.");
 		}
 		Debug.Log("Stopping creature ability.");
-		IsActing = false;
+		isActing = false;
 		gameObject.SetActive(false);
 	}
 
 	public void ToggleAbility()
 	{
-		if (!IsActing)
+		if (!isActing)
 		{
 			StartAbility();
 		}

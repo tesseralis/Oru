@@ -85,7 +85,7 @@ public class CreatureSelector : MonoBehaviour
 
 	private void OnClickBlock(Coordinate coordinate)
 	{
-		if (actionMarkers.IsActing)
+		if (actionMarkers.isActing)
 		{
 			UseCreatureAbility(coordinate);
 		}
