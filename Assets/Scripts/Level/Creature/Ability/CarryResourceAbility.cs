@@ -4,11 +4,11 @@ using System.Collections;
 using System.Collections.Generic;
 using Util;
 
-public class CarryResourceAbility : MonoBehaviour, IAbility
+public class CarryResourceAbility : AbstractCarryAbility, IAbility
 {
 	public int capacity;
 
-	ResourceCollection carrying;
+	public ResourceCollection carrying;
 
 	public ResourceCollection Carrying
 	{
@@ -34,7 +34,7 @@ public class CarryResourceAbility : MonoBehaviour, IAbility
 		}
 	}
 
-	public string Description()
+	public override string Description()
 	{
 		if (Carrying.IsEmpty())
 		{
@@ -46,7 +46,7 @@ public class CarryResourceAbility : MonoBehaviour, IAbility
 		}
 	}
 
-	public void Use(Coordinate target)
+	protected override void DoPickup(Coordinate target)
 	{
 		var resources = LevelManager.Resources;
 
@@ -66,7 +66,6 @@ public class CarryResourceAbility : MonoBehaviour, IAbility
 				resources[target] += Carrying;
 				Carrying = ResourceCollection.Empty();
 			}
-
 		}
 	}
 }

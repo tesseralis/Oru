@@ -20,7 +20,6 @@ public class Creature : MonoBehaviour
 	public IAbility Ability { get; private set; }
 
 	private bool isMoving = false;
-	private bool usingAbility = false;
 
 	private static System.Random rnd = new System.Random();
 	
@@ -78,7 +77,7 @@ public class Creature : MonoBehaviour
 	private void EnemyStep()
 	{
 		Position = NextPosition;
-		var possible = Neighbors(Position).Where(IsValidCoordinate).ToList();
+		var possible = Position.CardinalNeighbors().Where(IsValidCoordinate).ToList();
 		if (possible.Count > 0)
 		{
 			NextPosition = possible[rnd.Next(possible.Count)];
@@ -90,9 +89,10 @@ public class Creature : MonoBehaviour
 		}
 
 		// Destroy enemy creatures
-		foreach (var creature in LevelManager.Creatures.CreatureList.Where(x => Neighbors(Position).Contains(x.Position) && !x.Definition.IsEnemy))
+		foreach (var creature in LevelManager.Creatures.CreatureList.Where(x => Position.CardinalNeighbors().Contains(x.Position) && !x.Definition.IsEnemy))
 		{
 			creature.health = 0;
+			// FIXME this causes an enumeration error because we are iterating through the creature list
 			LevelManager.Creatures.DestroyCreature(creature);
 		}
 	}
@@ -100,14 +100,7 @@ public class Creature : MonoBehaviour
 	private void FriendlyStep()
 	{
 		Position = NextPosition;
-		if (usingAbility && Neighbors(Position).Contains(Goal))
-		{
-			// Use the ability now
-			Ability.Use(Goal);
-			usingAbility = false;
-			Goal = Position;
-		}
-		else if (!Position.Equals(Goal) && health > 0)
+		if (!Position.Equals(Goal) && health > 0)
 		{
 			NextPosition = NextCoordinate ();
 			health -= 1;
@@ -138,19 +131,22 @@ public class Creature : MonoBehaviour
 			}
 		}
 
+		// If the creature has a passive ability, do it
+		if (HasAbility())
+		{
+			Ability.Passive();
+		}
+
 		// If the creature loses all health, set it to an idle state
 		if (health == 0)
 		{
 			Goal = Position;
-			usingAbility = false;
 		}
 	}
 
 	public void SetGoal(Coordinate coordinate)
 	{
 		Goal = coordinate;
-		// If a new goal is set, forget that we were trying to use an ability
-		usingAbility = false;
 	}
 
 	// Returns true if this creature can reach the specified goal coordinate
@@ -171,17 +167,7 @@ public class Creature : MonoBehaviour
 		{
 			throw new InvalidOperationException("This creature does not have an ability");
 		}
-		var direction = coordinate - Position;
-		if (Coordinate.cardinals.Contains(direction) || coordinate == Position)
-		{
-			Ability.Use(coordinate);
-		}
-		else
-		{
-			// Otherwise, try to set the location as a goal
-			Goal = coordinate;
-			usingAbility = true;
-		}
+		Ability.Use(coordinate);
 	}
 
 	private float AngleFor(Coordinate direction)
@@ -208,7 +194,7 @@ public class Creature : MonoBehaviour
 		while (queue.Count > 0)
 		{
 			var current = queue.Dequeue();
-			var neighbors = Neighbors(current);
+			var neighbors = current.CardinalNeighbors();
 			foreach (Coordinate neighbor in neighbors)
 			{
 				if (!distance.ContainsKey(neighbor) && neighborPredicate(neighbor))
@@ -225,11 +211,6 @@ public class Creature : MonoBehaviour
 			}
 		}
 		return parents;
-	}
-
-	private static IList<Coordinate> Neighbors(Coordinate coordinate)
-	{
-		return Coordinate.cardinals.Select(x => x + coordinate).ToList();
 	}
 
 	// do a BFS and figure out the right path
