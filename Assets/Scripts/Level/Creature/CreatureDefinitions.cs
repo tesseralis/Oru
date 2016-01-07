@@ -48,10 +48,20 @@ public static class CreatureDefinitions
 	public static readonly CreatureDefinition Crab = new CreatureDefinition
 	{
 		Type = CreatureType.Horse,
-		Description = "An enemy creature",
+		Description = "A basic enemy creature",
 		Recipe = new Dictionary<ResourceType, int>() { {ResourceType.Energy, 1}, {ResourceType.Red, 1} },
 		AllowedTerrain = new TerrainType[]{ TerrainType.Land },
+		Ability = new FightAbility.Definition { Attack = 5, Defense = 5 },
 		IsEnemy = true
+	};
+
+	public static readonly CreatureDefinition Wolf = new CreatureDefinition
+	{
+		Type = CreatureType.Wolf,
+		Description = "Can fight enemies",
+		Recipe = new Dictionary<ResourceType, int>() { {ResourceType.Energy, 1}, {ResourceType.Blue, 4} },
+		AllowedTerrain = new TerrainType[]{ TerrainType.Land, TerrainType.Rock },
+		Ability = new FightAbility.Definition { Attack = 10, Defense = 5 }
 	};
 
 	public static CreatureDefinition ForType(CreatureType type)
@@ -63,6 +73,7 @@ public static class CreatureDefinitions
 		case CreatureType.Horse: return Horse;
 		case CreatureType.Elephant: return Elephant;
 		case CreatureType.Crab: return Crab;
+		case CreatureType.Wolf: return Wolf;
 		default: throw new ArgumentException("Passed in an invalid creature type: " + type, "type");
 		}
 	}

@@ -72,13 +72,19 @@ public class Creature : MonoBehaviour
 		{
 			EnemyStep();
 		}
+
+		// If the creature has a passive ability, do it
+		if (HasAbility())
+		{
+			Ability.Passive();
+		}
 	}
 
 	private void EnemyStep()
 	{
 		Position = NextPosition;
 		var possible = Position.CardinalNeighbors().Where(IsValidCoordinate).ToList();
-		if (possible.Count > 0)
+		if (LevelManager.level.Steps % 4 == 0 && possible.Count > 0)
 		{
 			NextPosition = possible[rnd.Next(possible.Count)];
 		}
@@ -86,14 +92,6 @@ public class Creature : MonoBehaviour
 		{
 			var direction = NextPosition - Position;
 			transform.Rotate(new Vector3(0, AngleFor(direction)) - transform.rotation.eulerAngles);
-		}
-
-		// Destroy enemy creatures
-		foreach (var creature in LevelManager.Creatures.CreatureList.Where(x => Position.CardinalNeighbors().Contains(x.Position) && !x.Definition.IsEnemy))
-		{
-			creature.health = 0;
-			// FIXME this causes an enumeration error because we are iterating through the creature list
-			LevelManager.Creatures.DestroyCreature(creature);
 		}
 	}
 
@@ -131,11 +129,6 @@ public class Creature : MonoBehaviour
 			}
 		}
 
-		// If the creature has a passive ability, do it
-		if (HasAbility())
-		{
-			Ability.Passive();
-		}
 
 		// If the creature loses all health, set it to an idle state
 		if (health == 0)

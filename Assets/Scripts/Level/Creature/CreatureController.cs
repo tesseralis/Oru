@@ -27,6 +27,11 @@ public class CreatureController : MonoBehaviour
 		get { return creatureList; }
 	}
 
+	public Creature this[Coordinate position]
+	{
+		get { return CreatureList.FirstOrDefault(x => x.Position == position); }
+	}
+
 	void Start()
 	{
 		// Update all our creatures when we tick
@@ -48,7 +53,6 @@ public class CreatureController : MonoBehaviour
 		return resourceCount.ToMultiset().Contains(recipe)
 			&& creatureDefinition.AllowedTerrain.Contains(LevelManager.Terrain[coordinate])
 			&& !CreatureList.Any(x => x.Position == coordinate);
-
 	}
 
 	// Add a creature at a specified location if possible
@@ -138,6 +142,13 @@ public class CreatureController : MonoBehaviour
 		{
 			creature.Step();
 		}
+		// Remove creatures that have died
+		var deadCreatures = CreatureList.Where(x => x.health < 0).ToList();
+		foreach (var creature in deadCreatures)
+		{
+			creature.health = 0;
+			DestroyCreature(creature);
+		}
 		if (CreaturesUpdated != null) { CreaturesUpdated(CreatureList); }
 	}
 		
@@ -164,6 +175,7 @@ public class CreaturePrefabOptions
 	public GameObject horsePrefab;
 	public GameObject elephantPrefab;
 	public GameObject crabPrefab;
+	public GameObject wolfPrefab;
 
 	public GameObject PrefabFor (CreatureType creature)
 	{
@@ -173,6 +185,7 @@ public class CreaturePrefabOptions
 		case CreatureType.Horse: return horsePrefab;
 		case CreatureType.Elephant: return elephantPrefab;
 		case CreatureType.Crab: return crabPrefab;
+		case CreatureType.Wolf: return wolfPrefab;
 		default: throw new ArgumentException("Illegal creature type: " + creature, "creature");
 		}
 	}
