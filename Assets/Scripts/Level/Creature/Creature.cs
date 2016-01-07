@@ -12,6 +12,7 @@ public class Creature : MonoBehaviour
 {
 	// The type of creature this is.
 	public CreatureType creatureType;
+	public int health = ResourceCollection.maxHealth;
 
 	public Coordinate Position { get; private set; }
 	public Coordinate NextPosition { get; private set; }
@@ -19,12 +20,18 @@ public class Creature : MonoBehaviour
 	public IAbility Ability { get; private set; }
 
 	private bool isMoving = false;
-	private bool usingAbility = false;
+
+	private static System.Random rnd = new System.Random();
 	
 	// Convenience method to get the creature's definition
 	public CreatureDefinition Definition
 	{
 		get { return CreatureDefinitions.ForType(creatureType); }
+	}
+
+	public ResourceCollection ToResources()
+	{
+		return ResourceCollection.FromMultiset(Definition.Recipe.MultisetSubtract(ResourceType.Energy, 1)).Add(health);
 	}
 
 	void Awake()
@@ -57,17 +64,44 @@ public class Creature : MonoBehaviour
 
 	public void Step()
 	{
-		Position = NextPosition;
-		if (usingAbility && Neighbors(Position).Contains(Goal))
+		if (!Definition.IsEnemy)
 		{
-			// Use the ability now
-			Ability.Use(Goal);
-			usingAbility = false;
-			Goal = Position;
+			FriendlyStep();
 		}
-		else if (!Position.Equals(Goal))
+		else
+		{
+			EnemyStep();
+		}
+
+		// If the creature has a passive ability, do it
+		if (HasAbility())
+		{
+			Ability.Passive();
+		}
+	}
+
+	private void EnemyStep()
+	{
+		Position = NextPosition;
+		var possible = Position.CardinalNeighbors().Where(IsValidCoordinate).ToList();
+		if (LevelManager.level.Steps % 4 == 0 && possible.Count > 0)
+		{
+			NextPosition = possible[rnd.Next(possible.Count)];
+		}
+		if (NextPosition != Position)
+		{
+			var direction = NextPosition - Position;
+			transform.Rotate(new Vector3(0, AngleFor(direction)) - transform.rotation.eulerAngles);
+		}
+	}
+
+	private void FriendlyStep()
+	{
+		Position = NextPosition;
+		if (!Position.Equals(Goal) && health > 0)
 		{
 			NextPosition = NextCoordinate ();
+			health -= 1;
 
 			// Make our creature face the right direction
 			if (NextPosition != Position)
@@ -94,13 +128,18 @@ public class Creature : MonoBehaviour
 				GetComponentInChildren<Animator>().SetTrigger("StopMove");
 			}
 		}
+
+
+		// If the creature loses all health, set it to an idle state
+		if (health == 0)
+		{
+			Goal = Position;
+		}
 	}
 
 	public void SetGoal(Coordinate coordinate)
 	{
 		Goal = coordinate;
-		// If a new goal is set, forget that we were trying to use an ability
-		usingAbility = false;
 	}
 
 	// Returns true if this creature can reach the specified goal coordinate
@@ -121,17 +160,7 @@ public class Creature : MonoBehaviour
 		{
 			throw new InvalidOperationException("This creature does not have an ability");
 		}
-		var direction = coordinate - Position;
-		if (Coordinate.cardinals.Contains(direction) || coordinate == Position)
-		{
-			Ability.Use(coordinate);
-		}
-		else
-		{
-			// Otherwise, try to set the location as a goal
-			Goal = coordinate;
-			usingAbility = true;
-		}
+		Ability.Use(coordinate);
 	}
 
 	private float AngleFor(Coordinate direction)
@@ -158,7 +187,7 @@ public class Creature : MonoBehaviour
 		while (queue.Count > 0)
 		{
 			var current = queue.Dequeue();
-			var neighbors = Neighbors(current);
+			var neighbors = current.CardinalNeighbors();
 			foreach (Coordinate neighbor in neighbors)
 			{
 				if (!distance.ContainsKey(neighbor) && neighborPredicate(neighbor))
@@ -175,11 +204,6 @@ public class Creature : MonoBehaviour
 			}
 		}
 		return parents;
-	}
-
-	private static IList<Coordinate> Neighbors(Coordinate coordinate)
-	{
-		return Coordinate.cardinals.Select(x => x + coordinate).ToList();
 	}
 
 	// do a BFS and figure out the right path

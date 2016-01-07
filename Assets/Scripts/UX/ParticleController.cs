@@ -15,7 +15,7 @@ public class ParticleController : MonoBehaviour
 		UXManager.State.Selector.GoalSet += (creature, pos) => CreateParticle(particleOptions.setCreatureGoal, pos);
 	}
 
-	private void CreateParticle(GameObject particles, Coordinate coordinate)
+	public void CreateParticle(GameObject particles, Coordinate coordinate)
 	{
 		if (particles)
 		{
@@ -30,4 +30,5 @@ public class ParticleEffectOptions
 	public GameObject createCreature;
 	public GameObject destroyCreature;
 	public GameObject setCreatureGoal;
+	public GameObject attack;
 }

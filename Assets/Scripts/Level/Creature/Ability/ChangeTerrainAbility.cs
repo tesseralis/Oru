@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using Util;
 
-public class ChangeTerrainAbility : MonoBehaviour, IAbility
+public class ChangeTerrainAbility : AbstractCarryAbility, IAbility
 {
 	public TerrainType carryType = TerrainType.Rock;
 	public TerrainType leaveType = TerrainType.Land;
@@ -29,8 +30,7 @@ public class ChangeTerrainAbility : MonoBehaviour, IAbility
 
 	public bool isCarrying;
 
-
-	public void Use(Coordinate target)
+	protected override void DoPickup(Coordinate target)
 	{
 		TerrainController terrain = LevelManager.Terrain;
 
@@ -63,7 +63,7 @@ public class ChangeTerrainAbility : MonoBehaviour, IAbility
 			&& !x.Definition.AllowedTerrain.Contains(terrain));
 	}
 
-	public string Description()
+	public override string Description()
 	{
 		if (isCarrying)
 		{
@@ -74,5 +74,4 @@ public class ChangeTerrainAbility : MonoBehaviour, IAbility
 			return "Pick up " + carryType;
 		}
 	}
-
 }

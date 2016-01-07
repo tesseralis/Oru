@@ -12,6 +12,11 @@ public interface IAbility
 	void Use(Coordinate coordinate);
 
 	/// <summary>
+	/// Activate the passive version of this ability.
+	/// </summary>
+	void Passive();
+
+	/// <summary>
 	/// Description of what happens when you use the ability.
 	/// </summary>
 	/// <returns>The ability description.</returns>

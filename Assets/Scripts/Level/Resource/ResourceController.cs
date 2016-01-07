@@ -12,7 +12,7 @@ public class ResourceController : MonoBehaviour
 	public GameObject resourcePilePrefab;
 
 	// Get the pile of resources at the given coordinate
-	public IDictionary<ResourceType, int> this[Coordinate coordinate]
+	public ResourceCollection this[Coordinate coordinate]
 	{
 		get
 		{
@@ -22,7 +22,7 @@ public class ResourceController : MonoBehaviour
 			}
 			else
 			{
-				return Multiset.Empty<ResourceType>();
+				return ResourceCollection.Empty();
 			}
 		}
 		set

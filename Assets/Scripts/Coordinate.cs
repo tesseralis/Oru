@@ -1,3 +1,5 @@
+using System.Linq;
+
 public struct Coordinate
 {
 	public Coordinate(int _x, int _z)
@@ -55,5 +57,11 @@ public struct Coordinate
 	public static Coordinate[] cardinals
 	{
 		get { return new Coordinate[]{up, down, left, right}; }
+	}
+
+	public Coordinate[] CardinalNeighbors()
+	{
+		Coordinate y = this;
+		return cardinals.Select(x => x + y).ToArray();
 	}
 }

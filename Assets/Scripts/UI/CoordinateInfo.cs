@@ -39,7 +39,7 @@ public class CoordinateInfo : MonoBehaviour
 		{
 			panel.SetActive(true);
 			content.gameObject.SetActive(false);
-			resourceList.ShowResources(LevelManager.Resources[coordinate]);
+			resourceList.ShowResources(LevelManager.Resources[coordinate].ToMultiset());
 		}
 		if (LevelManager.Recipes[coordinate] != null)
 		{
