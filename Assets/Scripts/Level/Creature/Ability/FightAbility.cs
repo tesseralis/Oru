@@ -62,6 +62,9 @@ public class FightAbility : MonoBehaviour, IAbility
 				{
 					enemy.health = -1;
 				}
+				// TODO Figure out a way for this not to rely on UX!!!
+				var particles = UXManager.Particles;
+				particles.CreateParticle(particles.particleOptions.attack, enemy.Position);
 			}
 			if (target != null)
 			{
