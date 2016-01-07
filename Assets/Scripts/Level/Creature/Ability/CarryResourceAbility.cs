@@ -7,7 +7,14 @@ using Util;
 public class CarryResourceAbility : MonoBehaviour, IAbility
 {
 	public int capacity;
-	public ResourceCount[] carrying;
+
+	ResourceCollection carrying;
+
+	public ResourceCollection Carrying
+	{
+		get { return carrying; }
+		set { carrying = value; }
+	}
 
 	public class Definition : IAbilityDefinition
 	{
@@ -22,23 +29,8 @@ public class CarryResourceAbility : MonoBehaviour, IAbility
 			var ability = creature.gameObject.AddComponent<CarryResourceAbility>();
 			// TODO figure out if there is a way to structure this without leaving these variables public
 			ability.capacity = Capacity;
-			ability.carrying = new ResourceCount[0];
+			ability.carrying = ResourceCollection.Empty();
 			return ability;
-		}
-	}
-
-	// Convert to a multiset
-	// TODO refactor with the same methods in ResourcePile
-	public IDictionary<ResourceType, int> Carrying
-	{
-		get
-		{
-			return carrying.Aggregate(Multiset.Empty<ResourceType>(),
-				(ms, resource) => ms.MultisetAdd(resource.type, resource.count));
-		}
-		set
-		{
-			carrying = value.Select(resource => new ResourceCount(resource.Key, resource.Value)).ToArray();
 		}
 	}
 
@@ -61,28 +53,9 @@ public class CarryResourceAbility : MonoBehaviour, IAbility
 		// If we're not carrying anything, pick up things
 		if (Carrying.IsEmpty())
 		{
-			var newCarry = Multiset.Empty<ResourceType>();
-			var resourcePile = resources[target];
-			var remainingCapacity = capacity;
-			foreach (var resource in resources[target])
-			{
-				if (resource.Value >= remainingCapacity)
-				{
-					// We've reached the remaining capacity, so finalize our changes and break
-					resources[target] = resourcePile.MultisetSubtract(resource.Key, remainingCapacity);
-					Carrying = newCarry.MultisetAdd(resource.Key, remainingCapacity);
-					return;
-				}
-				else
-				{
-					// Otherwise, accumulate that amount
-					resourcePile = resourcePile.MultisetSubtract(resource.Key, resource.Value);
-					newCarry = newCarry.MultisetAdd(resource.Key, resource.Value);
-					remainingCapacity -= resource.Value;
-				}
-			}
-			resources[target] = resourcePile;
-			Carrying = newCarry;
+			ResourceCollection carrying;
+			resources[target] = resources[target].Take(capacity, out carrying);
+			Carrying = carrying;
 		}
 		else
 		{
@@ -90,8 +63,8 @@ public class CarryResourceAbility : MonoBehaviour, IAbility
 			// Put down what we're carrying on the coordinate
 			if (LevelManager.Terrain.Contains(target) && LevelManager.Terrain[target] != TerrainType.Tree)
 			{
-				resources[target] = resources[target].MultisetAdd(Carrying);
-				Carrying = Multiset.Empty<ResourceType>();
+				resources[target] += Carrying;
+				Carrying = ResourceCollection.Empty();
 			}
 
 		}

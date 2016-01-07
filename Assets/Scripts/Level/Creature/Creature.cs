@@ -29,6 +29,11 @@ public class Creature : MonoBehaviour
 		get { return CreatureDefinitions.ForType(creatureType); }
 	}
 
+	public ResourceCollection ToResources()
+	{
+		return ResourceCollection.FromMultiset(Definition.Recipe.MultisetSubtract(ResourceType.Energy, 1)).Add(health);
+	}
+
 	void Awake()
 	{
 		// Make sure we have the right ability attached

@@ -44,12 +44,8 @@ public class CreatureController : MonoBehaviour
 		var recipe = creatureDefinition.Recipe;
 		// Figure out how many blocks we have available
 		var availableResources = Neighbors(coordinate).Select(c => resources[c]);
-		var resourceCount = Multiset.Empty<ResourceType>();
-		foreach (var resource in availableResources)
-		{
-			resourceCount = resourceCount.MultisetAdd(resource);
-		}
-		return resourceCount.Contains(recipe)
+		var resourceCount = availableResources.Aggregate((x, y) => x + y);
+		return resourceCount.ToMultiset().Contains(recipe)
 			&& creatureDefinition.AllowedTerrain.Contains(LevelManager.Terrain[coordinate])
 			&& !CreatureList.Any(x => x.Position == coordinate);
 
@@ -68,20 +64,36 @@ public class CreatureController : MonoBehaviour
 
 		// Remove the items from the neighboring coordinates.
 		var neighbors = Neighbors(location);
-		var remainder = definition.Recipe;
+		// If the creature needs a health resource, take it from the most healthy pile
+		int bestEnergy = 0;
+		if (NeedEnergy(definition.Recipe))
+		{
+			bestEnergy = neighbors.SelectMany(x => LevelManager.Resources[x].EnergyBlocks).Max();
+			// Remove from the thing we took it from
+			foreach (var neighbor in neighbors)
+			{
+				if (resources[neighbor].EnergyBlocks.Contains(bestEnergy))
+				{
+					resources[neighbor] = resources[neighbor].Remove(bestEnergy);
+					break;
+				}
+			}
+		}
 		// Take items from the adjacent resources until we don't need any more.
+		var remainder = definition.Recipe;
 		foreach (var neighbor in neighbors)
 		{
 			if (remainder.IsEmpty())
 			{
 				break;
 			}
-			var difference = LevelManager.Resources[neighbor].MultisetSubtract(remainder);
-			remainder = remainder.MultisetSubtract(resources[neighbor]);
+			var difference = resources[neighbor].Paper.MultisetSubtract(remainder);
+			remainder = remainder.MultisetSubtract(resources[neighbor].Paper);
 
-			resources[neighbor] = difference;
+			resources[neighbor] = resources[neighbor].WithPaper(difference);
 		}
 		var newCreature = gameObject.AddChildWithComponent<Creature>(creaturePrefabs.PrefabFor (creature), location);
+		newCreature.health = bestEnergy;
 
 		// Add the creature to our list
 		creatureList.Add(newCreature);
@@ -92,7 +104,6 @@ public class CreatureController : MonoBehaviour
 		return newCreature;
 	}
 
-	// TODO figure out why this creates stray GameObjects
 	public void DestroyCreature(Creature creature)
 	{
 		var coordinate = creature.Position;
@@ -101,14 +112,14 @@ public class CreatureController : MonoBehaviour
 		if (CreatureDestroyed != null) { CreatureDestroyed(coordinate); }
 
 		// Recycle the creature's components
-		LevelManager.Resources[coordinate] = LevelManager.Resources[coordinate].MultisetAdd(CreatureDefinitions.ForType(creature.creatureType).Recipe);
+		LevelManager.Resources[coordinate] += creature.ToResources();
 
 		// Do anything the creature's ability's state says we should do.
 		// TODO generalize this so that we can account for more abilities
 		if (creature.GetComponent<CarryResourceAbility>() != null)
 		{
 			var ability = creature.GetComponent<CarryResourceAbility>();
-			LevelManager.Resources[coordinate] = LevelManager.Resources[coordinate].MultisetAdd(ability.Carrying);
+			LevelManager.Resources[coordinate] += ability.Carrying;
 		}
 
 		// Remove from our list of creatures
@@ -137,6 +148,11 @@ public class CreatureController : MonoBehaviour
 			from z in range
 			select coordinate + new Coordinate(x, z)).ToList();
 
+	}
+
+	private static bool NeedEnergy(IDictionary<ResourceType, int> recipe)
+	{
+		return recipe.ContainsKey(ResourceType.Energy) && recipe[ResourceType.Energy] > 0;
 	}
 }
 

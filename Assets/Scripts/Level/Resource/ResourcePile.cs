@@ -13,18 +13,15 @@ public class ResourcePile : MonoBehaviour
 
 	// Height between separate resource types
 	public float heightGap = 0.1f;
-	public ResourceCount[] resources;
 
-	public IDictionary<ResourceType, int> Resources
+	public ResourceCollection resources;
+
+	public ResourceCollection Resources
 	{
-		get
-		{
-			return resources.Aggregate(Multiset.Empty<ResourceType>(),
-				(ms, resource) => ms.MultisetAdd(resource.type, resource.count));
-		}
+		get { return resources; }
 		set
 		{
-			resources = value.Select(resource => new ResourceCount(resource.Key, resource.Value)).ToArray();
+			resources = value;
 			UpdateView();
 		}
 	}
@@ -49,15 +46,8 @@ public class ResourcePile : MonoBehaviour
 		DeleteChildren();
 		var controller = GetComponentInParent<ResourceController>();
 		int numResourceTypes = 0;
-		bool hasEnergy = false;
-		foreach (var resource in Resources.Keys)
+		foreach (var resource in Resources.Paper.Keys)
 		{
-			// Handle the energy differently: put it on top of the rest
-			if (resource == ResourceType.Energy)
-			{
-				hasEnergy = true;
-				continue;
-			}
 			numResourceTypes++;
 			var obj = gameObject.AddChild(controller.resourcePrefabs.PrefabFor(resource), gameObject.Coordinate());
 
@@ -66,24 +56,12 @@ public class ResourcePile : MonoBehaviour
 		}
 
 		// Put the energy resource on top of everything else
-		if (hasEnergy)
+		// TODO show different things based on the health of the energy block
+		if (Resources.EnergyBlocks.Count > 0)
 		{
 			numResourceTypes++;
 			var obj = gameObject.AddChild(controller.resourcePrefabs.PrefabFor(ResourceType.Energy), gameObject.Coordinate());
 			obj.transform.Translate(Vector3.up * numResourceTypes * heightGap);
 		}
 	}
-}
-
-[Serializable]
-public class ResourceCount
-{
-	public ResourceCount(ResourceType _type, int _count)
-	{
-		type = _type;
-		count = _count;
-	}
-
-	public ResourceType type;
-	public int count;
 }
