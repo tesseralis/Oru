@@ -12,8 +12,7 @@ public class Creature : MonoBehaviour
 {
 	// The type of creature this is.
 	public CreatureType creatureType;
-	// TODO health value should be determined by the energy we created this from
-	public int health = 20;
+	public int health = ResourceCollection.maxHealth;
 
 	public Coordinate Position { get; private set; }
 	public Coordinate NextPosition { get; private set; }
@@ -22,6 +21,8 @@ public class Creature : MonoBehaviour
 
 	private bool isMoving = false;
 	private bool usingAbility = false;
+
+	private static System.Random rnd = new System.Random();
 	
 	// Convenience method to get the creature's definition
 	public CreatureDefinition Definition
@@ -63,6 +64,40 @@ public class Creature : MonoBehaviour
 	}
 
 	public void Step()
+	{
+		if (!Definition.IsEnemy)
+		{
+			FriendlyStep();
+		}
+		else
+		{
+			EnemyStep();
+		}
+	}
+
+	private void EnemyStep()
+	{
+		Position = NextPosition;
+		var possible = Neighbors(Position).Where(IsValidCoordinate).ToList();
+		if (possible.Count > 0)
+		{
+			NextPosition = possible[rnd.Next(possible.Count)];
+		}
+		if (NextPosition != Position)
+		{
+			var direction = NextPosition - Position;
+			transform.Rotate(new Vector3(0, AngleFor(direction)) - transform.rotation.eulerAngles);
+		}
+
+		// Destroy enemy creatures
+		foreach (var creature in LevelManager.Creatures.CreatureList.Where(x => Neighbors(Position).Contains(x.Position) && !x.Definition.IsEnemy))
+		{
+			creature.health = 0;
+			LevelManager.Creatures.DestroyCreature(creature);
+		}
+	}
+
+	private void FriendlyStep()
 	{
 		Position = NextPosition;
 		if (usingAbility && Neighbors(Position).Contains(Goal))

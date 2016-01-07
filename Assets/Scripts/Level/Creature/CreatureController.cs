@@ -163,6 +163,7 @@ public class CreaturePrefabOptions
 	public GameObject turtlePrefab;
 	public GameObject horsePrefab;
 	public GameObject elephantPrefab;
+	public GameObject crabPrefab;
 
 	public GameObject PrefabFor (CreatureType creature)
 	{
@@ -171,6 +172,7 @@ public class CreaturePrefabOptions
 		case CreatureType.Turtle: return turtlePrefab;
 		case CreatureType.Horse: return horsePrefab;
 		case CreatureType.Elephant: return elephantPrefab;
+		case CreatureType.Crab: return crabPrefab;
 		default: throw new ArgumentException("Illegal creature type: " + creature, "creature");
 		}
 	}
