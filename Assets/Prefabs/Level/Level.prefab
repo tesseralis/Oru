@@ -307,6 +307,10 @@ Prefab:
       propertyPath: creaturePrefabs.flowerPrefab
       value: 
       objectReference: {fileID: 128302, guid: 5ecc02b77e6054d618a2fe488d291d01, type: 2}
+    - target: {fileID: 0}
+      propertyPath: creatureController
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 180142}
