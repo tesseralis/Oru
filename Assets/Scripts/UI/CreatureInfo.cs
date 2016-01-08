@@ -46,6 +46,9 @@ public class CreatureInfo : MonoBehaviour
 		resourceList.ShowResources(creatureDefinition.Recipe);
 
 		DisplayAbilityText(creature);
+		var isEnemy = creature.Definition.IsEnemy;
+		useAbilityButton.gameObject.SetActive(!isEnemy);
+		destroyCreatureButton.gameObject.SetActive(!isEnemy);
 	}
 
 	private void DisplayAbilityText(Creature creature)
