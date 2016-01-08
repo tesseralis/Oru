@@ -176,6 +176,7 @@ public class CreaturePrefabOptions
 	public GameObject elephantPrefab;
 	public GameObject crabPrefab;
 	public GameObject wolfPrefab;
+	public GameObject flowerPrefab;
 
 	public GameObject PrefabFor (CreatureType creature)
 	{
@@ -186,6 +187,7 @@ public class CreaturePrefabOptions
 		case CreatureType.Elephant: return elephantPrefab;
 		case CreatureType.Crab: return crabPrefab;
 		case CreatureType.Wolf: return wolfPrefab;
+		case CreatureType.Flower: return flowerPrefab;
 		default: throw new ArgumentException("Illegal creature type: " + creature, "creature");
 		}
 	}

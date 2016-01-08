@@ -70,16 +70,19 @@ public class Creature : MonoBehaviour
 	{
 		if (LevelManager.level.Steps >= nextStep)
 		{
-			// TODO handle idle creatures
 			prevStep = nextStep;
 			nextStep += 4 - (int)Definition.Speed(this);
-			if (!Definition.IsEnemy)
+			// Move non-idle creatures
+			if (Definition.Speed(this) != CreatureSpeed.Idle)
 			{
-				FriendlyStep();
-			}
-			else
-			{
-				EnemyStep();
+				if (!Definition.IsEnemy)
+				{
+					FriendlyStep();
+				}
+				else
+				{
+					EnemyStep();
+				}
 			}
 
 			// If the creature has a passive ability, do it

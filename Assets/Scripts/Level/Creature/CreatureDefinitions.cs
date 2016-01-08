@@ -93,6 +93,16 @@ public static class CreatureDefinitions
 		Ability = new FightAbility.Definition { Attack = 10, Defense = 5 }
 	};
 
+	public static readonly CreatureDefinition Flower = new CreatureDefinition
+	{
+		Type = CreatureType.Flower,
+		Description = "Can heal other creatures",
+		Recipe = new Dictionary<ResourceType, int>() { {ResourceType.Yellow, 1} },
+		AllowedTerrain = new TerrainType[]{ TerrainType.Land },
+		Speed = FixedSpeed(CreatureSpeed.Idle),
+		Ability = new HealAbility.Definition { HealPower = 1 }
+	};
+
 	public static CreatureDefinition ForType(CreatureType type)
 	{
 		switch(type)
@@ -103,6 +113,7 @@ public static class CreatureDefinitions
 		case CreatureType.Elephant: return Elephant;
 		case CreatureType.Crab: return Crab;
 		case CreatureType.Wolf: return Wolf;
+		case CreatureType.Flower: return Flower;
 		default: throw new ArgumentException("Passed in an invalid creature type: " + type, "type");
 		}
 	}
