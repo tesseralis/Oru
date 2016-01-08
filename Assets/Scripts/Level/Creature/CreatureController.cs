@@ -146,7 +146,8 @@ public class CreatureController : MonoBehaviour
 		var deadCreatures = CreatureList.Where(x => x.health < 0).ToList();
 		foreach (var creature in deadCreatures)
 		{
-			creature.health = 0;
+			// Enemy creatures give out max health
+			creature.health = creature.Definition.IsEnemy ? ResourceCollection.maxHealth : 0;
 			DestroyCreature(creature);
 		}
 		if (CreaturesUpdated != null) { CreaturesUpdated(CreatureList); }
