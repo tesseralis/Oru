@@ -41,7 +41,7 @@ public class LevelManager : MonoBehaviour
 	// how fast the game moves
 	public float stepInterval = 0.5f;
 
-	public float Steps { get; private set; }
+	public int Steps { get; private set; }
 
 	public event Action Step;
 
