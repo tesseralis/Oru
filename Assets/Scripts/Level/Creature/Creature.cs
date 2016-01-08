@@ -101,11 +101,16 @@ public class Creature : MonoBehaviour
 		{
 			NextPosition = possible[rnd.Next(possible.Count)];
 		}
+		Coordinate direction;
 		if (NextPosition != Position)
 		{
-			var direction = NextPosition - Position;
-			transform.Rotate(new Vector3(0, AngleFor(direction)) - transform.rotation.eulerAngles);
+			direction = NextPosition - Position;
 		}
+		else
+		{
+			direction = Coordinate.cardinals[rnd.Next(4)];
+		}
+		FaceDirection (direction);
 	}
 
 	private void FriendlyStep()
@@ -120,7 +125,7 @@ public class Creature : MonoBehaviour
 			if (NextPosition != Position)
 			{
 				var direction = NextPosition - Position;
-				transform.Rotate(new Vector3(0, AngleFor(direction)) - transform.rotation.eulerAngles);
+				FaceDirection (direction);
 			}
 
 			// Animate our creature if it has animation
@@ -148,6 +153,11 @@ public class Creature : MonoBehaviour
 		{
 			Goal = Position;
 		}
+	}
+
+	void FaceDirection (Coordinate direction)
+	{
+		transform.Rotate (new Vector3 (0, AngleFor (direction)) - transform.rotation.eulerAngles);
 	}
 
 	public void SetGoal(Coordinate coordinate)
