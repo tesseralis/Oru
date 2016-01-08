@@ -32,7 +32,13 @@ public class CreatureSelector : MonoBehaviour
 		if (creatureMarker) { creatureMarker.SetActive(false); }
 		actionMarkers.Disable();
 		UXManager.Input.CreatureClicked += SelectCreature;
-		LevelManager.Creatures.CreatureDestroyed += (x) => Deselect();
+		LevelManager.Creatures.CreatureDestroyed += (x, pos) => 
+		{
+			if (x == SelectedCreature)
+			{
+				Deselect();
+			}
+		};
 	}
 
 	public void SelectCreature(Creature creature)

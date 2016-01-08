@@ -11,7 +11,7 @@ public class ParticleController : MonoBehaviour
 	void Start () {
 		// Add particles on certain effects
 		LevelManager.Creatures.CreatureCreated += (x, pos) => CreateParticle(particleOptions.createCreature, pos);
-		LevelManager.Creatures.CreatureDestroyed += (pos) => CreateParticle(particleOptions.destroyCreature, pos);
+		LevelManager.Creatures.CreatureDestroyed += (c, pos) => CreateParticle(particleOptions.destroyCreature, pos);
 		UXManager.State.Selector.GoalSet += (creature, pos) => CreateParticle(particleOptions.setCreatureGoal, pos);
 	}
 

@@ -11,7 +11,7 @@ public class AudioController : MonoBehaviour {
 	{
 		// Play sounds when the creature takes actions
 		LevelManager.Creatures.CreatureCreated += (x, y) => PlaySound(soundOptions.createCreature);
-		LevelManager.Creatures.CreatureDestroyed += (pos) => PlaySound(soundOptions.destroyCreature);
+		LevelManager.Creatures.CreatureDestroyed += (c, pos) => PlaySound(soundOptions.destroyCreature);
 		LevelManager.Recipes.RecipesUpdated += (obj) => PlaySound(soundOptions.pickupRecipe);
 		UXManager.State.Selector.Selected += x => PlaySound(soundOptions.selectCreature);
 		UXManager.State.Selector.GoalSet += (x, y) => PlaySound(soundOptions.setCreatureGoal);

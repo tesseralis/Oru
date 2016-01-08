@@ -14,7 +14,7 @@ public class CreatureController : MonoBehaviour
 	public CreaturePrefabOptions creaturePrefabs;
 
 	// Called when a creature is destroyed
-	public event Action<Coordinate> CreatureDestroyed;
+	public event Action<Creature, Coordinate> CreatureDestroyed;
 	// Called when a creature is created
 	public event Action<Creature, Coordinate> CreatureCreated;
 	// Called when all the creatures have updated their steps
@@ -113,7 +113,7 @@ public class CreatureController : MonoBehaviour
 		var coordinate = creature.Position;
 
 		// Answer any event handlers
-		if (CreatureDestroyed != null) { CreatureDestroyed(coordinate); }
+		if (CreatureDestroyed != null) { CreatureDestroyed(creature, coordinate); }
 
 		// Recycle the creature's components
 		LevelManager.Resources[coordinate] += creature.ToResources();
