@@ -79,7 +79,7 @@ public static class CreatureDefinitions
 		Recipe = new Dictionary<ResourceType, int>() { {ResourceType.Energy, 1}, {ResourceType.Red, 1} },
 		AllowedTerrain = new TerrainType[]{ TerrainType.Land },
 		Speed = FixedSpeed(CreatureSpeed.Slow),
-		Ability = new FightAbility.Definition { Attack = 5, Defense = 5 },
+		Ability = new FightAbility.Definition { Attack = 10, Defense = 5 },
 		IsEnemy = true
 	};
 
@@ -90,7 +90,7 @@ public static class CreatureDefinitions
 		Recipe = new Dictionary<ResourceType, int>() { {ResourceType.Energy, 1}, {ResourceType.Blue, 4} },
 		AllowedTerrain = new TerrainType[]{ TerrainType.Land, TerrainType.Rock },
 		Speed = FixedSpeed(CreatureSpeed.Fast),
-		Ability = new FightAbility.Definition { Attack = 10, Defense = 5 }
+		Ability = new FightAbility.Definition { Attack = 10, Defense = 7 }
 	};
 
 	public static readonly CreatureDefinition Flower = new CreatureDefinition
