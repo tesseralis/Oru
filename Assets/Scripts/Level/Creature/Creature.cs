@@ -20,6 +20,7 @@ public class Creature : MonoBehaviour
 	public IAbility Ability { get; private set; }
 
 	private bool isMoving = false;
+	private int prevStep, nextStep;
 
 	private static System.Random rnd = new System.Random();
 	
@@ -47,6 +48,8 @@ public class Creature : MonoBehaviour
 	{
 		// Store our initial position
 		Goal = NextPosition = Position = gameObject.Coordinate();
+		prevStep = LevelManager.level.Steps;
+		nextStep = prevStep + 4 - (int)Definition.Speed(this);
 	}
 
 	public void Update()
@@ -55,7 +58,8 @@ public class Creature : MonoBehaviour
 		var stepInterval = LevelManager.level.stepInterval;
 		var cellSize = LevelManager.level.cellSize;
 
-		var ratio = (Time.timeSinceLevelLoad % stepInterval) / stepInterval;
+		var time = Time.timeSinceLevelLoad;
+		var ratio = ((time / stepInterval) + 1 - prevStep) / (nextStep - prevStep);
 		var direction = NextPosition - Position;
 		var translation = new Vector3(direction.x, 0, direction.z) * ratio * cellSize;
 		gameObject.SetPosition(Position);
@@ -64,19 +68,25 @@ public class Creature : MonoBehaviour
 
 	public void Step()
 	{
-		if (!Definition.IsEnemy)
+		if (LevelManager.level.Steps >= nextStep)
 		{
-			FriendlyStep();
-		}
-		else
-		{
-			EnemyStep();
-		}
+			// TODO handle idle creatures
+			prevStep = nextStep;
+			nextStep += 4 - (int)Definition.Speed(this);
+			if (!Definition.IsEnemy)
+			{
+				FriendlyStep();
+			}
+			else
+			{
+				EnemyStep();
+			}
 
-		// If the creature has a passive ability, do it
-		if (HasAbility())
-		{
-			Ability.Passive();
+			// If the creature has a passive ability, do it
+			if (HasAbility())
+			{
+				Ability.Passive();
+			}
 		}
 	}
 
@@ -84,7 +94,7 @@ public class Creature : MonoBehaviour
 	{
 		Position = NextPosition;
 		var possible = Position.CardinalNeighbors().Where(IsValidCoordinate).ToList();
-		if (LevelManager.level.Steps % 4 == 0 && possible.Count > 0)
+		if (possible.Count > 0)
 		{
 			NextPosition = possible[rnd.Next(possible.Count)];
 		}
