@@ -18,6 +18,14 @@ public class CreatureInfo : MonoBehaviour
 		UXManager.State.Selector.Deselected += HideCreatureInfo;
 		UXManager.State.Selector.Selected += DisplayCreatureInfo;
 
+		LevelManager.Creatures.CreaturesUpdated += (obj) => 
+		{
+			if (UXManager.State.Selector.SelectedCreature)
+			{
+				DisplayCreatureInfo(UXManager.State.Selector.SelectedCreature);
+			}
+		};
+
 		// Add handlers for using ability
 		useAbilityButton.Click += UXManager.State.Selector.actionMarkers.ToggleAbility;
 
