@@ -207,6 +207,7 @@ MonoBehaviour:
     elephantPrefab: {fileID: 193838, guid: 7bf8f5892289646a68d64c829f68e79a, type: 2}
     crabPrefab: {fileID: 192472, guid: 4f667300056ae4817b5c39485398d75f, type: 2}
     wolfPrefab: {fileID: 199004, guid: f6fa27f4ffe71448787a33d24e2ceca7, type: 2}
+    flowerPrefab: {fileID: 128302, guid: 5ecc02b77e6054d618a2fe488d291d01, type: 2}
 --- !u!114 &11436340
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -302,6 +303,10 @@ Prefab:
       propertyPath: creaturePrefabs.wolfPrefab
       value: 
       objectReference: {fileID: 199004, guid: f6fa27f4ffe71448787a33d24e2ceca7, type: 2}
+    - target: {fileID: 0}
+      propertyPath: creaturePrefabs.flowerPrefab
+      value: 
+      objectReference: {fileID: 128302, guid: 5ecc02b77e6054d618a2fe488d291d01, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 180142}
