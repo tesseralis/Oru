@@ -28,6 +28,6 @@ public class GoalController : MonoBehaviour
 	// Event that is called when we are victorious.
 	public event Action OnWin;
 
-	// FIXME refactor this to allow multiple goals
+	// TODO refactor this to allow multiple goals
 	public Goal goal;
 }
