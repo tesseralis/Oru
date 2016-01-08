@@ -70,7 +70,7 @@ public class CreatureController : MonoBehaviour
 		var neighbors = Neighbors(location);
 		// If the creature needs a health resource, take it from the most healthy pile
 		int bestEnergy = 0;
-		if (NeedEnergy(definition.Recipe))
+		if (definition.NeedsEnergy())
 		{
 			bestEnergy = neighbors.SelectMany(x => LevelManager.Resources[x].EnergyBlocks).Max();
 			// Remove from the thing we took it from
@@ -159,11 +159,6 @@ public class CreatureController : MonoBehaviour
 			from z in range
 			select coordinate + new Coordinate(x, z)).ToList();
 
-	}
-
-	private static bool NeedEnergy(IDictionary<ResourceType, int> recipe)
-	{
-		return recipe.ContainsKey(ResourceType.Energy) && recipe[ResourceType.Energy] > 0;
 	}
 }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Util;
 
 /// <summary>
 /// Defines the static variables defining a creature
@@ -13,4 +14,9 @@ public class CreatureDefinition
 	public Func<Creature, CreatureSpeed> Speed { get; set; }
 	public IAbilityDefinition Ability { get; set; }
 	public bool IsEnemy { get; set; }
+
+	public bool NeedsEnergy()
+	{
+		return Recipe.Contains(ResourceType.Energy);
+	}
 }

@@ -82,6 +82,11 @@ namespace Util
 			return result;
 		}
 
+		public static bool Contains<T>(this IDictionary<T, int> set, T item)
+		{
+			return set.ContainsKey(item) && set[item] > 0;
+		}
+
 		// Check if one multiset contains another
 		public static bool Contains<T>(this IDictionary<T, int> superset, IDictionary<T, int> subset)
 		{
