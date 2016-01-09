@@ -23,8 +23,11 @@ public class TerrainController : MonoBehaviour
 		}
 		set
 		{
-			// Delete the old value
-			Destroy(grid[coordinate].gameObject);
+			if (grid.ContainsKey(coordinate))
+			{
+				// Delete the old value
+				Destroy(grid[coordinate].gameObject);
+			}
 
 			// Create the new item
 			var prefab = terrainPrefabs.PrefabFor (value);
