@@ -8,6 +8,9 @@ using Util;
 
 public class RecipeController : MonoBehaviour
 {
+	// Prefab to use for creating recipes
+	public GameObject recipePrefab;
+
 	// The list of recipes available to the player
 	public CreatureType[] availableRecipes;
 
@@ -30,6 +33,39 @@ public class RecipeController : MonoBehaviour
 			{
 				return null;
 			}
+		}
+		set
+		{
+			if (value.HasValue)
+			{
+				if (!recipeLocations.ContainsKey(coordinate))
+				{
+					recipeLocations[coordinate] = gameObject.AddChildWithComponent<Recipe>(recipePrefab, coordinate);
+				}
+				recipeLocations[coordinate].creature = value.Value;
+			}
+			else
+			{
+				if (recipeLocations.ContainsKey(coordinate))
+				{
+					var removed = recipeLocations[coordinate];
+					recipeLocations.Remove(coordinate);
+					Destroy(removed.gameObject);
+				}
+			}
+		}
+	}
+
+	public IList<CreatureType> AvailableRecipes
+	{
+		get
+		{
+			return availableRecipes.ToList();
+		}
+		set
+		{
+			availableRecipes = new HashSet<CreatureType>(value).ToArray();
+			if (RecipesUpdated != null) { RecipesUpdated(availableRecipes); }
 		}
 	}
 
@@ -63,9 +99,9 @@ public class RecipeController : MonoBehaviour
 			// from the grid and add it to the list of available instructions
 			if (creaturePositions.Contains(entry.Key))
 			{
-				if (!availableRecipes.Contains(entry.Value.creature))
+				if (!AvailableRecipes.Contains(entry.Value.creature))
 				{
-					availableRecipes = availableRecipes.Union(new CreatureType[] { entry.Value.creature }).ToArray();
+					AvailableRecipes = AvailableRecipes.Union(new CreatureType[] { entry.Value.creature }).ToArray();
 				}
 				removedEntries.Add(entry.Key);
 			}
@@ -74,12 +110,6 @@ public class RecipeController : MonoBehaviour
 		{
 			Destroy(recipeLocations[coord].gameObject);
 			recipeLocations.Remove(coord);
-		}
-
-		// Fire off events if a new recipe is added to the list.
-		if (removedEntries.Count > 0)
-		{
-			if (RecipesUpdated != null) { RecipesUpdated(availableRecipes); }
 		}
 	}
 
