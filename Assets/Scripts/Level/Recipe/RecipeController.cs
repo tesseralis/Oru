@@ -64,7 +64,7 @@ public class RecipeController : MonoBehaviour
 		}
 		set
 		{
-			availableRecipes = new HashSet<CreatureType>(value).ToArray();
+			availableRecipes = value.ToArray();
 			if (RecipesUpdated != null) { RecipesUpdated(availableRecipes); }
 		}
 	}
@@ -101,7 +101,7 @@ public class RecipeController : MonoBehaviour
 			{
 				if (!AvailableRecipes.Contains(entry.Value.creature))
 				{
-					AvailableRecipes = AvailableRecipes.Union(new CreatureType[] { entry.Value.creature }).ToArray();
+					AvailableRecipes = AvailableRecipes.Union(new CreatureType[] { entry.Value.creature }).ToList();
 				}
 				removedEntries.Add(entry.Key);
 			}
