@@ -219,6 +219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25ba3f05f169c411cba83912b007a64f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  goalPrefab: {fileID: 134374, guid: 92a3a21a799c0462e9eca225f50347c9, type: 2}
   goal: {fileID: 0}
 --- !u!114 &11478330
 MonoBehaviour:
@@ -249,6 +250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c279f77d8d664e9cb7e34a5441146a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  recipePrefab: {fileID: 185050, guid: f8cb401af82d646d399bb8608fd33ed2, type: 2}
   availableRecipes: 
 --- !u!114 &11483342
 MonoBehaviour:
@@ -315,6 +317,14 @@ Prefab:
       propertyPath: creatureController
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: recipePrefab
+      value: 
+      objectReference: {fileID: 185050, guid: f8cb401af82d646d399bb8608fd33ed2, type: 2}
+    - target: {fileID: 0}
+      propertyPath: goalPrefab
+      value: 
+      objectReference: {fileID: 134374, guid: 92a3a21a799c0462e9eca225f50347c9, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 180142}
