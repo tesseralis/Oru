@@ -55,6 +55,17 @@ public class CreatureController : MonoBehaviour
 			&& !CreatureList.Any(x => x.Position == coordinate);
 	}
 
+	// Add a creature at the specified location, disregarding restrictions
+	public Creature AddCreature(CreatureType creature, Coordinate location)
+	{
+		var newCreature = gameObject.AddChildWithComponent<Creature>(creaturePrefabs.PrefabFor (creature), location);
+
+		// Add the creature to our list
+		creatureList.Add(newCreature);
+
+		return newCreature;
+	}
+
 	// Add a creature at a specified location if possible
 	public Creature CreateCreature(CreatureType creature, Coordinate location)
 	{
@@ -96,7 +107,7 @@ public class CreatureController : MonoBehaviour
 
 			resources[neighbor] = resources[neighbor].WithPaper(difference);
 		}
-		var newCreature = gameObject.AddChildWithComponent<Creature>(creaturePrefabs.PrefabFor (creature), location);
+		var newCreature = AddCreature(creature, location);
 		newCreature.health = bestEnergy;
 
 		// Add the creature to our list
