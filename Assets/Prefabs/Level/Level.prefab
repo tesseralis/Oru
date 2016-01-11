@@ -269,6 +269,12 @@ MonoBehaviour:
     yellowPrefab: {fileID: 192110, guid: a6734951fc922471fac580d20d9f2425, type: 2}
     bluePrefab: {fileID: 178862, guid: 5d57f5de74f2f428c8a3d23c14031489, type: 2}
     greenPrefab: {fileID: 109198, guid: c3a6731d2693845fdad2bb637e78d30d, type: 2}
+  energyPrefabs:
+    lowThreshold: 5
+    fullEnergyPrefab: {fileID: 136454, guid: 92d54012a2fc74ebf8f2194796af14fe, type: 2}
+    mediumEnergyPrefab: {fileID: 174344, guid: 82c131b31d62f4f6e8e8024921f35557, type: 2}
+    lowEnergyPrefab: {fileID: 168798, guid: d0a0ebe33aaaf4aadae6935e67c1d69a, type: 2}
+    noEnergyPrefab: {fileID: 142122, guid: 16fdf90c9d200434ea7b13855cf9c717, type: 2}
   resourcePilePrefab: {fileID: 159150, guid: 284e74a3d652a48e6be113e2c67123e6, type: 2}
 --- !u!1001 &100100000
 Prefab:
@@ -325,6 +331,22 @@ Prefab:
       propertyPath: goalPrefab
       value: 
       objectReference: {fileID: 134374, guid: 92a3a21a799c0462e9eca225f50347c9, type: 2}
+    - target: {fileID: 0}
+      propertyPath: energyPrefabs.fullEnergyPrefab
+      value: 
+      objectReference: {fileID: 136454, guid: 92d54012a2fc74ebf8f2194796af14fe, type: 2}
+    - target: {fileID: 0}
+      propertyPath: energyPrefabs.lowEnergyPrefab
+      value: 
+      objectReference: {fileID: 168798, guid: d0a0ebe33aaaf4aadae6935e67c1d69a, type: 2}
+    - target: {fileID: 0}
+      propertyPath: energyPrefabs.mediumEnergyPrefab
+      value: 
+      objectReference: {fileID: 174344, guid: 82c131b31d62f4f6e8e8024921f35557, type: 2}
+    - target: {fileID: 0}
+      propertyPath: energyPrefabs.noEnergyPrefab
+      value: 
+      objectReference: {fileID: 142122, guid: 16fdf90c9d200434ea7b13855cf9c717, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 180142}
