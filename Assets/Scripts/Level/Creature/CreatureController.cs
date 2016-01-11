@@ -56,10 +56,10 @@ public class CreatureController : MonoBehaviour
 	}
 
 	// Add a creature at the specified location, disregarding restrictions
-	public Creature AddCreature(CreatureType creature, Coordinate location)
+	public Creature AddCreature(CreatureType creatureType, Coordinate location)
 	{
-		var newCreature = gameObject.AddChildWithComponent<Creature>(creaturePrefabs.PrefabFor (creature), location);
-
+		var newCreature = gameObject.AddChildWithComponent<Creature>(creaturePrefabs.PrefabFor (creatureType), location);
+		newCreature.creatureType = creatureType;
 		// Add the creature to our list
 		CreatureList.Add(newCreature);
 
