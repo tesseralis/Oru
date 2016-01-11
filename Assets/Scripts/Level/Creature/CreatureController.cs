@@ -180,29 +180,3 @@ public class CreatureController : MonoBehaviour
 
 	}
 }
-
-[Serializable]
-public class CreaturePrefabOptions
-{
-	public GameObject cranePrefab;
-	public GameObject turtlePrefab;
-	public GameObject horsePrefab;
-	public GameObject elephantPrefab;
-	public GameObject crabPrefab;
-	public GameObject wolfPrefab;
-	public GameObject flowerPrefab;
-
-	public GameObject PrefabFor (CreatureType creature)
-	{
-		switch (creature) {
-		case CreatureType.Crane: return cranePrefab;
-		case CreatureType.Turtle: return turtlePrefab;
-		case CreatureType.Horse: return horsePrefab;
-		case CreatureType.Elephant: return elephantPrefab;
-		case CreatureType.Crab: return crabPrefab;
-		case CreatureType.Wolf: return wolfPrefab;
-		case CreatureType.Flower: return flowerPrefab;
-		default: throw new ArgumentException("Illegal creature type: " + creature, "creature");
-		}
-	}
-}
