@@ -1,0 +1,17 @@
+terrain: |
+    lll
+    www
+    www
+    www
+    lll
+creatures: {}
+resources:
+    0,1:
+        Energy: 1
+        Blue: 1
+recipes:
+    available:
+        - Crane
+    field: {}
+goals:
+    4,1: Crane

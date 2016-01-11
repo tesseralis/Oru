@@ -20,25 +20,25 @@ public class CreatureController : MonoBehaviour
 	// Called when all the creatures have updated their steps
 	public event Action<IList<Creature>> CreaturesUpdated;
 
-	private IList<Creature> creatureList;
+	private IList<Creature> creaturesToDestroy = new List<Creature>();
 
-	public IList<Creature> CreatureList
-	{
-		get { return creatureList; }
-	}
+	public IList<Creature> CreatureList { get; private set; }
 
 	public Creature this[Coordinate position]
 	{
 		get { return CreatureList.FirstOrDefault(x => x.Position == position); }
 	}
 
+	void Awake()
+	{
+		// Add all the creatures we have on the board right now
+		CreatureList = GetComponentsInChildren<Creature>().ToList();
+	}
+
 	void Start()
 	{
 		// Update all our creatures when we tick
 		LevelManager.level.Step += StepCreatures;
-
-		// Add all the creatures we have on the board right now
-		creatureList = GetComponentsInChildren<Creature>().ToList();
 	}
 
 	// Returns true if we can add a creature at the given coordinate
@@ -53,6 +53,17 @@ public class CreatureController : MonoBehaviour
 		return resourceCount.ToMultiset().Contains(recipe)
 			&& creatureDefinition.AllowedTerrain.Contains(LevelManager.Terrain[coordinate])
 			&& !CreatureList.Any(x => x.Position == coordinate);
+	}
+
+	// Add a creature at the specified location, disregarding restrictions
+	public Creature AddCreature(CreatureType creature, Coordinate location)
+	{
+		var newCreature = gameObject.AddChildWithComponent<Creature>(creaturePrefabs.PrefabFor (creature), location);
+
+		// Add the creature to our list
+		CreatureList.Add(newCreature);
+
+		return newCreature;
 	}
 
 	// Add a creature at a specified location if possible
@@ -96,11 +107,8 @@ public class CreatureController : MonoBehaviour
 
 			resources[neighbor] = resources[neighbor].WithPaper(difference);
 		}
-		var newCreature = gameObject.AddChildWithComponent<Creature>(creaturePrefabs.PrefabFor (creature), location);
+		var newCreature = AddCreature(creature, location);
 		newCreature.health = bestEnergy;
-
-		// Add the creature to our list
-		creatureList.Add(newCreature);
 
 		// Call any necessary events
 		if (CreatureCreated != null) { CreatureCreated(newCreature, location); }
@@ -109,6 +117,11 @@ public class CreatureController : MonoBehaviour
 	}
 
 	public void DestroyCreature(Creature creature)
+	{
+		creaturesToDestroy.Add(creature);
+	}
+
+	private void DoDestroyCreature(Creature creature)
 	{
 		var coordinate = creature.Position;
 
@@ -127,7 +140,7 @@ public class CreatureController : MonoBehaviour
 		}
 
 		// Remove from our list of creatures
-		creatureList.Remove(creature);
+		CreatureList.Remove(creature);
 
 		// Remove from the hierarchy
 		Destroy(creature.gameObject);
@@ -148,8 +161,13 @@ public class CreatureController : MonoBehaviour
 		{
 			// Enemy creatures give out max health
 			creature.health = creature.Definition.IsEnemy ? ResourceCollection.maxHealth : 0;
-			DestroyCreature(creature);
 		}
+		// Destroy all dead creatures and creatures the user wants to destroy
+		foreach (var creature in deadCreatures.Union(creaturesToDestroy))
+		{
+			DoDestroyCreature(creature);
+		}
+		creaturesToDestroy.Clear();
 		if (CreaturesUpdated != null) { CreaturesUpdated(CreatureList); }
 	}
 		

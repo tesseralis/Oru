@@ -16,17 +16,6 @@ public class LevelSelect : MonoBehaviour
 	public Sprite finishedSprite;
 	public Sprite unfinishedSprite;
 
-	// Use this for initialization
-	void Awake ()
-	{
-		// TODO default to using level numbers in the future?
-		// If we do not specify the levels, auto-fill them from the scene selector
-		if (levels == null || levels.Length == 0)
-		{
-			levels = SceneManager.GetAllScenes().Select(x => x.name).ToArray();
-		}
-	}
-
 	void Update()
 	{
 		gameObject.SetActive(true);
@@ -45,7 +34,7 @@ public class LevelSelect : MonoBehaviour
 
 			// Set the component to do the hooked in action when clicked
 			var createButton = newButton.GetComponent<DelegateButton>();
-			createButton.Click += () => SceneManager.LoadScene(level);
+			createButton.Click += () => GameManager.game.LoadLevel(level);
 
 			if (GameManager.game.GetCompletion(level))
 			{

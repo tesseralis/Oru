@@ -50,9 +50,14 @@ public class ResourceController : MonoBehaviour
 
 	private IDictionary<Coordinate, ResourcePile> locations;
 
-	// Use this for initialization
-	void Start () {
+	void Awake ()
+	{
 		locations = new Dictionary<Coordinate, ResourcePile>();
+	}
+
+	// Use this for initialization
+	void Start ()
+	{
 		// Assume this grid's children are all terrain blocks
 		foreach (var pile in GetComponentsInChildren<ResourcePile>())
 		{
