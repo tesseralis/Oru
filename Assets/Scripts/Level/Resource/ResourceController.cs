@@ -8,6 +8,7 @@ public class ResourceController : MonoBehaviour
 {
 	// the prefabs to use to initialize different types of resources
 	public ResourcePrefabOptions resourcePrefabs;
+	public EnergyPrefabOptions energyPrefabs;
 
 	public GameObject resourcePilePrefab;
 
@@ -92,6 +93,36 @@ public class ResourcePrefabOptions
 			return bluePrefab;
 		default:
 			throw new ArgumentException("Resource type not supported: " + resource, "resource");
+		}
+	}
+}
+
+[Serializable]
+public class EnergyPrefabOptions
+{
+	public int lowThreshold = 5;
+	public GameObject fullEnergyPrefab;
+	public GameObject mediumEnergyPrefab;
+	public GameObject lowEnergyPrefab;
+	public GameObject noEnergyPrefab;
+
+	public GameObject PrefabFor(int energy)
+	{
+		if (energy <= 0)
+		{
+			return noEnergyPrefab;
+		}
+		else if (energy < lowThreshold)
+		{
+			return lowEnergyPrefab;
+		}
+		else if (energy < ResourceCollection.maxHealth)
+		{
+			return mediumEnergyPrefab;
+		}
+		else
+		{
+			return fullEnergyPrefab;
 		}
 	}
 }

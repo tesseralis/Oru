@@ -244,10 +244,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 156312431}
     m_Modifications:
-    - target: {fileID: 11460392, guid: d1c8f1e6626cb45b59890a76bfc010a7, type: 2}
-      propertyPath: levels.Array.size
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 22473664, guid: d1c8f1e6626cb45b59890a76bfc010a7, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -342,51 +338,35 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22401734, guid: d1c8f1e6626cb45b59890a76bfc010a7, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22401734, guid: d1c8f1e6626cb45b59890a76bfc010a7, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22401734, guid: d1c8f1e6626cb45b59890a76bfc010a7, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: -17
       objectReference: {fileID: 0}
     - target: {fileID: 22401734, guid: d1c8f1e6626cb45b59890a76bfc010a7, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: -17
       objectReference: {fileID: 0}
     - target: {fileID: 22470106, guid: d1c8f1e6626cb45b59890a76bfc010a7, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22470106, guid: d1c8f1e6626cb45b59890a76bfc010a7, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: -17
       objectReference: {fileID: 0}
     - target: {fileID: 22470600, guid: d1c8f1e6626cb45b59890a76bfc010a7, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22470600, guid: d1c8f1e6626cb45b59890a76bfc010a7, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11460392, guid: d1c8f1e6626cb45b59890a76bfc010a7, type: 2}
-      propertyPath: levels.Array.data[3]
-      value: level4
-      objectReference: {fileID: 0}
-    - target: {fileID: 11460392, guid: d1c8f1e6626cb45b59890a76bfc010a7, type: 2}
-      propertyPath: levels.Array.data[0]
-      value: level1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11460392, guid: d1c8f1e6626cb45b59890a76bfc010a7, type: 2}
-      propertyPath: levels.Array.data[1]
-      value: level2
-      objectReference: {fileID: 0}
-    - target: {fileID: 11460392, guid: d1c8f1e6626cb45b59890a76bfc010a7, type: 2}
-      propertyPath: levels.Array.data[2]
-      value: level3
+      value: -17
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d1c8f1e6626cb45b59890a76bfc010a7, type: 2}
