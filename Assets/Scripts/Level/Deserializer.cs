@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using YamlDotNet.Serialization;
@@ -8,6 +9,18 @@ using Util;
 
 public static class Deserializer
 {
+	// Deserialize coordinates in the form x,z
+	private static Coordinate DeserializeCoordinate(YamlNode node)
+	{
+		int[] coords = node.ToString().Split(',').Select(x => Int32.Parse(x)).ToArray();
+		return new Coordinate(coords[0], coords[1]);
+	}
+
+	public static IDictionary<Coordinate, T> DeserializeCoordinateMap<T>(YamlMappingNode map, Func<YamlNode, T> func)
+	{
+		return map.ToDictionary<Coordinate, T>(DeserializeCoordinate, func);
+	}
+
 	private static TerrainType DeserializeTerrainTile(char chr)
 	{
 		switch(chr)
@@ -20,6 +33,31 @@ public static class Deserializer
 		}
 	}
 
+	private static IDictionary<Coordinate, TerrainType> DeserializeTerrain(string terrainString)
+	{
+		var terrainGrid = new Dictionary<Coordinate, TerrainType>();
+		var terrain = terrainString.Split('\n');
+		for (int i = 0; i < terrain.Length; i++)
+		{
+			for (int j = 0; j < terrain[i].Length; j++)
+			{
+				if (terrain[i][j] != ' ')
+				{
+					var type = DeserializeTerrainTile(terrain[i][j]);
+					var coordinate = new Coordinate(i, j);
+					terrainGrid[coordinate] = type;
+				}
+			}
+		}
+		return terrainGrid;
+	}
+
+	private static ResourceCollection DeserializeResourceCollection(YamlNode node)
+	{
+		var dict = node.ToDictionary<ResourceType, int>(YamlExtensions.ToEnum<ResourceType>, YamlExtensions.ToInt);
+		return ResourceCollection.FromMultiset(dict);
+	}
+
 	public static void DeserializeLevel(string levelName)
 	{
 		var levelFile = UnityEngine.Resources.Load<TextAsset>("Levels/" + levelName);
@@ -30,46 +68,34 @@ public static class Deserializer
 
 		var level = (YamlMappingNode)yaml.Documents[0].RootNode;
 
-		// TODO factor out terrain deserialization
-		var terrain = level.GetString("terrain").Split('\n');
-		for (int i = 0; i < terrain.Length; i++)
+		foreach (var entry in DeserializeTerrain(level.GetString("terrain")))
 		{
-			for (int j = 0; j < terrain[i].Length; j++)
-			{
-				if (terrain[i][j] != ' ')
-				{
-					var type = DeserializeTerrainTile(terrain[i][j]);
-					var coordinate = new Coordinate(i, j);
-					Debug.LogFormat("Set {0}: to {1}", coordinate, type);
-					LevelManager.Terrain[coordinate] = type;
-				}
-			}
+			LevelManager.Terrain[entry.Key] = entry.Value;
 		}
 
-		var creatures = level.GetMapping("creatures");
-		foreach (var entry in creatures.ToCoordinateMap<CreatureType>(YamlExtensions.ToEnum<CreatureType>))
+		var creatures = DeserializeCoordinateMap(level.GetMapping("creatures"), x => x.ToEnum<CreatureType>());
+		foreach (var entry in creatures)
 		{
-			Debug.Log(entry.Key + " " + entry.Value);
 			LevelManager.Creatures.AddCreature(entry.Value, entry.Key);
 		}
 
-		var resourcePiles = level.GetMapping("resources");
-		foreach (var entry in resourcePiles.ToCoordinateMap(x => ((YamlMappingNode)x).ToDictionary<ResourceType, int>(YamlExtensions.ToEnum<ResourceType>, YamlExtensions.ToInt)))
+		var resources = DeserializeCoordinateMap(level.GetMapping("resources"), x => DeserializeResourceCollection(x));
+		foreach (var entry in resources)
 		{
-			Debug.Log(entry.Key + " " + entry.Value);
-			LevelManager.Resources[entry.Key] = ResourceCollection.FromMultiset(entry.Value);
+			LevelManager.Resources[entry.Key] = entry.Value;
 		}
 
 		var recipes = level.GetMapping("recipes");
-		var available = recipes.GetSequence("available");
-		LevelManager.Recipes.AvailableRecipes = available.Select<YamlNode, CreatureType>(YamlExtensions.ToEnum<CreatureType>).ToArray();
-		var field = recipes.GetMapping("field").ToCoordinateMap<CreatureType>(YamlExtensions.ToEnum<CreatureType>);
+		var available = recipes.GetSequence("available").Select(x => x.ToEnum<CreatureType>()).ToList();
+		LevelManager.Recipes.AvailableRecipes = available;
+
+		var field = DeserializeCoordinateMap(recipes.GetMapping("field"), x => x.ToEnum<CreatureType>());
 		foreach (var entry in field)
 		{
 			LevelManager.Recipes[entry.Key] = entry.Value;
 		}
 
-		var goals = level.GetMapping("goals").ToCoordinateMap<CreatureType>(YamlExtensions.ToEnum<CreatureType>);
+		var goals = DeserializeCoordinateMap(level.GetMapping("goals"), x => x.ToEnum<CreatureType>());
 		foreach (var goal in goals)
 		{
 			LevelManager.Goals.SetGoal(goal.Key, goal.Value);

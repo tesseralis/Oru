@@ -9,11 +9,25 @@ using System.Runtime.Serialization.Formatters.Binary;
 using YamlDotNet.Serialization;
 using YamlDotNet.RepresentationModel;
 
-// FIXME resolve all the weird type errors (I have to specify types to get Unity to build, but not Mono)
 namespace Util
 {
 	public static class YamlExtensions
 	{
+		public static YamlScalarNode AsScalar(this YamlNode node)
+		{
+			return (YamlScalarNode)node;
+		}
+
+		public static YamlMappingNode AsMapping(this YamlNode node)
+		{
+			return (YamlMappingNode)node;
+		}
+
+		public static YamlSequenceNode AsSequence(this YamlNode node)
+		{
+			return (YamlSequenceNode)node;
+		}
+
 		public static YamlNode GetChild(this YamlMappingNode map, string key)
 		{
 			return map.Children[new YamlScalarNode(key)];
@@ -21,43 +35,33 @@ namespace Util
 
 		public static YamlMappingNode GetMapping(this YamlMappingNode map, string key)
 		{
-			return (YamlMappingNode)map.GetChild(key);
+			return map.GetChild(key).AsMapping();
 		}
 
 		public static YamlSequenceNode GetSequence(this YamlMappingNode map, string key)
 		{
-			return (YamlSequenceNode)map.GetChild(key);
+			return map.GetChild(key).AsSequence();
 		}
 
 		public static string GetString(this YamlMappingNode map, string key)
 		{
-			return map.GetChild(key).ToString();
+			return map.GetChild(key).AsScalar().Value;
 		}
 
 		public static int ToInt(this YamlNode node)
 		{
-			return Int32.Parse(node.ToString());
+			return Int32.Parse(node.AsScalar().Value);
 		}
 
 		public static T ToEnum<T>(this YamlNode node)
 		{
-			return (T)Enum.Parse(typeof(T), node.ToString());
+			return (T)Enum.Parse(typeof(T), node.AsScalar().Value);
 		}
 
-		public static IDictionary<TKey, TValue> ToDictionary<TKey, TValue>(this YamlMappingNode map, Func<YamlNode, TKey> tfunc, Func<YamlNode, TValue> vfunc)
+		public static IDictionary<TKey, TValue> ToDictionary<TKey, TValue>(this YamlNode node,
+			Func<YamlNode, TKey> tfunc, Func<YamlNode, TValue> vfunc)
 		{
-			return map.ToDictionary(x => tfunc(x.Key), x => vfunc(x.Value));
-		}
-
-		public static IDictionary<Coordinate, T> ToCoordinateMap<T>(this YamlMappingNode map, Func<YamlNode, T> func)
-		{
-			return map.ToDictionary<Coordinate, T>(DeserializeCoordinate, func);
-		}
-
-		private static Coordinate DeserializeCoordinate(YamlNode node)
-		{
-			int[] coords = node.ToString().Split(',').Select<string, int>(Int32.Parse).ToArray();
-			return new Coordinate(coords[0], coords[1]);
+			return node.AsMapping().ToDictionary(x => tfunc(x.Key), x => vfunc(x.Value));
 		}
 	}
 }
