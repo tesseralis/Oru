@@ -14,7 +14,8 @@ public enum CreatureType
 	Beaver,
 	Dolphin,
 	Alligator,
-	Lion
+	Lion,
+	Camel
 }
 
 /// <summary>
@@ -70,7 +71,7 @@ public static class CreatureDefinitions
 					}
 					else
 					{
-						return CreatureSpeed.Slow;
+						return CreatureSpeed.Medium;
 					}
 				},
 				Ability = new CarryResourceAbility.Definition { Capacity = 5 }
@@ -142,7 +143,7 @@ public static class CreatureDefinitions
 		case CreatureType.Dolphin:
 			return new CreatureDefinition
 			{
-				Description = "Can move land tiles",
+				Description = "A fast seabound fighter",
 				Recipe = new Dictionary<ResourceType, int>() { {ResourceType.Energy, 1}, {ResourceType.Blue, 9} },
 				AllowedTerrain = new TerrainType[]{ TerrainType.Water },
 				Speed =  FixedSpeed(CreatureSpeed.Fast),
@@ -168,6 +169,15 @@ public static class CreatureDefinitions
 				Ability = new FightAbility.Definition { Attack = 17, Defense = 10 },
 				IsEnemy = true
 			};
+		case CreatureType.Camel:
+			return new CreatureDefinition
+			{
+				Description = "A land unit that can carry a lot of stuff",
+				Recipe = new Dictionary<ResourceType, int>() { {ResourceType.Energy, 1}, {ResourceType.Yellow, 9} },
+				AllowedTerrain = new TerrainType[]{ TerrainType.Land },
+				Speed = FixedSpeed(CreatureSpeed.Slow),
+				Ability = new CarryResourceAbility.Definition { Capacity = 10 }
+			};
 		default: throw new ArgumentException("Passed in an invalid creature type: " + type, "type");
 		}
 	}
@@ -187,6 +197,7 @@ public class CreaturePrefabOptions
 	public GameObject dolphinPrefab;
 	public GameObject alligatorPrefab;
 	public GameObject lionPrefab;
+	public GameObject camelPrefab;
 
 	public GameObject PrefabFor (CreatureType creature)
 	{
@@ -202,6 +213,7 @@ public class CreaturePrefabOptions
 		case CreatureType.Dolphin: return dolphinPrefab;
 		case CreatureType.Alligator: return alligatorPrefab;
 		case CreatureType.Lion: return lionPrefab;
+		case CreatureType.Camel: return camelPrefab;
 		default: throw new ArgumentException("Illegal creature type: " + creature, "creature");
 		}
 	}
