@@ -13,7 +13,6 @@ public static class CreatureDefinitions
 
 	public static readonly CreatureDefinition Crane = new CreatureDefinition
 	{
-		Type = CreatureType.Crane,
 		Description = "The basic origami crane",
 		Recipe = new Dictionary<ResourceType, int>() { {ResourceType.Energy, 1}, {ResourceType.Blue, 1} },
 		AllowedTerrain = new TerrainType[]{ TerrainType.Land, TerrainType.Water },
@@ -22,7 +21,6 @@ public static class CreatureDefinitions
 	
 	public static readonly CreatureDefinition Turtle = new CreatureDefinition
 	{
-		Type = CreatureType.Turtle,
 		Description = "A seabound unit that can carry resources",
 		Recipe = new Dictionary<ResourceType, int>() { {ResourceType.Energy, 1}, {ResourceType.Green, 1} },
 		AllowedTerrain = new TerrainType[]{ TerrainType.Land, TerrainType.Water },
@@ -40,7 +38,6 @@ public static class CreatureDefinitions
 
 	public static readonly CreatureDefinition Horse = new CreatureDefinition
 	{
-		Type = CreatureType.Horse,
 		Description = "A versatile land unit that can carry resources",
 		Recipe = new Dictionary<ResourceType, int>() { {ResourceType.Energy, 1}, {ResourceType.Red, 4} },
 		AllowedTerrain = new TerrainType[]{ TerrainType.Land, TerrainType.Rock },
@@ -60,7 +57,6 @@ public static class CreatureDefinitions
 
 	public static readonly CreatureDefinition Elephant = new CreatureDefinition
 	{
-		Type = CreatureType.Elephant,
 		Description = "A large unit that can uproot and move trees",
 		Recipe = new Dictionary<ResourceType, int>() { {ResourceType.Energy, 1}, {ResourceType.Blue, 9} },
 		AllowedTerrain = new TerrainType[]{ TerrainType.Land },
@@ -74,7 +70,6 @@ public static class CreatureDefinitions
 
 	public static readonly CreatureDefinition Crab = new CreatureDefinition
 	{
-		Type = CreatureType.Crab,
 		Description = "A basic enemy creature",
 		Recipe = new Dictionary<ResourceType, int>() { {ResourceType.Energy, 1}, {ResourceType.Red, 1} },
 		AllowedTerrain = new TerrainType[]{ TerrainType.Land },
@@ -85,7 +80,6 @@ public static class CreatureDefinitions
 
 	public static readonly CreatureDefinition Wolf = new CreatureDefinition
 	{
-		Type = CreatureType.Wolf,
 		Description = "Can fight enemies",
 		Recipe = new Dictionary<ResourceType, int>() { {ResourceType.Energy, 1}, {ResourceType.Blue, 4} },
 		AllowedTerrain = new TerrainType[]{ TerrainType.Land, TerrainType.Rock },
@@ -95,7 +89,6 @@ public static class CreatureDefinitions
 
 	public static readonly CreatureDefinition Flower = new CreatureDefinition
 	{
-		Type = CreatureType.Flower,
 		Description = "Can heal other creatures",
 		Recipe = new Dictionary<ResourceType, int>() { {ResourceType.Yellow, 1} },
 		AllowedTerrain = new TerrainType[]{ TerrainType.Land },
