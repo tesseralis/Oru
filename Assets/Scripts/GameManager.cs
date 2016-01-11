@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 
+
 /// <summary>
 /// Manages state that persists throughout the entire game, i.e. in the menus
 /// and across multiple levels.
@@ -53,6 +54,12 @@ public class GameManager : MonoBehaviour {
 			Destroy(gameObject);
 		}
 	}
+		
+	public void LoadLevel(string level)
+	{
+		SceneManager.LoadScene("DynamicLevel");
+		LevelManager.SetLevel(level);
+	}
 
 	// Save our game data
 	public void Save()
@@ -83,7 +90,7 @@ public class GameManager : MonoBehaviour {
 			file.Close();
 		}
 	}
-
+	
 	private string SaveFilePath()
 	{
 		return string.Format("{0}/{1}", Application.persistentDataPath, completionDataFile);

@@ -674,9 +674,10 @@ MonoBehaviour:
   buttonContainer: {fileID: 147012}
   buttonPrefab: {fileID: 11450146, guid: 152d66f4322b9438cb821ec8e3d1a0d4, type: 2}
   levels:
-  - Level1
-  - Level2
-  - Level3
+  - level1
+  - level2
+  - level3
+  - level4
   finishedSprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   unfinishedSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
 --- !u!114 &11472170

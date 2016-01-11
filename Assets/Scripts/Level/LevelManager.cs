@@ -14,6 +14,7 @@ using Util;
 public class LevelManager : MonoBehaviour
 {
 	public static LevelManager level;
+	public static string levelName;
 
 	public static TerrainController Terrain { get { return level.terrainController; } }
 	public static CreatureController Creatures { get { return level.creatureController; } }
@@ -39,7 +40,7 @@ public class LevelManager : MonoBehaviour
 	public float cellSize = 2;
 
 	// how fast the game moves
-	public float stepInterval = 0.5f;
+	public float stepInterval = 0.25f;
 
 	public int Steps { get; private set; }
 
@@ -64,6 +65,11 @@ public class LevelManager : MonoBehaviour
 		nextStepTime = 0;
 		Steps = 0;
 	}
+
+	void Start()
+	{
+		Deserializer.DeserializeLevel(levelName);
+	}
 	
 	// Update is called once per frame
 	void Update ()
@@ -75,6 +81,12 @@ public class LevelManager : MonoBehaviour
 			Debug.Log("Current step: " + Steps);
 			Step();
 		}
+	}
+
+	public static void SetLevel(string _levelName)
+	{
+		levelName = _levelName;
+		if (level) { Deserializer.DeserializeLevel(levelName); }
 	}
 
 }
