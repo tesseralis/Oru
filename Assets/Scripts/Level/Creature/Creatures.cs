@@ -10,7 +10,11 @@ public enum CreatureType
 	Elephant,
 	Crab,
 	Wolf,
-	Flower
+	Flower,
+	Beaver,
+	Dolphin,
+	Alligator,
+	Lion
 }
 
 /// <summary>
@@ -112,10 +116,61 @@ public static class CreatureDefinitions
 				Speed = FixedSpeed(CreatureSpeed.Idle),
 				Ability = new HealAbility.Definition { HealPower = 1 }
 			};
+		case CreatureType.Beaver:
+			return new CreatureDefinition
+			{
+				Description = "Can move land tiles",
+				Recipe = new Dictionary<ResourceType, int>() { {ResourceType.Energy, 1}, {ResourceType.Red, 1} },
+				AllowedTerrain = new TerrainType[]{ TerrainType.Land },
+				Speed =  x =>
+				{
+					if (x.GetComponent<ChangeTerrainAbility>().isCarrying)
+					{
+						return CreatureSpeed.Fast;
+					}
+					else
+					{
+						return CreatureSpeed.Slow;
+					}
+				},
+				Ability = new ChangeTerrainAbility.Definition
+				{
+					CarryType = TerrainType.Land,
+					LeaveType = TerrainType.Water
+				}
+			};
+		case CreatureType.Dolphin:
+			return new CreatureDefinition
+			{
+				Description = "Can move land tiles",
+				Recipe = new Dictionary<ResourceType, int>() { {ResourceType.Energy, 1}, {ResourceType.Blue, 9} },
+				AllowedTerrain = new TerrainType[]{ TerrainType.Water },
+				Speed =  FixedSpeed(CreatureSpeed.Fast),
+				Ability = new FightAbility.Definition { Attack = 15, Defense = 8 }
+			};
+		case CreatureType.Alligator:
+			return new CreatureDefinition
+			{
+				Description = "A waterbound enemy creature",
+				Recipe = new Dictionary<ResourceType, int>() { {ResourceType.Energy, 1}, {ResourceType.Green, 4} },
+				AllowedTerrain = new TerrainType[]{ TerrainType.Water },
+				Speed = FixedSpeed(CreatureSpeed.Medium),
+				Ability = new FightAbility.Definition { Attack = 13, Defense = 7 },
+				IsEnemy = true
+			};
+		case CreatureType.Lion:
+			return new CreatureDefinition
+			{
+				Description = "The king of the jungle; your toughest enemy",
+				Recipe = new Dictionary<ResourceType, int>() { {ResourceType.Energy, 1}, {ResourceType.Yellow, 9} },
+				AllowedTerrain = new TerrainType[]{ TerrainType.Land, TerrainType.Rock },
+				Speed = FixedSpeed(CreatureSpeed.Medium),
+				Ability = new FightAbility.Definition { Attack = 17, Defense = 10 },
+				IsEnemy = true
+			};
 		default: throw new ArgumentException("Passed in an invalid creature type: " + type, "type");
 		}
 	}
-
 }
 
 [Serializable]
@@ -128,6 +183,10 @@ public class CreaturePrefabOptions
 	public GameObject crabPrefab;
 	public GameObject wolfPrefab;
 	public GameObject flowerPrefab;
+	public GameObject beaverPrefab;
+	public GameObject dolphinPrefab;
+	public GameObject alligatorPrefab;
+	public GameObject lionPrefab;
 
 	public GameObject PrefabFor (CreatureType creature)
 	{
@@ -139,6 +198,10 @@ public class CreaturePrefabOptions
 		case CreatureType.Crab: return crabPrefab;
 		case CreatureType.Wolf: return wolfPrefab;
 		case CreatureType.Flower: return flowerPrefab;
+		case CreatureType.Beaver: return beaverPrefab;
+		case CreatureType.Dolphin: return dolphinPrefab;
+		case CreatureType.Alligator: return alligatorPrefab;
+		case CreatureType.Lion: return lionPrefab;
 		default: throw new ArgumentException("Illegal creature type: " + creature, "creature");
 		}
 	}
