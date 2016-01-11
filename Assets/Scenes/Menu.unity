@@ -244,6 +244,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 156312431}
     m_Modifications:
+    - target: {fileID: 11460392, guid: d1c8f1e6626cb45b59890a76bfc010a7, type: 2}
+      propertyPath: levels.Array.size
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 22473664, guid: d1c8f1e6626cb45b59890a76bfc010a7, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -334,39 +338,67 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22426680, guid: d1c8f1e6626cb45b59890a76bfc010a7, type: 2}
       propertyPath: m_AnchoredPosition.y
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 22401734, guid: d1c8f1e6626cb45b59890a76bfc010a7, type: 2}
+      propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22401734, guid: d1c8f1e6626cb45b59890a76bfc010a7, type: 2}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 22401734, guid: d1c8f1e6626cb45b59890a76bfc010a7, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22401734, guid: d1c8f1e6626cb45b59890a76bfc010a7, type: 2}
       propertyPath: m_SizeDelta.x
-      value: -17
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22401734, guid: d1c8f1e6626cb45b59890a76bfc010a7, type: 2}
       propertyPath: m_SizeDelta.y
-      value: -17
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22470106, guid: d1c8f1e6626cb45b59890a76bfc010a7, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22470106, guid: d1c8f1e6626cb45b59890a76bfc010a7, type: 2}
       propertyPath: m_SizeDelta.x
-      value: -17
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22470600, guid: d1c8f1e6626cb45b59890a76bfc010a7, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22470600, guid: d1c8f1e6626cb45b59890a76bfc010a7, type: 2}
       propertyPath: m_SizeDelta.y
-      value: -17
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11460392, guid: d1c8f1e6626cb45b59890a76bfc010a7, type: 2}
+      propertyPath: levels.Array.data[0]
+      value: crane
+      objectReference: {fileID: 0}
+    - target: {fileID: 11460392, guid: d1c8f1e6626cb45b59890a76bfc010a7, type: 2}
+      propertyPath: levels.Array.data[1]
+      value: horse
+      objectReference: {fileID: 0}
+    - target: {fileID: 11460392, guid: d1c8f1e6626cb45b59890a76bfc010a7, type: 2}
+      propertyPath: levels.Array.data[2]
+      value: beaver
+      objectReference: {fileID: 0}
+    - target: {fileID: 11460392, guid: d1c8f1e6626cb45b59890a76bfc010a7, type: 2}
+      propertyPath: levels.Array.data[3]
+      value: turtle
+      objectReference: {fileID: 0}
+    - target: {fileID: 11460392, guid: d1c8f1e6626cb45b59890a76bfc010a7, type: 2}
+      propertyPath: levels.Array.data[4]
+      value: wolf
+      objectReference: {fileID: 0}
+    - target: {fileID: 11460392, guid: d1c8f1e6626cb45b59890a76bfc010a7, type: 2}
+      propertyPath: levels.Array.data[5]
+      value: flower
+      objectReference: {fileID: 0}
+    - target: {fileID: 11460392, guid: d1c8f1e6626cb45b59890a76bfc010a7, type: 2}
+      propertyPath: levels.Array.data[6]
+      value: elephant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d1c8f1e6626cb45b59890a76bfc010a7, type: 2}

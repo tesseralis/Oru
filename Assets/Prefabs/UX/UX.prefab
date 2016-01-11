@@ -1188,6 +1188,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e284ed809ef7b49df90374d9a99207e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isEnabled: 0
+  isActing: 0
 --- !u!114 &11423056
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1240,6 +1242,7 @@ MonoBehaviour:
     createCreature: {fileID: 174366, guid: 09268116f21b84dfb95d046de4f5d363, type: 2}
     destroyCreature: {fileID: 189986, guid: c77e72afb954e430eaf8cc1f97fafe50, type: 2}
     setCreatureGoal: {fileID: 166660, guid: 22d15bc638da047959c747b5699dcc42, type: 2}
+    attack: {fileID: 189986, guid: c77e72afb954e430eaf8cc1f97fafe50, type: 2}
 --- !u!114 &11465554
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1312,7 +1315,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: particleOptions.attack
+      value: 
+      objectReference: {fileID: 189986, guid: c77e72afb954e430eaf8cc1f97fafe50, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 172088}

@@ -1,0 +1,19 @@
+terrain: |
+    llllll
+    llllll
+    wwwwww
+    wwwwww
+    llllll
+    llllll
+creatures:
+    0,2: Turtle
+    2,2: Alligator
+resources:
+    5,5:
+        Red: 4
+recipes:
+    available: []
+    field:
+        5,0: Horse
+goals:
+    0,0: Horse

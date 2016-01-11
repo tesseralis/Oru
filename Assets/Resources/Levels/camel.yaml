@@ -1,0 +1,20 @@
+terrain: |
+    wwwwww
+    wwwwww
+    rrllrr
+    rrllrr
+    wwwwww
+    wwwwww
+creatures:
+    2,2: Lion
+resources:
+    5,2:
+        Energy: 1
+        Blue: 9
+recipes:
+    available:
+        - Dolphin
+        - Camel
+    field: {}
+goals:
+    0,2: Dolphin

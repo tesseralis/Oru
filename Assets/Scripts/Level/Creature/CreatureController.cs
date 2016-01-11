@@ -56,12 +56,13 @@ public class CreatureController : MonoBehaviour
 	}
 
 	// Add a creature at the specified location, disregarding restrictions
-	public Creature AddCreature(CreatureType creature, Coordinate location)
+	public Creature AddCreature(CreatureType creatureType, Coordinate location)
 	{
-		var newCreature = gameObject.AddChildWithComponent<Creature>(creaturePrefabs.PrefabFor (creature), location);
-
+		var newCreature = gameObject.AddChildWithComponent<Creature>(creaturePrefabs.PrefabFor (creatureType), location);
+		newCreature.creatureType = creatureType;
 		// Add the creature to our list
 		CreatureList.Add(newCreature);
+		newCreature.health = ResourceCollection.maxHealth;
 
 		return newCreature;
 	}
@@ -178,31 +179,5 @@ public class CreatureController : MonoBehaviour
 			from z in range
 			select coordinate + new Coordinate(x, z)).ToList();
 
-	}
-}
-
-[Serializable]
-public class CreaturePrefabOptions
-{
-	public GameObject cranePrefab;
-	public GameObject turtlePrefab;
-	public GameObject horsePrefab;
-	public GameObject elephantPrefab;
-	public GameObject crabPrefab;
-	public GameObject wolfPrefab;
-	public GameObject flowerPrefab;
-
-	public GameObject PrefabFor (CreatureType creature)
-	{
-		switch (creature) {
-		case CreatureType.Crane: return cranePrefab;
-		case CreatureType.Turtle: return turtlePrefab;
-		case CreatureType.Horse: return horsePrefab;
-		case CreatureType.Elephant: return elephantPrefab;
-		case CreatureType.Crab: return crabPrefab;
-		case CreatureType.Wolf: return wolfPrefab;
-		case CreatureType.Flower: return flowerPrefab;
-		default: throw new ArgumentException("Illegal creature type: " + creature, "creature");
-		}
 	}
 }

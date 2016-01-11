@@ -27,7 +27,7 @@ public class LevelSelect : MonoBehaviour
 			var level = levels[i];
 			DelegateButton newButton = Instantiate(buttonPrefab);
 			newButton.transform.SetParent(buttonContainer.transform, false);
-			newButton.GetComponentInChildren<Text>().text = level.ToString();
+			newButton.GetComponentInChildren<Text>().text = "Level " + (i+1);
 			// Translate the new object by the index amount
 			var transform = newButton.GetComponent<RectTransform>();
 			transform.anchoredPosition += Vector2.down * i * transform.rect.height;

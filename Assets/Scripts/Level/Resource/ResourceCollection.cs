@@ -6,7 +6,7 @@ using Util;
 [Serializable]
 public class ResourceCollection
 {
-	public const int maxHealth = 20;
+	public const int maxHealth = 50;
 
 	// Paper resources and full energy blocks
 	public ResourceCount[] paper = new ResourceCount[0];
