@@ -60,7 +60,8 @@ public class ResourcePile : MonoBehaviour
 		if (Resources.EnergyBlocks.Count > 0)
 		{
 			numResourceTypes++;
-			var obj = gameObject.AddChild(controller.resourcePrefabs.PrefabFor(ResourceType.Energy), gameObject.Coordinate());
+			var maxEnergy = Resources.EnergyBlocks.Max();
+			var obj = gameObject.AddChild(controller.energyPrefabs.PrefabFor(maxEnergy), gameObject.Coordinate());
 			obj.transform.Translate(Vector3.up * numResourceTypes * heightGap);
 		}
 	}
