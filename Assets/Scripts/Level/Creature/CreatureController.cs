@@ -62,6 +62,7 @@ public class CreatureController : MonoBehaviour
 		newCreature.creatureType = creatureType;
 		// Add the creature to our list
 		CreatureList.Add(newCreature);
+		newCreature.health = ResourceCollection.maxHealth;
 
 		return newCreature;
 	}
