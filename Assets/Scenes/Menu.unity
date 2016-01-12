@@ -246,7 +246,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 11460392, guid: d1c8f1e6626cb45b59890a76bfc010a7, type: 2}
       propertyPath: levels.Array.size
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 22473664, guid: d1c8f1e6626cb45b59890a76bfc010a7, type: 2}
       propertyPath: m_LocalPosition.x
@@ -338,7 +338,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22426680, guid: d1c8f1e6626cb45b59890a76bfc010a7, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 300
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22401734, guid: d1c8f1e6626cb45b59890a76bfc010a7, type: 2}
       propertyPath: m_AnchorMax.x
@@ -394,11 +394,23 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11460392, guid: d1c8f1e6626cb45b59890a76bfc010a7, type: 2}
       propertyPath: levels.Array.data[5]
-      value: flower
+      value: spares
       objectReference: {fileID: 0}
     - target: {fileID: 11460392, guid: d1c8f1e6626cb45b59890a76bfc010a7, type: 2}
       propertyPath: levels.Array.data[6]
-      value: elephant
+      value: bear
+      objectReference: {fileID: 0}
+    - target: {fileID: 11460392, guid: d1c8f1e6626cb45b59890a76bfc010a7, type: 2}
+      propertyPath: levels.Array.data[7]
+      value: camel
+      objectReference: {fileID: 0}
+    - target: {fileID: 11460392, guid: d1c8f1e6626cb45b59890a76bfc010a7, type: 2}
+      propertyPath: levels.Array.data[8]
+      value: duel
+      objectReference: {fileID: 0}
+    - target: {fileID: 11460392, guid: d1c8f1e6626cb45b59890a76bfc010a7, type: 2}
+      propertyPath: levels.Array.data[9]
+      value: showdown
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d1c8f1e6626cb45b59890a76bfc010a7, type: 2}

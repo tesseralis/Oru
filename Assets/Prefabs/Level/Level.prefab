@@ -204,7 +204,7 @@ MonoBehaviour:
     cranePrefab: {fileID: 196838, guid: d523f911282d2416492ac5c037a8d18e, type: 2}
     turtlePrefab: {fileID: 198072, guid: d63d67bb9f3a54169bca2d861cb23155, type: 2}
     horsePrefab: {fileID: 126128, guid: e65724ff57e104152ac6ce240dbd6007, type: 2}
-    bearPrefab: {fileID: 0}
+    bearPrefab: {fileID: 193838, guid: 7bf8f5892289646a68d64c829f68e79a, type: 2}
     crabPrefab: {fileID: 192472, guid: 4f667300056ae4817b5c39485398d75f, type: 2}
     wolfPrefab: {fileID: 199004, guid: f6fa27f4ffe71448787a33d24e2ceca7, type: 2}
     flowerPrefab: {fileID: 128302, guid: 5ecc02b77e6054d618a2fe488d291d01, type: 2}
@@ -213,7 +213,7 @@ MonoBehaviour:
     serpentPrefab: {fileID: 183692, guid: 86a84667c727b4f8e815eb23195bf9fa, type: 2}
     lionPrefab: {fileID: 157946, guid: b2b4b3d31d21d4458b2625838dc8554f, type: 2}
     camelPrefab: {fileID: 186304, guid: ed318b49eaf414d6595f39daefaab7cc, type: 2}
-    dragonPrefab: {fileID: 0}
+    dragonPrefab: {fileID: 102854, guid: b0140aef76f004a08af3307b0f025fc2, type: 2}
 --- !u!114 &11436340
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -381,6 +381,14 @@ Prefab:
       propertyPath: creaturePrefabs.serpentPrefab
       value: 
       objectReference: {fileID: 183692, guid: 86a84667c727b4f8e815eb23195bf9fa, type: 2}
+    - target: {fileID: 0}
+      propertyPath: creaturePrefabs.dragonPrefab
+      value: 
+      objectReference: {fileID: 102854, guid: b0140aef76f004a08af3307b0f025fc2, type: 2}
+    - target: {fileID: 0}
+      propertyPath: creaturePrefabs.bearPrefab
+      value: 
+      objectReference: {fileID: 193838, guid: 7bf8f5892289646a68d64c829f68e79a, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 180142}

@@ -129,7 +129,7 @@ GameObject:
   - 65: {fileID: 6597324}
   - 114: {fileID: 11490042}
   m_Layer: 0
-  m_Name: Elephant
+  m_Name: Bear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
