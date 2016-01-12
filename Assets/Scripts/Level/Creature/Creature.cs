@@ -32,7 +32,14 @@ public class Creature : MonoBehaviour
 
 	public ResourceCollection ToResources()
 	{
-		return ResourceCollection.FromMultiset(Definition.Recipe.MultisetSubtract(ResourceType.Energy, 1)).Add(health);
+		if (Definition.NeedsEnergy())
+		{
+			return ResourceCollection.FromMultiset(Definition.Recipe.MultisetSubtract(ResourceType.Energy, 1)).Add(health);
+		}
+		else
+		{
+			return ResourceCollection.FromMultiset(Definition.Recipe);
+		}
 	}
 
 	void Awake()
