@@ -7,25 +7,19 @@ using Util;
 public class GoalController : MonoBehaviour
 {
 	public GameObject goalPrefab;
+	public bool levelComplete = false;
 
-	private bool hasWon = false;
-
-	// The game state
-	public bool HasWon
-	{ 
-		get { return hasWon; }
-		set
+	public void CompleteLevel()
+	{
+		if (!levelComplete)
 		{
-			hasWon = value;
-			if (hasWon)
-			{
-				if (LevelCompleted != null) { LevelCompleted(); }
-				// Save that we have won this level
-				Debug.Log("Won this level! Saving...");
-				GameManager.game.SetCompletion(LevelManager.levelName, true);
-				GameManager.game.Save();
-			}
+			if (LevelCompleted != null) { LevelCompleted(); }
+			// Save that we have won this level
+			Debug.Log("Won this level! Saving...");
+			GameManager.game.SetCompletion(LevelManager.levelName, true);
+			GameManager.game.Save();
 		}
+		levelComplete = true;
 	}
 
 	// Event that is called when we are victorious.

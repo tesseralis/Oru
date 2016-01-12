@@ -22,7 +22,7 @@ public class Goal : MonoBehaviour
 		if (GoalConditionMet(creatureList))
 		{
 			Debug.Log("You win!");
-			LevelManager.Goals.HasWon = true;
+			LevelManager.Goals.CompleteLevel();
 		}
 	}
 

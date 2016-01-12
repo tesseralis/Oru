@@ -13,6 +13,7 @@ public class AudioController : MonoBehaviour {
 		LevelManager.Creatures.CreatureCreated += (x, y) => PlaySound(soundOptions.createCreature);
 		LevelManager.Creatures.CreatureDestroyed += (c, pos) => PlaySound(soundOptions.destroyCreature);
 		LevelManager.Recipes.RecipesUpdated += (obj) => PlaySound(soundOptions.pickupRecipe);
+		LevelManager.Goals.LevelCompleted += () => PlaySound(soundOptions.levelComplete);
 		UXManager.State.Selector.Selected += x => PlaySound(soundOptions.selectCreature);
 		UXManager.State.Selector.GoalSet += (x, y) => PlaySound(soundOptions.setCreatureGoal);
 		UXManager.State.Selector.AbilityUsed += () => PlaySound(soundOptions.useAbility);
@@ -40,4 +41,5 @@ public class SoundEffectOptions
 	public AudioClip setCreatureGoal;
 	// TODO separate audio for different abilities
 	public AudioClip useAbility;
+	public AudioClip levelComplete;
 }
