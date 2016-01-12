@@ -95,6 +95,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cda90bbfe53f04679b33b52c23f2d1a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  paperSprite: {fileID: 0}
+  energySprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   image: {fileID: 11463640}
   text: {fileID: 11406560}
 --- !u!114 &11463640
@@ -117,7 +119,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -210,6 +212,18 @@ Prefab:
       propertyPath: text
       value: 
       objectReference: {fileID: 11406560}
+    - target: {fileID: 0}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: energySprite
+      value: 
+      objectReference: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 159880}

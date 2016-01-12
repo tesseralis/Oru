@@ -5,6 +5,9 @@ using System.Collections;
 
 public class ResourceCountPanel : MonoBehaviour {
 
+	public Sprite paperSprite;
+	public Sprite energySprite;
+
 	public Image image;
 	public Text text;
 
@@ -12,6 +15,7 @@ public class ResourceCountPanel : MonoBehaviour {
 	{
 		// Fill in the contents
 		image.color = GetColor(type);
+		image.sprite = GetSprite(type);
 		text.text = count.ToString();
 	}
 
@@ -25,6 +29,15 @@ public class ResourceCountPanel : MonoBehaviour {
 		case ResourceType.Green: return Color.green;
 		case ResourceType.Blue: return Color.blue;
 		default: throw new ArgumentException("Illegal resource: " + resource, "resource");
+		}
+	}
+
+	private Sprite GetSprite(ResourceType resource)
+	{
+		switch(resource)
+		{
+		case ResourceType.Energy: return energySprite;
+		default: return paperSprite;
 		}
 	}
 }
