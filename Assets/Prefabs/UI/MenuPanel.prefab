@@ -369,12 +369,12 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 40
-    m_Alignment: 1
+    m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1.5
   m_Text: 'Create creatures out of colored origami paper.
 
     Click on creatures to select them.
@@ -507,8 +507,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 11448186}
   m_HandleRect: {fileID: 22468976}
   m_Direction: 0
-  m_Value: 0.5
-  m_Size: 0.99999976
+  m_Value: 1
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -673,11 +673,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonContainer: {fileID: 147012}
   buttonPrefab: {fileID: 11450146, guid: 152d66f4322b9438cb821ec8e3d1a0d4, type: 2}
-  levels:
-  - level1
-  - level2
-  - level3
-  - level4
   finishedSprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   unfinishedSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
 --- !u!114 &11472170
@@ -812,7 +807,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 22412446}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.95079327
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1074,7 +1069,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: -181.5}
-  m_SizeDelta: {x: 0, y: 150}
+  m_SizeDelta: {x: -100, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22416032
 RectTransform:
@@ -1090,7 +1085,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -60}
+  m_AnchoredPosition: {x: 0, y: -50}
   m_SizeDelta: {x: 0, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22426680
@@ -1107,7 +1102,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 300}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!224 &22436190
