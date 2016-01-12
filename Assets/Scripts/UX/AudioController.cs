@@ -20,7 +20,7 @@ public class AudioController : MonoBehaviour {
 	}
 
 	// Play the given sound
-	void PlaySound(AudioClip clip)
+	public void PlaySound(AudioClip clip)
 	{
 		if (clip)
 		{
@@ -41,5 +41,6 @@ public class SoundEffectOptions
 	public AudioClip setCreatureGoal;
 	// TODO separate audio for different abilities
 	public AudioClip useAbility;
+	public AudioClip attack;
 	public AudioClip levelComplete;
 }

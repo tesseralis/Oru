@@ -68,6 +68,8 @@ public class FightAbility : MonoBehaviour, IAbility
 				// TODO Figure out a way for this not to rely on UX!!!
 				var particles = UXManager.Particles;
 				particles.CreateParticle(particles.particleOptions.attack, enemy.Position);
+				var audio = UXManager.Audio;
+				audio.PlaySound(audio.soundOptions.attack);
 
 				// Only attack one enemy at a time
 				break;
