@@ -7,7 +7,7 @@ terrain: |
     llllll
 creatures:
     0,2: Turtle
-    2,2: Alligator
+    2,2: Serpent
 resources:
     5,5:
         Red: 4

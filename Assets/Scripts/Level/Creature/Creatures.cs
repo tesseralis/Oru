@@ -7,15 +7,16 @@ public enum CreatureType
 	Crane,
 	Turtle,
 	Horse,
-	Elephant,
+	Bear,
 	Crab,
 	Wolf,
 	Flower,
 	Beaver,
-	Dolphin,
 	Alligator,
+	Serpent,
 	Lion,
-	Camel
+	Camel,
+	Dragon
 }
 
 /// <summary>
@@ -76,11 +77,11 @@ public static class CreatureDefinitions
 				},
 				Ability = new CarryResourceAbility.Definition { Capacity = 5 }
 			};
-		case CreatureType.Elephant:
+		case CreatureType.Bear:
 			return new CreatureDefinition
 			{
-				Description = "A large unit that can uproot and move trees",
-				Recipe = new Dictionary<ResourceType, int>() { {ResourceType.Energy, 1}, {ResourceType.Blue, 9} },
+				Description = "A medium sized unit that can uproot and move trees",
+				Recipe = new Dictionary<ResourceType, int>() { {ResourceType.Energy, 1}, {ResourceType.Yellow, 4} },
 				AllowedTerrain = new TerrainType[]{ TerrainType.Land },
 				Speed = FixedSpeed(CreatureSpeed.Slow),
 				Ability = new ChangeTerrainAbility.Definition
@@ -140,16 +141,16 @@ public static class CreatureDefinitions
 					LeaveType = TerrainType.Water
 				}
 			};
-		case CreatureType.Dolphin:
+		case CreatureType.Alligator:
 			return new CreatureDefinition
 			{
-				Description = "A fast seabound fighter",
-				Recipe = new Dictionary<ResourceType, int>() { {ResourceType.Energy, 1}, {ResourceType.Blue, 9} },
+				Description = "A water fighter",
+				Recipe = new Dictionary<ResourceType, int>() { {ResourceType.Energy, 1}, {ResourceType.Green, 9} },
 				AllowedTerrain = new TerrainType[]{ TerrainType.Water },
-				Speed =  FixedSpeed(CreatureSpeed.Fast),
+				Speed =  FixedSpeed(CreatureSpeed.Medium),
 				Ability = new FightAbility.Definition { Attack = 15, Defense = 8 }
 			};
-		case CreatureType.Alligator:
+		case CreatureType.Serpent:
 			return new CreatureDefinition
 			{
 				Description = "A waterbound enemy creature",
@@ -178,6 +179,16 @@ public static class CreatureDefinitions
 				Speed = FixedSpeed(CreatureSpeed.Slow),
 				Ability = new CarryResourceAbility.Definition { Capacity = 10 }
 			};
+		case CreatureType.Dragon:
+			return new CreatureDefinition
+			{
+				Description = "A mythical beast that can go anywhere",
+				Recipe = new Dictionary<ResourceType, int>() { {ResourceType.Energy, 1}, {ResourceType.Blue, 16} },
+				AllowedTerrain = new TerrainType[]{ TerrainType.Land, TerrainType.Rock, TerrainType.Water },
+				Speed = FixedSpeed(CreatureSpeed.Fast),
+				Ability = new FightAbility.Definition { Attack = 20, Defense = 15 },
+				IsEnemy = true
+			};
 		default: throw new ArgumentException("Passed in an invalid creature type: " + type, "type");
 		}
 	}
@@ -189,15 +200,16 @@ public class CreaturePrefabOptions
 	public GameObject cranePrefab;
 	public GameObject turtlePrefab;
 	public GameObject horsePrefab;
-	public GameObject elephantPrefab;
+	public GameObject bearPrefab;
 	public GameObject crabPrefab;
 	public GameObject wolfPrefab;
 	public GameObject flowerPrefab;
 	public GameObject beaverPrefab;
-	public GameObject dolphinPrefab;
 	public GameObject alligatorPrefab;
+	public GameObject serpentPrefab;
 	public GameObject lionPrefab;
 	public GameObject camelPrefab;
+	public GameObject dragonPrefab;
 
 	public GameObject PrefabFor (CreatureType creature)
 	{
@@ -205,15 +217,16 @@ public class CreaturePrefabOptions
 		case CreatureType.Crane: return cranePrefab;
 		case CreatureType.Turtle: return turtlePrefab;
 		case CreatureType.Horse: return horsePrefab;
-		case CreatureType.Elephant: return elephantPrefab;
+		case CreatureType.Bear: return bearPrefab;
 		case CreatureType.Crab: return crabPrefab;
 		case CreatureType.Wolf: return wolfPrefab;
 		case CreatureType.Flower: return flowerPrefab;
 		case CreatureType.Beaver: return beaverPrefab;
-		case CreatureType.Dolphin: return dolphinPrefab;
 		case CreatureType.Alligator: return alligatorPrefab;
+		case CreatureType.Serpent: return serpentPrefab;
 		case CreatureType.Lion: return lionPrefab;
 		case CreatureType.Camel: return camelPrefab;
+		case CreatureType.Dragon: return dragonPrefab;
 		default: throw new ArgumentException("Illegal creature type: " + creature, "creature");
 		}
 	}
