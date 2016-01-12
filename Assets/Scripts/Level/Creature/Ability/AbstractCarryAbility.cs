@@ -6,7 +6,7 @@ using Util;
 
 public abstract class AbstractCarryAbility : MonoBehaviour, IAbility
 {
-	private Coordinate? target;
+	public bool isActing;
 
 	protected Creature creature;
 
@@ -18,10 +18,11 @@ public abstract class AbstractCarryAbility : MonoBehaviour, IAbility
 
 	public void Passive()
 	{
-		if (target.HasValue && creature.Position.CardinalNeighbors().Contains(target.Value))
+		if (isActing && creature.NextPosition.CardinalNeighbors().Contains(creature.Goal))
 		{
-			DoPickup(target.Value);
-			target = null;
+			DoPickup(creature.Goal);
+			isActing = false;
+			creature.SetGoal(creature.NextPosition);
 		}
 	}
 
@@ -34,16 +35,8 @@ public abstract class AbstractCarryAbility : MonoBehaviour, IAbility
 		}
 		else
 		{
-			// Otherwise, try to set the location as a goal
-			foreach (var neighbor in coordinate.CardinalNeighbors())
-			{
-				// TODO also account for shortest path
-				if (creature.CanReach(neighbor))
-				{
-					target = coordinate;
-					creature.SetGoal(neighbor);
-				}
-			}
+			creature.SetGoal(coordinate);
+			isActing = true;
 		}
 	}
 
