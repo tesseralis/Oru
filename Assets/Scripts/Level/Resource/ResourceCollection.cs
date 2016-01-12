@@ -64,9 +64,11 @@ public class ResourceCollection
 	// Return a collection with a single instance of the given energy block removed
 	public ResourceCollection Remove(int energy)
 	{
+		var newBlocks = new List<int>(EnergyBlocks);
+		newBlocks.Remove(energy);
 		return new ResourceCollection
 		{
-			EnergyBlocks = this.EnergyBlocks.Except(new List<int>() { energy }).ToList(),
+			EnergyBlocks = newBlocks,
 			Paper = this.Paper
 		};
 	}
