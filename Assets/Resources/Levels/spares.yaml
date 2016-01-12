@@ -11,12 +11,10 @@ resources:
     1,4:
         Energy: 1
         Blue: 4
-        Yellow: 1
 recipes:
     available:
         - Wolf
     field:
-        0,4: Flower
         0,5: Horse
 goals:
     2,0: Horse

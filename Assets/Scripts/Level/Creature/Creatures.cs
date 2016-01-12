@@ -107,7 +107,7 @@ public static class CreatureDefinitions
 				Recipe = new Dictionary<ResourceType, int>() { {ResourceType.Energy, 1}, {ResourceType.Blue, 4} },
 				AllowedTerrain = new TerrainType[]{ TerrainType.Land, TerrainType.Rock },
 				Speed = FixedSpeed(CreatureSpeed.Fast),
-				Ability = new FightAbility.Definition { Attack = 10, Defense = 7 }
+				Ability = new FightAbility.Definition { Attack = 12, Defense = 7 }
 			};
 		case CreatureType.Flower:
 			return new CreatureDefinition
@@ -116,7 +116,7 @@ public static class CreatureDefinitions
 				Recipe = new Dictionary<ResourceType, int>() { {ResourceType.Yellow, 1} },
 				AllowedTerrain = new TerrainType[]{ TerrainType.Land },
 				Speed = FixedSpeed(CreatureSpeed.Idle),
-				Ability = new HealAbility.Definition { HealPower = 1 }
+				Ability = new HealAbility.Definition { HealPower = 5 }
 			};
 		case CreatureType.Beaver:
 			return new CreatureDefinition
