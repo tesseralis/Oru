@@ -21,9 +21,28 @@ public class GameManager : MonoBehaviour {
 	// Privately represent the completion data as a list of completed levels
 	public string[] completionData = new string[0];
 
-	public bool GetCompletion(String level)
+	public string[] levels;
+
+	public IList<String> Levels
 	{
-		return new HashSet<string>(completionData).Contains(level);
+		get { return levels.ToList(); }
+		set { levels = value.ToArray(); }
+	}
+
+	// Make sure there's only one controller in a scene
+	void Awake ()
+	{
+		if (game == null)
+		{
+			DontDestroyOnLoad(gameObject);
+			game = this;
+			Load();
+			Levels = Deserializer.DeserializeLevelList();
+		}
+		else if (game != this)
+		{
+			Destroy(gameObject);
+		}
 	}
 
 	public void SetCompletion(String level, bool value)
@@ -40,21 +59,11 @@ public class GameManager : MonoBehaviour {
 		completionData = completionSet.ToArray();
 	}
 
-	// Make sure there's only one controller in a scene
-	void Awake ()
+	public bool GetCompletion(String level)
 	{
-		if (game == null)
-		{
-			DontDestroyOnLoad(gameObject);
-			game = this;
-			Load();
-		}
-		else if (game != this)
-		{
-			Destroy(gameObject);
-		}
+		return new HashSet<string>(completionData).Contains(level);
 	}
-		
+
 	public void LoadLevel(string level)
 	{
 		SceneManager.LoadScene("DynamicLevel");
@@ -95,4 +104,5 @@ public class GameManager : MonoBehaviour {
 	{
 		return string.Format("{0}/{1}", Application.persistentDataPath, completionDataFile);
 	}
+
 }

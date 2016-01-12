@@ -66,7 +66,7 @@ public static class Deserializer
 		var yaml = new YamlStream();
 		yaml.Load(input);
 
-		var level = (YamlMappingNode)yaml.Documents[0].RootNode;
+		var level = yaml.Documents[0].RootNode.AsMapping();
 
 		foreach (var entry in DeserializeTerrain(level.GetString("terrain")))
 		{
@@ -102,4 +102,13 @@ public static class Deserializer
 		}
 	}
 
+
+	public static IList<String> DeserializeLevelList()
+	{
+		var levelListFile = UnityEngine.Resources.Load<TextAsset>("level-list");
+		var input = new StringReader(levelListFile.text);
+		var yaml = new YamlStream();
+		yaml.Load(input);
+		return yaml.Documents[0].RootNode.AsSequence().Select(x => x.ToString()).ToList();
+	}
 }

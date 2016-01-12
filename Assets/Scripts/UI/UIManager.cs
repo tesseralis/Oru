@@ -26,6 +26,12 @@ public class UIManager : MonoBehaviour
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 	}
 
+	public void NextLevel()
+	{
+		var levels = GameManager.game.Levels;
+		GameManager.game.LoadLevel(levels[levels.IndexOf(LevelManager.levelName) + 1]);
+	}
+
 }
 
 

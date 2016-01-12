@@ -11,8 +11,6 @@ public class LevelSelect : MonoBehaviour
 	public GameObject buttonContainer;
 	public DelegateButton buttonPrefab;
 
-	public string[] levels;
-
 	public Sprite finishedSprite;
 	public Sprite unfinishedSprite;
 
@@ -21,8 +19,10 @@ public class LevelSelect : MonoBehaviour
 		gameObject.SetActive(true);
 		buttonContainer.DestroyAllChildren();
 
+		var levels = GameManager.game.Levels;
+
 		// Populate the UI with buttons corresponding with the recipes
-		for (int i = 0; i < levels.Length; i++)
+		for (int i = 0; i < levels.Count; i++)
 		{
 			var level = levels[i];
 			DelegateButton newButton = Instantiate(buttonPrefab);
@@ -50,7 +50,7 @@ public class LevelSelect : MonoBehaviour
 	// Clear our game progress
 	public void ClearProgress()
 	{
-		foreach (string level in levels)
+		foreach (string level in GameManager.game.Levels)
 		{
 			GameManager.game.SetCompletion(level, false);
 		}
