@@ -68,6 +68,10 @@ public class LevelManager : MonoBehaviour
 
 	void Start()
 	{
+		if (levelName == null)
+		{
+			levelName = GameManager.game.Levels[0];
+		}
 		Deserializer.DeserializeLevel(levelName);
 	}
 	
