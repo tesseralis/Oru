@@ -128,11 +128,11 @@ public static class CreatureDefinitions
 				{
 					if (x.GetComponent<ChangeTerrainAbility>().isCarrying)
 					{
-						return CreatureSpeed.Fast;
+						return CreatureSpeed.Slow;
 					}
 					else
 					{
-						return CreatureSpeed.Slow;
+						return CreatureSpeed.Fast;
 					}
 				},
 				Ability = new ChangeTerrainAbility.Definition
