@@ -46,12 +46,12 @@ public class ChangeTerrainAbility : AbstractCarryAbility, IAbility
 			finalType = leaveType;
 		}
 
-		// Pick up or put down the terrain.
-		isCarrying = !isCarrying;
+		// Pick up or put down the terrain if we can
 		if (terrain.Contains(target) && terrain[target] == initialType
 			&& LevelManager.Resources[target].IsEmpty()
 			&& CanSetCoordinate(target, finalType))
 		{
+			isCarrying = !isCarrying;
 			terrain[target] = finalType;
 		}
 	}
