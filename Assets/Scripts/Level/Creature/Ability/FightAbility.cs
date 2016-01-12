@@ -37,7 +37,6 @@ public class FightAbility : MonoBehaviour, IAbility
 
 	public void Use(Coordinate coordinate)
 	{
-		// FIXME Set the enemy target
 		var enemy = LevelManager.Creatures[coordinate];
 		if (enemy && enemy.Definition.IsEnemy)
 		{

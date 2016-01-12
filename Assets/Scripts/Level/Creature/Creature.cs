@@ -109,7 +109,12 @@ public class Creature : MonoBehaviour
 		Position = NextPosition;
 		enemyToggle = !enemyToggle;
 		var possible = Position.CardinalNeighbors().Where(IsValidCoordinate).ToList();
-		if (enemyToggle)
+		var nextToEnemies = Position.CardinalNeighbors().Any(x =>
+			{
+				var creature = LevelManager.Creatures[x];
+				return creature != null && !creature.Definition.IsEnemy;
+			});
+		if (enemyToggle && !nextToEnemies)
 		{
 			if (possible.Count > 0)
 			{
