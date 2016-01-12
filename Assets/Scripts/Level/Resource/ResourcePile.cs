@@ -48,11 +48,17 @@ public class ResourcePile : MonoBehaviour
 		int numResourceTypes = 0;
 		foreach (var resource in Resources.Paper.Keys)
 		{
-			numResourceTypes++;
-			var obj = gameObject.AddChild(controller.resourcePrefabs.PrefabFor(resource), gameObject.Coordinate());
+			var size = 1;
+			while (Resources.Paper[resource] >= size * size)
+			{
+				numResourceTypes++;
+				size ++;
+				var obj = gameObject.AddChild(controller.resourcePrefabs.PrefabFor(resource), gameObject.Coordinate());
 
-			// Set the height correctly
-			obj.transform.Translate(Vector3.up * numResourceTypes * heightGap);
+				// Set the height correctly
+				obj.transform.Translate(Vector3.up * numResourceTypes * heightGap);
+
+			}
 		}
 
 		// Put the energy resource on top of everything else
