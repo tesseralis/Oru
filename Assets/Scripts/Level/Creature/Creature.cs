@@ -81,6 +81,13 @@ public class Creature : MonoBehaviour
 		{
 			prevStep = nextStep;
 			nextStep += 4 - (int)Definition.Speed(this);
+
+			// If the creature has a passive ability, do it
+			if (HasAbility())
+			{
+				Ability.Passive();
+			}
+
 			// Move non-idle creatures
 			if (Definition.Speed(this) != CreatureSpeed.Idle)
 			{
@@ -94,11 +101,6 @@ public class Creature : MonoBehaviour
 				}
 			}
 
-			// If the creature has a passive ability, do it
-			if (HasAbility())
-			{
-				Ability.Passive();
-			}
 		}
 	}
 
@@ -168,7 +170,7 @@ public class Creature : MonoBehaviour
 		}
 	}
 
-	void FaceDirection (Coordinate direction)
+	public void FaceDirection (Coordinate direction)
 	{
 		transform.Rotate (new Vector3 (0, AngleFor (direction)) - transform.rotation.eulerAngles);
 	}
