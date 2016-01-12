@@ -20,6 +20,8 @@ public class Creature : MonoBehaviour
 	public IAbility Ability { get; private set; }
 
 	private bool isMoving = false;
+	// Switch to make sure enemy only moves every two steps
+	private bool enemyToggle = false;
 	private int prevStep, nextStep;
 
 	private static System.Random rnd = new System.Random();
@@ -103,21 +105,25 @@ public class Creature : MonoBehaviour
 	private void EnemyStep()
 	{
 		Position = NextPosition;
+		enemyToggle = !enemyToggle;
 		var possible = Position.CardinalNeighbors().Where(IsValidCoordinate).ToList();
-		if (possible.Count > 0)
+		if (enemyToggle)
 		{
-			NextPosition = possible[rnd.Next(possible.Count)];
+			if (possible.Count > 0)
+			{
+				NextPosition = possible[rnd.Next(possible.Count)];
+			}
+			Coordinate direction;
+			if (NextPosition != Position)
+			{
+				direction = NextPosition - Position;
+			}
+			else
+			{
+				direction = Coordinate.cardinals[rnd.Next(4)];
+			}
+			FaceDirection (direction);
 		}
-		Coordinate direction;
-		if (NextPosition != Position)
-		{
-			direction = NextPosition - Position;
-		}
-		else
-		{
-			direction = Coordinate.cardinals[rnd.Next(4)];
-		}
-		FaceDirection (direction);
 	}
 
 	private void FriendlyStep()
