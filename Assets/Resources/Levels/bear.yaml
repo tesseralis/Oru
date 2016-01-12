@@ -16,13 +16,13 @@ resources:
         Energy: 1
         Red: 4
     0,4:
-        Blue: 8
+        Yellow: 4
 recipes:
     available:
         - Crane
     field:
         3,3: Horse
         3,4: Turtle
-        1,4: Elephant
+        1,4: Bear
 goals:
     4,0: Crane

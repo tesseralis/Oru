@@ -10,11 +10,24 @@ creatures:
 resources:
     5,2:
         Energy: 1
-        Blue: 9
+        Green: 9
+    2,0:
+        Energy: 1
+        Blue: 4
+    3,0:
+        Energy: 1
+        Blue: 4
+    2,5:
+        Energy: 1
+        Blue: 4
+    3,5:
+        Energy: 1
+        Blue: 4
 recipes:
     available:
-        - Dolphin
+        - Alligator
+        - Wolf
         - Camel
     field: {}
 goals:
-    0,2: Dolphin
+    0,2: Alligator
