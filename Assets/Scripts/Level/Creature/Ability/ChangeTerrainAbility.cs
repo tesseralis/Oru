@@ -56,6 +56,11 @@ public class ChangeTerrainAbility : AbstractCarryAbility, IAbility
 		}
 	}
 
+	public override bool CanUse(Coordinate coordinate)
+	{
+		return LevelManager.Terrain[coordinate] == (isCarrying ? leaveType : carryType);
+	}
+
 	// Returns true if you can set the coordinate to the specified terrain type
 	private bool CanSetCoordinate(Coordinate target, TerrainType terrain)
 	{

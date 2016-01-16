@@ -68,4 +68,17 @@ public class CarryResourceAbility : AbstractCarryAbility, IAbility
 			}
 		}
 	}
+
+	public override bool CanUse(Coordinate coordinate)
+	{
+		if (Carrying.IsEmpty())
+		{
+			return !LevelManager.Resources[coordinate].IsEmpty();
+		}
+		else
+		{
+			// Can't put down resources on trees
+			return LevelManager.Terrain[coordinate] != TerrainType.Tree;
+		}
+	}
 }

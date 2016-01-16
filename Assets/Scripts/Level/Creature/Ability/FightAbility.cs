@@ -44,6 +44,12 @@ public class FightAbility : MonoBehaviour, IAbility
 		}
 	}
 
+	public bool CanUse(Coordinate coordinate)
+	{
+		var otherCreature = LevelManager.Creatures[coordinate];
+		return (otherCreature != null) && otherCreature.Definition.IsEnemy == creature.Definition.IsEnemy;
+	}
+
 	public void Passive()
 	{
 		foreach (var neighbor in creature.Position.CardinalNeighbors())

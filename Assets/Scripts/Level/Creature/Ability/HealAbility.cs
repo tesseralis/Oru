@@ -40,6 +40,12 @@ public class HealAbility : MonoBehaviour, IAbility
 		// TODO Use the same creature setting as the fight ability
 	}
 
+	public bool CanUse(Coordinate coordinate)
+	{
+		// TODO use the same method as the fight ability to target allied creatures
+		return true;
+	}
+
 	public void Passive()
 	{
 		foreach (var neighbor in creature.Position.CardinalNeighbors())

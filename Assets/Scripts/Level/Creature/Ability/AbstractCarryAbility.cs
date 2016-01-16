@@ -44,5 +44,7 @@ public abstract class AbstractCarryAbility : MonoBehaviour, IAbility
 
 	public abstract string Description();
 
+	public abstract bool CanUse(Coordinate coordinate);
+
 }
 
