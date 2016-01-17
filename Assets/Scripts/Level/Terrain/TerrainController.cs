@@ -38,6 +38,11 @@ public class TerrainController : MonoBehaviour
 		}
 	}
 
+	public ICollection<Coordinate> GetCoordinates()
+	{
+		return grid.Keys;
+	}
+
 	public bool Contains(Coordinate coordinate)
 	{
 		return grid.ContainsKey(coordinate);
