@@ -139,11 +139,11 @@ public class Creature : MonoBehaviour
 		if (!Position.Equals(Goal) && health > 0)
 		{
 			NextPosition = NextCoordinate ();
-			health -= 1;
 
 			// Make our creature face the right direction
 			if (NextPosition != Position)
 			{
+				health -= 1;
 				var direction = NextPosition - Position;
 				FaceDirection (direction);
 			}
