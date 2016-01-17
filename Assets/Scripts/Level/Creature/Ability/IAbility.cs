@@ -5,6 +5,12 @@ using System;
 /// </summary>
 public interface IAbility
 {
+
+	/// <summary>
+	/// Determines whether this instance can be used on the specified coordinate.
+	/// </summary>
+	bool CanUse(Coordinate coordinate);
+
 	/// <summary>
 	/// Use the ability on the specified coordinate.
 	/// </summary>

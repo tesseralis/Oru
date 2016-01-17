@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections;
+using Util;
 
 public class ActionMarkers : MonoBehaviour
 {
@@ -8,10 +9,15 @@ public class ActionMarkers : MonoBehaviour
 	public bool isEnabled = false;
 	public bool isActing = false;
 
+	private Creature creature;
+
+	public GameObject actionMarker;
+
 	public void Enable(Creature creature)
-	{
+	{	
 		if (!isEnabled) { UXManager.Input.ActionButton += ToggleAbility; }
 		isEnabled = true;
+		this.creature = creature;
 		StopAbility();
 	}
 
@@ -33,7 +39,16 @@ public class ActionMarkers : MonoBehaviour
 		{
 			throw new InvalidOperationException("Actions are not enabled.");
 		}
-		Debug.Log("Engaging creature ability.");
+		Debug.Log("Starting creature ability.");
+		gameObject.DestroyAllChildren();
+		foreach (var coordinate in LevelManager.Terrain.GetCoordinates())
+		{
+			if (creature.Ability.CanUse(coordinate))
+			{
+				gameObject.AddChild(actionMarker, coordinate);
+			}
+		}
+
 		isActing = true;
 		gameObject.SetActive(true);
 	}
