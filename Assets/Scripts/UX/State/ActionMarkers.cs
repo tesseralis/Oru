@@ -13,6 +13,21 @@ public class ActionMarkers : MonoBehaviour
 
 	public GameObject actionMarker;
 
+	void Update()
+	{
+		if (isActing)
+		{
+			gameObject.DestroyAllChildren();
+			foreach (var coordinate in LevelManager.Terrain.GetCoordinates())
+			{
+				if (creature.Ability.CanUse(coordinate))
+				{
+					gameObject.AddChild(actionMarker, coordinate);
+				}
+			}
+		}
+	}
+
 	public void Enable(Creature creature)
 	{	
 		if (!isEnabled) { UXManager.Input.ActionButton += ToggleAbility; }
@@ -40,14 +55,7 @@ public class ActionMarkers : MonoBehaviour
 			throw new InvalidOperationException("Actions are not enabled.");
 		}
 		Debug.Log("Starting creature ability.");
-		gameObject.DestroyAllChildren();
-		foreach (var coordinate in LevelManager.Terrain.GetCoordinates())
-		{
-			if (creature.Ability.CanUse(coordinate))
-			{
-				gameObject.AddChild(actionMarker, coordinate);
-			}
-		}
+
 
 		isActing = true;
 		gameObject.SetActive(true);
