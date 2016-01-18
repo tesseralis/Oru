@@ -15,6 +15,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &113684
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 482834}
+  m_Layer: 0
+  m_Name: CreaturePreview
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &117694
 GameObject:
   m_ObjectHideFlags: 1
@@ -366,6 +381,7 @@ Transform:
   m_Children:
   - {fileID: 408582}
   - {fileID: 476486}
+  - {fileID: 482834}
   m_Father: {fileID: 495392}
   m_RootOrder: 0
 --- !u!4 &428250
@@ -418,6 +434,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 425378}
   m_RootOrder: 1
+--- !u!4 &482834
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 113684}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 425378}
+  m_RootOrder: 2
 --- !u!4 &485962
 Transform:
   m_ObjectHideFlags: 1
@@ -716,6 +744,7 @@ MonoBehaviour:
   createMarker: {fileID: 128712}
   positiveMarker: {fileID: 190632}
   negativeMarker: {fileID: 178924}
+  creaturePreview: {fileID: 113684}
 --- !u!114 &11435598
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -913,7 +942,7 @@ ParticleSystem:
         m_RotationOrder: 4
       minMaxState: 0
     startSpeed:
-      scalar: 0.1
+      scalar: 0.2
       maxCurve:
         serializedVersion: 2
         m_Curve:

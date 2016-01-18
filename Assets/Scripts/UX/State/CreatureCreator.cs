@@ -8,6 +8,7 @@ public class CreatureCreator : MonoBehaviour {
 	public GameObject createMarker;
 	public GameObject positiveMarker;
 	public GameObject negativeMarker;
+	public GameObject creaturePreview;
 
 	// Handler that is called when the creature is created
 	public event Action<Creature> Created;
@@ -74,16 +75,16 @@ public class CreatureCreator : MonoBehaviour {
 			{
 				if (positiveMarker) { positiveMarker.SetActive(true); }
 				if (negativeMarker) { negativeMarker.SetActive(false); }
-				// TODO fix the creature preview
-//				var prefab = GameManager.Creatures.PrefabFor(currentCreatureType);
-//				GameObject newObject = GameObject.Instantiate(prefab);
-//				newObject.transform.SetParent(createMarker.transform, false);
-//				newObject.GetComponent<BoxCollider>().enabled = false;
+				if (creaturePreview) { creaturePreview.SetActive(true); }
+				var prefab = LevelManager.Creatures.creaturePrefabs.PrefabFor(currentCreatureType);
+				creaturePreview.DestroyAllChildren();
+				creaturePreview.AddChild(prefab, coordinate);
 			}
 			else
 			{		
 				if (positiveMarker) { positiveMarker.SetActive(false); }
 				if (negativeMarker) { negativeMarker.SetActive(true); }
+				if (creaturePreview) { creaturePreview.SetActive(false); }
 			}
 		}
 	}
