@@ -87,9 +87,16 @@ public class CreatureSelector : MonoBehaviour
 		if (Deselected != null) { Deselected(); }
 	}
 
+	// TODO refactor this into a method in the ability list
+	private bool CanAttack(Coordinate coordinate)
+	{
+		var fight = SelectedCreature.GetComponent<FightAbility>();
+		return fight && fight.CanUse(coordinate);
+	}
+
 	private void OnClickBlock(Coordinate coordinate)
 	{
-		if (SelectedCreature && actionMarkers.isActing)
+		if (SelectedCreature && (actionMarkers.isActing || CanAttack(coordinate)))
 		{
 			UseCreatureAbility(coordinate);
 		}
