@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections;
+using System.Linq;
 using Util;
 
 public class ActionMarkers : MonoBehaviour
@@ -11,18 +12,23 @@ public class ActionMarkers : MonoBehaviour
 
 	private Creature creature;
 
-	public GameObject actionMarker;
+	public GameObject actionMarkerPositive;
+	public GameObject actionMarkerNegative;
 
 	void Update()
 	{
 		if (isActing)
 		{
 			gameObject.DestroyAllChildren();
-			foreach (var coordinate in LevelManager.Terrain.GetCoordinates())
+			foreach (var coordinate in creature.Position.CardinalNeighbors())
 			{
 				if (creature.Ability.CanUse(coordinate))
 				{
-					gameObject.AddChild(actionMarker, coordinate);
+					gameObject.AddChild(actionMarkerPositive, coordinate);
+				}
+				else
+				{
+					gameObject.AddChild(actionMarkerNegative, coordinate);
 				}
 			}
 		}

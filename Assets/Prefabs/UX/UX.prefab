@@ -831,7 +831,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isEnabled: 0
   isActing: 0
-  actionMarker: {fileID: 112180, guid: 78d139015a4274109a3a0ee94d9357cf, type: 2}
+  actionMarkerPositive: {fileID: 112180, guid: 78d139015a4274109a3a0ee94d9357cf, type: 2}
+  actionMarkerNegative: {fileID: 183786, guid: 93ff439f4ce1440b4acbb5bfb1acae1f, type: 2}
 --- !u!114 &11495526
 MonoBehaviour:
   m_ObjectHideFlags: 1
