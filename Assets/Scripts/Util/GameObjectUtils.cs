@@ -29,7 +29,7 @@ namespace Util
 		{
 			var cellSize = LevelManager.level.cellSize;
 			var position = new Vector3(coordinate.x * cellSize, 0, coordinate.z * cellSize);
-			GameObject newObject = (GameObject)GameObject.Instantiate(prefab, position, Quaternion.identity);
+			GameObject newObject = (GameObject)GameObject.Instantiate(prefab, position, prefab.transform.rotation);
 			newObject.transform.SetParent(gameObject.transform);
 			return newObject;
 		}
