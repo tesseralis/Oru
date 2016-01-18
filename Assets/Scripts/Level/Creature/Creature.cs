@@ -188,7 +188,8 @@ public class Creature : MonoBehaviour
 	// Returns true if this creature can reach the specified goal coordinate
 	public bool CanReach(Coordinate goal)
 	{
-		var parents = DoBFS(Position, goal, IsValidCoordinate);
+		IDictionary<Coordinate, Coordinate> parents;
+		DoBFS(Position, goal, IsValidCoordinate, out parents);
 		return parents.Keys.Contains(goal);
 	}
 
@@ -216,12 +217,12 @@ public class Creature : MonoBehaviour
 	}
 
 	private delegate bool CoordinatePredicate(Coordinate coordinate);
-	private static IDictionary<Coordinate, Coordinate> DoBFS(Coordinate start, Coordinate end, CoordinatePredicate neighborPredicate)
+	private static IDictionary<Coordinate, int> DoBFS(Coordinate start, Coordinate end, CoordinatePredicate neighborPredicate, out IDictionary<Coordinate, Coordinate> parents)
 	{
 		// Initialize BFS data structures
 		var distance = new Dictionary<Coordinate, int>();
-		var parents = new Dictionary<Coordinate, Coordinate> ();
 		var queue = new Queue<Coordinate> ();
+		parents = new Dictionary<Coordinate, Coordinate>();
 
 		// Input our start coordinate
 		distance [start] = 0;
@@ -246,7 +247,7 @@ public class Creature : MonoBehaviour
 				break;
 			}
 		}
-		return parents;
+		return distance;
 	}
 
 	// do a BFS and figure out the right path
@@ -258,7 +259,8 @@ public class Creature : MonoBehaviour
 			return Position;
 		}
 
-		var parents = DoBFS(Position, Goal, IsValidCoordinate);
+		IDictionary<Coordinate, Coordinate> parents;
+		DoBFS(Position, Goal, IsValidCoordinate, out parents);
 
 		Coordinate next;
 		// If we can reach the goal, then move the creature to the next step towards that goal
@@ -273,14 +275,16 @@ public class Creature : MonoBehaviour
 		}
 
 		// Otherwise, do another BFS not accounting for terrain restrictions and try to move the creature there
-		parents = DoBFS(Position, Goal, LevelManager.Terrain.Contains);
+		var distance = DoBFS(Goal, Position, LevelManager.Terrain.Contains, out parents);
 		// TODO assert that the level is fully connected
-		next = Goal;
-		while (parents[next] != Position)
+		foreach (var neighbor in Position.CardinalNeighbors())
 		{
-			next = parents[next];
+			if (distance.ContainsKey(neighbor) && distance[neighbor] < distance[Position] && IsValidCoordinate(neighbor))
+			{
+				return neighbor;
+			}
 		}
-		return IsValidCoordinate(next) ? next : Position;
+		return Position;
 	}
 
 	// Returns true if this creature is allowed to go to this coordinate
