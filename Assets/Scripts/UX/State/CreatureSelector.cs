@@ -31,7 +31,7 @@ public class CreatureSelector : MonoBehaviour
 	{
 		if (creatureMarker) { creatureMarker.SetActive(false); }
 		actionMarkers.Disable();
-		UXManager.Input.CreatureClicked += SelectCreature;
+		UXManager.Input.TerrainClicked += OnClickBlock;
 		LevelManager.Creatures.CreatureDestroyed += (x, pos) => 
 		{
 			if (x == SelectedCreature)
@@ -48,7 +48,6 @@ public class CreatureSelector : MonoBehaviour
 			// Make the entity marker visible
 			if (creatureMarker) { creatureMarker.SetActive(true); }
 			// Add a listener for terrain clicks
-			UXManager.Input.TerrainClicked += OnClickBlock;
 			UXManager.Input.CancelButton += Deselect;
 		}
 		SelectedCreature = creature;
@@ -77,7 +76,6 @@ public class CreatureSelector : MonoBehaviour
 
 	public void Deselect()
 	{
-		UXManager.Input.TerrainClicked -= OnClickBlock;
 		UXManager.Input.CancelButton -= Deselect;
 		actionMarkers.Disable();
 		SelectedCreature = null;
@@ -91,11 +89,15 @@ public class CreatureSelector : MonoBehaviour
 
 	private void OnClickBlock(Coordinate coordinate)
 	{
-		if (actionMarkers.isActing)
+		if (SelectedCreature && actionMarkers.isActing)
 		{
 			UseCreatureAbility(coordinate);
 		}
-		else
+		else if (LevelManager.Creatures[coordinate])
+		{
+			SelectCreature(LevelManager.Creatures[coordinate]);
+		}
+		else if (SelectedCreature)
 		{
 			SetCurrentCreatureGoal(coordinate);
 		}

@@ -143,7 +143,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 405904}
-  - 65: {fileID: 6527964}
   - 114: {fileID: 11469074}
   m_Layer: 0
   m_Name: Camel
@@ -499,18 +498,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 138564}
   m_Mesh: {fileID: 4300002, guid: 25712b9d3dd0eb4439390fb8fea8043e, type: 3}
---- !u!65 &6527964
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 186304}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1.2, z: 0.6}
-  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!95 &9596352
 Animator:
   serializedVersion: 3
@@ -547,7 +534,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 186304}

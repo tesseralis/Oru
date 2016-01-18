@@ -9,7 +9,6 @@ using Util;
 public class InputController : MonoBehaviour
 {
 	public Action<Coordinate> TerrainClicked;
-	public Action<Creature> CreatureClicked;
 	public Action ActionButton;
 	public Action CancelButton;
 
@@ -34,11 +33,6 @@ public class InputController : MonoBehaviour
 				if (hit.transform.GetComponent<TerrainTile>() && TerrainClicked != null)
 				{
 					TerrainClicked(hit.transform.gameObject.Coordinate());
-				}
-				// TODO make it so you figure out if there is a creature on the tile instead
-				if (hit.transform.GetComponent<Creature>() && CreatureClicked != null)
-				{
-					CreatureClicked(hit.transform.GetComponent<Creature>());
 				}
 			}
 		}
