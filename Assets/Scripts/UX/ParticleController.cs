@@ -31,4 +31,5 @@ public class ParticleEffectOptions
 	public GameObject destroyCreature;
 	public GameObject setCreatureGoal;
 	public GameObject attack;
+	public GameObject heal;
 }

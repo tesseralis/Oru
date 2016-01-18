@@ -784,6 +784,7 @@ MonoBehaviour:
     destroyCreature: {fileID: 189986, guid: c77e72afb954e430eaf8cc1f97fafe50, type: 2}
     setCreatureGoal: {fileID: 166660, guid: 22d15bc638da047959c747b5699dcc42, type: 2}
     attack: {fileID: 189986, guid: c77e72afb954e430eaf8cc1f97fafe50, type: 2}
+    heal: {fileID: 174366, guid: 09268116f21b84dfb95d046de4f5d363, type: 2}
 --- !u!114 &11465554
 MonoBehaviour:
   m_ObjectHideFlags: 1

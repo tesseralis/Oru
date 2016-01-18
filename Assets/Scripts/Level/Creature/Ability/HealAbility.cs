@@ -55,6 +55,8 @@ public class HealAbility : MonoBehaviour, IAbility
 			{
 				// Heal allies
 				ally.health = Math.Min(ally.health + healPower, ResourceCollection.maxHealth);
+				// TODO move this out of game logic code
+				UXManager.Particles.CreateParticle(UXManager.Particles.particleOptions.heal, neighbor);
 			}
 		}
 	}
