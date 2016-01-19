@@ -3,18 +3,20 @@ using System;
 
 public class FightAbility : MonoBehaviour, IAbility
 {
+	private const int baseDamage = 2;
+
 	protected Creature creature;
 
 	// The enemy creature to target
 	public Creature target;
 
-	public int attack;
-	public int defense;
+	public BattlePower attack;
+	public BattlePower defense;
 
 	public class Definition : IAbilityDefinition
 	{
-		public int Attack { get; set; }
-		public int Defense { get; set; }
+		public BattlePower Attack { get; set; }
+		public BattlePower Defense { get; set; }
 
 		public string Description()
 		{
@@ -62,7 +64,7 @@ public class FightAbility : MonoBehaviour, IAbility
 				// Attack the enemy
 				if (enemy.GetComponent<FightAbility>())
 				{
-					enemy.health -= Math.Max(attack - enemy.GetComponent<FightAbility>().defense, 1);
+					enemy.health -= CalculateDamage(enemy.GetComponent<FightAbility>());
 				}
 				else
 				{
@@ -92,5 +94,13 @@ public class FightAbility : MonoBehaviour, IAbility
 	public string Description()
 	{
 		return "Attack";
+	}
+
+	private int CalculateDamage(FightAbility enemy)
+	{
+		// Damage is calculated by multiplying by the base damage by the square of the difference in the creatures strengths
+		// and dividing by the creature's speed (since faster creatures can attack more).
+		var diff = attack - enemy.defense + 3;
+		return (diff * diff * baseDamage) / (int)creature.Definition.Speed(creature);
 	}
 }
