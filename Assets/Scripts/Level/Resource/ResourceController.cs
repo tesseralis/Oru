@@ -116,7 +116,7 @@ public class EnergyPrefabOptions
 		{
 			return lowEnergyPrefab;
 		}
-		else if (energy < ResourceCollection.maxHealth)
+		else if (energy < LevelManager.Creatures.maxHealth)
 		{
 			return mediumEnergyPrefab;
 		}

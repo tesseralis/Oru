@@ -12,7 +12,7 @@ public class Creature : MonoBehaviour
 {
 	// The type of creature this is.
 	public CreatureType creatureType;
-	public int health = ResourceCollection.maxHealth;
+	public int health = LevelManager.Creatures.maxHealth;
 
 	public Coordinate Position { get; private set; }
 	public Coordinate NextPosition { get; private set; }
