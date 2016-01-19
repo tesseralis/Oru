@@ -6,7 +6,7 @@ using Util;
 [Serializable]
 public class ResourceCollection
 {
-	public const int maxHealth = 50;
+//	public const int maxHealth = 50;
 
 	// Paper resources and full energy blocks
 	public ResourceCount[] paper = new ResourceCount[0];
@@ -18,7 +18,7 @@ public class ResourceCollection
 		get
 		{
 			var fullEnergies = paper.Where(x => x.type == ResourceType.Energy).Sum(x => x.count);
-			return energyBlocks.Concat(Enumerable.Repeat(maxHealth, fullEnergies)).ToList();
+			return energyBlocks.Concat(Enumerable.Repeat(LevelManager.Creatures.maxHealth, fullEnergies)).ToList();
 		}
 		private set { energyBlocks = value.ToArray(); }
 	}

@@ -10,6 +10,8 @@ using Util;
 /// </summary>
 public class CreatureController : MonoBehaviour
 {
+	// Maximum health a creature can have
+	public int maxHealth = 50;
 
 	public CreaturePrefabOptions creaturePrefabs;
 
@@ -62,7 +64,7 @@ public class CreatureController : MonoBehaviour
 		newCreature.creatureType = creatureType;
 		// Add the creature to our list
 		CreatureList.Add(newCreature);
-		newCreature.health = ResourceCollection.maxHealth;
+		newCreature.health = LevelManager.Creatures.maxHealth;
 
 		return newCreature;
 	}
@@ -94,6 +96,10 @@ public class CreatureController : MonoBehaviour
 					break;
 				}
 			}
+		}
+		else
+		{
+			bestEnergy = maxHealth;
 		}
 		// Take items from the adjacent resources until we don't need any more.
 		var remainder = definition.Recipe;
@@ -161,7 +167,7 @@ public class CreatureController : MonoBehaviour
 		foreach (var creature in deadCreatures)
 		{
 			// Enemy creatures give out max health
-			creature.health = creature.Definition.IsEnemy ? ResourceCollection.maxHealth : 0;
+			creature.health = creature.Definition.IsEnemy ? LevelManager.Creatures.maxHealth : 0;
 		}
 		// Destroy all dead creatures and creatures the user wants to destroy
 		foreach (var creature in deadCreatures.Union(creaturesToDestroy))

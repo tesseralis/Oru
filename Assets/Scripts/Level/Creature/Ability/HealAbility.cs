@@ -54,7 +54,7 @@ public class HealAbility : MonoBehaviour, IAbility
 			if (ally && (ally.Definition.IsEnemy == creature.Definition.IsEnemy))
 			{
 				// Heal allies
-				ally.health = Math.Min(ally.health + healPower, ResourceCollection.maxHealth);
+				ally.health = Math.Min(ally.health + healPower, LevelManager.Creatures.maxHealth);
 				// TODO move this out of game logic code
 				UXManager.Particles.CreateParticle(UXManager.Particles.particleOptions.heal, neighbor);
 			}

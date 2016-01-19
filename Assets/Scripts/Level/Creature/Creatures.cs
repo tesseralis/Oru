@@ -97,7 +97,7 @@ public static class CreatureDefinitions
 				Recipe = new Dictionary<ResourceType, int>() { {ResourceType.Energy, 1}, {ResourceType.Red, 1} },
 				AllowedTerrain = new TerrainType[]{ TerrainType.Land },
 				Speed = FixedSpeed(CreatureSpeed.Slow),
-				Ability = new FightAbility.Definition { Attack = 10, Defense = 5 },
+				Ability = new FightAbility.Definition { Attack = BattlePower.Low, Defense = BattlePower.Low },
 				IsEnemy = true
 			};
 		case CreatureType.Wolf:
@@ -107,7 +107,7 @@ public static class CreatureDefinitions
 				Recipe = new Dictionary<ResourceType, int>() { {ResourceType.Energy, 1}, {ResourceType.Blue, 4} },
 				AllowedTerrain = new TerrainType[]{ TerrainType.Land, TerrainType.Rock },
 				Speed = FixedSpeed(CreatureSpeed.Fast),
-				Ability = new FightAbility.Definition { Attack = 12, Defense = 7 }
+				Ability = new FightAbility.Definition { Attack = BattlePower.Medium, Defense = BattlePower.Medium }
 			};
 		case CreatureType.Flower:
 			return new CreatureDefinition
@@ -148,7 +148,7 @@ public static class CreatureDefinitions
 				Recipe = new Dictionary<ResourceType, int>() { {ResourceType.Energy, 1}, {ResourceType.Green, 9} },
 				AllowedTerrain = new TerrainType[]{ TerrainType.Water },
 				Speed =  FixedSpeed(CreatureSpeed.Medium),
-				Ability = new FightAbility.Definition { Attack = 15, Defense = 8 }
+				Ability = new FightAbility.Definition { Attack = BattlePower.High, Defense = BattlePower.Medium }
 			};
 		case CreatureType.Serpent:
 			return new CreatureDefinition
@@ -157,7 +157,7 @@ public static class CreatureDefinitions
 				Recipe = new Dictionary<ResourceType, int>() { {ResourceType.Energy, 1}, {ResourceType.Green, 4} },
 				AllowedTerrain = new TerrainType[]{ TerrainType.Water },
 				Speed = FixedSpeed(CreatureSpeed.Medium),
-				Ability = new FightAbility.Definition { Attack = 13, Defense = 7 },
+				Ability = new FightAbility.Definition { Attack = BattlePower.Medium, Defense = BattlePower.Low },
 				IsEnemy = true
 			};
 		case CreatureType.Lion:
@@ -167,7 +167,7 @@ public static class CreatureDefinitions
 				Recipe = new Dictionary<ResourceType, int>() { {ResourceType.Energy, 1}, {ResourceType.Yellow, 9} },
 				AllowedTerrain = new TerrainType[]{ TerrainType.Land, TerrainType.Rock },
 				Speed = FixedSpeed(CreatureSpeed.Medium),
-				Ability = new FightAbility.Definition { Attack = 17, Defense = 10 },
+				Ability = new FightAbility.Definition { Attack = BattlePower.High, Defense = BattlePower.Medium },
 				IsEnemy = true
 			};
 		case CreatureType.Camel:
@@ -186,7 +186,7 @@ public static class CreatureDefinitions
 				Recipe = new Dictionary<ResourceType, int>() { {ResourceType.Energy, 1}, {ResourceType.Blue, 16} },
 				AllowedTerrain = new TerrainType[]{ TerrainType.Land, TerrainType.Rock, TerrainType.Water },
 				Speed = FixedSpeed(CreatureSpeed.Fast),
-				Ability = new FightAbility.Definition { Attack = 20, Defense = 15 },
+				Ability = new FightAbility.Definition { Attack = BattlePower.High, Defense = BattlePower.High },
 				IsEnemy = true
 			};
 		default: throw new ArgumentException("Passed in an invalid creature type: " + type, "type");

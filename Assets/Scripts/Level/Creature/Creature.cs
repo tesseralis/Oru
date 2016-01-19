@@ -12,7 +12,7 @@ public class Creature : MonoBehaviour
 {
 	// The type of creature this is.
 	public CreatureType creatureType;
-	public int health = ResourceCollection.maxHealth;
+	public int health = LevelManager.Creatures.maxHealth;
 
 	public Coordinate Position { get; private set; }
 	public Coordinate NextPosition { get; private set; }
@@ -83,7 +83,7 @@ public class Creature : MonoBehaviour
 			nextStep += 4 - (int)Definition.Speed(this);
 
 			// If the creature has a passive ability, do it
-			if (HasAbility())
+			if (HasAbility() && health > 0)
 			{
 				Ability.Passive();
 			}
