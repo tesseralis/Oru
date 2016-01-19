@@ -83,7 +83,7 @@ public class Creature : MonoBehaviour
 			nextStep += 4 - (int)Definition.Speed(this);
 
 			// If the creature has a passive ability, do it
-			if (HasAbility())
+			if (HasAbility() && health > 0)
 			{
 				Ability.Passive();
 			}

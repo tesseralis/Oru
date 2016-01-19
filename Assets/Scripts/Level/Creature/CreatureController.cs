@@ -97,6 +97,10 @@ public class CreatureController : MonoBehaviour
 				}
 			}
 		}
+		else
+		{
+			bestEnergy = maxHealth;
+		}
 		// Take items from the adjacent resources until we don't need any more.
 		var remainder = definition.Recipe;
 		foreach (var neighbor in neighbors)
