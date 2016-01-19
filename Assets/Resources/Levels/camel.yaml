@@ -1,28 +1,16 @@
 terrain: |
     wwwwww
     wwwwww
-    rrllrr
-    rrllrr
+    llllll
+    llllll
     wwwwww
     wwwwww
 creatures:
     2,2: Lion
 resources:
     5,2:
-        Energy: 1
+        Energy: 2
         Green: 9
-    2,0:
-        Energy: 1
-        Blue: 4
-    3,0:
-        Energy: 1
-        Blue: 4
-    2,5:
-        Energy: 1
-        Blue: 4
-    3,5:
-        Energy: 1
-        Blue: 4
 recipes:
     available:
         - Alligator
