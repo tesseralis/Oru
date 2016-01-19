@@ -22,13 +22,16 @@ public class ActionMarkers : MonoBehaviour
 			gameObject.DestroyAllChildren();
 			foreach (var coordinate in creature.Position.CardinalNeighbors())
 			{
-				if (creature.Ability.CanUse(coordinate))
+				if (LevelManager.Terrain.Contains(coordinate))
 				{
-					gameObject.AddChild(actionMarkerPositive, coordinate);
-				}
-				else
-				{
-					gameObject.AddChild(actionMarkerNegative, coordinate);
+					if (creature.Ability.CanUse(coordinate))
+					{
+						gameObject.AddChild(actionMarkerPositive, coordinate);
+					}
+					else
+					{
+						gameObject.AddChild(actionMarkerNegative, coordinate);
+					}
 				}
 			}
 		}
