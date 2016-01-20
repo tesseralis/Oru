@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a614408f75f148f694347b7c1d9f5df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  magnitude: 0.0025
+  magnitude: 0.1
   period: 3
 --- !u!114 &11448732
 MonoBehaviour:
@@ -135,6 +135,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: magnitude
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

@@ -6,12 +6,14 @@ using System.Collections;
 public class BobbingMotion : MonoBehaviour
 {
 
-	public float magnitude = 0.0025f;
+	public float magnitude = 0.1f;
 	public float period = 3f;
 	
 	// Update is called once per frame
 	void Update ()
 	{
-		gameObject.transform.Translate(Vector3.up * Mathf.Cos(Time.timeSinceLevelLoad * period) * magnitude);
+		var position = transform.position;
+		var newY = Mathf.Cos(Time.timeSinceLevelLoad * period) * magnitude;
+		transform.position = new Vector3(position.x, newY, position.z);
 	}
 }
