@@ -13,6 +13,7 @@ public class UXManager : MonoBehaviour
 	public InputController inputController;
 	public ParticleController particleController;
 	public StateController stateController;
+	public TimeController timeController;
 
 	public static UXManager ux;
 
@@ -20,6 +21,7 @@ public class UXManager : MonoBehaviour
 	public static InputController Input { get { return ux.inputController; } }
 	public static ParticleController Particles { get { return ux.particleController; } }
 	public static StateController State { get { return ux.stateController; } }
+	public static TimeController Time { get { return ux.timeController; } }
 
 	void Awake()
 	{
@@ -28,8 +30,9 @@ public class UXManager : MonoBehaviour
 		// Auto-wire if necessary
 		if (!audioController) { audioController = GetComponentInChildren<AudioController>(); }
 		if (!inputController) { inputController = GetComponentInChildren<InputController>(); }
-		if (!particleController) { particleController = GetComponent<ParticleController>(); }
-		if (!stateController) { stateController = GetComponent<StateController>(); }
+		if (!particleController) { particleController = GetComponentInChildren<ParticleController>(); }
+		if (!stateController) { stateController = GetComponentInChildren<StateController>(); }
+		if (!timeController) { timeController = GetComponentInChildren<TimeController>(); }
 	}
 
 }

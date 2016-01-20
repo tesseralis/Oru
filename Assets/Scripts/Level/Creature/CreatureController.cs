@@ -24,6 +24,8 @@ public class CreatureController : MonoBehaviour
 
 	private IList<Creature> creaturesToDestroy = new List<Creature>();
 
+	public int Steps { get; private set; }
+
 	public IList<Creature> CreatureList { get; private set; }
 
 	public Creature this[Coordinate position]
@@ -35,12 +37,6 @@ public class CreatureController : MonoBehaviour
 	{
 		// Add all the creatures we have on the board right now
 		CreatureList = GetComponentsInChildren<Creature>().ToList();
-	}
-
-	void Start()
-	{
-		// Update all our creatures when we tick
-		LevelManager.level.Step += StepCreatures;
 	}
 
 	// Returns true if we can add a creature at the given coordinate
@@ -156,8 +152,9 @@ public class CreatureController : MonoBehaviour
 	/// <summary>
 	/// Move all the creatures forward one game step.
 	/// </summary>
-	void StepCreatures()
+	public void StepCreatures()
 	{
+		Steps++;
 		foreach(Creature creature in CreatureList)
 		{
 			creature.Step();

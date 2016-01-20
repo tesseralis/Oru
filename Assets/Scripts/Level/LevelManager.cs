@@ -39,16 +39,6 @@ public class LevelManager : MonoBehaviour
 	// how width of the space between individual cells
 	public float cellSize = 2;
 
-	// how fast the game moves
-	public float stepInterval = 0.25f;
-
-	public int Steps { get; private set; }
-
-	public event Action Step;
-
-	// the next time to take a step
-	private float nextStepTime;
-
 	void Awake ()
 	{
 		if (level == null) { level = this; }
@@ -59,11 +49,6 @@ public class LevelManager : MonoBehaviour
 		if (!resourceController) { resourceController = GetComponentInChildren<ResourceController>(); }
 		if (!recipeController) { recipeController = GetComponentInChildren<RecipeController>(); }
 		if (!goalController) { goalController = GetComponentInChildren<GoalController>(); }
-
-		// Set up time management
-		// TODO Time should also be factored out somewhere else
-		nextStepTime = 0;
-		Steps = 0;
 	}
 
 	void Start()
@@ -73,18 +58,6 @@ public class LevelManager : MonoBehaviour
 			levelName = GameManager.game.Levels[0];
 		}
 		Deserializer.DeserializeLevel(levelName);
-	}
-	
-	// Update is called once per frame
-	void Update ()
-	{
-		if (Time.timeSinceLevelLoad >= nextStepTime)
-		{
-			nextStepTime += stepInterval;
-			Steps++;
-			Debug.Log("Current step: " + Steps);
-			Step();
-		}
 	}
 
 	public static void SetLevel(string _levelName)
