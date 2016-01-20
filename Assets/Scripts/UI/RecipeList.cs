@@ -47,6 +47,9 @@ public class RecipeList : MonoBehaviour
 			createButton.MouseEnter += () => ShowRecipeInfoPanel(recipe);
 			createButton.MouseExit += HideRecipeInfoPanel;
 		}
+
+		var sizeDelta = buttonContainer.GetComponent<RectTransform>().sizeDelta;
+		buttonContainer.GetComponent<RectTransform>().sizeDelta = new Vector2(sizeDelta.x, buttonSpacing * availableRecipes.Count);
 	}
 
 	void ShowRecipeInfoPanel(CreatureType recipe)
