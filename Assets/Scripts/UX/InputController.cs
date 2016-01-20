@@ -15,6 +15,18 @@ public class InputController : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+		// TODO pick a different key for pausing (escape?)
+		// TODO add a pausing button
+		if (Input.GetKeyDown(KeyCode.P))
+		{
+			UXManager.Time.TogglePause();
+		}
+		// Disable all input if paused
+		if (UXManager.Time.IsPaused)
+		{
+			return;
+		}
+
 		if (Input.GetButtonDown("Jump"))
 		{
 			if (ActionButton != null) { ActionButton(); }
@@ -23,7 +35,6 @@ public class InputController : MonoBehaviour
 		{
 			if (CancelButton != null) { CancelButton(); }
 		}
-
 		if (Input.GetButtonDown("Fire1"))
 		{
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
