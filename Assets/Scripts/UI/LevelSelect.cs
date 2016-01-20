@@ -2,6 +2,7 @@
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using Util;
 
@@ -16,6 +17,8 @@ public class LevelSelect : MonoBehaviour
 
 	public float buttonSpacing = 5.0f;
 
+	private IList<Button> buttons = new List<Button>();
+
 	void Awake()
 	{
 		var rectTransform = buttonContainer.GetComponent<RectTransform>();
@@ -23,15 +26,10 @@ public class LevelSelect : MonoBehaviour
 		rectTransform.anchoredPosition = new Vector2(anchoredPosition.x, 0);
 	}
 
-	// TODO this can be done at initialization since the number of levels doesn't change
-	void Update()
+	void Start()
 	{
-		gameObject.SetActive(true);
-		buttonContainer.DestroyAllChildren();
-
 		var levels = GameManager.game.Levels;
-
-		// Populate the UI with buttons corresponding with the recipes
+		var buttonHeight = buttonPrefab.GetComponent<RectTransform>().rect.height;
 		for (int i = 0; i < levels.Count; i++)
 		{
 			var level = levels[i];
@@ -39,21 +37,32 @@ public class LevelSelect : MonoBehaviour
 			newButton.transform.SetParent(buttonContainer.transform, false);
 			newButton.GetComponentInChildren<Text>().text = "Level " + (i+1);
 			// Translate the new object by the index amount
-			var transform = newButton.GetComponent<RectTransform>();
-			transform.anchoredPosition += Vector2.down * i * (transform.rect.height + buttonSpacing);
+			var buttonTransform = newButton.GetComponent<RectTransform>();
+			buttonTransform.anchoredPosition += Vector2.down * i * (buttonHeight + buttonSpacing);
 
 			// Set the component to do the hooked in action when clicked
-			var createButton = newButton.GetComponent<DelegateButton>();
-			createButton.Click += () => GameManager.game.LoadLevel(level);
+			newButton.Click += () => GameManager.game.LoadLevel(level);
 
-			if (GameManager.game.GetCompletion(level))
-			{
-				newButton.image.color = finishedColor;
-			}
-			else
-			{
-				newButton.image.color = unfinishedColor;	
-			}
+			// Add to the list of buttons
+			buttons.Add(newButton);
+		}
+		var containerTransform = buttonContainer.GetComponent<RectTransform>();
+		var size = containerTransform.sizeDelta;
+		containerTransform.sizeDelta = new Vector2(size.x, levels.Count * (buttonHeight + buttonSpacing) + buttonSpacing);
+
+	}
+
+	void Update()
+	{
+		var levels = GameManager.game.Levels;
+
+		// Populate the UI with buttons corresponding with the recipes
+		for (int i = 0; i < levels.Count; i++)
+		{
+			var level = levels[i];
+			var button = buttons[i];
+
+			button.image.color = GameManager.game.GetCompletion(level) ? finishedColor : unfinishedColor;
 		}
 	}
 
