@@ -16,6 +16,13 @@ public class RecipeList : MonoBehaviour
 
 	public float buttonSpacing = 30f;
 
+	void Awake ()
+	{
+		var rectTransform = buttonContainer.GetComponent<RectTransform>();
+		var anchoredPosition = rectTransform.anchoredPosition;
+		rectTransform.anchoredPosition = new Vector2(anchoredPosition.x, 0);
+	}
+
 	// Use this for initialization
 	void Start ()
 	{
