@@ -30,7 +30,7 @@ public class CreatureCreator : MonoBehaviour {
 		isCreating = true;
 		// Do the actual creation
 		UXManager.Input.TerrainClicked += CreateCreature;
-		UXManager.Input.CancelButton += StopCreation;
+		UXManager.Input.DeselectButton += StopCreation;
 
 		if (CreationStarted != null) { CreationStarted(creature); }
 	}
@@ -40,7 +40,7 @@ public class CreatureCreator : MonoBehaviour {
 		isCreating = false;
 		if (createMarker) { createMarker.SetActive(false); }
 		UXManager.Input.TerrainClicked -= CreateCreature;
-		UXManager.Input.CancelButton -= StopCreation;
+		UXManager.Input.DeselectButton -= StopCreation;
 
 		if (CreationStopped != null) { CreationStopped(); }
 	}

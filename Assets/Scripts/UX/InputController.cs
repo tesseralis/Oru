@@ -10,14 +10,12 @@ public class InputController : MonoBehaviour
 {
 	public Action<Coordinate> TerrainClicked;
 	public Action ActionButton;
-	public Action CancelButton;
+	public Action DeselectButton;
 
 	// Update is called once per frame
 	void Update ()
 	{
-		// TODO pick a different key for pausing (escape?)
-		// TODO add a pausing button
-		if (Input.GetKeyDown(KeyCode.P))
+		if (Input.GetButtonDown("Cancel"))
 		{
 			UXManager.Time.TogglePause();
 		}
@@ -27,15 +25,15 @@ public class InputController : MonoBehaviour
 			return;
 		}
 
-		if (Input.GetButtonDown("Jump"))
+		if (Input.GetButtonDown("Action"))
 		{
 			if (ActionButton != null) { ActionButton(); }
 		}
-		if (Input.GetButtonDown("Cancel"))
+		if (Input.GetButtonDown("Deselect"))
 		{
-			if (CancelButton != null) { CancelButton(); }
+			if (DeselectButton != null) { DeselectButton(); }
 		}
-		if (Input.GetButtonDown("Fire1"))
+		if (Input.GetButtonDown("Select"))
 		{
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit;
