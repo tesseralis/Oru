@@ -11,8 +11,10 @@ public class LevelSelect : MonoBehaviour
 	public GameObject buttonContainer;
 	public DelegateButton buttonPrefab;
 
-	public Sprite finishedSprite;
-	public Sprite unfinishedSprite;
+	public Color finishedColor;
+	public Color unfinishedColor;
+
+	public float buttonSpacing = 5.0f;
 
 	void Update()
 	{
@@ -30,7 +32,7 @@ public class LevelSelect : MonoBehaviour
 			newButton.GetComponentInChildren<Text>().text = "Level " + (i+1);
 			// Translate the new object by the index amount
 			var transform = newButton.GetComponent<RectTransform>();
-			transform.anchoredPosition += Vector2.down * i * transform.rect.height;
+			transform.anchoredPosition += Vector2.down * i * (transform.rect.height + buttonSpacing);
 
 			// Set the component to do the hooked in action when clicked
 			var createButton = newButton.GetComponent<DelegateButton>();
@@ -38,11 +40,11 @@ public class LevelSelect : MonoBehaviour
 
 			if (GameManager.game.GetCompletion(level))
 			{
-				newButton.image.sprite = finishedSprite;
+				newButton.image.color = finishedColor;
 			}
 			else
 			{
-				newButton.image.sprite = unfinishedSprite;	
+				newButton.image.color = unfinishedColor;	
 			}
 		}
 	}
