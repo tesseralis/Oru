@@ -16,6 +16,14 @@ public class LevelSelect : MonoBehaviour
 
 	public float buttonSpacing = 5.0f;
 
+	void Awake()
+	{
+		var rectTransform = buttonContainer.GetComponent<RectTransform>();
+		var anchoredPosition = rectTransform.anchoredPosition;
+		rectTransform.anchoredPosition = new Vector2(anchoredPosition.x, 0);
+	}
+
+	// TODO this can be done at initialization since the number of levels doesn't change
 	void Update()
 	{
 		gameObject.SetActive(true);
