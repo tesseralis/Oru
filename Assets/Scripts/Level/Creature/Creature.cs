@@ -19,7 +19,6 @@ public class Creature : MonoBehaviour
 	public Coordinate Goal { get; private set; }
 	public IAbility Ability { get; private set; }
 
-	private bool isMoving = false;
 	// Switch to make sure enemy only moves every two steps
 	private bool enemyToggle = false;
 	private int prevStep, nextStep;
@@ -64,17 +63,17 @@ public class Creature : MonoBehaviour
 	public void Update()
 	{
 		// FIXME re-enable creature animation
-//		// Animate the creature moving
-//		var stepInterval = LevelManager.level.stepInterval;
-//		var cellSize = LevelManager.level.cellSize;
-//
-//		var time = Time.timeSinceLevelLoad;
-//		var ratio = ((time / stepInterval) + 1 - prevStep) / (nextStep - prevStep);
-//		var direction = NextPosition - Position;
-//		var translation = new Vector3(direction.x, 0, direction.z) * ratio * cellSize;
-//		gameObject.SetPosition(Position);
-//		transform.position += translation;
+		// Animate the creature moving
+		var stepInterval = UXManager.Time.stepInterval;
+		var cellSize = LevelManager.level.cellSize;
+
+		var time = Time.timeSinceLevelLoad;
+		var ratio = ((time / stepInterval) + 1 - prevStep) / (nextStep - prevStep);
+		var direction = NextPosition - Position;
+		var translation = new Vector3(direction.x, 0, direction.z) * ratio * cellSize;
 		gameObject.SetPosition(Position);
+		transform.position += translation;
+//		gameObject.SetPosition(Position);
 	}
 
 	public void Step()
@@ -149,25 +148,7 @@ public class Creature : MonoBehaviour
 				var direction = NextPosition - Position;
 				FaceDirection (direction);
 			}
-
-			// Animate our creature if it has animation
-			// TODO factor out animation into a UX class
-//			if (GetComponentInChildren<Animator>() && !isMoving)
-//			{
-//				isMoving = true;
-//				Debug.Log("Animating the creature moving.");
-//				GetComponentInChildren<Animator>().SetTrigger("StartMove");
-//			}
 		}
-//		else
-//		{
-//			if (GetComponentInChildren<Animator>() && isMoving)
-//			{
-//				isMoving = false;
-//				Debug.Log("Animating the creature stopping.");
-//				GetComponentInChildren<Animator>().SetTrigger("StopMove");
-//			}
-//		}
 
 		// If the creature loses all health, set it to an idle state
 		if (health == 0)

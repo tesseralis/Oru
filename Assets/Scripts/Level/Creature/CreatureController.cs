@@ -19,6 +19,8 @@ public class CreatureController : MonoBehaviour
 	public event Action<Creature, Coordinate> CreatureDestroyed;
 	// Called when a creature is created
 	public event Action<Creature, Coordinate> CreatureCreated;
+	// Called when a single creature has updated its step
+	public event Action<Creature> CreatureStepped;
 	// Called when all the creatures have updated their steps
 	public event Action<IList<Creature>> CreaturesUpdated;
 
@@ -158,6 +160,7 @@ public class CreatureController : MonoBehaviour
 		foreach(Creature creature in CreatureList)
 		{
 			creature.Step();
+			if (CreatureStepped != null) { CreatureStepped(creature); }
 		}
 		// Remove creatures that have died
 		var deadCreatures = CreatureList.Where(x => x.health < 0).ToList();
