@@ -61,6 +61,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!1 &135754
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 447808}
+  - 114: {fileID: 11426346}
+  m_Layer: 0
+  m_Name: Animation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &137552
 GameObject:
   m_ObjectHideFlags: 1
@@ -360,6 +376,7 @@ Transform:
   - {fileID: 428250}
   - {fileID: 440048}
   - {fileID: 439298}
+  - {fileID: 447808}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &418732
@@ -439,6 +456,18 @@ Transform:
   - {fileID: 495392}
   m_Father: {fileID: 412718}
   m_RootOrder: 5
+--- !u!4 &447808
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 135754}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 412718}
+  m_RootOrder: 7
 --- !u!4 &476060
 Transform:
   m_ObjectHideFlags: 1
@@ -774,6 +803,17 @@ MonoBehaviour:
   positiveMarker: {fileID: 190632}
   negativeMarker: {fileID: 178924}
   creaturePreview: {fileID: 113684}
+--- !u!114 &11426346
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 135754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eda91efc608934806a93f4bbccb6ce4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11435598
 MonoBehaviour:
   m_ObjectHideFlags: 1
