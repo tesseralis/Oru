@@ -44,7 +44,7 @@ public class CoordinateInfo : MonoBehaviour
 		if (LevelManager.Recipes[coordinate] != null)
 		{
 			panel.SetActive(true);
-			content.text = "?";
+			content.text = "Blueprint: " + LevelManager.Recipes[coordinate];
 			resourceList.Hide();
 		}
 
