@@ -91,7 +91,7 @@ public class CreatureSelector : MonoBehaviour
 	private bool CanAttack(Coordinate coordinate)
 	{
 		var fight = SelectedCreature.GetComponent<FightAbility>();
-		return fight && fight.CanUse(coordinate);
+		return fight && fight.CanUse(coordinate) && !SelectedCreature.Definition.IsEnemy;
 	}
 
 	private void OnClickBlock(Coordinate coordinate)
