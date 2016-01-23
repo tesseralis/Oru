@@ -53,14 +53,14 @@ public class LevelManager : MonoBehaviour
 
 		if (levelName != null)
 		{
-			Deserializer.DeserializeLevel(levelName);
+			Serialization.DeserializeLevel(levelName);
 		}
 	}
 
 	public static void SetLevel(string _levelName)
 	{
 		levelName = _levelName;
-		if (level) { Deserializer.DeserializeLevel(levelName); }
+		if (level) { Serialization.DeserializeLevel(levelName); }
 	}
 
 }

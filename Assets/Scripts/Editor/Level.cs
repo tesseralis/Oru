@@ -1,10 +1,16 @@
 ﻿using UnityEditor;
 using UnityEngine;
+using System.IO;
 using System.Linq;
 
 public class Level : EditorWindow
 {
 	int level;
+
+	private string[] LevelList
+	{
+		get { return Serialization.DeserializeLevelList().ToArray(); }
+	}
 
 	[MenuItem("Window/Level")]
 	public static void  ShowWindow () {
@@ -13,7 +19,7 @@ public class Level : EditorWindow
 
 	public void OnGUI()
 	{
-		level = EditorGUILayout.Popup("Level", level, Deserializer.DeserializeLevelList().ToArray());
+		level = EditorGUILayout.Popup("Level", level, LevelList);
 		GUILayout.Label ("Level Settings", EditorStyles.boldLabel);
 		if (GUILayout.Button("Load"))
 		{
@@ -27,13 +33,17 @@ public class Level : EditorWindow
 
 	public void LoadLevel()
 	{
-		Deserializer.DeserializeLevel(Deserializer.DeserializeLevelList()[level]);
+		Serialization.DeserializeLevel(LevelList[level]);
 		Debug.Log("Level Loaded");
 	}
 
 	public void SaveLevel()
 	{
-		// TODO Save the level
+		var levelFile = UnityEngine.Resources.Load<TextAsset>("Levels/" + LevelList[level]);
+		var filePath = AssetDatabase.GetAssetPath(levelFile);
+		var writer = new StreamWriter(filePath);
+		Debug.Log(Serialization.SerializeLevel(writer));
+		writer.Close();
 		Debug.Log("Level Saved");
 	}
 }

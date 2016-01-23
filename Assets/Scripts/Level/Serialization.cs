@@ -7,7 +7,7 @@ using YamlDotNet.Serialization;
 using YamlDotNet.RepresentationModel;
 using Util;
 
-public static class Deserializer
+public static class Serialization
 {
 	// Deserialize coordinates in the form x,z
 	private static Coordinate DeserializeCoordinate(YamlNode node)
@@ -16,9 +16,20 @@ public static class Deserializer
 		return new Coordinate(coords[0], coords[1]);
 	}
 
-	public static IDictionary<Coordinate, T> DeserializeCoordinateMap<T>(YamlMappingNode map, Func<YamlNode, T> func)
+	private static YamlNode SerializeCoordinate(Coordinate coordinate)
+	{
+		return new YamlScalarNode(string.Format("{0},{1}", coordinate.x, coordinate.z));
+	}
+
+	private static IDictionary<Coordinate, T> DeserializeCoordinateMap<T>(YamlMappingNode map, Func<YamlNode, T> func)
 	{
 		return map.ToDictionary<Coordinate, T>(DeserializeCoordinate, func);
+	}
+
+	private static YamlNode SerializeCoordinateMap<T>(GameObject gameObject, Func<T, YamlNode> func) where T : MonoBehaviour
+	{
+		return new YamlMappingNode(gameObject.GetComponentsInChildren<T>().Select(x =>
+			new KeyValuePair<YamlNode, YamlNode>(SerializeCoordinate(x.gameObject.Coordinate()), func(x))));
 	}
 
 	private static TerrainType DeserializeTerrainTile(char chr)
@@ -30,6 +41,18 @@ public static class Deserializer
 		case 'r': return TerrainType.Rock;
 		case 't': return TerrainType.Tree;
 		default: throw new ArgumentException("Illegal terrain type");
+		}
+	}
+
+	private static char SerializeTerrainTile(TerrainType tile)
+	{
+		switch(tile)
+		{
+		case TerrainType.Land: return 'l';
+		case TerrainType.Water: return 'w';
+		case TerrainType.Rock: return 'r';
+		case TerrainType.Tree: return 't';
+		default: return ' ';
 		}
 	}
 
@@ -52,16 +75,48 @@ public static class Deserializer
 		return terrainGrid;
 	}
 
+	private static YamlNode SerializeTerrain(GameObject terrain)
+	{
+		var tiles = terrain.GetComponentsInChildren<TerrainTile>().ToDictionary(x => x.gameObject.Coordinate(), x => x.type);
+		var xMax = tiles.Max(t => t.Key.x);
+		var zMax = tiles.Max(t => t.Key.z);
+		return new YamlScalarNode(string.Join("\n", Enumerable.Range(0, xMax+1).Select(i =>
+		{
+			return string.Join("", Enumerable.Range(0, zMax+1).Select(j => 
+					{
+						var coord = new Coordinate(i, j);
+						if (tiles.ContainsKey(coord))
+							return SerializeTerrainTile(tiles[new Coordinate(i, j)]).ToString();
+						else
+							return "";
+					}).ToArray());
+			}).ToArray()) + "\n") {
+			Style = YamlDotNet.Core.ScalarStyle.Literal
+		};
+	}
+
 	private static ResourceCollection DeserializeResourceCollection(YamlNode node)
 	{
 		var dict = node.ToDictionary<ResourceType, int>(YamlExtensions.ToEnum<ResourceType>, YamlExtensions.ToInt);
 		return ResourceCollection.FromMultiset(dict);
 	}
 
-	public static void DeserializeLevel(string levelName)
+	private static YamlNode SerializeResourceCollection(ResourceCollection collection)
 	{
+		return new YamlMappingNode(collection.ToMultiset().Select(x =>
+			new KeyValuePair<YamlNode, YamlNode>(SerializeScalar(x.Key), SerializeScalar(x.Value))));
+	}
+
+	private static YamlNode SerializeScalar<T>(T item)
+	{
+		return new YamlScalarNode(item.ToString());
+	}
+
+	// Deserialize a level yaml string
+	public static void DeserializeLevel(String levelName)
+	{
+		// Factor out to ResourcesPathfinder
 		var levelFile = UnityEngine.Resources.Load<TextAsset>("Levels/" + levelName);
-		Debug.Log(levelFile.text);
 		var input = new StringReader(levelFile.text);
 		var yaml = new YamlStream();
 		yaml.Load(input);
@@ -81,7 +136,6 @@ public static class Deserializer
 		foreach (var entry in creatureMapping)
 		{
 			creatures.AddCreature(entry.Key, entry.Value);
-
 		}
 
 		var resources = GameObject.Find("Resources").GetComponent<ResourceController>();
@@ -116,6 +170,45 @@ public static class Deserializer
 		}
 	}
 
+	// Serialize the level into the given writer and return the serialized level
+	public static string SerializeLevel(TextWriter writer)
+	{
+		var terrain = GameObject.Find("Terrain").GetComponent<TerrainController>();
+		var terrainString = SerializeTerrain(terrain.gameObject);
+
+		var creatures = GameObject.Find("Creatures").GetComponent<CreatureController>();
+		var creatureMapping = SerializeCoordinateMap<Creature>(creatures.gameObject, x => SerializeScalar(x.creatureType));
+
+		var resources = GameObject.Find("Resources").GetComponent<ResourceController>();
+		var resourceMapping = SerializeCoordinateMap<ResourcePile>(resources.gameObject, x => SerializeResourceCollection(x.ResourceCollection));
+
+		var recipes = GameObject.Find("Recipes").GetComponent<RecipeController>();
+		var availableRecipesList = new YamlSequenceNode(recipes.availableRecipes.Select(x => SerializeScalar(x)));
+		var fieldRecipesMapping = SerializeCoordinateMap<Recipe>(recipes.gameObject, x => SerializeScalar(x.creature));
+		var recipeNode = new YamlMappingNode()
+		{
+			{SerializeScalar("available"), availableRecipesList},
+			{SerializeScalar("field"), fieldRecipesMapping}
+		};
+
+		var goals = GameObject.Find("Goals").GetComponent<GoalController>();
+		var goalsMapping = SerializeCoordinateMap<Goal>(goals.gameObject, x => SerializeScalar(x.winningCreatureType));
+
+		var levelNode = new YamlMappingNode()
+		{
+			{"terrain", terrainString},
+			{"creatures", creatureMapping},
+			{"resources", resourceMapping},
+			{"recipes", recipeNode},
+			{"goals", goalsMapping}
+		};
+		var levelDocument = new YamlDocument(levelNode);
+
+		// Serialize
+		var yaml = new YamlStream(levelDocument);
+		yaml.Save(writer, false);
+		return writer.ToString();
+	}
 
 	public static IList<String> DeserializeLevelList()
 	{
