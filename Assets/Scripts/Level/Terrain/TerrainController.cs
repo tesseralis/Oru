@@ -11,9 +11,7 @@ using Util;
 /// </summary>
 public class TerrainController : MonoBehaviour
 {
-	public TerrainPrefabOptions terrainPrefabs;
-
-	private IDictionary<Coordinate, TerrainTile> grid;
+	private IDictionary<Coordinate, TerrainTile> grid = new Dictionary<Coordinate, TerrainTile>();
 
 	public TerrainType this[Coordinate coordinate]
 	{
@@ -30,12 +28,17 @@ public class TerrainController : MonoBehaviour
 			}
 
 			// Create the new item
-			var prefab = terrainPrefabs.PrefabFor (value);
-			var block = gameObject.AddChildWithComponent<TerrainTile>(prefab, coordinate);
-			block.type = value;
-			grid[coordinate] = block;
-
+			grid[coordinate] = AddTerrainTile(coordinate, value);
 		}
+	}
+
+	// Add a terrain tile to this object, but not the game state
+	public TerrainTile AddTerrainTile(Coordinate coordinate, TerrainType type)
+	{
+		var prefab = ResourcesPathfinder.TerrainPrefab(type);
+		var tile = gameObject.AddChildWithComponent<TerrainTile>(prefab, coordinate);
+		tile.type = type;
+		return tile;
 	}
 
 	public ICollection<Coordinate> GetCoordinates()
@@ -51,37 +54,10 @@ public class TerrainController : MonoBehaviour
 	// Initialize the grid
 	void Start ()
 	{
-		grid = new Dictionary<Coordinate, TerrainTile>();
 		foreach (var block in GetComponentsInChildren<TerrainTile>())
 		{
 			grid[block.gameObject.Coordinate()] = block;
 		}
 	}
 
-}
-
-[Serializable]
-public class TerrainPrefabOptions
-{
-	public GameObject landPrefab;
-	public GameObject rockPrefab;
-	public GameObject treePrefab;
-	public GameObject waterPrefab;
-
-
-	public GameObject PrefabFor (TerrainType type)
-	{
-		switch (type) {
-		case TerrainType.Land:
-			return landPrefab;
-		case TerrainType.Rock:
-			return rockPrefab;
-		case TerrainType.Tree:
-			return treePrefab;
-		case TerrainType.Water:
-			return waterPrefab;
-		default:
-			throw new ArgumentException("Illegal terrain type: " + type, "type");
-		}
-	}
 }

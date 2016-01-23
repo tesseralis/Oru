@@ -1,30 +1,31 @@
 terrain: |
-    tttlttt
-    ttttttt
-    wwwwwww
-    lllllll
-    ttttttt
-    lllllll
-    lllllll
-    wwwwwww
-    wwwwwww
+  ttttltttt
+  ttttttttt
+  wwwwwwwww
+  lllllllll
+  ttttttttt
+  lllllllll
+  lllllllll
+  wwwwwwwww
+  wwwwwwwww
 creatures:
-    2,3: Dragon
+  2,4: Dragon
 resources:
-    6,3:
-        Energy: 10
-        Blue: 10
-        Yellow: 10
-        Red: 10
-        Green: 10
+  6,4:
+    Blue: 10
+    Yellow: 10
+    Red: 10
+    Green: 10
+    Energy: 10
 recipes:
-    available:
-        - Flower
-        - Wolf
-        - Alligator
-        - Beaver
-        - Bear
-        - Crane
-    field: {}
+  available:
+  - Flower
+  - Wolf
+  - Alligator
+  - Beaver
+  - Bear
+  - Crane
+  field: {}
 goals:
-    0,3: Crane
+  0,4: Crane
+...

@@ -16,7 +16,7 @@ public class ResourcePile : MonoBehaviour
 
 	public ResourceCollection resources;
 
-	public ResourceCollection Resources
+	public ResourceCollection ResourceCollection
 	{
 		get { return resources; }
 		set
@@ -44,16 +44,16 @@ public class ResourcePile : MonoBehaviour
 	void UpdateView()
 	{
 		DeleteChildren();
-		var controller = GetComponentInParent<ResourceController>();
 		int numResourceTypes = 0;
-		foreach (var resource in Resources.Paper.Keys)
+		foreach (var resource in ResourceCollection.Paper.Keys)
 		{
 			var size = 1;
-			while (Resources.Paper[resource] >= size * size)
+			while (ResourceCollection.Paper[resource] >= size * size)
 			{
 				numResourceTypes++;
 				size ++;
-				var obj = gameObject.AddChild(controller.resourcePrefabs.PrefabFor(resource), gameObject.Coordinate());
+				var prefab = ResourcesPathfinder.PaperResourcePrefab(resource);
+				var obj = gameObject.AddChild(prefab, gameObject.Coordinate());
 
 				// Set the height correctly
 				obj.transform.Translate(Vector3.up * numResourceTypes * heightGap);
@@ -62,13 +62,14 @@ public class ResourcePile : MonoBehaviour
 		}
 
 		// Put the energy resource on top of everything else
-		// TODO show different things based on the health of the energy block
-		if (Resources.EnergyBlocks.Count > 0)
+		if (ResourceCollection.EnergyBlocks.Count > 0)
 		{
 			numResourceTypes++;
-			var maxEnergy = Resources.EnergyBlocks.Max();
-			var obj = gameObject.AddChild(controller.energyPrefabs.PrefabFor(maxEnergy), gameObject.Coordinate());
+			var maxEnergy = ResourceCollection.EnergyBlocks.Max();
+			var prefab = ResourcesPathfinder.EnergyResourcePrefab(maxEnergy);
+			var obj = gameObject.AddChild(prefab, gameObject.Coordinate());
 			obj.transform.Translate(Vector3.up * numResourceTypes * heightGap);
 		}
 	}
+
 }

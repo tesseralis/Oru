@@ -47,15 +47,7 @@ public static class CreatureDefinitions
 				Description = "A seabound unit that can carry resources",
 				Recipe = new Dictionary<ResourceType, int>() { {ResourceType.Energy, 1}, {ResourceType.Green, 1} },
 				AllowedTerrain = new TerrainType[]{ TerrainType.Land, TerrainType.Water },
-				Speed = x =>
-				{
-					switch(LevelManager.Terrain[x.Position])
-					{
-					case TerrainType.Water: return CreatureSpeed.Medium;
-					case TerrainType.Land: return CreatureSpeed.Slow;
-					default: throw new InvalidOperationException("Terrain not allowed");
-					}
-				},
+				Speed = FixedSpeed(CreatureSpeed.Slow),
 				Ability = new CarryResourceAbility.Definition { Capacity = 5 }
 			};
 		case CreatureType.Horse:
@@ -190,44 +182,6 @@ public static class CreatureDefinitions
 				IsEnemy = true
 			};
 		default: throw new ArgumentException("Passed in an invalid creature type: " + type, "type");
-		}
-	}
-}
-
-[Serializable]
-public class CreaturePrefabOptions
-{
-	public GameObject cranePrefab;
-	public GameObject turtlePrefab;
-	public GameObject horsePrefab;
-	public GameObject bearPrefab;
-	public GameObject crabPrefab;
-	public GameObject wolfPrefab;
-	public GameObject flowerPrefab;
-	public GameObject beaverPrefab;
-	public GameObject alligatorPrefab;
-	public GameObject serpentPrefab;
-	public GameObject lionPrefab;
-	public GameObject camelPrefab;
-	public GameObject dragonPrefab;
-
-	public GameObject PrefabFor (CreatureType creature)
-	{
-		switch (creature) {
-		case CreatureType.Crane: return cranePrefab;
-		case CreatureType.Turtle: return turtlePrefab;
-		case CreatureType.Horse: return horsePrefab;
-		case CreatureType.Bear: return bearPrefab;
-		case CreatureType.Crab: return crabPrefab;
-		case CreatureType.Wolf: return wolfPrefab;
-		case CreatureType.Flower: return flowerPrefab;
-		case CreatureType.Beaver: return beaverPrefab;
-		case CreatureType.Alligator: return alligatorPrefab;
-		case CreatureType.Serpent: return serpentPrefab;
-		case CreatureType.Lion: return lionPrefab;
-		case CreatureType.Camel: return camelPrefab;
-		case CreatureType.Dragon: return dragonPrefab;
-		default: throw new ArgumentException("Illegal creature type: " + creature, "creature");
 		}
 	}
 }

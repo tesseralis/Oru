@@ -12,7 +12,7 @@ public class Creature : MonoBehaviour
 {
 	// The type of creature this is.
 	public CreatureType creatureType;
-	public int health = LevelManager.Creatures.maxHealth;
+	public int health;
 
 	public Coordinate Position { get; private set; }
 	public Coordinate NextPosition { get; private set; }
@@ -62,18 +62,15 @@ public class Creature : MonoBehaviour
 
 	public void Update()
 	{
-		// FIXME re-enable creature animation
 		// Animate the creature moving
 		var stepInterval = UXManager.Time.stepInterval;
-		var cellSize = LevelManager.level.cellSize;
 
 		var time = Time.timeSinceLevelLoad;
 		var ratio = ((time / stepInterval) + 1 - prevStep) / (nextStep - prevStep);
 		var direction = NextPosition - Position;
-		var translation = new Vector3(direction.x, 0, direction.z) * ratio * cellSize;
+		var translation = new Vector3(direction.x, 0, direction.z) * ratio * LevelManager.cellSize;
 		gameObject.SetPosition(Position);
 		transform.position += translation;
-//		gameObject.SetPosition(Position);
 	}
 
 	public void Step()

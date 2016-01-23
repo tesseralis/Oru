@@ -1,21 +1,22 @@
 terrain: |
-    wwwwww
-    wwwwww
-    llllll
-    llllll
-    wwwwww
-    wwwwww
+  wwwwww
+  wwwwww
+  llllll
+  llllll
+  wwwwww
+  wwwwww
 creatures:
-    2,2: Lion
+  2,2: Lion
 resources:
-    5,2:
-        Energy: 2
-        Green: 9
+  5,2:
+    Green: 9
+    Energy: 2
 recipes:
-    available:
-        - Alligator
-        - Wolf
-        - Camel
-    field: {}
+  available:
+  - Alligator
+  - Wolf
+  - Camel
+  field: {}
 goals:
-    0,2: Alligator
+  0,2: Alligator
+...

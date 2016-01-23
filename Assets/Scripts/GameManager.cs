@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour {
 			DontDestroyOnLoad(gameObject);
 			game = this;
 			Load();
-			Levels = Deserializer.DeserializeLevelList();
+			Levels = Serialization.DeserializeLevelList();
 		}
 		else if (game != this)
 		{

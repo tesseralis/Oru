@@ -40,9 +40,12 @@ public class RecipeController : MonoBehaviour
 			{
 				if (!recipeLocations.ContainsKey(coordinate))
 				{
-					recipeLocations[coordinate] = gameObject.AddChildWithComponent<Recipe>(recipePrefab, coordinate);
+					recipeLocations[coordinate] = AddRecipe(coordinate, value.Value);
 				}
-				recipeLocations[coordinate].creature = value.Value;
+				else
+				{
+					recipeLocations[coordinate].creature = value.Value;
+				}
 			}
 			else
 			{
@@ -54,6 +57,15 @@ public class RecipeController : MonoBehaviour
 				}
 			}
 		}
+	}
+
+	// Add a recipe to this game object, but do not update the game state
+	public Recipe AddRecipe(Coordinate coordinate, CreatureType type)
+	{
+		var prefab = ResourcesPathfinder.RecipePrefab();
+		var recipe = gameObject.AddChildWithComponent<Recipe>(prefab, coordinate);
+		recipe.creature = type;
+		return recipe;
 	}
 
 	public IList<CreatureType> AvailableRecipes

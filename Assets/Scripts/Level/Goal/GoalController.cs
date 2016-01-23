@@ -28,14 +28,23 @@ public class GoalController : MonoBehaviour
 	// TODO refactor this to allow multiple goals
 	public Goal goal;
 
-	public void SetGoal(Coordinate coordinate, CreatureType type)
+	// Add a goal to the list of goals
+	public void AddGoal(Coordinate coordinate, CreatureType type)
 	{
 		if (goal)
 		{
-			Destroy(goal.gameObject);
+			throw new InvalidOperationException("There is already a goal set; we can currently only have one goal per level.");
 		}
-
-		goal = gameObject.AddChildWithComponent<Goal>(goalPrefab, coordinate);
+		var prefab = ResourcesPathfinder.GoalPrefab();
+		goal = gameObject.AddChildWithComponent<Goal>(prefab, coordinate);
 		goal.winningCreatureType = type;
+	}
+
+	void Start()
+	{
+		if (!goal)
+		{
+			goal = GetComponentInChildren<Goal>();
+		}
 	}
 }

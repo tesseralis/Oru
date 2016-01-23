@@ -76,7 +76,7 @@ public class CreatureCreator : MonoBehaviour {
 				if (positiveMarker) { positiveMarker.SetActive(true); }
 				if (negativeMarker) { negativeMarker.SetActive(false); }
 				if (creaturePreview) { creaturePreview.SetActive(true); }
-				var prefab = LevelManager.Creatures.creaturePrefabs.PrefabFor(currentCreatureType);
+				var prefab = ResourcesPathfinder.CreaturePrefab(currentCreatureType);
 				creaturePreview.DestroyAllChildren();
 				creaturePreview.AddChild(prefab, coordinate);
 			}

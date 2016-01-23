@@ -36,8 +36,9 @@ public class LevelManager : MonoBehaviour
 	// the goals of the game world
 	public GoalController goalController;
 	
-	// how width of the space between individual cells
-	public float cellSize = 2;
+	// width of the space between individual cells
+	// TODO move this to an option in a custom inspector
+	public const float cellSize = 2;
 
 	void Awake ()
 	{
@@ -49,21 +50,17 @@ public class LevelManager : MonoBehaviour
 		if (!resourceController) { resourceController = GetComponentInChildren<ResourceController>(); }
 		if (!recipeController) { recipeController = GetComponentInChildren<RecipeController>(); }
 		if (!goalController) { goalController = GetComponentInChildren<GoalController>(); }
-	}
 
-	void Start()
-	{
-		if (levelName == null)
+		if (levelName != null)
 		{
-			levelName = GameManager.game.Levels[0];
+			Serialization.DeserializeLevel(levelName);
 		}
-		Deserializer.DeserializeLevel(levelName);
 	}
 
 	public static void SetLevel(string _levelName)
 	{
 		levelName = _levelName;
-		if (level) { Deserializer.DeserializeLevel(levelName); }
+		if (level) { Serialization.DeserializeLevel(levelName); }
 	}
 
 }

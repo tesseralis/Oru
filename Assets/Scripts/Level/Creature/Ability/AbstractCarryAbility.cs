@@ -10,7 +10,7 @@ public abstract class AbstractCarryAbility : MonoBehaviour, IAbility
 
 	protected Creature creature;
 
-	// FIXME cancel action when creature goal is set
+	// TODO cancel action when creature goal is set
 	void Awake()
 	{
 		creature = GetComponent<Creature>();

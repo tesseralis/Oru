@@ -1,28 +1,30 @@
 terrain: |
-    rrrrl
-    wwwrl
-    wwwrr
-    tttll
-    lltll
+  rrrrl
+  wwwrl
+  wwwrr
+  tttll
+  lltll
 creatures: {}
 resources:
-    4,3:
-        Energy: 1
-        Blue: 1
-    1,2:
-        Energy: 1
-        Green: 1
-    2,0:
-        Energy: 1
-        Red: 4
-    0,4:
-        Yellow: 4
+  4,3:
+    Blue: 1
+    Energy: 1
+  1,2:
+    Green: 1
+    Energy: 1
+  2,0:
+    Red: 4
+    Energy: 1
+  0,4:
+    Yellow: 4
+    Energy: 0
 recipes:
-    available:
-        - Crane
-    field:
-        3,3: Horse
-        3,4: Turtle
-        1,4: Bear
+  available:
+  - Crane
+  field:
+    3,3: Horse
+    3,4: Turtle
+    1,4: Bear
 goals:
-    4,0: Crane
+  4,0: Crane
+...

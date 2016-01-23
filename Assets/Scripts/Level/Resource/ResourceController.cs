@@ -6,12 +6,6 @@ using Util;
 
 public class ResourceController : MonoBehaviour
 {
-	// the prefabs to use to initialize different types of resources
-	public ResourcePrefabOptions resourcePrefabs;
-	public EnergyPrefabOptions energyPrefabs;
-
-	public GameObject resourcePilePrefab;
-
 	// Get the pile of resources at the given coordinate
 	public ResourceCollection this[Coordinate coordinate]
 	{
@@ -19,7 +13,7 @@ public class ResourceController : MonoBehaviour
 		{
 			if (locations.ContainsKey(coordinate))
 			{
-				return locations[coordinate].Resources;
+				return locations[coordinate].ResourceCollection;
 			}
 			else
 			{
@@ -41,12 +35,23 @@ public class ResourceController : MonoBehaviour
 				if (!locations.ContainsKey(coordinate))
 				{
 					// Instantiate a new marker
-					var resourcePile = gameObject.AddChildWithComponent<ResourcePile>(resourcePilePrefab, coordinate);
-					locations[coordinate] = resourcePile;
+					locations[coordinate] = AddResourcePile(coordinate, value);
 				}
-				locations[coordinate].Resources = value;
+				else
+				{
+					locations[coordinate].ResourceCollection = value;
+				}
 			}
 		}
+	}
+
+	// Add a resource pile object, but do not change the game state
+	public ResourcePile AddResourcePile(Coordinate coordinate, ResourceCollection resources)
+	{
+		var prefab = ResourcesPathfinder.ResourcePilePrefab();
+		var resourcePile = gameObject.AddChildWithComponent<ResourcePile>(prefab, coordinate);
+		resourcePile.resources = resources;
+		return resourcePile;
 	}
 
 	private IDictionary<Coordinate, ResourcePile> locations;
@@ -66,63 +71,4 @@ public class ResourceController : MonoBehaviour
 		}
 	}
 
-}
-
-[Serializable]
-public class ResourcePrefabOptions
-{
-	public GameObject energyPrefab;
-	public GameObject redPrefab;
-	public GameObject yellowPrefab;
-	public GameObject bluePrefab;
-	public GameObject greenPrefab;
-
-	public GameObject PrefabFor(ResourceType resource)
-	{
-		switch(resource)
-		{
-		case ResourceType.Energy:
-			return energyPrefab;
-		case ResourceType.Red:
-			return redPrefab;
-		case ResourceType.Yellow:
-			return yellowPrefab;
-		case ResourceType.Green:
-			return greenPrefab;
-		case ResourceType.Blue:
-			return bluePrefab;
-		default:
-			throw new ArgumentException("Resource type not supported: " + resource, "resource");
-		}
-	}
-}
-
-[Serializable]
-public class EnergyPrefabOptions
-{
-	public int lowThreshold = 5;
-	public GameObject fullEnergyPrefab;
-	public GameObject mediumEnergyPrefab;
-	public GameObject lowEnergyPrefab;
-	public GameObject noEnergyPrefab;
-
-	public GameObject PrefabFor(int energy)
-	{
-		if (energy <= 0)
-		{
-			return noEnergyPrefab;
-		}
-		else if (energy < lowThreshold)
-		{
-			return lowEnergyPrefab;
-		}
-		else if (energy < LevelManager.Creatures.maxHealth)
-		{
-			return mediumEnergyPrefab;
-		}
-		else
-		{
-			return fullEnergyPrefab;
-		}
-	}
 }
