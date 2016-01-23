@@ -36,8 +36,9 @@ public class LevelManager : MonoBehaviour
 	// the goals of the game world
 	public GoalController goalController;
 	
-	// how width of the space between individual cells
-	public float cellSize = 2;
+	// width of the space between individual cells
+	// TODO move this to an option in a custom inspector
+	public const float cellSize = 2;
 
 	void Awake ()
 	{

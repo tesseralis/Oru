@@ -18,7 +18,7 @@ public class ResourceCollection
 		get
 		{
 			var fullEnergies = paper.Where(x => x.type == ResourceType.Energy).Sum(x => x.count);
-			return energyBlocks.Concat(Enumerable.Repeat(LevelManager.Creatures.maxHealth, fullEnergies)).ToList();
+			return energyBlocks.Concat(Enumerable.Repeat(CreatureController.maxHealth, fullEnergies)).ToList();
 		}
 		private set { energyBlocks = value.ToArray(); }
 	}

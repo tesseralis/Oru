@@ -11,9 +11,8 @@ using Util;
 public class CreatureController : MonoBehaviour
 {
 	// Maximum health a creature can have
-	public int maxHealth = 50;
-
-	public CreaturePrefabOptions creaturePrefabs;
+	// TODO Move this to a custom editor window
+	public const int maxHealth = 50;
 
 	// Called when a creature is destroyed
 	public event Action<Creature, Coordinate> CreatureDestroyed;
@@ -35,10 +34,25 @@ public class CreatureController : MonoBehaviour
 		get { return CreatureList.FirstOrDefault(x => x.Position == position); }
 	}
 
-	void Awake()
+	// Add a creature at the specified location, but do not add it to the game state
+	public Creature AddCreature(Coordinate location, CreatureType creatureType)
+	{
+		var prefab = ResourcesPathfinder.CreaturePrefab(creatureType);
+		var newCreature = gameObject.AddChildWithComponent<Creature>(prefab, location);
+		newCreature.creatureType = creatureType;
+		return newCreature;
+	}
+
+	void Start()
 	{
 		// Add all the creatures we have on the board right now
 		CreatureList = GetComponentsInChildren<Creature>().ToList();
+
+		// Creatures should all start out with full health
+		foreach (var creature in CreatureList)
+		{
+			creature.health = CreatureController.maxHealth;
+		}
 	}
 
 	// Returns true if we can add a creature at the given coordinate
@@ -55,17 +69,6 @@ public class CreatureController : MonoBehaviour
 			&& !CreatureList.Any(x => x.Position == coordinate);
 	}
 
-	// Add a creature at the specified location, disregarding restrictions
-	public Creature AddCreature(CreatureType creatureType, Coordinate location)
-	{
-		var newCreature = gameObject.AddChildWithComponent<Creature>(creaturePrefabs.PrefabFor (creatureType), location);
-		newCreature.creatureType = creatureType;
-		// Add the creature to our list
-		CreatureList.Add(newCreature);
-		newCreature.health = LevelManager.Creatures.maxHealth;
-
-		return newCreature;
-	}
 
 	// Add a creature at a specified location if possible
 	public Creature CreateCreature(CreatureType creature, Coordinate location)
@@ -112,8 +115,10 @@ public class CreatureController : MonoBehaviour
 
 			resources[neighbor] = resources[neighbor].WithPaper(difference);
 		}
-		var newCreature = AddCreature(creature, location);
+		var newCreature = AddCreature(location, creature);
 		newCreature.health = bestEnergy;
+		CreatureList.Add(newCreature);
+
 
 		// Call any necessary events
 		if (CreatureCreated != null) { CreatureCreated(newCreature, location); }
@@ -167,7 +172,7 @@ public class CreatureController : MonoBehaviour
 		foreach (var creature in deadCreatures)
 		{
 			// Enemy creatures give out max health
-			creature.health = creature.Definition.IsEnemy ? LevelManager.Creatures.maxHealth : 0;
+			creature.health = creature.Definition.IsEnemy ? CreatureController.maxHealth : 0;
 		}
 		// Destroy all dead creatures and creatures the user wants to destroy
 		foreach (var creature in deadCreatures.Union(creaturesToDestroy))

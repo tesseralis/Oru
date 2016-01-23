@@ -8,16 +8,17 @@ namespace Util
 	// Defines extension methods related to coordinates
 	public static class GameObjectUtils
 	{
+		// Store the cell size for reference
+		private static float cellSize = LevelManager.cellSize;
+
 		public static Coordinate Coordinate(this GameObject gameObject)
 		{
-			var cellSize = LevelManager.level.cellSize;
 			var position = gameObject.gameObject.transform.position;
 			return new Coordinate(Mathf.RoundToInt(position.x / cellSize), Mathf.RoundToInt(position.z / cellSize));
 		}
 
 		public static void SetPosition(this GameObject gameObject, Coordinate coordinate)
 		{
-			var cellSize = LevelManager.level.cellSize;
 			gameObject.transform.position = new Vector3(coordinate.x * cellSize, gameObject.transform.position.y, coordinate.z * cellSize);
 		}
 
@@ -27,7 +28,6 @@ namespace Util
 		/// <returns>The child GameObject.</returns>
 		public static GameObject AddChild(this GameObject gameObject, GameObject prefab, Coordinate coordinate)
 		{
-			var cellSize = LevelManager.level.cellSize;
 			var position = new Vector3(coordinate.x * cellSize, 0, coordinate.z * cellSize);
 			GameObject newObject = (GameObject)GameObject.Instantiate(prefab, position, prefab.transform.rotation);
 			newObject.transform.SetParent(gameObject.transform);
@@ -50,6 +50,9 @@ namespace Util
 			return newObject.GetComponent<T>();
 		}
 
+		/// <summary>
+		/// Calls "Destroy" on all children of this object.
+		/// </summary>
 		public static void DestroyAllChildren(this GameObject gameObject)
 		{
 			// Delete the existing children first
@@ -60,6 +63,21 @@ namespace Util
 			}
 			// Delete the previously existing children
 			children.ForEach(x => GameObject.Destroy(x));
+		}
+
+		/// <summary>
+		/// Calls "DestroyImmediate" on all children of this object.
+		/// </summary>
+		public static void DestroyAllChildrenImmediate(this GameObject gameObject)
+		{
+			// Delete the existing children first
+			var children = new List<GameObject>();
+			foreach (Transform child in gameObject.transform)
+			{
+				children.Add(child.gameObject);
+			}
+			// Delete the previously existing children
+			children.ForEach(x => GameObject.DestroyImmediate(x));
 		}
 
 	}

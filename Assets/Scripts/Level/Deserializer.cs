@@ -66,39 +66,53 @@ public static class Deserializer
 		var yaml = new YamlStream();
 		yaml.Load(input);
 
-		var level = yaml.Documents[0].RootNode.AsMapping();
+		var levelMapping = yaml.Documents[0].RootNode.AsMapping();
 
-		foreach (var entry in DeserializeTerrain(level.GetString("terrain")))
+		var terrain = GameObject.Find("Terrain").GetComponent<TerrainController>();
+		terrain.gameObject.DestroyAllChildrenImmediate();
+		foreach (var entry in DeserializeTerrain(levelMapping.GetString("terrain")))
 		{
-			LevelManager.Terrain[entry.Key] = entry.Value;
+			terrain.AddTerrainTile(entry.Key, entry.Value);
 		}
 
-		var creatures = DeserializeCoordinateMap(level.GetMapping("creatures"), x => x.ToEnum<CreatureType>());
-		foreach (var entry in creatures)
+		var creatures = GameObject.Find("Creatures").GetComponent<CreatureController>();
+		creatures.gameObject.DestroyAllChildrenImmediate();
+		var creatureMapping = DeserializeCoordinateMap(levelMapping.GetMapping("creatures"), x => x.ToEnum<CreatureType>());
+		foreach (var entry in creatureMapping)
 		{
-			LevelManager.Creatures.AddCreature(entry.Value, entry.Key);
+			creatures.AddCreature(entry.Key, entry.Value);
+
 		}
 
-		var resources = DeserializeCoordinateMap(level.GetMapping("resources"), x => DeserializeResourceCollection(x));
-		foreach (var entry in resources)
+		var resources = GameObject.Find("Resources").GetComponent<ResourceController>();
+		resources.gameObject.DestroyAllChildrenImmediate();
+		var resourcesMapping = DeserializeCoordinateMap(levelMapping.GetMapping("resources"), x => DeserializeResourceCollection(x));
+		foreach (var entry in resourcesMapping)
 		{
-			LevelManager.Resources[entry.Key] = entry.Value;
+			resources.AddResourcePile(entry.Key, entry.Value);
 		}
 
-		var recipes = level.GetMapping("recipes");
-		var available = recipes.GetSequence("available").Select(x => x.ToEnum<CreatureType>()).ToList();
-		LevelManager.Recipes.AvailableRecipes = available;
+		var recipes = GameObject.Find("Recipes").GetComponent<RecipeController>();
+		recipes.gameObject.DestroyAllChildrenImmediate();
+		var recipeMapping = levelMapping.GetMapping("recipes");
 
-		var field = DeserializeCoordinateMap(recipes.GetMapping("field"), x => x.ToEnum<CreatureType>());
+		// TODO this won't work when loading a level from the level editor
+		// I think it has to do with setting dirty flags
+		var available = recipeMapping.GetSequence("available").Select(x => x.ToEnum<CreatureType>()).ToArray();
+		recipes.availableRecipes = available;
+
+		var field = DeserializeCoordinateMap(recipeMapping.GetMapping("field"), x => x.ToEnum<CreatureType>());
 		foreach (var entry in field)
 		{
-			LevelManager.Recipes[entry.Key] = entry.Value;
+			recipes.AddRecipe(entry.Key, entry.Value);
 		}
 
-		var goals = DeserializeCoordinateMap(level.GetMapping("goals"), x => x.ToEnum<CreatureType>());
-		foreach (var goal in goals)
+		var goals = GameObject.Find("Goals").GetComponent<GoalController>();
+		goals.gameObject.DestroyAllChildrenImmediate();
+		var goalMapping = DeserializeCoordinateMap(levelMapping.GetMapping("goals"), x => x.ToEnum<CreatureType>());
+		foreach (var goal in goalMapping)
 		{
-			LevelManager.Goals.SetGoal(goal.Key, goal.Value);
+			goals.AddGoal(goal.Key, goal.Value);
 		}
 	}
 
