@@ -4,6 +4,8 @@ using System.Linq;
 
 public class Level : EditorWindow
 {
+	int level;
+
 	[MenuItem("Window/Level")]
 	public static void  ShowWindow () {
 		EditorWindow.GetWindow(typeof(Level));
@@ -11,6 +13,7 @@ public class Level : EditorWindow
 
 	public void OnGUI()
 	{
+		level = EditorGUILayout.Popup("Level", level, Deserializer.DeserializeLevelList().ToArray());
 		GUILayout.Label ("Level Settings", EditorStyles.boldLabel);
 		if (GUILayout.Button("Load"))
 		{
@@ -24,9 +27,7 @@ public class Level : EditorWindow
 
 	public void LoadLevel()
 	{
-		// TODO make the deserializer work
-		// TODO be able to load all the level
-		Deserializer.DeserializeLevel("crane");
+		Deserializer.DeserializeLevel(Deserializer.DeserializeLevelList()[level]);
 		Debug.Log("Level Loaded");
 	}
 
