@@ -6,7 +6,7 @@ terrain: |
   llllll
   llllll
 creatures:
-  0,2: Turtle
+  0,0: Turtle
   2,2: Serpent
 resources:
   5,5:
@@ -17,5 +17,5 @@ recipes:
   field:
     5,0: Horse
 goals:
-  0,0: Horse
+  0,5: Horse
 ...
