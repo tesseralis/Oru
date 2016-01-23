@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 
 /// <summary>
 /// A pathfinder for resource assets
@@ -6,16 +7,21 @@
 public static class ResourcesPathfinder
 {
 	private const int lowThreshold = 5;
-	private const string prefabPath = "Prefabs/Level";
+	private const string prefabPath = "Prefabs";
 
 	private static GameObject LoadPrefab(params string[] path)
 	{
-		return Resources.Load<GameObject>(string.Format("{0}/{1}", prefabPath, string.Join("/", path)));
+		var prefab = Resources.Load<GameObject>(string.Format("{0}/{1}", prefabPath, string.Join("/", path)));
+		if (!prefab)
+		{
+			throw new ArgumentException("Bad path when loading prefab at: " + string.Join("/", path));
+		}
+		return prefab;
 	}
 
 	public static GameObject TerrainPrefab(TerrainType type)
 	{
-		return LoadPrefab("TerrainTiles", type + "Tile");
+		return LoadPrefab("Terrain", type.ToString());
 	}
 
 	public static GameObject CreaturePrefab(CreatureType type)
