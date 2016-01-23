@@ -200,6 +200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6b61a2fab1024eee9e00f9c370d7196, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 50
   creaturePrefabs:
     cranePrefab: {fileID: 196838, guid: d523f911282d2416492ac5c037a8d18e, type: 2}
     turtlePrefab: {fileID: 198072, guid: d63d67bb9f3a54169bca2d861cb23155, type: 2}
@@ -226,6 +227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goalPrefab: {fileID: 134374, guid: 92a3a21a799c0462e9eca225f50347c9, type: 2}
+  levelComplete: 0
   goal: {fileID: 0}
 --- !u!114 &11478330
 MonoBehaviour:
@@ -244,7 +246,6 @@ MonoBehaviour:
   recipeController: {fileID: 11481760}
   goalController: {fileID: 11436340}
   cellSize: 2
-  stepInterval: 0.3
 --- !u!114 &11481760
 MonoBehaviour:
   m_ObjectHideFlags: 1
