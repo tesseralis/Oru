@@ -49,15 +49,11 @@ public class LevelManager : MonoBehaviour
 		if (!resourceController) { resourceController = GetComponentInChildren<ResourceController>(); }
 		if (!recipeController) { recipeController = GetComponentInChildren<RecipeController>(); }
 		if (!goalController) { goalController = GetComponentInChildren<GoalController>(); }
-	}
 
-	void Start()
-	{
-		if (levelName == null)
+		if (levelName != null)
 		{
-			levelName = GameManager.game.Levels[0];
+			Deserializer.DeserializeLevel(levelName);
 		}
-		Deserializer.DeserializeLevel(levelName);
 	}
 
 	public static void SetLevel(string _levelName)
