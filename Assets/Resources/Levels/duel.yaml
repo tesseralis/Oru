@@ -1,21 +1,22 @@
 terrain: |
-    wwlww
-    lllll
-    lllll
-    lllll
-    wwlww
+  wwlww
+  lllll
+  lllll
+  lllll
+  wwlww
 creatures:
-    2,2: Lion
+  2,2: Lion
 resources:
-    0,2:
-        Energy: 1
-        Blue: 4
-        Yellow: 1
+  0,2:
+    Blue: 4
+    Yellow: 1
+    Energy: 1
 recipes:
-    available:
-        - Flower
-        - Wolf
-        - Bear
-    field: {}
+  available:
+  - Flower
+  - Wolf
+  - Bear
+  field: {}
 goals:
-    4,2: Bear
+  4,2: Bear
+...

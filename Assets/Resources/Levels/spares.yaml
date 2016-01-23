@@ -1,22 +1,23 @@
 terrain: |
-    lrrrl
-    rlllr
-    rlllr
-    rlllr
-    lrrrl
+  lrrrl
+  rlllr
+  rlllr
+  rlllr
+  lrrrl
 creatures:
-    1,1: Crab
-    1,3: Crab
-    3,1: Crab
-    3,3: Crab
+  1,1: Crab
+  1,3: Crab
+  3,1: Crab
+  3,3: Crab
 resources:
-    0,0:
-        Energy: 1
-        Blue: 4
+  0,0:
+    Blue: 4
+    Energy: 1
 recipes:
-    available:
-        - Wolf
-    field:
-        0,4: Horse
+  available:
+  - Wolf
+  field:
+    0,4: Horse
 goals:
-    4,4: Horse
+  4,4: Horse
+...

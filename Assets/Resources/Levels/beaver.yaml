@@ -1,17 +1,18 @@
 terrain: |
-    lwww
-    lwww
-    wwww
-    wwww
+  lwww
+  lwww
+  wwww
+  wwww
 creatures:
-    3,0: Crane
+  3,0: Crane
 resources:
-    0,0:
-        Energy: 1
-        Red: 1
+  0,0:
+    Red: 1
+    Energy: 1
 recipes:
-    available: []
-    field:
-        0,3: Beaver
+  available: []
+  field:
+    0,3: Beaver
 goals:
-    3,3: Beaver
+  3,3: Beaver
+...
