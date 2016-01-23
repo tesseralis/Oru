@@ -47,15 +47,7 @@ public static class CreatureDefinitions
 				Description = "A seabound unit that can carry resources",
 				Recipe = new Dictionary<ResourceType, int>() { {ResourceType.Energy, 1}, {ResourceType.Green, 1} },
 				AllowedTerrain = new TerrainType[]{ TerrainType.Land, TerrainType.Water },
-				Speed = x =>
-				{
-					switch(LevelManager.Terrain[x.Position])
-					{
-					case TerrainType.Water: return CreatureSpeed.Medium;
-					case TerrainType.Land: return CreatureSpeed.Slow;
-					default: throw new InvalidOperationException("Terrain not allowed");
-					}
-				},
+				Speed = FixedSpeed(CreatureSpeed.Slow),
 				Ability = new CarryResourceAbility.Definition { Capacity = 5 }
 			};
 		case CreatureType.Horse:
