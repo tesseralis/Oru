@@ -9,7 +9,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 465036}
   - 33: {fileID: 3322460}
-  - 64: {fileID: 6421092}
   - 23: {fileID: 2375058}
   m_Layer: 0
   m_Name: Plane
@@ -29,7 +28,7 @@ GameObject:
   - 114: {fileID: 11408562}
   - 65: {fileID: 6533506}
   m_Layer: 0
-  m_Name: WaterTile
+  m_Name: Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -92,18 +91,6 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 131962}
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!64 &6421092
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 131962}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Convex: 0
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!65 &6533506
 BoxCollider:

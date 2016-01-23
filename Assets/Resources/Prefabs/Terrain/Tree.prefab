@@ -28,7 +28,7 @@ GameObject:
   - 114: {fileID: 11418856}
   - 65: {fileID: 6569180}
   m_Layer: 0
-  m_Name: TreeTile
+  m_Name: Tree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,7 +60,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 429058}
   - 33: {fileID: 3398682}
-  - 64: {fileID: 6426892}
   - 23: {fileID: 2389622}
   m_Layer: 0
   m_Name: Plane
@@ -218,18 +217,6 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 151832}
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!64 &6426892
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 151832}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Convex: 0
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!65 &6569180
 BoxCollider:

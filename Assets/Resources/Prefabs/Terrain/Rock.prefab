@@ -9,7 +9,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 428236}
   - 33: {fileID: 3390252}
-  - 64: {fileID: 6474564}
   - 23: {fileID: 2398074}
   m_Layer: 0
   m_Name: Plane
@@ -29,7 +28,7 @@ GameObject:
   - 114: {fileID: 11459748}
   - 65: {fileID: 6568604}
   m_Layer: 0
-  m_Name: RockTile
+  m_Name: Rock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -92,18 +91,6 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 116056}
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!64 &6474564
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 116056}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Convex: 0
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!65 &6568604
 BoxCollider:
