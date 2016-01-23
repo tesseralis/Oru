@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UnityEditor;
+using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -29,7 +30,12 @@ namespace Util
 		public static GameObject AddChild(this GameObject gameObject, GameObject prefab, Coordinate coordinate)
 		{
 			var position = new Vector3(coordinate.x * cellSize, 0, coordinate.z * cellSize);
+			#if UNITY_EDITOR
+			GameObject newObject = (GameObject)PrefabUtility.InstantiatePrefab(prefab);
+			newObject.transform.position = position;
+			#else
 			GameObject newObject = (GameObject)GameObject.Instantiate(prefab, position, prefab.transform.rotation);
+			#endif
 			newObject.transform.SetParent(gameObject.transform);
 			return newObject;
 		}
