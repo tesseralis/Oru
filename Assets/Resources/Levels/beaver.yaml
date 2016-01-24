@@ -1,18 +1,18 @@
-terrain: |
+Terrain: |
   lwww
   lwww
   wwww
   wwww
-creatures:
+Creatures:
   3,0: Crane
-resources:
+Resources:
   0,0:
     Red: 1
     Energy: 1
-recipes:
-  available: []
-  field:
+Recipes:
+  Available: []
+  Field:
     0,3: Beaver
-goals:
+Goals:
   3,3: Beaver
 ...

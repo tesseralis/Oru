@@ -1,22 +1,22 @@
-terrain: |
+Terrain: |
   wwwwww
   wwwwww
   llllll
   llllll
   wwwwww
   wwwwww
-creatures:
+Creatures:
   2,2: Lion
-resources:
+Resources:
   5,2:
     Black: 9
     Energy: 2
-recipes:
-  available:
+Recipes:
+  Available:
   - Alligator
   - Wolf
   - Camel
-  field: {}
-goals:
+  Field: {}
+Goals:
   0,2: Alligator
 ...

@@ -1,11 +1,11 @@
-terrain: |
+Terrain: |
   rrrrl
   wwwrl
   wwwrr
   tttll
   lltll
-creatures: {}
-resources:
+Creatures: {}
+Resources:
   4,3:
     Blue: 1
     Energy: 1
@@ -18,13 +18,13 @@ resources:
   0,4:
     White: 4
     Energy: 0
-recipes:
-  available:
+Recipes:
+  Available:
   - Crane
-  field:
+  Field:
     3,3: Horse
     3,4: Turtle
     1,4: Bear
-goals:
+Goals:
   4,0: Crane
 ...

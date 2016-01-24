@@ -1,4 +1,4 @@
-terrain: |
+Terrain: |
   ttttltttt
   ttttttttt
   wwwwwwwww
@@ -8,24 +8,24 @@ terrain: |
   lllllllll
   wwwwwwwww
   wwwwwwwww
-creatures:
+Creatures:
   2,4: Dragon
-resources:
+Resources:
   6,4:
     Blue: 10
     White: 10
     Red: 10
     Black: 10
     Energy: 10
-recipes:
-  available:
+Recipes:
+  Available:
   - Flower
   - Wolf
   - Alligator
   - Beaver
   - Bear
   - Crane
-  field: {}
-goals:
+  Field: {}
+Goals:
   0,4: Crane
 ...

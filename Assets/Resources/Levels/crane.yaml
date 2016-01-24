@@ -1,18 +1,18 @@
-terrain: |
+Terrain: |
   lll
   www
   www
   www
   lll
-creatures: {}
-resources:
+Creatures: {}
+Resources:
   0,1:
     Blue: 1
     Energy: 1
-recipes:
-  available:
+Recipes:
+  Available:
   - Crane
-  field: {}
-goals:
+  Field: {}
+Goals:
   4,1: Crane
 ...

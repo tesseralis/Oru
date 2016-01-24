@@ -1,21 +1,21 @@
-terrain: |
+Terrain: |
   llll
   llll
   rrll
   lrll
-creatures: {}
-resources:
+Creatures: {}
+Resources:
   0,0:
     Blue: 1
     Energy: 1
   3,3:
     Red: 4
     Energy: 1
-recipes:
-  available:
+Recipes:
+  Available:
   - Crane
-  field:
+  Field:
     0,3: Horse
-goals:
+Goals:
   3,0: Crane
 ...

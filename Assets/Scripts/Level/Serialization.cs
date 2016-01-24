@@ -130,14 +130,14 @@ public static class Serialization
 
 		var terrain = GameObject.Find("Terrain").GetComponent<TerrainController>();
 		terrain.gameObject.DestroyAllChildrenImmediate();
-		foreach (var entry in DeserializeTerrain(levelMapping.GetString("terrain")))
+		foreach (var entry in DeserializeTerrain(levelMapping.GetString("Terrain")))
 		{
 			terrain.AddTerrainTile(entry.Key, entry.Value);
 		}
 
 		var creatures = GameObject.Find("Creatures").GetComponent<CreatureController>();
 		creatures.gameObject.DestroyAllChildrenImmediate();
-		var creatureMapping = DeserializeCoordinateMap(levelMapping.GetMapping("creatures"), x => DeserializeCreatureType(x));
+		var creatureMapping = DeserializeCoordinateMap(levelMapping.GetMapping("Creatures"), x => DeserializeCreatureType(x));
 		foreach (var entry in creatureMapping)
 		{
 			creatures.AddCreature(entry.Key, entry.Value);
@@ -145,7 +145,7 @@ public static class Serialization
 
 		var resources = GameObject.Find("Resources").GetComponent<ResourceController>();
 		resources.gameObject.DestroyAllChildrenImmediate();
-		var resourcesMapping = DeserializeCoordinateMap(levelMapping.GetMapping("resources"), x => DeserializeResourceCollection(x));
+		var resourcesMapping = DeserializeCoordinateMap(levelMapping.GetMapping("Resources"), x => DeserializeResourceCollection(x));
 		foreach (var entry in resourcesMapping)
 		{
 			resources.AddResourcePile(entry.Key, entry.Value);
@@ -153,14 +153,14 @@ public static class Serialization
 
 		var recipes = GameObject.Find("Recipes").GetComponent<RecipeController>();
 		recipes.gameObject.DestroyAllChildrenImmediate();
-		var recipeMapping = levelMapping.GetMapping("recipes");
+		var recipeMapping = levelMapping.GetMapping("Recipes");
 
 		// TODO this won't work when loading a level from the level editor
 		// I think it has to do with setting dirty flags
-		var available = recipeMapping.GetSequence("available").Select(x => DeserializeCreatureType(x)).ToArray();
+		var available = recipeMapping.GetSequence("Available").Select(x => DeserializeCreatureType(x)).ToArray();
 		recipes.availableRecipes = available;
 
-		var field = DeserializeCoordinateMap(recipeMapping.GetMapping("field"), x => DeserializeCreatureType(x));
+		var field = DeserializeCoordinateMap(recipeMapping.GetMapping("Field"), x => DeserializeCreatureType(x));
 		foreach (var entry in field)
 		{
 			recipes.AddRecipe(entry.Key, entry.Value);
@@ -168,7 +168,7 @@ public static class Serialization
 	
 		var goals = GameObject.Find("Goals").GetComponent<GoalController>();
 		goals.gameObject.DestroyAllChildrenImmediate();
-		var goalMapping = DeserializeCoordinateMap(levelMapping.GetMapping("goals"), x => DeserializeCreatureType(x));
+		var goalMapping = DeserializeCoordinateMap(levelMapping.GetMapping("Goals"), x => DeserializeCreatureType(x));
 		foreach (var goal in goalMapping)
 		{
 			goals.AddGoal(goal.Key, goal.Value);
@@ -192,8 +192,8 @@ public static class Serialization
 		var fieldRecipesMapping = SerializeCoordinateMap<Recipe>(recipes.gameObject, x => SerializeScalar(x.creature));
 		var recipeNode = new YamlMappingNode()
 		{
-			{SerializeScalar("available"), availableRecipesList},
-			{SerializeScalar("field"), fieldRecipesMapping}
+			{SerializeScalar("Available"), availableRecipesList},
+			{SerializeScalar("Field"), fieldRecipesMapping}
 		};
 
 		var goals = GameObject.Find("Goals").GetComponent<GoalController>();
@@ -201,11 +201,11 @@ public static class Serialization
 
 		var levelNode = new YamlMappingNode()
 		{
-			{"terrain", terrainString},
-			{"creatures", creatureMapping},
-			{"resources", resourceMapping},
-			{"recipes", recipeNode},
-			{"goals", goalsMapping}
+			{"Terrain", terrainString},
+			{"Creatures", creatureMapping},
+			{"Resources", resourceMapping},
+			{"Recipes", recipeNode},
+			{"Goals", goalsMapping}
 		};
 		var levelDocument = new YamlDocument(levelNode);
 

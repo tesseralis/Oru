@@ -1,22 +1,22 @@
-terrain: |
+Terrain: |
   wwlww
   lllll
   lllll
   lllll
   wwlww
-creatures:
+Creatures:
   2,2: Lion
-resources:
+Resources:
   0,2:
     Blue: 4
     White: 1
     Energy: 1
-recipes:
-  available:
+Recipes:
+  Available:
   - Flower
   - Wolf
   - Bear
-  field: {}
-goals:
+  Field: {}
+Goals:
   4,2: Bear
 ...

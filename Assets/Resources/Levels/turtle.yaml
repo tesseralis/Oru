@@ -1,21 +1,21 @@
-terrain: |
+Terrain: |
   llllll
   llllll
   wwwwww
   wwwwww
   llllll
   llllll
-creatures:
+Creatures:
   0,0: Turtle
   2,2: Serpent
-resources:
+Resources:
   5,5:
     Red: 4
     Energy: 0
-recipes:
-  available: []
-  field:
+Recipes:
+  Available: []
+  Field:
     5,0: Horse
-goals:
+Goals:
   0,5: Horse
 ...

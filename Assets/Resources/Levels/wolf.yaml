@@ -1,25 +1,25 @@
-terrain: |
+Terrain: |
   wwwwww
   wwwwww
   rrllrr
   rrllrr
   wwwwww
   wwwwww
-creatures:
+Creatures:
   2,2: Crab
   3,3: Crab
   5,2: Crane
-resources:
+Resources:
   2,0:
     Blue: 4
     Energy: 1
   2,5:
     Blue: 4
     Energy: 1
-recipes:
-  available:
+Recipes:
+  Available:
   - Wolf
-  field: {}
-goals:
+  Field: {}
+Goals:
   0,2: Crane
 ...
