@@ -1,2 +1,2 @@
 ﻿
-public enum ResourceType { Energy, Red, Yellow, Green, Blue }
+public enum ResourceType { Energy, White, Black, Red, Blue }

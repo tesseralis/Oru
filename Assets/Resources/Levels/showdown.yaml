@@ -13,9 +13,9 @@ creatures:
 resources:
   6,4:
     Blue: 10
-    Yellow: 10
+    White: 10
     Red: 10
-    Green: 10
+    Black: 10
     Energy: 10
 recipes:
   available:

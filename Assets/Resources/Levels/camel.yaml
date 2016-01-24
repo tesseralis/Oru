@@ -9,7 +9,7 @@ creatures:
   2,2: Lion
 resources:
   5,2:
-    Green: 9
+    Black: 9
     Energy: 2
 recipes:
   available:

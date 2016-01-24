@@ -9,7 +9,7 @@ creatures:
 resources:
   0,2:
     Blue: 4
-    Yellow: 1
+    White: 1
     Energy: 1
 recipes:
   available:

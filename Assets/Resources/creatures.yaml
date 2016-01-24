@@ -9,7 +9,7 @@ Turtle:
   Description: "A seabound unit that can carry resources"
   Recipe:
     Energy: 1
-    Green: 1
+    Black: 1
   AllowedTerrain: [Land, Water]
   Speed: Slow
   Ability:
@@ -62,7 +62,7 @@ Wolf:
 Flower:
   Description: "Can heal other creatures"
   Recipe:
-    Yellow: 1
+    White: 1
   AllowedTerrain: [Land]
   Speed: Idle
   Ability:
@@ -83,7 +83,7 @@ Alligator:
   Description: "A water fighter"
   Recipe:
     Energy: 1
-    Green: 9
+    Black: 9
   AllowedTerrain: [Water]
   Speed:  Medium
   Ability:
@@ -94,7 +94,7 @@ Serpent:
   Description: "A waterbound enemy creature"
   Recipe:
     Energy: 1
-    Green: 4
+    Black: 4
   AllowedTerrain: [Water]
   Speed: Medium
   Ability:
@@ -106,7 +106,7 @@ Lion:
   Description: "The king of the jungle"
   Recipe:
     Energy: 1
-    Yellow: 9
+    White: 9
   AllowedTerrain: [Land, Rock]
   Speed: Medium
   Ability:
@@ -118,7 +118,7 @@ Camel:
   Description: "A land unit that can carry a lot of stuff"
   Recipe:
     Energy: 1
-    Yellow: 9
+    White: 9
   AllowedTerrain: [Land]
   Speed: Slow
   Ability:

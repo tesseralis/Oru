@@ -10,13 +10,13 @@ resources:
     Blue: 1
     Energy: 1
   1,2:
-    Green: 1
+    Black: 1
     Energy: 1
   2,0:
     Red: 4
     Energy: 1
   0,4:
-    Yellow: 4
+    White: 4
     Energy: 0
 recipes:
   available:
