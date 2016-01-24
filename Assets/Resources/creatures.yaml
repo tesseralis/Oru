@@ -29,7 +29,7 @@ Bear:
   Description: "A medium sized unit that can uproot and move trees"
   Recipe:
     Energy: 1
-    Yellow: 4
+    White: 4
   AllowedTerrain: [Land]
   Speed: Slow
   Ability:
