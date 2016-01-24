@@ -34,13 +34,13 @@ public class Creature : MonoBehaviour
 
 	public ResourceCollection ToResources()
 	{
-		if (Definition.NeedsEnergy())
+		if (Definition.NoEnergy)
 		{
-			return ResourceCollection.FromMultiset(Definition.Recipe.MultisetSubtract(ResourceType.Energy, 1)).Add(health);
+			return ResourceCollection.FromMultiset(Definition.Recipe);
 		}
 		else
 		{
-			return ResourceCollection.FromMultiset(Definition.Recipe);
+			return ResourceCollection.FromMultiset(Definition.Recipe).Add(health);
 		}
 	}
 

@@ -163,11 +163,15 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: 1, g: 1, b: 1, a: 0.78431374}
+        second: {r: 0.9191176, g: 0.85829365, b: 0.85829365, a: 0.78431374}
       data:
         first:
           name: _SpecColor
         second: {r: 0.11764706, g: 0.11764706, b: 0.11764706, a: 1}
+      data:
+        first:
+          name: _SpecularColor
+        second: {r: 0.15686275, g: 0.15686275, b: 0.15686275, a: 1}
       data:
         first:
           name: _EmissionColorUI
@@ -176,7 +180,3 @@ Material:
         first:
           name: _EmissionColorWithMapUI
         second: {r: 1, g: 1, b: 1, a: 1}
-      data:
-        first:
-          name: _SpecularColor
-        second: {r: 0.15686275, g: 0.15686275, b: 0.15686275, a: 1}
