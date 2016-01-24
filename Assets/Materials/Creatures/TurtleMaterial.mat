@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: TurtleBodyMaterial
+  m_Name: TurtleMaterial
   m_Shader: {fileID: 45, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _LIGHTMAPPING_DYNAMIC_LIGHTMAPS _LIGHTMAPPING_REALTIME _UVSEC_UV1
   m_LightmapFlags: 5
@@ -161,11 +161,15 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: 0.27657202, g: 0.39705884, b: 0, a: 1}
+        second: {r: 0.19852942, g: 0.1684077, b: 0, a: 1}
       data:
         first:
           name: _SpecColor
         second: {r: 0.11764706, g: 0.11764706, b: 0.11764706, a: 1}
+      data:
+        first:
+          name: _SpecularColor
+        second: {r: 0.15686275, g: 0.15686275, b: 0.15686275, a: 1}
       data:
         first:
           name: _EmissionColorUI
@@ -174,7 +178,3 @@ Material:
         first:
           name: _EmissionColorWithMapUI
         second: {r: 1, g: 1, b: 1, a: 1}
-      data:
-        first:
-          name: _SpecularColor
-        second: {r: 0.15686275, g: 0.15686275, b: 0.15686275, a: 1}
