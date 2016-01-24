@@ -9,7 +9,6 @@ public class ResourceList : MonoBehaviour
 {
 
 	public GameObject resourceCountPanelPrefab;
-	public float resourceSpacing = 30f;
 
 	// TODO a lot of this can be factored with the methods in RecipeList
 	public void ShowResources(IDictionary<ResourceType, int> recipe)
@@ -17,6 +16,8 @@ public class ResourceList : MonoBehaviour
 		gameObject.SetActive(true);
 		// Delete all the children
 		gameObject.DestroyAllChildren();
+
+		var resourceCountHeight = resourceCountPanelPrefab.GetComponent<RectTransform>().rect.height;
 
 		int i = 0;
 		foreach(var entry in recipe)
@@ -26,7 +27,7 @@ public class ResourceList : MonoBehaviour
 
 			// Translate the new object by the index amount
 			var transform = newResource.GetComponent<RectTransform>();
-			transform.anchoredPosition += Vector2.down * i * resourceSpacing;
+			transform.anchoredPosition += Vector2.down * i * resourceCountHeight;
 			newResource.GetComponent<ResourceCountPanel>().SetContents(entry.Key, entry.Value);
 			i++;
 		}
