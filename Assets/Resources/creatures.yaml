@@ -1,14 +1,12 @@
 Crane:
   Description: "The basic origami crane"
   Recipe:
-    Energy: 1
     Blue: 1
   AllowedTerrain: [Land, Water]
   Speed: Medium
 Turtle:
   Description: "A seabound unit that can carry resources"
   Recipe:
-    Energy: 1
     Black: 1
   AllowedTerrain: [Land, Water]
   Speed: Slow
@@ -18,7 +16,6 @@ Turtle:
 Horse:
   Description: "A versatile land unit that can carry resources"
   Recipe: 
-    Energy: 1
     Red: 4
   AllowedTerrain: [Land, Rock]
   Speed: Fast
@@ -28,7 +25,6 @@ Horse:
 Bear:
   Description: "A medium sized unit that can uproot and move trees"
   Recipe:
-    Energy: 1
     White: 4
   AllowedTerrain: [Land]
   Speed: Slow
@@ -39,7 +35,6 @@ Bear:
 Crab:
   Description: "A basic enemy creature"
   Recipe:
-    Energy: 1
     Red: 1
   AllowedTerrain: [Land]
   Speed: Slow
@@ -51,7 +46,6 @@ Crab:
 Wolf:
   Description: "Can fight enemies"
   Recipe:
-    Energy: 1
     Blue: 4
   AllowedTerrain: [Land, Rock]
   Speed: Fast
@@ -63,6 +57,7 @@ Flower:
   Description: "Can heal other creatures"
   Recipe:
     White: 1
+  NoEnergy: true
   AllowedTerrain: [Land]
   Speed: Idle
   Ability:
@@ -71,7 +66,6 @@ Flower:
 Beaver:
   Description: "Can move land tiles"
   Recipe:
-    Energy: 1
     Red: 1
   AllowedTerrain: [Land]
   Speed: Fast
@@ -82,7 +76,6 @@ Beaver:
 Alligator:
   Description: "A water fighter"
   Recipe:
-    Energy: 1
     Black: 9
   AllowedTerrain: [Water]
   Speed:  Medium
@@ -93,7 +86,6 @@ Alligator:
 Serpent:
   Description: "A waterbound enemy creature"
   Recipe:
-    Energy: 1
     Black: 4
   AllowedTerrain: [Water]
   Speed: Medium
@@ -105,7 +97,6 @@ Serpent:
 Lion:
   Description: "The king of the jungle"
   Recipe:
-    Energy: 1
     White: 9
   AllowedTerrain: [Land, Rock]
   Speed: Medium
@@ -117,7 +108,6 @@ Lion:
 Camel:
   Description: "A land unit that can carry a lot of stuff"
   Recipe:
-    Energy: 1
     White: 9
   AllowedTerrain: [Land]
   Speed: Slow
@@ -127,7 +117,6 @@ Camel:
 Dragon:
   Description: "A mythical beast that can go anywhere"
   Recipe:
-    Energy: 1
     Blue: 16
   AllowedTerrain: [Land, Rock, Water]
   Speed: Fast

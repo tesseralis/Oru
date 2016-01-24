@@ -261,6 +261,7 @@ public static class Serialization
 		var definition = node.AsMapping();
 		var description = definition.GetString("Description");
 		var recipe = DeserializeResourceCollection(definition.GetMapping("Recipe")).ToMultiset();
+		var noEnergy = definition.HasKey("NoEnergy") ? definition.GetBool("NoEnergy") : false;
 		var allowedTerrain = definition.GetSequence("AllowedTerrain").Select(x => x.ToEnum<TerrainType>()).ToArray();
 		var speed = definition.GetChild("Speed").ToEnum<CreatureSpeed>();
 		var ability = definition.HasKey("Ability") ? DeserializeAbility(definition.GetChild("Ability")) : null;
@@ -269,6 +270,7 @@ public static class Serialization
 		{
 			Description = description,
 			Recipe = recipe,
+			NoEnergy = noEnergy,
 			AllowedTerrain = allowedTerrain,
 			Speed = speed,
 			Ability = ability,

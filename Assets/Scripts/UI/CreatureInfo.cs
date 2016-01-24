@@ -49,9 +49,9 @@ public class CreatureInfo : MonoBehaviour
 		descriptionDisplay.text = string.Format("Allowed Terrain: {0}\nAbility: {1}{2}",
 			string.Join(", ", creatureDefinition.AllowedTerrain.Select(t => t.ToString()).ToArray()),
 			ability,
-			creature.Definition.NeedsEnergy() ? "\n\nHealth: " + creature.health : "");
+			!creature.Definition.NoEnergy ? "\n\nHealth: " + creature.health : "");
 
-		resourceList.ShowResources(creatureDefinition.Recipe);
+		resourceList.ShowResources(creatureDefinition.RecipeWithEnergy());
 
 		DisplayAbilityText(creature);
 		var isEnemy = creature.Definition.IsEnemy;

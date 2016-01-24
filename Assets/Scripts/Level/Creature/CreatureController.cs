@@ -83,9 +83,9 @@ public class CreatureController : MonoBehaviour
 
 		// Remove the items from the neighboring coordinates.
 		var neighbors = Neighbors(location);
-		// If the creature needs a health resource, take it from the most healthy pile
+		// If the creature needs an energy resource, take it from the most healthy pile
 		int bestEnergy = 0;
-		if (definition.NeedsEnergy())
+		if (!definition.NoEnergy)
 		{
 			bestEnergy = neighbors.SelectMany(x => LevelManager.Resources[x].EnergyBlocks).Max();
 			// Remove from the thing we took it from
