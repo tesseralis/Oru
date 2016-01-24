@@ -148,7 +148,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f828531687824056b48f74c9377d8d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  creatureType: 7
+  creatureType:
+    name: Beaver
   health: 20
 --- !u!1001 &100100000
 Prefab:
@@ -168,6 +169,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: health
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: creatureType.name
+      value: Beaver
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

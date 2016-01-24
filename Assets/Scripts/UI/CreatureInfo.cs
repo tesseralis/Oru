@@ -43,7 +43,7 @@ public class CreatureInfo : MonoBehaviour
 	{
 		gameObject.SetActive(true);
 		nameDisplay.text = creature.creatureType.ToString();
-		var creatureDefinition = CreatureDefinitions.ForType(creature.creatureType);
+		var creatureDefinition = CreatureDefinition.ForType(creature.creatureType);
 		useAbilityButton.gameObject.SetActive(!creature.Definition.IsEnemy && creature.HasAbility());
 		string ability = creature.HasAbility() ? creature.Definition.Ability.Description() : "None";
 		descriptionDisplay.text = string.Format("Allowed Terrain: {0}\nAbility: {1}{2}",

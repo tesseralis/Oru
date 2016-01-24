@@ -11,6 +11,7 @@ using Util;
 public class Creature : MonoBehaviour
 {
 	// The type of creature this is.
+	// TODO figure out a way that I don't have to define this in every prefab I make for level editing
 	public CreatureType creatureType;
 	public int health;
 
@@ -28,7 +29,7 @@ public class Creature : MonoBehaviour
 	// Convenience method to get the creature's definition
 	public CreatureDefinition Definition
 	{
-		get { return CreatureDefinitions.ForType(creatureType); }
+		get { return CreatureDefinition.ForType(creatureType); }
 	}
 
 	public ResourceCollection ToResources()
