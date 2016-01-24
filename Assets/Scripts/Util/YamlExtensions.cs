@@ -28,6 +28,11 @@ namespace Util
 			return (YamlSequenceNode)node;
 		}
 
+		public static bool HasKey(this YamlMappingNode map, string key)
+		{
+			return map.Children.ContainsKey(new YamlScalarNode(key));
+		}
+
 		public static YamlNode GetChild(this YamlMappingNode map, string key)
 		{
 			return map.Children[new YamlScalarNode(key)];
@@ -48,9 +53,24 @@ namespace Util
 			return map.GetChild(key).AsScalar().Value;
 		}
 
+		public static int GetInt(this YamlMappingNode map, string key)
+		{
+			return map.GetChild(key).AsScalar().ToInt();
+		}
+
+		public static bool GetBool(this YamlMappingNode map, string key)
+		{
+			return map.GetChild(key).AsScalar().ToBool();
+		}
+
 		public static int ToInt(this YamlNode node)
 		{
 			return Int32.Parse(node.AsScalar().Value);
+		}
+
+		public static bool ToBool(this YamlNode node)
+		{
+			return Boolean.Parse(node.AsScalar().Value);
 		}
 
 		public static T ToEnum<T>(this YamlNode node)

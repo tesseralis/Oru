@@ -218,4 +218,67 @@ public static class Serialization
 		yaml.Load(input);
 		return yaml.Documents[0].RootNode.AsSequence().Select(x => x.ToString()).ToList();
 	}
+
+	public static IAbilityDefinition DeserializeAbility(YamlNode node)
+	{
+		var ability = node.AsMapping();
+		switch(ability.GetString("Type"))
+		{
+		case "CarryResourceAbility":
+			return new CarryResourceAbility.Definition
+			{
+				Capacity = ability.GetInt("Capacity")
+			};
+		case "ChangeTerrainAbility":
+			return new ChangeTerrainAbility.Definition
+			{
+				CarryType = ability.GetChild("CarryType").ToEnum<TerrainType>(),
+				LeaveType = ability.GetChild("LeaveType").ToEnum<TerrainType>()
+			};
+		case "FightAbility":
+			return new FightAbility.Definition
+			{
+				Attack = ability.GetChild("Attack").ToEnum<BattlePower>(),
+				Defense = ability.GetChild("Defense").ToEnum<BattlePower>()
+			};
+		case "HealAbility":
+			return new HealAbility.Definition
+			{
+				HealPower = ability.GetInt("HealPower")
+			};
+		default: throw new ArgumentException("Ability not found: " + ability.GetString("Type"));
+		}
+	}
+
+	// Creature definitions
+	public static CreatureDefinition DeserializeCreature(YamlNode node)
+	{
+		var definition = node.AsMapping();
+		var description = definition.GetString("Description");
+		var recipe = DeserializeResourceCollection(definition.GetMapping("Recipe")).ToMultiset();
+		var allowedTerrain = definition.GetSequence("AllowedTerrain").Select(x => x.ToEnum<TerrainType>()).ToArray();
+		var speed = definition.GetChild("Speed").ToEnum<CreatureSpeed>();
+		var ability = definition.HasKey("Ability") ? DeserializeAbility(definition.GetChild("Ability")) : null;
+		var isEnemy = definition.HasKey("IsEnemy") ? definition.GetBool("IsEnemy") : false;
+		return new CreatureDefinition()
+		{
+			Description = description,
+			Recipe = recipe,
+			AllowedTerrain = allowedTerrain,
+			Speed = speed,
+			Ability = ability,
+			IsEnemy = isEnemy
+		};
+	}
+
+	public static IDictionary<CreatureType, CreatureDefinition> DeserializeCreatureDefinitions()
+	{
+		var creaturesFile = UnityEngine.Resources.Load<TextAsset>("creatures");
+		var input = new StringReader(creaturesFile.text);
+		var yaml = new YamlStream();
+		yaml.Load(input);
+		var creatureMapping = yaml.Documents[0].RootNode.AsMapping();
+		// TODO replace the enum definition
+		return creatureMapping.ToDictionary(x => x.Key.ToEnum<CreatureType>(), x => DeserializeCreature(x.Value));
+	}
 }

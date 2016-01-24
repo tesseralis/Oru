@@ -35,7 +35,7 @@ Bear:
   Ability:
     Type: ChangeTerrainAbility
     CarryType: Tree
-  	LeaveType: Land
+    LeaveType: Land
 Crab:
   Description: "A basic enemy creature"
   Recipe:
@@ -78,7 +78,7 @@ Beaver:
   Ability:
     Type: ChangeTerrainAbility
     CarryType: Land
-  	LeaveType: Water
+    LeaveType: Water
 Alligator:
   Description: "A water fighter"
   Recipe:

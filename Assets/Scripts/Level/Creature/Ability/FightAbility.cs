@@ -102,6 +102,6 @@ public class FightAbility : MonoBehaviour, IAbility
 		// and dividing by the creature's speed (since faster creatures can attack more).
 		// TODO a fast low speed creature won't be able to hit a high def enemy because of rounding
 		var diff = attack - enemy.defense + 3;
-		return (diff * diff * baseDamage) / (int)creature.Definition.Speed(creature);
+		return (diff * diff * baseDamage) / (int)creature.Definition.Speed;
 	}
 }
