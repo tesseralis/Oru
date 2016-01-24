@@ -33,7 +33,7 @@ namespace Util
 			{
 				result[item] += amount;
 			}
-			else
+			else if (amount > 0)
 			{
 				result[item] = amount;
 			}

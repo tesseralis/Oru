@@ -17,7 +17,6 @@ Resources:
     Energy: 1
   0,4:
     White: 4
-    Energy: 0
 Recipes:
   Available:
   - Crane
