@@ -259,7 +259,7 @@ public static class Serialization
 	public static CreatureDefinition DeserializeCreature(YamlNode node)
 	{
 		var definition = node.AsMapping();
-		var description = definition.GetString("Description");
+//		var description = definition.GetString("Description");
 		var recipe = DeserializeResourceCollection(definition.GetMapping("Recipe")).ToMultiset();
 		var noEnergy = definition.HasKey("NoEnergy") ? definition.GetBool("NoEnergy") : false;
 		var allowedTerrain = definition.GetSequence("AllowedTerrain").Select(x => x.ToEnum<TerrainType>()).ToArray();
@@ -268,7 +268,7 @@ public static class Serialization
 		var isEnemy = definition.HasKey("IsEnemy") ? definition.GetBool("IsEnemy") : false;
 		return new CreatureDefinition()
 		{
-			Description = description,
+//			Description = description,
 			Recipe = recipe,
 			NoEnergy = noEnergy,
 			AllowedTerrain = allowedTerrain,

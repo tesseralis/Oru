@@ -19,13 +19,14 @@ Resources:
     Energy: 10
 Recipes:
   Available:
-  - Flower
-  - Wolf
-  - Alligator
-  - Beaver
-  - Bear
   - Crane
+  - Dog
+  - Monkey
+  - Shark
+  - Frog
+  - Snake
+  - Horse
   Field: {}
 Goals:
-  0,4: Crane
+  0,4: Frog
 ...

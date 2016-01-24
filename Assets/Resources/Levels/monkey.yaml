@@ -7,23 +7,25 @@ Terrain: |
 Creatures: {}
 Resources:
   4,3:
-    Blue: 1
+    White: 1
     Energy: 1
   1,2:
     Black: 1
+    Red: 1
+    White: 2
     Energy: 1
   2,0:
-    Red: 4
-    Energy: 1
+    Red: 5
+    Black: 2
   0,4:
-    White: 4
+    Black: 1
 Recipes:
   Available:
-  - Crane
+  - Rabbit
   Field:
     3,3: Horse
-    3,4: Turtle
-    1,4: Bear
+    3,4: Koi
+    1,4: Monkey
 Goals:
-  4,0: Crane
+  4,0: Rabbit
 ...

@@ -1,22 +1,24 @@
 Terrain: |
   wwlww
-  lllll
-  lllll
-  lllll
+  wlllw
+  rrrrr
+  wlllw
   wwlww
 Creatures:
-  2,2: Lion
+  3,2: Tiger
 Resources:
   0,2:
-    Blue: 4
+    Blue: 5
     White: 1
-    Energy: 1
+    Red: 1
+    Black: 1
+    Energy: 2
 Recipes:
   Available:
-  - Flower
-  - Wolf
-  - Bear
-  Field: {}
+  - Crane
+  Field:
+    2,0: Rat
+    2,4: Snake
 Goals:
-  4,2: Bear
+  4,2: Rat
 ...

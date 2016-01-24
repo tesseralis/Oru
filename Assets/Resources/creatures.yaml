@@ -1,127 +1,132 @@
-Crane:
-  Description: "The basic origami crane"
+# Size 1 creatures
+Rabbit:
   Recipe:
-    Blue: 1
-  AllowedTerrain: [Land, Water]
-  Speed: Medium
-Turtle:
-  Description: "A seabound unit that can carry resources"
+    White: 1
+  AllowedTerrain: &land [Land]
+  Speed: Fast
+Rat:
   Recipe:
     Black: 1
-  AllowedTerrain: [Land, Water]
-  Speed: Slow
-  Ability:
-    Type: CarryResourceAbility
-    Capacity: 5
-Horse:
-  Description: "A versatile land unit that can carry resources"
-  Recipe: 
-    Red: 4
-  AllowedTerrain: [Land, Rock]
-  Speed: Fast
-  Ability:
-    Type: CarryResourceAbility
-    Capacity: 5
-Bear:
-  Description: "A medium sized unit that can uproot and move trees"
+  AllowedTerrain: &rock [Land, Rock]
+  Speed: Medium
+Frog:
   Recipe:
-    White: 4
-  AllowedTerrain: [Land]
+    Blue: 1
+  AllowedTerrain: &water [Water]
   Speed: Slow
+Butterfly:
+  Recipe:
+    Red: 1
+  AllowedTerrain: &air [Land, Rock, Water]
+  Speed: Slow
+# Size 2 creatures
+Crane:
+  Recipe:
+    Black: 1
+    White: 1
+    Red: 1
+    Blue: 1
+  AllowedTerrain: *air
+  Speed: Medium
+  Ability:
+    Type: HealAbility
+    HealPower: 5
+Koi:
+  Recipe:
+    Black: 1
+    White: 2
+    Red: 1
+  AllowedTerrain: *water
+  Speed: Medium
+  Ability:
+    Type: CarryResourceAbility
+    Capacity: 5
+Dog:
+  Recipe:
+    White: 1
+    Red: 3
+  AllowedTerrain: *land
+  Speed: Medium
+  Ability:
+    Type: ChangeTerrainAbility
+    CarryType: Land
+    LeaveType: Water
+Monkey:
+  Recipe:
+    Black: 4
+  AllowedTerrain: *land
+  Speed: Medium
   Ability:
     Type: ChangeTerrainAbility
     CarryType: Tree
     LeaveType: Land
-Crab:
-  Description: "A basic enemy creature"
+Snake:
+  Recipe:
+    Blue: 4
+  AllowedTerrain: *rock
+  Speed: Fast
+  Ability:
+    Type: FightAbility
+    Attack: Medium
+    Defense: Medium
+# Size 3 creatures
+Horse:
+  Recipe:
+    Black: 3
+    Red: 6
+  AllowedTerrain: *rock
+  Speed: Fast
+  Ability:
+    Type: CarryResourceAbility
+    Capacity: 5
+Shark:
+  Recipe:
+    White: 3
+    Blue: 6
+  AllowedTerrain: *water
+  Speed: Fast
+  Ability:
+    Type: FightAbility
+    Attack: High
+    Defense: Medium
+# Enemy Creatures
+Bird:
   Recipe:
     Red: 1
-  AllowedTerrain: [Land]
-  Speed: Slow
+  AllowedTerrain: *air
+  Speed: Fast
   Ability:
     Type: FightAbility
     Attack: Low
     Defense: Low
   IsEnemy: true
-Wolf:
-  Description: "Can fight enemies"
-  Recipe:
-    Blue: 4
-  AllowedTerrain: [Land, Rock]
-  Speed: Fast
-  Ability:
-    Type: FightAbility
-    Attack: Medium
-    Defense: Medium
-Flower:
-  Description: "Can heal other creatures"
-  Recipe:
-    White: 1
-  NoEnergy: true
-  AllowedTerrain: [Land]
-  Speed: Idle
-  Ability:
-    Type: HealAbility
-    HealPower: 5
-Beaver:
-  Description: "Can move land tiles"
-  Recipe:
-    Red: 1
-  AllowedTerrain: [Land]
-  Speed: Fast
-  Ability:
-    Type: ChangeTerrainAbility
-    CarryType: Land
-    LeaveType: Water
-Alligator:
-  Description: "A water fighter"
-  Recipe:
-    Black: 9
-  AllowedTerrain: [Water]
-  Speed:  Medium
-  Ability:
-    Type: FightAbility
-    Attack: High
-    Defense: Medium
-Serpent:
-  Description: "A waterbound enemy creature"
+Turtle:
   Recipe:
     Black: 4
-  AllowedTerrain: [Water]
-  Speed: Medium
+  AllowedTerrain: *water
+  Speed: Slow
   Ability:
     Type: FightAbility
-    Attack: Medium
-    Defense: Low 
+    Attack: Low
+    Defense: High
   IsEnemy: true
-Lion:
-  Description: "The king of the jungle"
+Tiger:
   Recipe:
     White: 9
-  AllowedTerrain: [Land, Rock]
+  AllowedTerrain: *land
   Speed: Medium
   Ability:
     Type: FightAbility
     Attack: High
-    Defense: Medium 
+    Defense: Medium
   IsEnemy: true
-Camel:
-  Description: "A land unit that can carry a lot of stuff"
-  Recipe:
-    White: 9
-  AllowedTerrain: [Land]
-  Speed: Slow
-  Ability:
-    Type: CarryResourceAbility
-    Capacity: 10
 Dragon:
-  Description: "A mythical beast that can go anywhere"
   Recipe:
     Blue: 16
-  AllowedTerrain: [Land, Rock, Water]
+  AllowedTerrain: *rock
   Speed: Fast
   Ability:
     Type: FightAbility
     Attack: High
-    Defense: High 
+    Defense: High
   IsEnemy: true

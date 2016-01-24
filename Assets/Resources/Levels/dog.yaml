@@ -4,15 +4,16 @@ Terrain: |
   wwww
   wwww
 Creatures:
-  3,0: Crane
+  3,0: Frog
 Resources:
   0,0:
-    Red: 1
+    Red: 3
+    White: 1
     Energy: 1
 Recipes:
   Available: []
   Field:
-    0,3: Beaver
+    0,3: Dog
 Goals:
-  3,3: Beaver
+  3,3: Dog
 ...
