@@ -1,23 +1,27 @@
 Terrain: |
   lrrrl
   rlllr
-  rlllr
+  rlwlr
   rlllr
   lrrrl
 Creatures:
-  1,1: Crab
-  1,3: Crab
-  3,1: Crab
-  3,3: Crab
+  1,1: Bird
+  1,3: Bird
+  3,1: Bird
+  3,3: Bird
+  3,2: Bird
+  1,2: Bird
+  2,2: Turtle
 Resources:
   0,0:
-    Blue: 4
-    Energy: 1
+    Blue: 16
+    Energy: 4
 Recipes:
   Available:
-  - Wolf
+  - Snake
   Field:
     0,4: Horse
+    4,0: Butterfly
 Goals:
   4,4: Horse
 ...

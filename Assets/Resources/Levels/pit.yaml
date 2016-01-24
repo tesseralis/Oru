@@ -1,14 +1,13 @@
 Terrain: |
-  wwwwww
-  wwwwww
-  rrllrr
-  rrllrr
-  wwwwww
-  wwwwww
+  llllll
+  llllll
+  rrwwrr
+  rrwwrr
+  llllll
+  llllll
 Creatures:
-  2,2: Crab
-  3,3: Crab
-  5,2: Crane
+  2,2: Turtle
+  5,2: Dog
 Resources:
   2,0:
     Blue: 4
@@ -18,8 +17,8 @@ Resources:
     Energy: 1
 Recipes:
   Available:
-  - Wolf
+  - Snake
   Field: {}
 Goals:
-  0,2: Crane
+  0,2: Dog
 ...

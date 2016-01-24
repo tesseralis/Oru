@@ -6,15 +6,18 @@ Terrain: |
   llllll
   llllll
 Creatures:
-  0,0: Turtle
-  2,2: Serpent
+  0,0: Butterfly
+  2,2: Turtle
 Resources:
   5,5:
-    Red: 4
+    Red: 1
+    Blue: 1
+    White: 1
+    Black: 1
 Recipes:
   Available: []
   Field:
-    5,0: Horse
+    5,0: Crane
 Goals:
-  0,5: Horse
+  0,5: Crane
 ...

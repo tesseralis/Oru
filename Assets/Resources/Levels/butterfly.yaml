@@ -7,12 +7,12 @@ Terrain: |
 Creatures: {}
 Resources:
   0,1:
-    Blue: 1
+    Red: 1
     Energy: 1
 Recipes:
   Available:
-  - Crane
+  - Butterfly
   Field: {}
 Goals:
-  4,1: Crane
+  4,1: Butterfly
 ...
