@@ -1,0 +1,138 @@
+Crane:
+  Description: "The basic origami crane"
+  Recipe:
+    Energy: 1
+    Blue: 1
+  AllowedTerrain: [Land, Water]
+  Speed: Medium
+Turtle:
+  Description: "A seabound unit that can carry resources"
+  Recipe:
+    Energy: 1
+    Green: 1
+  AllowedTerrain: [Land, Water]
+  Speed: Slow
+  Ability:
+    Type: CarryResourceAbility
+    Capacity: 5
+Horse:
+  Description: "A versatile land unit that can carry resources"
+  Recipe: 
+    Energy: 1
+    Red: 4
+  AllowedTerrain: [Land, Rock]
+  Speed: Fast
+  Ability:
+    Type: CarryResourceAbility
+    Capacity: 5
+Bear:
+  Description: "A medium sized unit that can uproot and move trees"
+  Recipe:
+    Energy: 1
+    Yellow: 4
+  AllowedTerrain: [Land]
+  Speed: Slow
+  Ability:
+    Type: ChangeTerrainAbility
+    CarryType: Tree
+  	LeaveType: Land
+Crab:
+  Description: "A basic enemy creature"
+  Recipe:
+    Energy: 1
+    Red: 1
+  AllowedTerrain: [Land]
+  Speed: Slow
+  Ability:
+    Type: FightAbility
+    Attack: Low
+    Defense: Low
+  IsEnemy: true
+Wolf:
+  Description: "Can fight enemies"
+  Recipe:
+    Energy: 1
+    Blue: 4
+  AllowedTerrain: [Land, Rock]
+  Speed: Fast
+  Ability:
+    Type: FightAbility
+    Attack: Medium
+    Defense: Medium
+Flower:
+  Description: "Can heal other creatures"
+  Recipe:
+    Yellow: 1
+  AllowedTerrain: [Land]
+  Speed: Idle
+  Ability:
+    Type: HealAbility
+    HealPower: 5
+Beaver:
+  Description: "Can move land tiles"
+  Recipe:
+    Energy: 1
+    Red: 1
+  AllowedTerrain: [Land]
+  Speed: Fast
+  Ability:
+    Type: ChangeTerrainAbility
+    CarryType: Land
+  	LeaveType: Water
+Alligator:
+  Description: "A water fighter"
+  Recipe:
+    Energy: 1
+    Green: 9
+  AllowedTerrain: [Water]
+  Speed:  Medium
+  Ability:
+    Type: FightAbility
+    Attack: High
+    Defense: Medium
+Serpent:
+  Description: "A waterbound enemy creature"
+  Recipe:
+    Energy: 1
+    Green: 4
+  AllowedTerrain: [Water]
+  Speed: Medium
+  Ability:
+    Type: FightAbility
+    Attack: Medium
+    Defense: Low 
+  IsEnemy: true
+Lion:
+  Description: "The king of the jungle"
+  Recipe:
+    Energy: 1
+    Yellow: 9
+  AllowedTerrain: [Land, Rock]
+  Speed: Medium
+  Ability:
+    Type: FightAbility
+    Attack: High
+    Defense: Medium 
+  IsEnemy: true
+Camel:
+  Description: "A land unit that can carry a lot of stuff"
+  Recipe:
+    Energy: 1
+    Yellow: 9
+  AllowedTerrain: [Land]
+  Speed: Slow
+  Ability:
+    Type: CarryResourceAbility
+    Capacity: 10
+Dragon:
+  Description: "A mythical beast that can go anywhere"
+  Recipe:
+    Energy: 1
+    Blue: 16
+  AllowedTerrain: [Land, Rock, Water]
+  Speed: Fast
+  Ability:
+    Type: FightAbility
+    Attack: High
+    Defense: High 
+  IsEnemy: true
