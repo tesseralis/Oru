@@ -19,6 +19,6 @@ public class RecipeInfo : MonoBehaviour
 			string.Join(", ", definition.AllowedTerrain.Select(t => t.ToString()).ToArray()),
 			ability);
 		var creatureDefinition = CreatureDefinition.ForType(creatureType);
-		GetComponentInChildren<ResourceList>().ShowResources(creatureDefinition.Recipe);
+		GetComponentInChildren<ResourceList>().ShowResources(creatureDefinition.RecipeWithEnergy());
 	}
 }
