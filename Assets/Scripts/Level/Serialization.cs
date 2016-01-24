@@ -9,6 +9,11 @@ using Util;
 
 public static class Serialization
 {
+	private static CreatureType DeserializeCreatureType(YamlNode node)
+	{
+		return new CreatureType(node.ToString());
+	}
+
 	// Deserialize coordinates in the form x,z
 	private static Coordinate DeserializeCoordinate(YamlNode node)
 	{
@@ -132,7 +137,7 @@ public static class Serialization
 
 		var creatures = GameObject.Find("Creatures").GetComponent<CreatureController>();
 		creatures.gameObject.DestroyAllChildrenImmediate();
-		var creatureMapping = DeserializeCoordinateMap(levelMapping.GetMapping("creatures"), x => x.ToEnum<CreatureType>());
+		var creatureMapping = DeserializeCoordinateMap(levelMapping.GetMapping("creatures"), x => DeserializeCreatureType(x));
 		foreach (var entry in creatureMapping)
 		{
 			creatures.AddCreature(entry.Key, entry.Value);
@@ -152,18 +157,18 @@ public static class Serialization
 
 		// TODO this won't work when loading a level from the level editor
 		// I think it has to do with setting dirty flags
-		var available = recipeMapping.GetSequence("available").Select(x => x.ToEnum<CreatureType>()).ToArray();
+		var available = recipeMapping.GetSequence("available").Select(x => DeserializeCreatureType(x)).ToArray();
 		recipes.availableRecipes = available;
 
-		var field = DeserializeCoordinateMap(recipeMapping.GetMapping("field"), x => x.ToEnum<CreatureType>());
+		var field = DeserializeCoordinateMap(recipeMapping.GetMapping("field"), x => DeserializeCreatureType(x));
 		foreach (var entry in field)
 		{
 			recipes.AddRecipe(entry.Key, entry.Value);
 		}
-
+	
 		var goals = GameObject.Find("Goals").GetComponent<GoalController>();
 		goals.gameObject.DestroyAllChildrenImmediate();
-		var goalMapping = DeserializeCoordinateMap(levelMapping.GetMapping("goals"), x => x.ToEnum<CreatureType>());
+		var goalMapping = DeserializeCoordinateMap(levelMapping.GetMapping("goals"), x => DeserializeCreatureType(x));
 		foreach (var goal in goalMapping)
 		{
 			goals.AddGoal(goal.Key, goal.Value);
@@ -217,5 +222,68 @@ public static class Serialization
 		var yaml = new YamlStream();
 		yaml.Load(input);
 		return yaml.Documents[0].RootNode.AsSequence().Select(x => x.ToString()).ToList();
+	}
+
+	public static IAbilityDefinition DeserializeAbility(YamlNode node)
+	{
+		var ability = node.AsMapping();
+		switch(ability.GetString("Type"))
+		{
+		case "CarryResourceAbility":
+			return new CarryResourceAbility.Definition
+			{
+				Capacity = ability.GetInt("Capacity")
+			};
+		case "ChangeTerrainAbility":
+			return new ChangeTerrainAbility.Definition
+			{
+				CarryType = ability.GetChild("CarryType").ToEnum<TerrainType>(),
+				LeaveType = ability.GetChild("LeaveType").ToEnum<TerrainType>()
+			};
+		case "FightAbility":
+			return new FightAbility.Definition
+			{
+				Attack = ability.GetChild("Attack").ToEnum<BattlePower>(),
+				Defense = ability.GetChild("Defense").ToEnum<BattlePower>()
+			};
+		case "HealAbility":
+			return new HealAbility.Definition
+			{
+				HealPower = ability.GetInt("HealPower")
+			};
+		default: throw new ArgumentException("Ability not found: " + ability.GetString("Type"));
+		}
+	}
+
+	// Creature definitions
+	public static CreatureDefinition DeserializeCreature(YamlNode node)
+	{
+		var definition = node.AsMapping();
+		var description = definition.GetString("Description");
+		var recipe = DeserializeResourceCollection(definition.GetMapping("Recipe")).ToMultiset();
+		var allowedTerrain = definition.GetSequence("AllowedTerrain").Select(x => x.ToEnum<TerrainType>()).ToArray();
+		var speed = definition.GetChild("Speed").ToEnum<CreatureSpeed>();
+		var ability = definition.HasKey("Ability") ? DeserializeAbility(definition.GetChild("Ability")) : null;
+		var isEnemy = definition.HasKey("IsEnemy") ? definition.GetBool("IsEnemy") : false;
+		return new CreatureDefinition()
+		{
+			Description = description,
+			Recipe = recipe,
+			AllowedTerrain = allowedTerrain,
+			Speed = speed,
+			Ability = ability,
+			IsEnemy = isEnemy
+		};
+	}
+
+	public static IDictionary<CreatureType, CreatureDefinition> DeserializeCreatureDefinitions()
+	{
+		var creaturesFile = UnityEngine.Resources.Load<TextAsset>("creatures");
+		var input = new StringReader(creaturesFile.text);
+		var yaml = new YamlStream();
+		yaml.Load(input);
+		var creatureMapping = yaml.Documents[0].RootNode.AsMapping();
+		// TODO replace the enum definition
+		return creatureMapping.ToDictionary(x => DeserializeCreatureType(x.Key), x => DeserializeCreature(x.Value));
 	}
 }

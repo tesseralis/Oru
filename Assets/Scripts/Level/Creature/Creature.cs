@@ -11,6 +11,7 @@ using Util;
 public class Creature : MonoBehaviour
 {
 	// The type of creature this is.
+	// TODO figure out a way that I don't have to define this in every prefab I make for level editing
 	public CreatureType creatureType;
 	public int health;
 
@@ -28,7 +29,7 @@ public class Creature : MonoBehaviour
 	// Convenience method to get the creature's definition
 	public CreatureDefinition Definition
 	{
-		get { return CreatureDefinitions.ForType(creatureType); }
+		get { return CreatureDefinition.ForType(creatureType); }
 	}
 
 	public ResourceCollection ToResources()
@@ -57,7 +58,7 @@ public class Creature : MonoBehaviour
 		// Store our initial position
 		Goal = NextPosition = Position = gameObject.Coordinate();
 		prevStep = LevelManager.Creatures.Steps;
-		nextStep = prevStep + 4 - (int)Definition.Speed(this);
+		nextStep = prevStep + 4 - (int)Definition.Speed;
 	}
 
 	public void Update()
@@ -78,7 +79,7 @@ public class Creature : MonoBehaviour
 		if (LevelManager.Creatures.Steps >= nextStep)
 		{
 			prevStep = nextStep;
-			nextStep += 4 - (int)Definition.Speed(this);
+			nextStep += 4 - (int)Definition.Speed;
 
 			// If the creature has a passive ability, do it
 			if (HasAbility() && health > 0)
@@ -87,7 +88,7 @@ public class Creature : MonoBehaviour
 			}
 
 			// Move non-idle creatures
-			if (Definition.Speed(this) != CreatureSpeed.Idle)
+			if (Definition.Speed != CreatureSpeed.Idle)
 			{
 				if (!Definition.IsEnemy)
 				{

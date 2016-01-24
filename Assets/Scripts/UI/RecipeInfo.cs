@@ -13,12 +13,12 @@ public class RecipeInfo : MonoBehaviour
 	{
 		gameObject.SetActive(true);
 		nameDisplay.text = creatureType.ToString();
-		var definition = CreatureDefinitions.ForType(creatureType);
+		var definition = CreatureDefinition.ForType(creatureType);
 		string ability = definition.Ability != null ? definition.Ability.Description() : "None";
 		descriptionDisplay.text = string.Format("Allowed Terrain: {0}\nAbility: {1}",
 			string.Join(", ", definition.AllowedTerrain.Select(t => t.ToString()).ToArray()),
 			ability);
-		var creatureDefinition = CreatureDefinitions.ForType(creatureType);
+		var creatureDefinition = CreatureDefinition.ForType(creatureType);
 		GetComponentInChildren<ResourceList>().ShowResources(creatureDefinition.Recipe);
 	}
 }

@@ -58,7 +58,7 @@ public class CreatureController : MonoBehaviour
 	// Returns true if we can add a creature at the given coordinate
 	public bool CanCreateCreature(CreatureType creature, Coordinate coordinate)
 	{
-		var creatureDefinition = CreatureDefinitions.ForType(creature);
+		var creatureDefinition = CreatureDefinition.ForType(creature);
 		var resources = LevelManager.Resources;
 		var recipe = creatureDefinition.Recipe;
 		// Figure out how many blocks we have available
@@ -73,7 +73,7 @@ public class CreatureController : MonoBehaviour
 	// Add a creature at a specified location if possible
 	public Creature CreateCreature(CreatureType creature, Coordinate location)
 	{
-		var definition = CreatureDefinitions.ForType(creature);
+		var definition = CreatureDefinition.ForType(creature);
 		if (!CanCreateCreature(creature, location))
 		{
 			throw new ArgumentException(string.Format("Cannot create {0} at {1}.",
