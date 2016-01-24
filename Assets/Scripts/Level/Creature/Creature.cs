@@ -189,10 +189,10 @@ public class Creature : MonoBehaviour
 
 	private float AngleFor(Coordinate direction)
 	{
-		if (direction == Coordinate.up) { return -90; }
-		if (direction == Coordinate.right) { return 0; }
-		if (direction == Coordinate.down) { return 90; }
-		if (direction == Coordinate.left) { return 180; }
+		if (direction == Coordinate.up) { return 0; }
+		if (direction == Coordinate.right) { return 90; }
+		if (direction == Coordinate.down) { return 180; }
+		if (direction == Coordinate.left) { return 270; }
 		throw new ArgumentException("Given coordinate" + direction + " is not a direction", "direction");
 	}
 
