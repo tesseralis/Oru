@@ -76,7 +76,7 @@ public class ChangeTerrainAbility : AbstractCarryAbility, IAbility
 		}
 		else
 		{
-			return "Pick up " + carryType;
+			return "Dig up " + carryType;
 		}
 	}
 }

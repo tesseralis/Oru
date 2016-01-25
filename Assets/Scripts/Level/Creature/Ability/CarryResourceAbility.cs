@@ -38,11 +38,11 @@ public class CarryResourceAbility : AbstractCarryAbility, IAbility
 	{
 		if (Carrying.IsEmpty())
 		{
-			return "Pick up " + capacity;
+			return "Pick up " + capacity + " resources";
 		}
 		else
 		{
-			return "Put down " + capacity;
+			return "Drop off resources";
 		}
 	}
 
