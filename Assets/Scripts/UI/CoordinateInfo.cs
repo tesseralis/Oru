@@ -44,6 +44,7 @@ public class CoordinateInfo : MonoBehaviour
 		if (LevelManager.Recipes[coordinate] != null)
 		{
 			panel.SetActive(true);
+			content.gameObject.SetActive(true);
 			content.text = "Blueprint: " + LevelManager.Recipes[coordinate];
 			resourceList.Hide();
 		}
@@ -51,6 +52,7 @@ public class CoordinateInfo : MonoBehaviour
 		if (LevelManager.Goals.goal.gameObject.Coordinate() == coordinate)
 		{
 			panel.SetActive(true);
+			content.gameObject.SetActive(true);
 			content.text = string.Format("Goal: {0} at this location.", LevelManager.Goals.goal.winningCreatureType);
 			resourceList.Hide();
 		}
