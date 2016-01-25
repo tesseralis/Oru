@@ -32,6 +32,11 @@ public class UIManager : MonoBehaviour
 		GameManager.game.LoadLevel(levels[levels.IndexOf(LevelManager.levelName) + 1]);
 	}
 
+	public void TogglePause()
+	{
+		UXManager.Time.TogglePause();
+	}
+
 }
 
 
