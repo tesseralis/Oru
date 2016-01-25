@@ -101,7 +101,7 @@ Animator:
   m_GameObject: {fileID: 175558}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 46ffbd0b3f4b14f37b7d501174c3cd4f, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7ee4e51bf2ce94d72aa5bc81b01305b4, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -146,6 +146,10 @@ Prefab:
       propertyPath: creatureType.name
       value: Crane
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 7ee4e51bf2ce94d72aa5bc81b01305b4, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 196838}
