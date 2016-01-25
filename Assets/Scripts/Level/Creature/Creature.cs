@@ -184,6 +184,10 @@ public class Creature : MonoBehaviour
 		{
 			throw new InvalidOperationException("This creature does not have an ability");
 		}
+		if (!Ability.CanUse(coordinate))
+		{
+			throw new InvalidOperationException("Cannot use creature ability on " + coordinate);
+		}
 		Ability.Use(coordinate);
 	}
 

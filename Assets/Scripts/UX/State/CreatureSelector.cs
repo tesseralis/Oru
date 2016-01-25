@@ -112,10 +112,12 @@ public class CreatureSelector : MonoBehaviour
 
 	private void UseCreatureAbility(Coordinate coordinate)
 	{
-		// TODO verify if we can use the ability here
-		SelectedCreature.UseAbility(coordinate);
-		actionMarkers.StopAbility();
-		if (AbilityUsed != null) { AbilityUsed(); }
+		if (SelectedCreature.Ability.CanUse(coordinate))
+		{
+			SelectedCreature.UseAbility(coordinate);
+			actionMarkers.StopAbility();
+			if (AbilityUsed != null) { AbilityUsed(); }
+		}
 	}
 		
 	private void SetCurrentCreatureGoal(Coordinate coordinate)
