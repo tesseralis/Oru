@@ -4,7 +4,7 @@ Rabbit:
     White: 1
   AllowedTerrain: &land [Land]
   Speed: Fast
-Rat:
+Mouse:
   Recipe:
     Black: 1
   AllowedTerrain: &rock [Land, Rock]

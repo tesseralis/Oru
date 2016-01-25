@@ -17,8 +17,8 @@ Recipes:
   Available:
   - Crane
   Field:
-    2,0: Rat
+    2,0: Mouse
     2,4: Snake
 Goals:
-  4,2: Rat
+  4,2: Mouse
 ...
