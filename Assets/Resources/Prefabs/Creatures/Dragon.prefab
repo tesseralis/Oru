@@ -16,17 +16,17 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &132514
+--- !u!1 &115572
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 446834}
-  - 33: {fileID: 3354372}
-  - 23: {fileID: 2329430}
-  - 95: {fileID: 9540534}
+  - 4: {fileID: 417514}
+  - 33: {fileID: 3381786}
+  - 23: {fileID: 2336724}
+  - 95: {fileID: 9562862}
   m_Layer: 0
   m_Name: dragon
   m_TagString: Untagged
@@ -34,6 +34,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &417514
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 115572}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 423372}
+  m_RootOrder: 0
 --- !u!4 &423372
 Transform:
   m_ObjectHideFlags: 1
@@ -44,27 +56,15 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 446834}
+  - {fileID: 417514}
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!4 &446834
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 132514}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 423372}
-  m_RootOrder: 0
---- !u!23 &2329430
+--- !u!23 &2336724
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 132514}
+  m_GameObject: {fileID: 115572}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -85,22 +85,22 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!33 &3354372
+--- !u!33 &3381786
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 132514}
-  m_Mesh: {fileID: 4300000, guid: ff4dda48457594230877b5f9e3f62978, type: 3}
---- !u!95 &9540534
+  m_GameObject: {fileID: 115572}
+  m_Mesh: {fileID: 4300000, guid: 36f6b9c5e8ff743d187ce9717cd96a71, type: 3}
+--- !u!95 &9562862
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 132514}
+  m_GameObject: {fileID: 115572}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: ff4dda48457594230877b5f9e3f62978, type: 3}
+  m_Avatar: {fileID: 9000000, guid: 36f6b9c5e8ff743d187ce9717cd96a71, type: 3}
   m_Controller: {fileID: 9100000, guid: 7ee4e51bf2ce94d72aa5bc81b01305b4, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
@@ -122,7 +122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   creatureType:
     name: Dragon
-  health: 50
+  health: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
