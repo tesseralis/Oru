@@ -124,6 +124,10 @@ public class CreatureSelector : MonoBehaviour
 		{
 			SelectedCreature.SetGoal(coordinate);
 			if (GoalSet != null) { GoalSet(SelectedCreature, coordinate); }
+			if (SelectedCreature.HasAbility())
+			{
+				SelectedCreature.Ability.Cancel();
+			}
 		}
 	}
 

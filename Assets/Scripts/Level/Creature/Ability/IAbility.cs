@@ -23,6 +23,12 @@ public interface IAbility
 	void Passive();
 
 	/// <summary>
+	/// Cancel using this ability.
+	/// </summary>
+	/// <returns><c>true</c> if this instance cancel ; otherwise, <c>false</c>.</returns>
+	void Cancel();
+
+	/// <summary>
 	/// Description of what happens when you use the ability.
 	/// </summary>
 	/// <returns>The ability description.</returns>

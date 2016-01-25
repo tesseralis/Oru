@@ -40,6 +40,11 @@ public abstract class AbstractCarryAbility : MonoBehaviour, IAbility
 		}
 	}
 
+	public void Cancel()
+	{
+		isActing = false;
+	}
+
 	protected abstract void DoPickup(Coordinate target);
 
 	public abstract string Description();

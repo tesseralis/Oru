@@ -60,4 +60,9 @@ public class HealAbility : MonoBehaviour, IAbility
 			}
 		}
 	}
+
+	public void Cancel()
+	{
+		// Healing does not need any cancellation
+	}
 }

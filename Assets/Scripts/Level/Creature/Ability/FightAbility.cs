@@ -49,7 +49,6 @@ public class FightAbility : MonoBehaviour, IAbility
 	public bool CanUse(Coordinate coordinate)
 	{
 		var otherCreature = LevelManager.Creatures[coordinate];
-		// TODO make this stick to the enemy creature
 		return (otherCreature != null) && otherCreature.Definition.IsEnemy != creature.Definition.IsEnemy;
 	}
 
@@ -85,10 +84,14 @@ public class FightAbility : MonoBehaviour, IAbility
 			}
 			if (target != null)
 			{
-				// TODO you should be able to do this without using the ability
 				creature.SetGoal(target.Position);
 			}
 		}
+	}
+
+	public void Cancel()
+	{
+		target = null;
 	}
 
 	public string Description()
