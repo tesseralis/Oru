@@ -35,14 +35,10 @@ public class InputController : MonoBehaviour
 		}
 		if (Input.GetButtonDown("Select"))
 		{
-			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			RaycastHit hit;
-			if (Physics.Raycast(ray, out hit) && !EventSystem.current.IsPointerOverGameObject())
+			var currentCoordinate = CurrentCoordinate();
+			if (currentCoordinate.HasValue)
 			{
-				if (hit.transform.GetComponent<TerrainTile>() && TerrainClicked != null)
-				{
-					TerrainClicked(hit.transform.gameObject.Coordinate());
-				}
+				TerrainClicked(currentCoordinate.Value);
 			}
 		}
 	}
@@ -50,12 +46,9 @@ public class InputController : MonoBehaviour
 	// Return the current coordinate we are selecting, if any
 	public Coordinate? CurrentCoordinate()
 	{
-		// TODO refactor with the other method
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		RaycastHit hit;
-		// TODO Make it so that this is disabled when another UI element is on top
-		// without having a weird wobble effect with the coordinate grid
-		if (Physics.Raycast(ray, out hit))
+		if (Physics.Raycast(ray, out hit) && !EventSystem.current.IsPointerOverGameObject())
 		{
 			if (hit.transform.GetComponent<TerrainTile>())
 			{

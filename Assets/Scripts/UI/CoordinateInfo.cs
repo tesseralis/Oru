@@ -56,8 +56,7 @@ public class CoordinateInfo : MonoBehaviour
 		}
 
 		// Move ourselves to the new location
-		gameObject.SetPosition(coordinate);
-
+		gameObject.transform.position = Input.mousePosition;
 	}
 
 	// Hide the panel
