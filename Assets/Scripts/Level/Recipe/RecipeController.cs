@@ -103,7 +103,7 @@ public class RecipeController : MonoBehaviour
 	// Update the list of available instructions if a creature has walked on it
 	private void UpdateAvailableRecipes(IList<Creature> creatureList)
 	{
-		var creaturePositions = creatureList.Select(x => x.Position).ToList();
+		var creaturePositions = creatureList.Where(x => !x.Definition.IsEnemy).Select(x => x.Position).ToList();
 		var removedEntries = new List<Coordinate>();
 		foreach (var entry in recipeLocations)
 		{
