@@ -63,4 +63,9 @@ public class InputController : MonoBehaviour
 	{
 		return new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 	}
+
+	public float ZoomAmount()
+	{
+		return Input.GetAxis("Mouse ScrollWheel");
+	}
 }

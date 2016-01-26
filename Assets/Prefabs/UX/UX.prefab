@@ -769,6 +769,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   translateFactor: 0.25
+  zoomFactor: 1
+  minZoom: 1
+  maxZoom: 10
 --- !u!114 &11438796
 MonoBehaviour:
   m_ObjectHideFlags: 1
