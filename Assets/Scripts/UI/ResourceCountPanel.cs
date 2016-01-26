@@ -23,7 +23,7 @@ public class ResourceCountPanel : MonoBehaviour {
 	{
 		switch(resource)
 		{
-		case ResourceType.Energy: return Color.white;
+		case ResourceType.Energy: return Color.grey;
 		case ResourceType.Black: return Color.black;
 		case ResourceType.White: return Color.white;
 		case ResourceType.Red: return Color.red;
