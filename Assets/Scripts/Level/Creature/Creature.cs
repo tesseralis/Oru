@@ -82,7 +82,7 @@ public class Creature : MonoBehaviour
 			nextStep += 4 - (int)Definition.Speed;
 
 			// If the creature has a passive ability, do it
-			if (HasAbility() && health > 0)
+			if (HasAbility() && IsAlive())
 			{
 				Ability.Passive();
 			}
@@ -135,7 +135,7 @@ public class Creature : MonoBehaviour
 	private void FriendlyStep()
 	{
 		Position = NextPosition;
-		if (!Position.Equals(Goal) && health > 0)
+		if (!Position.Equals(Goal) && IsAlive())
 		{
 			NextPosition = NextCoordinate ();
 
@@ -149,7 +149,7 @@ public class Creature : MonoBehaviour
 		}
 
 		// If the creature loses all health, set it to an idle state
-		if (health == 0)
+		if (!IsAlive())
 		{
 			Goal = Position;
 		}
@@ -169,7 +169,7 @@ public class Creature : MonoBehaviour
 	public bool CanReach(Coordinate goal)
 	{
 		// Creatures with no health can't reach anything
-		if (health <= 0) { return goal == Position; }
+		if (!IsAlive()) { return goal == Position; }
 		IDictionary<Coordinate, Coordinate> parents;
 		DoBFS(Position, goal, IsValidCoordinate, out parents);
 		return parents.Keys.Contains(goal);
@@ -182,7 +182,7 @@ public class Creature : MonoBehaviour
 
 	public bool CanUseAbility(Coordinate coordinate)
 	{
-		return HasAbility() && Ability.CanUse(coordinate) && health > 0;
+		return HasAbility() && Ability.CanUse(coordinate) && IsAlive();
 	}
 
 	public void UseAbility(Coordinate coordinate)
@@ -192,6 +192,11 @@ public class Creature : MonoBehaviour
 			throw new InvalidOperationException("This creature cannot use this ability at this time");
 		}
 		Ability.Use(coordinate);
+	}
+
+	public bool IsAlive()
+	{
+		return health > 0;
 	}
 
 	private float AngleFor(Coordinate direction)
