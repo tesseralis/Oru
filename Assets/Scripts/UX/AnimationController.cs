@@ -11,10 +11,12 @@ public class AnimationController : MonoBehaviour
 
 	private void AnimateError(Creature creature)
 	{
-		Debug.Log(creature + " commited an error.");
-		if (creature.GetComponentInChildren<Animator>())
+		if (!creature.Definition.IsEnemy)
 		{
-			creature.GetComponentInChildren<Animator>().SetTrigger("Error");
+			if (creature.GetComponentInChildren<Animator>())
+			{
+				creature.GetComponentInChildren<Animator>().SetTrigger("Error");
+			}
 		}
 	}
 
