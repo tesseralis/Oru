@@ -6,7 +6,7 @@ using System;
 /// </summary>
 public static class ResourcesPathfinder
 {
-	private const int lowThreshold = 5;
+	private const int lowThreshold = CreatureController.lowHealth;
 	private const string prefabPath = "Prefabs";
 
 	private static GameObject LoadPrefab(params string[] path)

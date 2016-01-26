@@ -13,6 +13,7 @@ public class ParticleController : MonoBehaviour
 		LevelManager.Creatures.CreatureCreated += (x, pos) => CreateParticle(particleOptions.createCreature, pos);
 		LevelManager.Creatures.CreatureDestroyed += (c, pos) => CreateParticle(particleOptions.destroyCreature, pos);
 		UXManager.State.Selector.GoalSet += (creature, pos) => CreateParticle(particleOptions.setCreatureGoal, pos);
+		LevelManager.Creatures.CreatureStepped += LowHealth;
 	}
 
 	public void CreateParticle(GameObject particles, Coordinate coordinate)
@@ -20,6 +21,15 @@ public class ParticleController : MonoBehaviour
 		if (particles)
 		{
 			gameObject.AddChild(particles, coordinate);
+		}
+	}
+
+	// Apply a "smoky" particle effect when the creature's health is low
+	private void LowHealth(Creature creature)
+	{
+		if (creature.health <= CreatureController.lowHealth)
+		{
+			creature.gameObject.AddChild(particleOptions.lowHealth);
 		}
 	}
 }
@@ -30,6 +40,7 @@ public class ParticleEffectOptions
 	public GameObject createCreature;
 	public GameObject destroyCreature;
 	public GameObject setCreatureGoal;
+	public GameObject lowHealth;
 	public GameObject attack;
 	public GameObject heal;
 }

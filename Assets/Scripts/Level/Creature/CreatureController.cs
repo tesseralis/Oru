@@ -13,6 +13,7 @@ public class CreatureController : MonoBehaviour
 	// Maximum health a creature can have
 	// TODO Move this to a custom editor window
 	public const int maxHealth = 50;
+	public const int lowHealth = 10;
 
 	// Called when a creature is destroyed
 	public event Action<Creature, Coordinate> CreatureDestroyed;
