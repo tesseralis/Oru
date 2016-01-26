@@ -8,6 +8,7 @@ public class CreatureInfo : MonoBehaviour
 {
 
 	public Text nameDisplay;
+	public Healthbar healthbar;
 	public Text descriptionDisplay;
 	public ResourceList resourceList;
 	public DelegateButton useAbilityButton;
@@ -42,15 +43,22 @@ public class CreatureInfo : MonoBehaviour
 	private void DisplayCreatureInfo(Creature creature)
 	{
 		gameObject.SetActive(true);
+
+		// Display the creature's name
 		nameDisplay.text = creature.creatureType.ToString();
+
+		// Display creature health
+		healthbar.SetHealth(creature.health);
+
+		// Display creature data
 		var creatureDefinition = CreatureDefinition.ForType(creature.creatureType);
 		useAbilityButton.gameObject.SetActive(!creature.Definition.IsEnemy && creature.HasAbility());
 		string ability = creature.HasAbility() ? creature.Definition.Ability.Description() : "None";
-		descriptionDisplay.text = string.Format("Allowed Terrain: {0}\nAbility: {1}{2}",
+		descriptionDisplay.text = string.Format("Allowed Terrain: {0}\nAbility: {1}",
 			string.Join(", ", creatureDefinition.AllowedTerrain.Select(t => t.ToString()).ToArray()),
-			ability,
-			!creature.Definition.NoEnergy ? "\n\nHealth: " + creature.health : "");
+			ability);
 
+		// Display the creature's resources
 		resourceList.ShowResources(creatureDefinition.RecipeWithEnergy());
 
 		DisplayAbilityText(creature);
