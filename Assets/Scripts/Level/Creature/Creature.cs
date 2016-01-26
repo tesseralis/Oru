@@ -165,9 +165,11 @@ public class Creature : MonoBehaviour
 		Goal = coordinate;
 	}
 
-	// Returns true if this creature can reach the specified goal coordinate
+	// Returns true if this creature can reach the specified goal coordinate at its current state
 	public bool CanReach(Coordinate goal)
 	{
+		// Creatures with no health can't reach anything
+		if (health <= 0) { return goal == Position; }
 		IDictionary<Coordinate, Coordinate> parents;
 		DoBFS(Position, goal, IsValidCoordinate, out parents);
 		return parents.Keys.Contains(goal);
