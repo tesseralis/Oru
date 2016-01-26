@@ -29,17 +29,35 @@ namespace Util
 		/// Add a child object to the script, using the given prefab.
 		/// </summary>
 		/// <returns>The child GameObject.</returns>
-		public static GameObject AddChild(this GameObject gameObject, GameObject prefab, Coordinate coordinate)
+		public static GameObject AddChild(this GameObject gameObject, GameObject prefab)
 		{
-			var position = new Vector3(coordinate.x * cellSize, 0, coordinate.z * cellSize);
 			#if UNITY_EDITOR
 			GameObject newObject = (GameObject)PrefabUtility.InstantiatePrefab(prefab);
-			newObject.transform.position = position;
 			#else
-			GameObject newObject = (GameObject)GameObject.Instantiate(prefab, position, prefab.transform.rotation);
+			GameObject newObject = (GameObject)GameObject.Instantiate(prefab);
 			#endif
-			newObject.transform.SetParent(gameObject.transform);
+			newObject.transform.SetParent(gameObject.transform, false);
 			return newObject;
+		}
+
+		/// <summary>
+		/// Add a child object to the script, using the given prefab.
+		/// </summary>
+		/// <returns>The child GameObject.</returns>
+		public static GameObject AddChild(this GameObject gameObject, GameObject prefab, Vector3 position)
+		{
+			var child = gameObject.AddChild(prefab);
+			child.transform.position = position;
+			return child;
+		}
+
+		/// <summary>
+		/// Add a child object to the script, using the given prefab.
+		/// </summary>
+		/// <returns>The child GameObject.</returns>
+		public static GameObject AddChild(this GameObject gameObject, GameObject prefab, Coordinate coordinate)
+		{
+			return gameObject.AddChild(prefab, new Vector3(coordinate.x * cellSize, 0, coordinate.z * cellSize));
 		}
 
 		/// <summary>

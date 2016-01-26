@@ -10,6 +10,8 @@ public class CarryResourceAbility : AbstractCarryAbility, IAbility
 
 	public ResourceCollection carrying;
 
+	private ResourcePile resourcePile;
+
 	public ResourceCollection Carrying
 	{
 		get { return carrying; }
@@ -30,6 +32,13 @@ public class CarryResourceAbility : AbstractCarryAbility, IAbility
 			// TODO figure out if there is a way to structure this without leaving these variables public
 			ability.capacity = Capacity;
 			ability.carrying = ResourceCollection.Empty();
+
+			// Add a visual indicator for what the creature is carrying
+			// TODO perhaps this should be in some UX class?
+			ability.resourcePile = creature.gameObject.AddChildWithComponent<ResourcePile>(
+				ResourcesPathfinder.ResourcePilePrefab(), new Coordinate(0, 0));
+			var translate = creature.GetComponentInChildren<MeshRenderer>().bounds.size.y;
+			ability.resourcePile.transform.Translate(Vector3.up * translate);
 			return ability;
 		}
 	}
@@ -67,6 +76,8 @@ public class CarryResourceAbility : AbstractCarryAbility, IAbility
 				Carrying = ResourceCollection.Empty();
 			}
 		}
+		// Update the visual representation
+		resourcePile.ResourceCollection = Carrying;
 	}
 
 	public override bool CanUse(Coordinate coordinate)

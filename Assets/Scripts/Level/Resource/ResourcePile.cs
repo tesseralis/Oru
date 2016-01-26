@@ -53,7 +53,7 @@ public class ResourcePile : MonoBehaviour
 				numResourceTypes++;
 				size ++;
 				var prefab = ResourcesPathfinder.PaperResourcePrefab(resource);
-				var obj = gameObject.AddChild(prefab, gameObject.Coordinate());
+				var obj = gameObject.AddChild(prefab);
 
 				// Set the height correctly
 				obj.transform.Translate(Vector3.up * numResourceTypes * heightGap);
@@ -67,7 +67,7 @@ public class ResourcePile : MonoBehaviour
 			numResourceTypes++;
 			var maxEnergy = ResourceCollection.EnergyBlocks.Max();
 			var prefab = ResourcesPathfinder.EnergyResourcePrefab(maxEnergy);
-			var obj = gameObject.AddChild(prefab, gameObject.Coordinate());
+			var obj = gameObject.AddChild(prefab);
 			obj.transform.Translate(Vector3.up * numResourceTypes * heightGap);
 		}
 	}
