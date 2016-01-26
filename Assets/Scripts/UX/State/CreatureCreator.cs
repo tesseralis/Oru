@@ -16,6 +16,8 @@ public class CreatureCreator : MonoBehaviour {
 	public event Action<CreatureType> CreationStarted;
 	// Handler that is called when creation has stopped
 	public event Action CreationStopped;
+	// Handler that is called when the user commits an error
+	public event Action CreationError;
 
 	private CreatureType currentCreatureType;
 	private bool isCreating = false;
@@ -111,6 +113,10 @@ public class CreatureCreator : MonoBehaviour {
 			StopCreation();
 		
 			if (Created != null) { Created(creature); }
+		}
+		else
+		{
+			if (CreationError != null) { CreationError(); }
 		}
 
 	}

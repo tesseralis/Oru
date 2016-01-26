@@ -18,6 +18,7 @@ public class AudioController : MonoBehaviour {
 		UXManager.State.Selector.GoalSet += (x, y) => PlaySound(soundOptions.setCreatureGoal);
 		UXManager.State.Selector.AbilityUsed += () => PlaySound(soundOptions.useAbility);
 		UXManager.State.Selector.CreatureError += x => PlaySound(soundOptions.error);
+		UXManager.State.Creator.CreationError += () => PlaySound(soundOptions.error);
 	}
 
 	// Play the given sound
