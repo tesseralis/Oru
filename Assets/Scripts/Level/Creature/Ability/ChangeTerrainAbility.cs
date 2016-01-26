@@ -6,8 +6,10 @@ using Util;
 
 public class ChangeTerrainAbility : AbstractCarryAbility, IAbility
 {
-	public TerrainType carryType = TerrainType.Rock;
-	public TerrainType leaveType = TerrainType.Land;
+	public TerrainType carryType;
+	public TerrainType leaveType;
+
+	private GameObject carriedObject;
 
 	public class Definition : IAbilityDefinition
 	{
@@ -53,6 +55,21 @@ public class ChangeTerrainAbility : AbstractCarryAbility, IAbility
 		{
 			isCarrying = !isCarrying;
 			terrain[target] = finalType;
+
+			// Visually represent the carried tile
+			if (isCarrying)
+			{
+				carriedObject = creature.gameObject.AddChild(
+					ResourcesPathfinder.TerrainPrefab(carryType));
+				var translate = creature.GetComponentInChildren<MeshRenderer>().bounds.size.y;
+				carriedObject.transform.Translate(Vector3.up * translate);
+				carriedObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+			}
+			else
+			{
+				Destroy(carriedObject);
+				carriedObject = null;
+			}
 		}
 	}
 
