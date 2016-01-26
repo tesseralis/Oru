@@ -11,8 +11,8 @@ public class CreatureInfo : MonoBehaviour
 	public Healthbar healthbar;
 	public Text descriptionDisplay;
 	public ResourceList resourceList;
-	public DelegateButton useAbilityButton;
-	public DelegateButton destroyCreatureButton;
+	public Button useAbilityButton;
+	public Button destroyCreatureButton;
 
 	public void Start()
 	{
@@ -26,12 +26,6 @@ public class CreatureInfo : MonoBehaviour
 				DisplayCreatureInfo(UXManager.State.Selector.SelectedCreature);
 			}
 		};
-
-		// Add handlers for using ability
-		useAbilityButton.Click += UXManager.State.Selector.actionMarkers.ToggleAbility;
-
-		// Add handlers for destroying the creature
-		destroyCreatureButton.Click += UXManager.State.Selector.DestroySelectedCreature;
 
 		UXManager.State.Selector.AbilityUsed += () =>
 			DisplayAbilityText(UXManager.State.Selector.SelectedCreature);
@@ -78,6 +72,16 @@ public class CreatureInfo : MonoBehaviour
 	private void HideCreatureInfo()
 	{
 		gameObject.SetActive(false);
+	}
+
+	public void UseAbility()
+	{
+		UXManager.State.Selector.actionMarkers.ToggleAbility();
+	}
+
+	public void DestroyCreature()
+	{
+		UXManager.State.Selector.DestroySelectedCreature();
 	}
 
 }
