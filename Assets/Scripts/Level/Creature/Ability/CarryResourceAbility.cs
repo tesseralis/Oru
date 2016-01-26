@@ -36,7 +36,7 @@ public class CarryResourceAbility : AbstractCarryAbility, IAbility
 			// Add a visual indicator for what the creature is carrying
 			// TODO perhaps this should be in some UX class?
 			ability.resourcePile = creature.gameObject.AddChildWithComponent<ResourcePile>(
-				ResourcesPathfinder.ResourcePilePrefab(), new Coordinate(0, 0));
+				ResourcesPathfinder.ResourcePilePrefab());
 			var translate = creature.GetComponentInChildren<MeshRenderer>().bounds.size.y;
 			ability.resourcePile.transform.Translate(Vector3.up * translate);
 			return ability;

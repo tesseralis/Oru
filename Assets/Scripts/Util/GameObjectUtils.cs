@@ -65,6 +65,22 @@ namespace Util
 		/// </summary>
 		/// <returns>The component belonging to the child that was added.</returns>
 		/// <typeparam name="T">The type of component to add.</typeparam>
+		public static T AddChildWithComponent<T>(this GameObject gameObject, GameObject prefab) where T : Component
+		{
+			GameObject newObject = gameObject.AddChild(prefab);
+
+			if (newObject.GetComponent<T>() == null)
+			{
+				newObject.AddComponent<T>();
+			}
+			return newObject.GetComponent<T>();
+		}
+
+		/// <summary>
+		/// Add a child object to the script with the given component, using the given prefab.
+		/// </summary>
+		/// <returns>The component belonging to the child that was added.</returns>
+		/// <typeparam name="T">The type of component to add.</typeparam>
 		public static T AddChildWithComponent<T>(this GameObject gameObject, GameObject prefab, Coordinate coordinate) where T : Component
 		{
 			GameObject newObject = gameObject.AddChild(prefab, coordinate);
