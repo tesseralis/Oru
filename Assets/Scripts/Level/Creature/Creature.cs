@@ -180,15 +180,16 @@ public class Creature : MonoBehaviour
 		return GetComponent<IAbility>() != null;
 	}
 
+	public bool CanUseAbility(Coordinate coordinate)
+	{
+		return HasAbility() && Ability.CanUse(coordinate) && health > 0;
+	}
+
 	public void UseAbility(Coordinate coordinate)
 	{
-		if (!HasAbility())
+		if (!CanUseAbility(coordinate))
 		{
-			throw new InvalidOperationException("This creature does not have an ability");
-		}
-		if (!Ability.CanUse(coordinate))
-		{
-			throw new InvalidOperationException("Cannot use creature ability on " + coordinate);
+			throw new InvalidOperationException("This creature cannot use this ability at this time");
 		}
 		Ability.Use(coordinate);
 	}

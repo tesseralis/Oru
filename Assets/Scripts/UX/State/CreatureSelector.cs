@@ -114,7 +114,7 @@ public class CreatureSelector : MonoBehaviour
 
 	private void UseCreatureAbility(Coordinate coordinate)
 	{
-		if (SelectedCreature.Ability.CanUse(coordinate))
+		if (SelectedCreature.CanUseAbility(coordinate))
 		{
 			SelectedCreature.UseAbility(coordinate);
 			actionMarkers.StopAbility();
