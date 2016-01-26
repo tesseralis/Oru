@@ -829,6 +829,7 @@ MonoBehaviour:
     selectCreature: {fileID: 8300000, guid: a442c94ab224549e6819278f2f8e2005, type: 3}
     pickupRecipe: {fileID: 8300000, guid: f30f4525d12c74e3f895f418a503ebd8, type: 3}
     setCreatureGoal: {fileID: 8300000, guid: 0fc6b75f4b5444c64b89acf2348e3d46, type: 3}
+    error: {fileID: 8300000, guid: 3069b2b89e57c4ae0aef8a1338bef458, type: 3}
     useAbility: {fileID: 8300000, guid: 636d568ebdcfe4b9b9c4d4c0d1a5b3bc, type: 3}
     attack: {fileID: 8300000, guid: 636d568ebdcfe4b9b9c4d4c0d1a5b3bc, type: 3}
     levelComplete: {fileID: 8300000, guid: 6ee7c76d493c544b596e68cba58a67f4, type: 3}

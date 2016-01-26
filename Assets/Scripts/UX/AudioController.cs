@@ -17,6 +17,7 @@ public class AudioController : MonoBehaviour {
 		UXManager.State.Selector.Selected += x => PlaySound(soundOptions.selectCreature);
 		UXManager.State.Selector.GoalSet += (x, y) => PlaySound(soundOptions.setCreatureGoal);
 		UXManager.State.Selector.AbilityUsed += () => PlaySound(soundOptions.useAbility);
+		UXManager.State.Selector.CreatureError += x => PlaySound(soundOptions.error);
 	}
 
 	// Play the given sound
@@ -39,6 +40,7 @@ public class SoundEffectOptions
 	public AudioClip selectCreature;
 	public AudioClip pickupRecipe;
 	public AudioClip setCreatureGoal;
+	public AudioClip error;
 	// TODO separate audio for different abilities
 	public AudioClip useAbility;
 	public AudioClip attack;
