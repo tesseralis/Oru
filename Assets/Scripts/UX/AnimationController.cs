@@ -6,6 +6,16 @@ public class AnimationController : MonoBehaviour
 	void Start()
 	{
 		LevelManager.Creatures.CreatureStepped += AnimateCreature;
+		UXManager.State.Selector.CreatureError += AnimateError;
+	}
+
+	private void AnimateError(Creature creature)
+	{
+		Debug.Log(creature + " commited an error.");
+		if (creature.GetComponentInChildren<Animator>())
+		{
+			creature.GetComponentInChildren<Animator>().SetTrigger("Error");
+		}
 	}
 
 	private void AnimateCreature(Creature creature)

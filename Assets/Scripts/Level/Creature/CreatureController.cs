@@ -20,6 +20,7 @@ public class CreatureController : MonoBehaviour
 	public event Action<Creature, Coordinate> CreatureCreated;
 	// Called when a single creature has updated its step
 	public event Action<Creature> CreatureStepped;
+	// TODO I can probably refactor this out because of the above method
 	// Called when all the creatures have updated their steps
 	public event Action<IList<Creature>> CreaturesUpdated;
 

@@ -15,6 +15,8 @@ public class CreatureSelector : MonoBehaviour
 	public event Action Deselected;
 	public event Action<Creature, Coordinate> GoalSet;
 	public event Action AbilityUsed;
+	// Called when the user commits an error on a creature
+	public event Action<Creature> CreatureError;
 
 	public Creature SelectedCreature { get; private set; }
 
@@ -118,6 +120,10 @@ public class CreatureSelector : MonoBehaviour
 			actionMarkers.StopAbility();
 			if (AbilityUsed != null) { AbilityUsed(); }
 		}
+		else
+		{
+			if (CreatureError != null) { CreatureError(SelectedCreature); }
+		}
 	}
 		
 	private void SetCurrentCreatureGoal(Coordinate coordinate)
@@ -130,6 +136,10 @@ public class CreatureSelector : MonoBehaviour
 			{
 				SelectedCreature.Ability.Cancel();
 			}
+		}
+		else
+		{
+			if (CreatureError != null) { CreatureError(SelectedCreature); }
 		}
 	}
 
