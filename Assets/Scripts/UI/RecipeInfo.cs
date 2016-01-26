@@ -21,4 +21,9 @@ public class RecipeInfo : MonoBehaviour
 		var creatureDefinition = CreatureDefinition.ForType(creatureType);
 		GetComponentInChildren<ResourceList>().ShowResources(creatureDefinition.RecipeWithEnergy());
 	}
+
+	public void HideRecipeInfo()
+	{
+		gameObject.SetActive(false);
+	}
 }

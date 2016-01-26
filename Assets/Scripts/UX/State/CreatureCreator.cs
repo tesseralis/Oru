@@ -27,12 +27,14 @@ public class CreatureCreator : MonoBehaviour {
 		currentCreatureType = creature;
 
 		// Ensure that we never double-click
-		if (isCreating) { return; }
 
-		isCreating = true;
-		// Do the actual creation
-		UXManager.Input.TerrainClicked += CreateCreature;
-		UXManager.Input.DeselectButton += StopCreation;
+		if (!isCreating)
+		{
+			isCreating = true;
+			// Do the actual creation
+			UXManager.Input.TerrainClicked += CreateCreature;
+			UXManager.Input.DeselectButton += StopCreation;
+		}
 
 		if (CreationStarted != null) { CreationStarted(creature); }
 	}
