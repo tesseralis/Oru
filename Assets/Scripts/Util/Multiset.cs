@@ -82,6 +82,11 @@ namespace Util
 			return result;
 		}
 
+		public static int MultisetCount<T>(this IDictionary<T, int> mset)
+		{
+			return mset.Values.Sum();
+		}
+
 		public static bool Contains<T>(this IDictionary<T, int> set, T item)
 		{
 			return set.ContainsKey(item) && set[item] > 0;

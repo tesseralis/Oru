@@ -23,7 +23,7 @@ public class CarryResourceAbility : AbstractCarryAbility, IAbility
 		public int Capacity { get; set; }
 		public string Description()
 		{
-			return "Pick up " + Capacity + " resources";
+			return "Carry up to " + Capacity + " items";
 		}
 
 		public IAbility AddToCreature(Creature creature)
@@ -47,11 +47,11 @@ public class CarryResourceAbility : AbstractCarryAbility, IAbility
 	{
 		if (Carrying.IsEmpty())
 		{
-			return "Pick up " + capacity + " resources";
+			return "Pick up " + capacity + " items";
 		}
 		else
 		{
-			return "Drop off resources";
+			return "Drop off " + Carrying.Count() + " items";
 		}
 	}
 

@@ -82,6 +82,12 @@ public class ResourceCollection
 		};
 	}
 
+	// The number of items we're carrying
+	public int Count()
+	{
+		return EnergyBlocks.Count + Paper.MultisetCount();
+	}
+
 	// Take n items arbitrarily from this collection and leave the remaining
 	public ResourceCollection Take(int n, out ResourceCollection taken)
 	{
