@@ -16,6 +16,7 @@ public class LevelManager : MonoBehaviour
 	public static LevelManager level;
 	public static string levelName;
 
+	[TextArea(3, 10)]
 	public string instructions;
 
 	public static TerrainController Terrain { get { return level.terrainController; } }

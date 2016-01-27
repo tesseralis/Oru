@@ -128,6 +128,12 @@ public static class Serialization
 
 		var levelMapping = yaml.Documents[0].RootNode.AsMapping();
 
+		var level = GameObject.Find("Level").GetComponent<LevelManager>();
+		if (levelMapping.HasKey("Instructions"))
+		{
+			level.instructions = levelMapping.GetString("Instructions");
+		}
+
 		var terrain = GameObject.Find("Terrain").GetComponent<TerrainController>();
 		terrain.gameObject.DestroyAllChildrenImmediate();
 		foreach (var entry in DeserializeTerrain(levelMapping.GetString("Terrain")))
@@ -207,6 +213,12 @@ public static class Serialization
 			{"Recipes", recipeNode},
 			{"Goals", goalsMapping}
 		};
+
+		var level = GameObject.Find("Level").GetComponent<LevelManager>();
+		if (!string.IsNullOrEmpty(level.instructions))
+		{
+			levelNode.Add("Instructions", new YamlScalarNode(level.instructions) { Style = YamlDotNet.Core.ScalarStyle.Literal } );
+		}
 		var levelDocument = new YamlDocument(levelNode);
 
 		// Serialize
@@ -259,7 +271,6 @@ public static class Serialization
 	public static CreatureDefinition DeserializeCreature(YamlNode node)
 	{
 		var definition = node.AsMapping();
-//		var description = definition.GetString("Description");
 		var recipe = DeserializeResourceCollection(definition.GetMapping("Recipe")).ToMultiset();
 		var noEnergy = definition.HasKey("NoEnergy") ? definition.GetBool("NoEnergy") : false;
 		var allowedTerrain = definition.GetSequence("AllowedTerrain").Select(x => x.ToEnum<TerrainType>()).ToArray();
@@ -268,7 +279,6 @@ public static class Serialization
 		var isEnemy = definition.HasKey("IsEnemy") ? definition.GetBool("IsEnemy") : false;
 		return new CreatureDefinition()
 		{
-//			Description = description,
 			Recipe = recipe,
 			NoEnergy = noEnergy,
 			AllowedTerrain = allowedTerrain,

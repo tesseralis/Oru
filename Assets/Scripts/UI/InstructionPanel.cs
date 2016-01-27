@@ -13,7 +13,7 @@ public class InstructionPanel : MonoBehaviour {
 		var instructions = LevelManager.level.instructions;
 		if (!string.IsNullOrEmpty(instructions))
 		{
-			instructionText.text = instructions;
+			instructionText.text = instructions.Replace("\n", "\n\n");
 			ShowInstructions();
 		}
 		else
