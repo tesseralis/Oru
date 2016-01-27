@@ -20,4 +20,6 @@ Recipes:
     5,0: Crane
 Goals:
   0,5: Crane
+Instructions: |
+  Some creatures are enemies that will unfold your creatures if you are next to them.
 ...

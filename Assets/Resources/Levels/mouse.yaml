@@ -1,0 +1,21 @@
+Terrain: |
+  llll
+  llll
+  rrll
+  lrll
+Creatures:
+  0,0: Rabbit
+Resources:
+  3,3:
+    Black: 1
+    Energy: 1
+Recipes:
+  Available: []
+  Field:
+    0,3: Mouse
+Goals:
+  3,0: Mouse
+Instructions: |
+  Make creature pick up blueprints to create more kinds of creatures.
+  Some creatures can go on more kinds of terrain tiles than others.
+...
