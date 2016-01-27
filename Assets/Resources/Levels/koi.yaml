@@ -2,7 +2,7 @@ Terrain: |
   lwww
   lwww
   wwww
-  wwll
+  wwww
 Creatures:
   3,0: Frog
 Resources:
@@ -17,6 +17,5 @@ Recipes:
 Goals:
   3,3: Dog
 Instructions: |
-  Some creatures have abilities that let them do special things.
-  Press <space> to use a creature's ability.
+  TODO This level isn't made yet
 ...

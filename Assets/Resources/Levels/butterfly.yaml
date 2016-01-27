@@ -1,18 +1,22 @@
 Terrain: |
-  lll
-  www
-  www
-  www
-  lll
+  lwwrl
+  rrrwr
+  lllrw
+  rrlrw
+  lrlrl
 Creatures:
-  0,1: Butterfly
-Resources: {}
+  2,2: Tiger
+  0,0: Mouse
+  1,3: Turtle
+Resources:
+  4,4:
+    Red: 1
 Recipes:
   Available: []
-  Field: {}
+  Field:
+    4,0: Butterfly
 Goals:
-  4,1: Butterfly
+  0,4: Butterfly
 Instructions: |
-  Click on a creature to select it.
-  Click on a tile to move the selected creature to that location.
+  Some creatures are enemies that will unfold your creatures if you are next to them.
 ...

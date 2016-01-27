@@ -133,6 +133,10 @@ public static class Serialization
 		{
 			level.instructions = levelMapping.GetString("Instructions");
 		}
+		else
+		{
+			level.instructions = "";
+		}
 
 		var terrain = GameObject.Find("Terrain").GetComponent<TerrainController>();
 		terrain.gameObject.DestroyAllChildrenImmediate();
