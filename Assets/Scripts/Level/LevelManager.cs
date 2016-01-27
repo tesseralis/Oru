@@ -16,6 +16,8 @@ public class LevelManager : MonoBehaviour
 	public static LevelManager level;
 	public static string levelName;
 
+	public string instructions;
+
 	public static TerrainController Terrain { get { return level.terrainController; } }
 	public static CreatureController Creatures { get { return level.creatureController; } }
 	public static ResourceController Resources { get { return level.resourceController; } }
