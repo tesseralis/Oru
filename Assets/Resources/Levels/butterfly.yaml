@@ -4,15 +4,15 @@ Terrain: |
   www
   www
   lll
-Creatures: {}
-Resources:
-  0,1:
-    Red: 1
-    Energy: 1
+Creatures:
+  0,1: Butterfly
+Resources: {}
 Recipes:
-  Available:
-  - Butterfly
+  Available: []
   Field: {}
 Goals:
   4,1: Butterfly
+Instructions: |
+  Click on a creature to select it.
+  Click on a tile to move the selected creature to that location.
 ...

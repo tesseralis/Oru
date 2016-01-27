@@ -16,4 +16,7 @@ Recipes:
     0,3: Dog
 Goals:
   3,3: Dog
+Instructions: |
+  Some creatures have abilities that let them do special things.
+  Press <space> to use a creature's ability.
 ...
