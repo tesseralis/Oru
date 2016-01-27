@@ -37,6 +37,12 @@ public class RecipeList : MonoBehaviour
 
 	void UpdateRecipeList(IList<CreatureType> availableRecipes)
 	{
+		// Don't show anything if we don't have any recipes.
+		if (availableRecipes.Count <= 0)
+		{
+			gameObject.SetActive(false);
+			return;
+		}
 		gameObject.SetActive(true);
 		buttonContainer.DestroyAllChildren();
 
