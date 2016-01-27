@@ -1,20 +1,20 @@
 Terrain: |
-  llll
-  llll
-  rrll
-  lrll
+  lwl
+  wlw
+  lwl
 Creatures:
   0,0: Rabbit
 Resources:
-  3,3:
-    Black: 1
-    Energy: 1
+  1,2:
+    Blue: 1
 Recipes:
-  Available: []
+  Available:
+  - Rabbit
   Field:
-    0,3: Mouse
+    2,2: Frog
 Goals:
-  3,0: Mouse
-Instructions: |
-  TODO This level isn't made yet
+  1,0: Frog
+Instructions: |-
+  You can "unfold" creatures to turn them back into items.
+  You can create creatures using any items adjacent to the tile you want to create it on.
 ...
