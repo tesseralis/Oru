@@ -16,6 +16,8 @@ public class LevelSelect : MonoBehaviour
 	public Color unfinishedColor;
 
 	public float buttonSpacing = 5.0f;
+	// TODO This should be managed somewhere other than the UI (probably)
+	public bool unlockAllLevels = false;
 
 	private IList<Button> buttons = new List<Button>();
 
@@ -56,13 +58,33 @@ public class LevelSelect : MonoBehaviour
 	{
 		var levels = GameManager.game.Levels;
 
-		// Populate the UI with buttons corresponding with the recipes
+		// Only go up to the highest completed level;
+		var maxLevelComplete = -1;
+		for (int i = 0; i < levels.Count; i++)
+		{
+			if (GameManager.game.GetCompletion(levels[i]))
+			{
+				maxLevelComplete = i;
+			}
+		}
+
+		// Populate the UI with buttons corresponding with the levels
 		for (int i = 0; i < levels.Count; i++)
 		{
 			var level = levels[i];
 			var button = buttons[i];
 
 			button.image.color = GameManager.game.GetCompletion(level) ? finishedColor : unfinishedColor;
+
+			// Only show levels we've unlocked so far
+			if (unlockAllLevels || i <= maxLevelComplete + 1)
+			{
+				button.gameObject.SetActive(true);
+			}
+			else
+			{
+				button.gameObject.SetActive(false);
+			}
 		}
 	}
 
