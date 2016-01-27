@@ -62,7 +62,7 @@ public class CreatureController : MonoBehaviour
 	{
 		var creatureDefinition = CreatureDefinition.ForType(creature);
 		var resources = LevelManager.Resources;
-		var recipe = creatureDefinition.Recipe;
+		var recipe = creatureDefinition.RecipeWithEnergy();
 		// Figure out how many blocks we have available
 		var availableResources = Neighbors(coordinate).Select(c => resources[c]);
 		var resourceCount = availableResources.Aggregate((x, y) => x + y);
