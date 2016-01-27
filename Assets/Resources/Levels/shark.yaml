@@ -1,24 +1,32 @@
 Terrain: |
-  wwwwww
-  wwwwww
-  wwllww
-  wwllww
-  wwwwww
-  wwwwww
+  ttttltttt
+  ttttttttt
+  wwwwwwwww
+  lllllllll
+  ttttttttt
+  lllllllll
+  lllllllll
+  wwwwwwwww
+  wwwwwwwww
 Creatures:
-  3,3: Tiger
+  2,4: Dragon
 Resources:
-  5,3:
-    Blue: 6
-    White: 3
-    Energy: 5
-  2,2:
-    Red: 3
+  6,4:
+    Blue: 10
+    White: 10
+    Red: 10
+    Black: 10
+    Energy: 10
 Recipes:
   Available:
-  - Shark
+  - Crane
   - Dog
+  - Monkey
+  - Shark
+  - Frog
+  - Snake
+  - Horse
   Field: {}
 Goals:
-  0,2: Dog
+  0,4: Frog
 ...

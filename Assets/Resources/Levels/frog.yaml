@@ -1,0 +1,20 @@
+Terrain: |
+  llll
+  llll
+  rrll
+  lrll
+Creatures:
+  0,0: Rabbit
+Resources:
+  3,3:
+    Black: 1
+    Energy: 1
+Recipes:
+  Available: []
+  Field:
+    0,3: Mouse
+Goals:
+  3,0: Mouse
+Instructions: |
+  TODO This level isn't made yet
+...

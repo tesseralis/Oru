@@ -1,25 +1,26 @@
 Terrain: |
   llllll
   llllll
-  wwwwww
-  wwwwww
+  rrwwrr
+  rrwwrr
   llllll
   llllll
 Creatures:
-  0,0: Butterfly
   2,2: Turtle
+  5,2: Dog
 Resources:
-  5,5:
-    Red: 1
-    Blue: 1
-    White: 1
-    Black: 1
+  2,0:
+    Blue: 4
+    Energy: 1
+  2,5:
+    Blue: 4
+    Energy: 1
 Recipes:
-  Available: []
-  Field:
-    5,0: Crane
+  Available:
+  - Snake
+  Field: {}
 Goals:
-  0,5: Crane
+  0,2: Dog
 Instructions: |
-  Some creatures are enemies that will unfold your creatures if you are next to them.
+  TODO make this level
 ...

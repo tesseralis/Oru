@@ -1,0 +1,16 @@
+Terrain: |
+  lll
+  lll
+  lll
+Creatures:
+  0,0: Rabbit
+Resources: {}
+Recipes:
+  Available: []
+  Field: {}
+Goals:
+  2,2: Rabbit
+Instructions: |
+  Click on a creature to select it.
+  Click on a tile to move the selected creature to that location.
+...
