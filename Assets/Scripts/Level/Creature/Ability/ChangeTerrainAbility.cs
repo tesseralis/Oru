@@ -18,7 +18,7 @@ public class ChangeTerrainAbility : AbstractCarryAbility, IAbility
 
 		public string Description()
 		{
-			return "Pick up " + CarryType;
+			return "Dig up " + CarryType;
 		}
 
 		public IAbility AddToCreature(Creature creature)
