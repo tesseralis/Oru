@@ -34,28 +34,11 @@ public class ChangeTerrainAbility : AbstractCarryAbility, IAbility
 
 	protected override void DoPickup(Coordinate target)
 	{
-		TerrainController terrain = LevelManager.Terrain;
-
-		// Determine whether the creature should be picking up or putting down
-		TerrainType initialType;
-		TerrainType finalType;
-		if (isCarrying)
-		{
-			initialType = leaveType;
-			finalType = carryType;
-		} else {
-			initialType = carryType;
-			finalType = leaveType;
-		}
-
 		// Pick up or put down the terrain if we can
-		if (terrain.Contains(target) && terrain[target] == initialType
-			&& LevelManager.Resources[target].IsEmpty()
-			&& CanSetCoordinate(target, finalType))
+		if (CanUse(target))
 		{
 			isCarrying = !isCarrying;
-			terrain[target] = finalType;
-
+			LevelManager.Terrain[target] = isCarrying ? leaveType : carryType;
 			// Visually represent the carried tile
 			if (isCarrying)
 			{
@@ -75,7 +58,22 @@ public class ChangeTerrainAbility : AbstractCarryAbility, IAbility
 
 	public override bool CanUse(Coordinate coordinate)
 	{
-		return LevelManager.Terrain[coordinate] == (isCarrying ? leaveType : carryType);
+		// Determine whether the creature should be picking up or putting down
+		TerrainType initialType;
+		TerrainType finalType;
+		if (isCarrying)
+		{
+			initialType = leaveType;
+			finalType = carryType;
+		} else {
+			initialType = carryType;
+			finalType = leaveType;
+		}
+		
+		return LevelManager.Terrain.Contains(coordinate)
+			&& LevelManager.Terrain[coordinate] == initialType
+			&& LevelManager.Resources[coordinate].IsEmpty()
+			&& CanSetCoordinate(coordinate, finalType);
 	}
 
 	// Returns true if you can set the coordinate to the specified terrain type
