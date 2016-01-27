@@ -1,19 +1,20 @@
 Terrain: |
-  lwl
-  wlw
-  lwl
+  llww
+  llww
+  wwll
+  wwll
 Creatures:
   0,0: Rabbit
 Resources:
-  1,2:
+  0,3:
     Blue: 1
 Recipes:
   Available:
   - Rabbit
   Field:
-    2,2: Frog
+    3,3: Frog
 Goals:
-  1,0: Frog
+  3,0: Frog
 Instructions: |-
   You can "unfold" creatures to turn them back into items.
   You can create creatures using any items adjacent to the tile you want to create it on.
