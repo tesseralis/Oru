@@ -28,7 +28,7 @@ GameObject:
   - 114: {fileID: 11459748}
   - 65: {fileID: 6568604}
   m_Layer: 0
-  m_Name: Rock
+  m_Name: Sand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

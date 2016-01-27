@@ -28,7 +28,7 @@ GameObject:
   - 114: {fileID: 11418438}
   - 65: {fileID: 6590124}
   m_Layer: 0
-  m_Name: Land
+  m_Name: Grass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
