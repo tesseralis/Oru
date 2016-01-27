@@ -1,10 +1,10 @@
 Terrain: |
-  llllll
-  llllll
+  wwlltl
+  wwlltt
   rrwwrr
   rrwwrr
-  llllll
-  llllll
+  ttllww
+  ttllww
 Creatures:
   2,2: Turtle
   5,2: Dog
@@ -16,9 +16,12 @@ Resources:
     Blue: 4
     Energy: 1
 Recipes:
-  Available:
-  - Snake
-  Field: {}
+  Available: []
+  Field:
+    0,0: Monkey
+    5,5: Snake
 Goals:
-  0,2: Dog
+  0,5: Snake
+Instructions: |-
+  Some creatures can fight enemy creatures.
 ...
