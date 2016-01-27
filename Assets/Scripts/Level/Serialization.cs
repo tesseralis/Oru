@@ -41,9 +41,9 @@ public static class Serialization
 	{
 		switch(chr)
 		{
-		case 'l': return TerrainType.Land;
+		case 'l': return TerrainType.Grass;
 		case 'w': return TerrainType.Water;
-		case 'r': return TerrainType.Rock;
+		case 'r': return TerrainType.Sand;
 		case 't': return TerrainType.Tree;
 		default: throw new ArgumentException("Illegal terrain type");
 		}
@@ -53,9 +53,9 @@ public static class Serialization
 	{
 		switch(tile)
 		{
-		case TerrainType.Land: return 'l';
+		case TerrainType.Grass: return 'l';
 		case TerrainType.Water: return 'w';
-		case TerrainType.Rock: return 'r';
+		case TerrainType.Sand: return 'r';
 		case TerrainType.Tree: return 't';
 		default: return ' ';
 		}
