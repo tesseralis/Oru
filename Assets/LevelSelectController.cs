@@ -17,6 +17,7 @@ public class LevelSelectController : MonoBehaviour
 
 	IList<string> levels;
 	int currentLevel;
+	int maxLevelComplete = -1;
 
 	Coordinate[] levelCoordinates = new Coordinate[]
 	{
@@ -41,7 +42,6 @@ public class LevelSelectController : MonoBehaviour
 		levels = GameManager.game.Levels;
 
 		// Only go up to the highest completed level;
-		var maxLevelComplete = -1;
 		for (int i = 0; i < levels.Count; i++)
 		{
 			if (GameManager.game.GetCompletion(levels[i]))
@@ -61,10 +61,11 @@ public class LevelSelectController : MonoBehaviour
 
 	public void UpdateLevel(Creature creature)
 	{
-		if (levelCoordinates.Contains(creature.Position))
+		var index = Array.IndexOf(levelCoordinates, creature.Position, 0, maxLevelComplete + 2);
+		if (index >= 0)
 		{
 			playLevelButton.gameObject.SetActive(true);
-			currentLevel = Array.IndexOf(levelCoordinates, creature.Position);
+			currentLevel = index;
 			playLevelButton.GetComponentInChildren<Text>().text = "Play Level " + (currentLevel + 1);
 		}
 		else
