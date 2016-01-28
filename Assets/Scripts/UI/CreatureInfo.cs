@@ -8,6 +8,7 @@ public class CreatureInfo : MonoBehaviour
 {
 	public GameObject panel;
 	public Text nameDisplay;
+	public GameObject blueprintLabel;
 	public GameObject healthInfo;
 	public Healthbar healthbar;
 	public Text descriptionDisplay;
@@ -62,7 +63,8 @@ public class CreatureInfo : MonoBehaviour
 		// Hide creature health
 		healthInfo.gameObject.SetActive(false);
 
-		// TODO display "blueprint" subtitle
+		// display "blueprint" subtitle
+		blueprintLabel.SetActive(true);
 
 		// Hide the ability and destroy buttons
 		useAbilityButton.gameObject.SetActive(false);
@@ -76,6 +78,9 @@ public class CreatureInfo : MonoBehaviour
 		// Display creature health
 		healthInfo.gameObject.SetActive(true);
 		healthbar.SetHealth(creature.health);
+
+		// Hide "blueprint" label
+		blueprintLabel.SetActive(false);
 
 		// Display creature data
 		var creatureDefinition = CreatureDefinition.ForType(creature.creatureType);
