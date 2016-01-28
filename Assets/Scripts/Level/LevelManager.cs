@@ -14,8 +14,9 @@ using Util;
 public class LevelManager : MonoBehaviour
 {
 	public static LevelManager level;
-	public static string levelName;
+	public static Action<LevelManager> LevelLoaded;
 
+	public string levelName;
 	[TextArea(3, 10)]
 	public string instructions;
 
@@ -53,20 +54,16 @@ public class LevelManager : MonoBehaviour
 		if (!resourceController) { resourceController = GetComponentInChildren<ResourceController>(); }
 		if (!recipeController) { recipeController = GetComponentInChildren<RecipeController>(); }
 		if (!goalController) { goalController = GetComponentInChildren<GoalController>(); }
-
-		if (levelName != null)
-		{
-			Serialization.DeserializeLevel(levelName);
-		}
 	}
 
-	public static void SetLevel(string _levelName)
+	void Start()
 	{
-		levelName = _levelName;
-		if (level)
-		{
-			Serialization.DeserializeLevel(levelName);
-		}
+		if (LevelLoaded != null) { LevelLoaded(level); }
+	}
+
+	public static void ClearActions()
+	{
+		LevelLoaded = null;
 	}
 
 }

@@ -3,7 +3,12 @@ using System.Collections;
 
 public class AnimationController : MonoBehaviour
 {
-	void Start()
+	void Awake()
+	{
+		LevelManager.LevelLoaded += AddHooks;
+	}
+	
+	void AddHooks(LevelManager level)
 	{
 		LevelManager.Creatures.CreatureStepped += AnimateCreature;
 		UXManager.State.Selector.CreatureError += AnimateError;

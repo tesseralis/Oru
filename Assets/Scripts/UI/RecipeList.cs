@@ -21,10 +21,11 @@ public class RecipeList : MonoBehaviour
 		var rectTransform = buttonContainer.GetComponent<RectTransform>();
 		var anchoredPosition = rectTransform.anchoredPosition;
 		rectTransform.anchoredPosition = new Vector2(anchoredPosition.x, 0);
+		LevelManager.LevelLoaded += OnLevelLoaded;
 	}
 
 	// Use this for initialization
-	void Start ()
+	void OnLevelLoaded (LevelManager level)
 	{
 		LevelManager.Recipes.RecipesUpdated += UpdateRecipeList;
 		UpdateRecipeList(LevelManager.Recipes.AvailableRecipes);

@@ -77,7 +77,7 @@ public class LevelSelectController : MonoBehaviour
 
 	public void LoadCurrentLevel()
 	{
-		GameManager.game.LoadLevel(levels[currentLevel]);
+		GameManager.LoadLevel(levels[currentLevel]);
 	}
 
 	// Clear our game progress

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Manages the UI (Canvas) components of the game.
@@ -9,8 +8,6 @@ public class UIManager : MonoBehaviour
 	// make game manager accessible throughout the game
 	public static UIManager ui;
 
-	public string menuScene = "Menu";
-
 	void Awake()
 	{
 		if (ui == null) { ui = this; }
@@ -18,18 +15,20 @@ public class UIManager : MonoBehaviour
 
 	public void ReturnToMenu()
 	{
-		SceneManager.LoadScene(menuScene);
+		GameManager.LoadMainMenu();
 	}
 
 	public void RestartLevel()
 	{
-		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+		GameManager.LoadLevel(GameManager.game.currentLevel);
 	}
 
 	public void NextLevel()
 	{
 		var levels = GameManager.game.Levels;
-		GameManager.game.LoadLevel(levels[levels.IndexOf(LevelManager.levelName) + 1]);
+		var nextLevel = levels[levels.IndexOf(LevelManager.level.levelName) + 1];
+		Debug.Log("Loading the next level: " + nextLevel);
+		GameManager.LoadLevel(nextLevel);
 	}
 
 	public void TogglePause()

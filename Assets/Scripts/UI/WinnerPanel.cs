@@ -5,7 +5,12 @@ public class WinnerPanel : MonoBehaviour
 {
 	public GameObject nextLevelButton;
 
-	void Start ()
+	void Awake()
+	{
+		LevelManager.LevelLoaded += OnLevelLoad;
+	}
+
+	void OnLevelLoad (LevelManager level)
 	{
 		// Start creating the recipe
 		LevelManager.Goals.LevelCompleted += DisplayWinInfo;
@@ -18,7 +23,7 @@ public class WinnerPanel : MonoBehaviour
 
 		// Don't show the "next level" button if this is the last level
 		var levels = GameManager.game.Levels;
-		var isLastLevel = levels.IndexOf(LevelManager.levelName) == levels.Count - 1;
+		var isLastLevel = levels.IndexOf(LevelManager.level.levelName) == levels.Count - 1;
 		nextLevelButton.SetActive(!isLastLevel);
 	}
 }

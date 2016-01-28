@@ -92,6 +92,17 @@ namespace Util
 			return newObject.GetComponent<T>();
 		}
 
+		public static T AddChildWithComponent<T>(this GameObject gameObject, string name) where T : Component
+		{
+			var newObject = new GameObject(name);
+			newObject.transform.SetParent(gameObject.transform, false);
+			if (newObject.GetComponent<T>() == null)
+			{
+				newObject.AddComponent<T>();
+			}
+			return newObject.GetComponent<T>();
+		}
+
 		/// <summary>
 		/// Calls "Destroy" on all children of this object.
 		/// </summary>
@@ -106,21 +117,5 @@ namespace Util
 			// Delete the previously existing children
 			children.ForEach(x => GameObject.Destroy(x));
 		}
-
-		/// <summary>
-		/// Calls "DestroyImmediate" on all children of this object.
-		/// </summary>
-		public static void DestroyAllChildrenImmediate(this GameObject gameObject)
-		{
-			// Delete the existing children first
-			var children = new List<GameObject>();
-			foreach (Transform child in gameObject.transform)
-			{
-				children.Add(child.gameObject);
-			}
-			// Delete the previously existing children
-			children.ForEach(x => GameObject.DestroyImmediate(x));
-		}
-
 	}
 }

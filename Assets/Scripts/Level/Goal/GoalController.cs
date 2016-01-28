@@ -16,7 +16,7 @@ public class GoalController : MonoBehaviour
 			if (LevelCompleted != null) { LevelCompleted(); }
 			// Save that we have won this level
 			Debug.Log("Won this level! Saving...");
-			GameManager.game.SetCompletion(LevelManager.levelName, true);
+			GameManager.game.SetCompletion(LevelManager.level.levelName, true);
 			GameManager.game.Save();
 		}
 		levelComplete = true;
