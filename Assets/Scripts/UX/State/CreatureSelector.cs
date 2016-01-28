@@ -58,7 +58,7 @@ public class CreatureSelector : MonoBehaviour
 		transform.SetParent(creature.transform, false);
 
 		// Add a listener to the action markers
-		if (creature.HasAbility())
+		if (!creature.Definition.IsEnemy && creature.HasAbility())
 		{
 			actionMarkers.Enable(creature);
 		}
