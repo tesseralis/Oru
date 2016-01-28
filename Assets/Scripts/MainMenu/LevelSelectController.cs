@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System;
 using System.Collections;
@@ -77,5 +78,18 @@ public class LevelSelectController : MonoBehaviour
 	public void LoadCurrentLevel()
 	{
 		GameManager.game.LoadLevel(levels[currentLevel]);
+	}
+
+	// Clear our game progress
+	public void ClearProgress()
+	{
+		foreach (string level in GameManager.game.Levels)
+		{
+			GameManager.game.SetCompletion(level, false);
+		}
+		GameManager.game.Save();
+
+		// Reload the level
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 	}
 }
