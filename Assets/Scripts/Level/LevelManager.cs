@@ -57,13 +57,17 @@ public class LevelManager : MonoBehaviour
 		if (levelName != null)
 		{
 			Serialization.DeserializeLevel(levelName);
+			levelName = null; // TODO Ensure that we don't get stuck with an old scene
 		}
 	}
 
 	public static void SetLevel(string _levelName)
 	{
 		levelName = _levelName;
-		if (level) { Serialization.DeserializeLevel(levelName); }
+		if (level)
+		{
+			Serialization.DeserializeLevel(levelName);
+		}
 	}
 
 }
