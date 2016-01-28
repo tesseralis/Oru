@@ -16,8 +16,6 @@ public class RecipeList : MonoBehaviour
 	public event Action<CreatureType> BlueprintEnter;
 	public event Action BlueprintExit;
 
-	public float buttonSpacing = 30f;
-
 	void Awake ()
 	{
 		var rectTransform = buttonContainer.GetComponent<RectTransform>();
@@ -42,6 +40,8 @@ public class RecipeList : MonoBehaviour
 		}
 		gameObject.SetActive(true);
 		buttonContainer.DestroyAllChildren();
+
+		var buttonSpacing = createButtonPrefab.GetComponent<RectTransform>().rect.height;
 
 		// Populate the UI with buttons corresponding with the recipes
 		for (int i = 0; i < availableRecipes.Count; i++)
