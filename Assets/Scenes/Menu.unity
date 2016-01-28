@@ -477,10 +477,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 062a14e7ab959405c8931d6287972c4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unfinishedLevelPrefab: {fileID: 134374, guid: 3a720ddac0e83453097b69824ead1454,
+  unfinishedLevelPrefab: {fileID: 138270, guid: 3a720ddac0e83453097b69824ead1454,
     type: 2}
-  finishedLevelPrefab: {fileID: 134374, guid: 94a877cbb59824767bab3dd819781e9d, type: 2}
-  unlockAllLevels: 0
+  finishedLevelPrefab: {fileID: 161454, guid: b602d5ce899de4129af6db9c3ca0a727, type: 2}
+  unlockAllLevels: 1
   playLevelButton: {fileID: 2004028331}
 --- !u!1001 &542323495
 Prefab:

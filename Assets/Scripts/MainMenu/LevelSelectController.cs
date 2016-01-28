@@ -39,7 +39,6 @@ public class LevelSelectController : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-
 		levels = GameManager.game.Levels;
 
 		// Only go up to the highest completed level;
@@ -50,19 +49,22 @@ public class LevelSelectController : MonoBehaviour
 				maxLevelComplete = i;
 			}
 		}
-		for (int i = 0; i <= (unlockAllLevels ? levels.Count : maxLevelComplete + 1); i++)
+		for (int i = 0; i < AvailableLevelCount(); i++)
 		{
 			var level = levels[i];
 			var prefab = GameManager.game.GetCompletion(level) ? finishedLevelPrefab : unfinishedLevelPrefab;
-			gameObject.AddChild(prefab, levelCoordinates[i]);
+			var newObject = gameObject.AddChild(prefab, levelCoordinates[i]);
+			var creatureName = level[0].ToString().ToUpper() + level.Substring(1);
+			var creatureType = new CreatureType(creatureName);
+			newObject.GetComponentInChildren<SpriteRenderer>().sprite = ResourcesPathfinder.GoalSprite(creatureType);
 		}
 
 		LevelManager.Creatures.CreatureStepped += UpdateLevel;
 	}
 
-	public void UpdateLevel(Creature creature)
+	void UpdateLevel(Creature creature)
 	{
-		var index = Array.IndexOf(levelCoordinates, creature.Position, 0, maxLevelComplete + 2);
+		var index = Array.IndexOf(levelCoordinates, creature.Position, 0, AvailableLevelCount());
 		if (index >= 0)
 		{
 			playLevelButton.gameObject.SetActive(true);
@@ -73,6 +75,11 @@ public class LevelSelectController : MonoBehaviour
 		{
 			playLevelButton.gameObject.SetActive(false);
 		}
+	}
+
+	private int AvailableLevelCount()
+	{
+		return unlockAllLevels ? levels.Count : Math.Min(maxLevelComplete + 2, levels.Count);
 	}
 
 	public void LoadCurrentLevel()
