@@ -954,7 +954,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonContainer: {fileID: 155736}
   createButtonPrefab: {fileID: 145030, guid: 152d66f4322b9438cb821ec8e3d1a0d4, type: 2}
-  buttonSpacing: 30
 --- !u!114 &11404194
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2901,7 +2900,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panel: {fileID: 113142}
   nameDisplay: {fileID: 11452292}
-  blueprintLabel: {fileID: 147468}
+  blueprintLabel: {fileID: 11409438}
   healthInfo: {fileID: 155236}
   healthbar: {fileID: 11462136}
   descriptionDisplay: {fileID: 11425334}

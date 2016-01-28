@@ -8,7 +8,7 @@ public class CreatureInfo : MonoBehaviour
 {
 	public GameObject panel;
 	public Text nameDisplay;
-	public GameObject blueprintLabel;
+	public Text blueprintLabel;
 	public GameObject healthInfo;
 	public Healthbar healthbar;
 	public Text descriptionDisplay;
@@ -38,12 +38,17 @@ public class CreatureInfo : MonoBehaviour
 
 	void Update()
 	{
-		if (highlightedBlueprint.HasValue)
+		// If a blueprint is highlighed and is not the same as the current creating creature (if any),
+		// show that blueprint's info
+		if (highlightedBlueprint.HasValue
+			&& (!creatingCreature.HasValue || highlightedBlueprint.Value != creatingCreature.Value))
 		{
+			blueprintLabel.text = "Blueprint";
 			DisplayRecipeInfo(highlightedBlueprint.Value);
 		}
 		else if (creatingCreature.HasValue)
 		{
+			blueprintLabel.text = "Creating";
 			DisplayRecipeInfo(creatingCreature.Value);
 		}
 		else if (selectedCreature)
@@ -64,7 +69,7 @@ public class CreatureInfo : MonoBehaviour
 		healthInfo.gameObject.SetActive(false);
 
 		// display "blueprint" subtitle
-		blueprintLabel.SetActive(true);
+		blueprintLabel.gameObject.SetActive(true);
 
 		// Hide the ability and destroy buttons
 		useAbilityButton.gameObject.SetActive(false);
@@ -80,7 +85,7 @@ public class CreatureInfo : MonoBehaviour
 		healthbar.SetHealth(creature.health);
 
 		// Hide "blueprint" label
-		blueprintLabel.SetActive(false);
+		blueprintLabel.gameObject.SetActive(false);
 
 		// Display creature data
 		var creatureDefinition = CreatureDefinition.ForType(creature.creatureType);
