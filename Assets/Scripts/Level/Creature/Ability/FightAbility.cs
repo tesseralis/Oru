@@ -9,6 +9,7 @@ public class FightAbility : MonoBehaviour, IAbility
 
 	// The enemy creature to target
 	public Creature target;
+	public bool hasTarget = false;
 
 	public BattlePower attack;
 	public BattlePower defense;
@@ -43,6 +44,7 @@ public class FightAbility : MonoBehaviour, IAbility
 		if (enemy && enemy.Definition.IsEnemy)
 		{
 			target = enemy;
+			hasTarget = true;
 		}
 	}
 
@@ -54,6 +56,20 @@ public class FightAbility : MonoBehaviour, IAbility
 
 	public void Passive()
 	{
+		if (hasTarget)
+		{
+			if (target != null)
+			{
+				creature.SetGoal(target.Position);
+			}
+			else
+			{
+				// This means the target has been destroyed, so cancel the goal.
+				hasTarget = false;
+				creature.SetGoal(creature.NextPosition);
+			}
+		}
+
 		foreach (var neighbor in creature.Position.CardinalNeighbors())
 		{
 			var enemy = LevelManager.Creatures[neighbor];
@@ -82,16 +98,13 @@ public class FightAbility : MonoBehaviour, IAbility
 				// Only attack one enemy at a time
 				break;
 			}
-			if (target != null)
-			{
-				creature.SetGoal(target.Position);
-			}
 		}
 	}
 
 	public void Cancel()
 	{
 		target = null;
+		hasTarget = false;
 	}
 
 	public string Description()
