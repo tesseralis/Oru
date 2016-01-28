@@ -18,8 +18,8 @@ Resources:
 Recipes:
   Available: []
   Field:
-    0,0: Monkey
-    5,5: Snake
+    0,2: Monkey
+    5,3: Snake
 Goals:
   0,5: Snake
 Instructions: |-
