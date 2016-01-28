@@ -6,70 +6,116 @@ using Util;
 
 public class CreatureInfo : MonoBehaviour
 {
-
+	public GameObject panel;
 	public Text nameDisplay;
+	public GameObject healthInfo;
 	public Healthbar healthbar;
 	public Text descriptionDisplay;
 	public ResourceList resourceList;
 	public Button useAbilityButton;
 	public Button destroyCreatureButton;
 
+	public RecipeList recipeList;
+
+	private Creature selectedCreature;
+	private CreatureType? creatingCreature;
+	private CreatureType? highlightedBlueprint;
+
 	public void Start()
 	{
-		UXManager.State.Selector.Deselected += HideCreatureInfo;
-		UXManager.State.Selector.Selected += DisplayCreatureInfo;
+		UXManager.State.Selector.Selected += (x) => { selectedCreature = x; };
+		UXManager.State.Selector.Deselected += () => { selectedCreature = null; };
 
-		LevelManager.Creatures.CreaturesUpdated += (obj) => 
+		UXManager.State.Creator.CreationStarted += (x) => { creatingCreature = x; };
+		UXManager.State.Creator.CreationStopped += () => { creatingCreature = null; };
+
+		recipeList.BlueprintEnter += (x) => { highlightedBlueprint = x; };
+		recipeList.BlueprintExit += () => { highlightedBlueprint = null; };
+
+		panel.SetActive(false);
+	}
+
+	void Update()
+	{
+		if (highlightedBlueprint.HasValue)
 		{
-			if (UXManager.State.Selector.SelectedCreature)
-			{
-				DisplayCreatureInfo(UXManager.State.Selector.SelectedCreature);
-			}
-		};
+			DisplayRecipeInfo(highlightedBlueprint.Value);
+		}
+		else if (creatingCreature.HasValue)
+		{
+			DisplayRecipeInfo(creatingCreature.Value);
+		}
+		else if (selectedCreature)
+		{
+			DisplayCreatureInfo(selectedCreature);
+		}
+		else
+		{
+			panel.SetActive(false);
+		}
+	}
 
-		UXManager.State.Selector.AbilityUsed += () =>
-			DisplayAbilityText(UXManager.State.Selector.SelectedCreature);
+	private void DisplayRecipeInfo(CreatureType blueprint)
+	{
+		DisplayInfo(blueprint);
 
-		// Finally, hide ourselves until a creature is selected
-		HideCreatureInfo();
+		// Hide creature health
+		healthInfo.gameObject.SetActive(false);
+
+		// TODO display "blueprint" subtitle
+
+		// Hide the ability and destroy buttons
+		useAbilityButton.gameObject.SetActive(false);
+		destroyCreatureButton.gameObject.SetActive(false);
 	}
 
 	private void DisplayCreatureInfo(Creature creature)
 	{
-		gameObject.SetActive(true);
-
-		// Display the creature's name
-		nameDisplay.text = creature.creatureType.ToString();
+		DisplayInfo(creature.creatureType);
 
 		// Display creature health
+		healthInfo.gameObject.SetActive(true);
 		healthbar.SetHealth(creature.health);
 
 		// Display creature data
 		var creatureDefinition = CreatureDefinition.ForType(creature.creatureType);
 		useAbilityButton.gameObject.SetActive(!creature.Definition.IsEnemy && creature.HasAbility());
-		// TODO refactor with same method in "Recipe Info"
-		var text = "Allowed Terrain: " + string.Join(", ", creatureDefinition.AllowedTerrain.Select(t => t.ToString()).ToArray());
-		if (creature.HasAbility())
-		{
-			text += "\nAbility: " + creature.Definition.Ability.Description();
-		}
-		if (creature.GetComponent<FightAbility>())
-		{
-			var ability = creature.GetComponent<FightAbility>();
-			text += "\nAttack: " + ability.attack;
-			text += "\nDefense: " + ability.defense;
-		}
-		descriptionDisplay.text = text;
 
 		// Display the creature's resources
 		resourceList.ShowResources(creatureDefinition.RecipeWithEnergy());
 
-		DisplayAbilityText(creature);
+		DisplayAbilityButtonText(creature);
 		var isEnemy = creature.Definition.IsEnemy;
 		destroyCreatureButton.gameObject.SetActive(!isEnemy);
 	}
 
-	private void DisplayAbilityText(Creature creature)
+	// Display info common to both creatures and blueprints
+	private void DisplayInfo(CreatureType creatureType)
+	{
+		panel.SetActive(true);
+		var definition = CreatureDefinition.ForType(creatureType);
+
+		// Display the creature's name
+		nameDisplay.text = creatureType.ToString();
+
+		// display the information in the recipe
+		var text = "Allowed Terrain: " + string.Join(", ", definition.AllowedTerrain.Select(t => t.ToString()).ToArray());
+		if (definition.Ability != null)
+		{
+			text += "\nAbility: " + definition.Ability.Description();
+		}
+		// TODO makes this more typesafe?
+		if (definition.Ability is FightAbility.Definition)
+		{
+			var ability = (FightAbility.Definition)definition.Ability;
+			text += "\nAttack: " + ability.Attack;
+			text += "\nDefense: " + ability.Defense;
+		}
+		descriptionDisplay.text = text;
+
+	}
+
+	private void DisplayAbilityButtonText(Creature creature)
 	{
 		var text = useAbilityButton.GetComponentInChildren<Text>();
 		if (creature.HasAbility())
@@ -82,6 +128,8 @@ public class CreatureInfo : MonoBehaviour
 	{
 		gameObject.SetActive(false);
 	}
+
+	// Functions for selected creature
 
 	public void UseAbility()
 	{
