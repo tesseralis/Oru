@@ -387,7 +387,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 180142, guid: cd9830b50e3d74a29970d40875dc8638, type: 2}
       propertyPath: m_Name
-      value: MenuLevel
+      value: Level
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cd9830b50e3d74a29970d40875dc8638, type: 2}
