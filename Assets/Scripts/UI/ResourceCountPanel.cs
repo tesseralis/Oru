@@ -23,7 +23,8 @@ public class ResourceCountPanel : MonoBehaviour {
 	{
 		switch(resource)
 		{
-		case ResourceType.Energy: return Color.grey;
+		// TODO Store the heart's "pink" color somewhere
+		case ResourceType.Energy: return new Color(1.0f, 0.564705882f, 0.984313725f, 1.0f);
 		case ResourceType.Black: return Color.black;
 		case ResourceType.White: return Color.white;
 		case ResourceType.Red: return Color.red;
