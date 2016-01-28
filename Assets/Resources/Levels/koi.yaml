@@ -1,21 +1,29 @@
 Terrain: |
-  lwww
-  lwww
-  wwww
-  wwww
+  lwwwl
+  twwwt
+  lwlwl
+  twwwt
+  lwwwl
 Creatures:
-  3,0: Frog
+  0,0: Monkey
 Resources:
-  0,0:
-    Red: 3
-    White: 1
+  4,0:
+    Red: 1
+    White: 2
+    Black: 1
     Energy: 1
+  4,4:
+    White: 1
+  0,4:
+    Red: 3
 Recipes:
-  Available: []
+  Available:
+  - Monkey
   Field:
-    0,3: Dog
+    2,4: Dog
+    2,0: Koi
 Goals:
-  3,3: Dog
+  2,2: Koi
 Instructions: |
   TODO This level isn't made yet
 ...
