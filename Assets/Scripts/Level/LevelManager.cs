@@ -57,7 +57,6 @@ public class LevelManager : MonoBehaviour
 		if (levelName != null)
 		{
 			Serialization.DeserializeLevel(levelName);
-			levelName = null; // TODO Ensure that we don't get stuck with an old scene
 		}
 	}
 
