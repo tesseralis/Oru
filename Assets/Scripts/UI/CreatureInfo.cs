@@ -53,6 +53,12 @@ public class CreatureInfo : MonoBehaviour
 		{
 			text += "\nAbility: " + creature.Definition.Ability.Description();
 		}
+		if (creature.GetComponent<FightAbility>())
+		{
+			var ability = creature.GetComponent<FightAbility>();
+			text += "\nAttack: " + ability.attack;
+			text += "\nDefense: " + ability.defense;
+		}
 		descriptionDisplay.text = text;
 
 		// Display the creature's resources

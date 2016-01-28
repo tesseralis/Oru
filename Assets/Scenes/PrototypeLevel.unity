@@ -942,11 +942,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22498444, guid: 9fcb869508e024b4c883df85ccbacc4d, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.99999994
       objectReference: {fileID: 0}
     - target: {fileID: 22498444, guid: 9fcb869508e024b4c883df85ccbacc4d, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9fcb869508e024b4c883df85ccbacc4d, type: 2}
@@ -1450,7 +1450,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 11481760, guid: cd9830b50e3d74a29970d40875dc8638, type: 2}
       propertyPath: availableRecipes.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 401594, guid: cd9830b50e3d74a29970d40875dc8638, type: 2}
       propertyPath: m_LocalPosition.x
@@ -1495,6 +1495,10 @@ Prefab:
     - target: {fileID: 11478330, guid: cd9830b50e3d74a29970d40875dc8638, type: 2}
       propertyPath: instructions
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 11481760, guid: cd9830b50e3d74a29970d40875dc8638, type: 2}
+      propertyPath: availableRecipes.Array.data[1].name
+      value: Snake
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cd9830b50e3d74a29970d40875dc8638, type: 2}

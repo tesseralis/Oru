@@ -20,6 +20,12 @@ public class RecipeInfo : MonoBehaviour
 		{
 			text += "\nAbility: " + definition.Ability.Description();
 		}
+		if (definition.Ability is FightAbility.Definition)
+		{
+			var ability = (FightAbility.Definition)definition.Ability;
+			text += "\nAttack: " + ability.Attack;
+			text += "\nDefense: " + ability.Defense;
+		}
 		descriptionDisplay.text = text;
 		var creatureDefinition = CreatureDefinition.ForType(creatureType);
 		GetComponentInChildren<ResourceList>().ShowResources(creatureDefinition.RecipeWithEnergy());
