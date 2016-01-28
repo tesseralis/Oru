@@ -70,4 +70,28 @@ public static class ResourcesPathfinder
 	{
 		return LoadPrefab("Goal");
 	}
+
+	public static Sprite GoalSprite(CreatureType? type)
+	{
+		Sprite[] sprites = Resources.LoadAll<Sprite>(prefabPath + "/Goals");
+		return sprites[GetGoalSpriteIndex(type)];
+	}
+
+	private static int GetGoalSpriteIndex(CreatureType? type)
+	{
+		if (type.HasValue)
+		{
+			return Array.IndexOf(creatureOrder, type.Value.name);
+		}
+		else
+		{
+			return 14;
+		}
+	}
+
+	private static string[] creatureOrder = {
+		"Rabbit", "Dog", "Crane", "Bird",
+		"Mouse", "Koi", "Horse", "Turtle",
+		"Frog", "Snake", "Shark", "Tiger",
+		"Butterfly", "Monkey", "", "Dragon" };
 }

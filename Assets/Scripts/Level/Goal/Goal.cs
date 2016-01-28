@@ -15,6 +15,7 @@ public class Goal : MonoBehaviour
 	void Start()
 	{
 		LevelManager.Creatures.CreaturesUpdated += CheckGoalCondition;
+		GetComponentInChildren<SpriteRenderer>().sprite = ResourcesPathfinder.GoalSprite(winningCreatureType);
 	}
 
 	private void CheckGoalCondition(IList<Creature> creatureList)
