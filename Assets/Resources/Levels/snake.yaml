@@ -8,6 +8,7 @@ Terrain: |
 Creatures:
   2,2: Turtle
   5,2: Dog
+  0,5: Bird
 Resources:
   2,0:
     Blue: 4
