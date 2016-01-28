@@ -242,6 +242,26 @@ public class Creature : MonoBehaviour
 		return distance;
 	}
 
+	private static Coordinate? NextCoordinateInPath(Coordinate start, Coordinate end, CoordinatePredicate neighborPredicate)
+	{
+		IDictionary<Coordinate, Coordinate> parents;
+		DoBFS(start, end, neighborPredicate, out parents);
+
+		Coordinate next;
+		// If we can reach the goal, then move the creature to the next step towards that goal
+		if (parents.ContainsKey(end))
+		{
+			next = end;
+			while (parents[next] != start)
+			{
+				next = parents[next];
+			}
+			return next;
+		}
+
+		return null;
+	}
+
 	// do a BFS and figure out the right path
 	private Coordinate NextCoordinate()
 	{
@@ -251,30 +271,22 @@ public class Creature : MonoBehaviour
 			return Position;
 		}
 
-		IDictionary<Coordinate, Coordinate> parents;
-		DoBFS(Position, Goal, IsValidCoordinate, out parents);
-
-		Coordinate next;
-		// If we can reach the goal, then move the creature to the next step towards that goal
-		if (parents.ContainsKey(Goal))
+		var normalPathfinding = NextCoordinateInPath(Position, Goal, IsValidCoordinate);
+		if (normalPathfinding.HasValue)
 		{
-			next = Goal;
-			while (parents[next] != Position)
-			{
-				next = parents[next];
-			}
-			return next;
+			return normalPathfinding.Value;
 		}
 
-		// Otherwise, do another BFS not accounting for terrain restrictions and try to move the creature there
-		var distance = DoBFS(Goal, Position, LevelManager.Terrain.Contains, out parents);
-		// TODO assert that the level is fully connected
-		foreach (var neighbor in Position.CardinalNeighbors())
+		var abilityPathfinding = NextCoordinateInPath(Position, Goal, IsValidCoordinateOrGoal);
+		if (abilityPathfinding.HasValue && IsValidCoordinate(abilityPathfinding.Value))
 		{
-			if (distance.ContainsKey(neighbor) && distance[neighbor] < distance[Position] && IsValidCoordinate(neighbor))
-			{
-				return neighbor;
-			}
+			return abilityPathfinding.Value;
+		}
+
+		var bestTryPathfinding = NextCoordinateInPath(Position, Goal, LevelManager.Terrain.Contains);
+		if (bestTryPathfinding.HasValue && IsValidCoordinate(bestTryPathfinding.Value))
+		{
+			return bestTryPathfinding.Value;
 		}
 		return Position;
 	}
@@ -285,6 +297,12 @@ public class Creature : MonoBehaviour
 		return LevelManager.Terrain.Contains(coordinate)
 			&& Definition.AllowedTerrain.Contains(LevelManager.Terrain[coordinate])
 			&& !LevelManager.Creatures.CreatureList.Any(x => x != this && (x.Position == coordinate || x.NextPosition == coordinate));
+	}
+
+	// Checks if the coordinate is valid unless it's the goal coordinate
+	private bool IsValidCoordinateOrGoal(Coordinate coordinate)
+	{
+		return coordinate == Goal || IsValidCoordinate(coordinate);
 	}
 
 }
