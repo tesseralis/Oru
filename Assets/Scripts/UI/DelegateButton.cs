@@ -5,24 +5,23 @@ using System;
 using System.Collections;
 
 // A button that can receive delegates
-public class DelegateButton : Button
+public class DelegateButton : MonoBehaviour
 {
 
 	public event Action Click;
 	public event Action MouseEnter;
 	public event Action MouseExit;
 
-	public override void OnPointerDown(PointerEventData eventData)
+	public void OnClick()
 	{
 		if (Click != null) { Click(); }
 	}
-
-	public override void OnPointerEnter(PointerEventData eventData)
+	public void OnMouseEnter()
 	{
 		if (MouseEnter != null) { MouseEnter(); }
 	}
 
-	public override void OnPointerExit(PointerEventData eventData)
+	public void OnMouseExit()
 	{
 		if (MouseExit != null) { MouseExit(); }
 	}
