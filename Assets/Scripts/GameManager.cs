@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour {
 
 	public string[] levels;
 
+	public string currentLevel;
+
 	public IList<String> Levels
 	{
 		get { return levels.ToList(); }
@@ -64,10 +66,28 @@ public class GameManager : MonoBehaviour {
 		return new HashSet<string>(completionData).Contains(level);
 	}
 
-	public void LoadLevel(string level)
+	public static void LoadLevel(string levelName)
 	{
+		Debug.Log("Loading level " + levelName);
+		game.currentLevel = levelName;
+		LevelManager.ClearActions();
 		SceneManager.LoadScene("DynamicLevel");
-		LevelManager.SetLevel(level);
+	}
+
+	public static void LoadMainMenu()
+	{
+		Debug.Log("Loading main menu.");
+		game.currentLevel = "";
+		LevelManager.ClearActions();
+		SceneManager.LoadScene("Menu");
+	}
+
+	void OnLevelWasLoaded(int level)
+	{
+		if (levels.Contains(currentLevel))
+		{
+			Serialization.DeserializeLevel(currentLevel);
+		}
 	}
 
 	// Save our game data

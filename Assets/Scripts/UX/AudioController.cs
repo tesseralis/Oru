@@ -6,8 +6,14 @@ public class AudioController : MonoBehaviour {
 	
 	public SoundEffectOptions soundOptions;
 
+	void Awake()
+	{
+		LevelManager.LevelLoaded += AddHooks;
+	}
+
+
 	// Use this for initialization
-	void Start ()
+	void AddHooks (LevelManager level)
 	{
 		// Play sounds when the creature takes actions
 		LevelManager.Creatures.CreatureCreated += (x, y) => PlaySound(soundOptions.createCreature);

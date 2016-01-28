@@ -7,13 +7,18 @@ public class ParticleController : MonoBehaviour
 {
 	public ParticleEffectOptions particleOptions;
 
+	void Awake()
+	{
+		LevelManager.LevelLoaded += AddHooks;
+	}
+
 	// Use this for initialization
-	void Start () {
+	void AddHooks (LevelManager level) {
 		// Add particles on certain effects
 		LevelManager.Creatures.CreatureCreated += (x, pos) => CreateParticle(particleOptions.createCreature, pos);
 		LevelManager.Creatures.CreatureDestroyed += (c, pos) => CreateParticle(particleOptions.destroyCreature, pos);
-		UXManager.State.Selector.GoalSet += (creature, pos) => CreateParticle(particleOptions.setCreatureGoal, pos);
 		LevelManager.Creatures.CreatureStepped += LowHealth;
+		UXManager.State.Selector.GoalSet += (creature, pos) => CreateParticle(particleOptions.setCreatureGoal, pos);
 	}
 
 	public void CreateParticle(GameObject particles, Coordinate coordinate)

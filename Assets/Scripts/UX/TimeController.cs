@@ -23,12 +23,16 @@ public class TimeController : MonoBehaviour
 	{
 		// Ensure that the game is running at the right speed
 		Time.timeScale = 1f;
+
+		LevelManager.LevelLoaded += (x) => { levelLoaded = true; };
 	}
-	
+
+	private bool levelLoaded;
+
 	// Update is called once per frame
 	void Update ()
 	{
-		if (Time.timeSinceLevelLoad >= nextStepTime)
+		if (levelLoaded && Time.timeSinceLevelLoad >= nextStepTime)
 		{
 			nextStepTime += stepInterval;
 			LevelManager.Creatures.StepCreatures();

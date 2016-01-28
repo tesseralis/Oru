@@ -118,8 +118,9 @@ public static class Serialization
 	}
 
 	// Deserialize a level yaml string
-	public static void DeserializeLevel(String levelName)
+	public static LevelManager DeserializeLevel(String levelName)
 	{
+		Debug.Log("Deserializing " + levelName);
 		// Factor out to ResourcesPathfinder
 		var levelFile = UnityEngine.Resources.Load<TextAsset>("Levels/" + levelName);
 		var input = new StringReader(levelFile.text);
@@ -128,7 +129,8 @@ public static class Serialization
 
 		var levelMapping = yaml.Documents[0].RootNode.AsMapping();
 
-		var level = GameObject.Find("Level").GetComponent<LevelManager>();
+		var level = new GameObject("Level").AddComponent<LevelManager>();
+		level.levelName = levelName;
 		if (levelMapping.HasKey("Instructions"))
 		{
 			level.instructions = levelMapping.GetString("Instructions");
@@ -138,35 +140,29 @@ public static class Serialization
 			level.instructions = "";
 		}
 
-		var terrain = GameObject.Find("Terrain").GetComponent<TerrainController>();
-		terrain.gameObject.DestroyAllChildrenImmediate();
+		var terrain = level.terrainController = level.gameObject.AddChildWithComponent<TerrainController>("Terrain");
 		foreach (var entry in DeserializeTerrain(levelMapping.GetString("Terrain")))
 		{
 			terrain.AddTerrainTile(entry.Key, entry.Value);
 		}
 
-		var creatures = GameObject.Find("Creatures").GetComponent<CreatureController>();
-		creatures.gameObject.DestroyAllChildrenImmediate();
+		var creatures = level.creatureController = level.gameObject.AddChildWithComponent<CreatureController>("Creatures");
 		var creatureMapping = DeserializeCoordinateMap(levelMapping.GetMapping("Creatures"), x => DeserializeCreatureType(x));
 		foreach (var entry in creatureMapping)
 		{
 			creatures.AddCreature(entry.Key, entry.Value);
 		}
 
-		var resources = GameObject.Find("Resources").GetComponent<ResourceController>();
-		resources.gameObject.DestroyAllChildrenImmediate();
+		var resources = level.resourceController = level.gameObject.AddChildWithComponent<ResourceController>("Resources");
 		var resourcesMapping = DeserializeCoordinateMap(levelMapping.GetMapping("Resources"), x => DeserializeResourceCollection(x));
 		foreach (var entry in resourcesMapping)
 		{
 			resources.AddResourcePile(entry.Key, entry.Value);
 		}
 
-		var recipes = GameObject.Find("Recipes").GetComponent<RecipeController>();
-		recipes.gameObject.DestroyAllChildrenImmediate();
+		var recipes = level.recipeController = level.gameObject.AddChildWithComponent<RecipeController>("Recipes");
 		var recipeMapping = levelMapping.GetMapping("Recipes");
 
-		// TODO this won't work when loading a level from the level editor
-		// I think it has to do with setting dirty flags
 		var available = recipeMapping.GetSequence("Available").Select(x => DeserializeCreatureType(x)).ToArray();
 		recipes.availableRecipes = available;
 
@@ -176,13 +172,16 @@ public static class Serialization
 			recipes.AddRecipe(entry.Key, entry.Value);
 		}
 	
-		var goals = GameObject.Find("Goals").GetComponent<GoalController>();
-		goals.gameObject.DestroyAllChildrenImmediate();
+		var goals = level.goalController = level.gameObject.AddChildWithComponent<GoalController>("Goals");
 		var goalMapping = DeserializeCoordinateMap(levelMapping.GetMapping("Goals"), x => DeserializeCreatureType(x));
 		foreach (var goal in goalMapping)
 		{
 			goals.AddGoal(goal.Key, goal.Value);
 		}
+
+		Debug.Log("Finished deserializing " + levelName);
+
+		return level;
 	}
 
 	// Serialize the level into the given writer and return the serialized level

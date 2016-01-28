@@ -6,8 +6,13 @@ public class InstructionPanel : MonoBehaviour {
 
 	public Text instructionText;
 
+	void Awake()
+	{
+		LevelManager.LevelLoaded += OnLevelLoaded;
+	}
+
 	// Use this for initialization
-	void Start ()
+	void OnLevelLoaded (LevelManager level)
 	{
 		// Show or hide instructions based on level text
 		var instructions = LevelManager.level.instructions;
