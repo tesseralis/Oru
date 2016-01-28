@@ -88,15 +88,10 @@ public class CreatureInfo : MonoBehaviour
 		blueprintLabel.gameObject.SetActive(false);
 
 		// Display creature data
-		var creatureDefinition = CreatureDefinition.ForType(creature.creatureType);
 		useAbilityButton.gameObject.SetActive(!creature.Definition.IsEnemy && creature.HasAbility());
 
-		// Display the creature's resources
-		resourceList.ShowResources(creatureDefinition.RecipeWithEnergy());
-
 		DisplayAbilityButtonText(creature);
-		var isEnemy = creature.Definition.IsEnemy;
-		destroyCreatureButton.gameObject.SetActive(!isEnemy);
+		destroyCreatureButton.gameObject.SetActive(!creature.Definition.IsEnemy);
 	}
 
 	// Display info common to both creatures and blueprints
@@ -112,17 +107,18 @@ public class CreatureInfo : MonoBehaviour
 		var text = "Allowed Terrain: " + string.Join(", ", definition.AllowedTerrain.Select(t => t.ToString()).ToArray());
 		if (definition.Ability != null)
 		{
-			text += "\nAbility: " + definition.Ability.Description();
+			text += "\n\nAbility: " + definition.Ability.Description();
 		}
 		// TODO makes this more typesafe?
 		if (definition.Ability is FightAbility.Definition)
 		{
 			var ability = (FightAbility.Definition)definition.Ability;
-			text += "\nAttack: " + ability.Attack;
+			text += "\n\nAttack: " + ability.Attack;
 			text += "\nDefense: " + ability.Defense;
 		}
 		descriptionDisplay.text = text;
 
+		resourceList.ShowResources(definition.RecipeWithEnergy());
 	}
 
 	private void DisplayAbilityButtonText(Creature creature)
