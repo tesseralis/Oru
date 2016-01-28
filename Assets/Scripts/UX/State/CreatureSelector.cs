@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections;
+using System.Linq;
 
 /// <summary>
 /// The entity selector is responsible for the visual display of when something
@@ -26,6 +27,7 @@ public class CreatureSelector : MonoBehaviour
 		{
 			actionMarkers = GetComponentInChildren<ActionMarkers>();
 		}
+		LevelManager.LevelLoaded += OnLevelLoad;
 	}
 
 	// Use this for initialization
@@ -34,6 +36,11 @@ public class CreatureSelector : MonoBehaviour
 		if (creatureMarker) { creatureMarker.SetActive(false); }
 		actionMarkers.Disable();
 		UXManager.Input.TerrainClicked += OnClickBlock;
+
+	}
+
+	void OnLevelLoad(LevelManager level)
+	{
 		LevelManager.Creatures.CreatureDestroyed += (x, pos) => 
 		{
 			if (x == SelectedCreature)
@@ -41,6 +48,11 @@ public class CreatureSelector : MonoBehaviour
 				Deselect();
 			}
 		};
+		var firstCreature = LevelManager.Creatures.CreatureList.FirstOrDefault(x => !x.Definition.IsEnemy);
+		if (firstCreature)
+		{
+			SelectCreature(firstCreature);
+		}
 	}
 
 	public void SelectCreature(Creature creature)

@@ -45,7 +45,7 @@ public class CreatureController : MonoBehaviour
 		return newCreature;
 	}
 
-	void Start()
+	public void OnLoad()
 	{
 		// Add all the creatures we have on the board right now
 		CreatureList = GetComponentsInChildren<Creature>().ToList();

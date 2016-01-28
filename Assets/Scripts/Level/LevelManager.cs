@@ -58,6 +58,8 @@ public class LevelManager : MonoBehaviour
 
 	void Start()
 	{
+		// TODO Make all the other controllers use "OnLoad" methods
+		creatureController.OnLoad();
 		if (LevelLoaded != null) { LevelLoaded(level); }
 	}
 
