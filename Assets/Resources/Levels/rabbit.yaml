@@ -2,15 +2,18 @@ Terrain: |
   lll
   lll
   lll
-Creatures:
-  0,0: Rabbit
-Resources: {}
+Creatures: {}
+Resources:
+  0,2:
+    White: 1
+    Energy: 1
 Recipes:
-  Available: []
+  Available:
+  - Rabbit
   Field: {}
 Goals:
-  2,2: Rabbit
+  2,0: Rabbit
 Instructions: |
-  Click on a creature to select it.
-  Click on a tile to move the selected creature to that location.
+  Create creatures by using the items shown in the blueprints.
+  Complete the level by moving the right creature to the goal tile.
 ...
