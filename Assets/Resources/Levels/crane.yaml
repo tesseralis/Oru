@@ -1,24 +1,21 @@
 Terrain: |
-  wwlww
+  ltltl
+  lllll
+  wrrrw
   wlllw
-  rrrrr
-  wlllw
-  wwlww
+  wtltw
 Creatures:
   3,2: Tiger
-Resources:
-  0,2:
-    Blue: 5
-    White: 1
-    Red: 1
-    Black: 1
-    Energy: 2
+  1,2: Snake
+  4,4: Frog
+  4,0: Butterfly
+  0,4: Mouse
+  0,0: Rabbit
+Resources: {}
 Recipes:
-  Available:
-  - Crane
+  Available: []
   Field:
-    2,0: Mouse
-    2,4: Snake
+    0,2: Crane
 Goals:
-  4,2: Mouse
+  4,2: Crane
 ...
