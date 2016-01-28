@@ -480,7 +480,7 @@ MonoBehaviour:
   unfinishedLevelPrefab: {fileID: 138270, guid: 3a720ddac0e83453097b69824ead1454,
     type: 2}
   finishedLevelPrefab: {fileID: 161454, guid: b602d5ce899de4129af6db9c3ca0a727, type: 2}
-  unlockAllLevels: 1
+  unlockAllLevels: 0
   playLevelButton: {fileID: 2004028331}
 --- !u!1001 &542323495
 Prefab:
@@ -1941,7 +1941,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.75686276, b: 0.75686276, a: 1}
+  m_Color: {r: 1, g: 0.5647059, b: 0.9843137, a: 0.19607843}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
