@@ -18,6 +18,7 @@ public class ParticleController : MonoBehaviour
 		LevelManager.Creatures.CreatureCreated += (x, pos) => CreateParticle(particleOptions.createCreature, pos);
 		LevelManager.Creatures.CreatureDestroyed += (c, pos) => CreateParticle(particleOptions.destroyCreature, pos);
 		LevelManager.Creatures.CreatureStepped += LowHealth;
+		LevelManager.Creatures.CreatureStepped += IsEnemy;
 		UXManager.State.Selector.GoalSet += (creature, pos) => CreateParticle(particleOptions.setCreatureGoal, pos);
 	}
 
@@ -37,6 +38,14 @@ public class ParticleController : MonoBehaviour
 			creature.gameObject.AddChild(particleOptions.lowHealth);
 		}
 	}
+
+	private void IsEnemy(Creature creature)
+	{
+		if (creature.Definition.IsEnemy)
+		{
+			creature.gameObject.AddChild(particleOptions.enemy);
+		}
+	}
 }
 
 [Serializable]
@@ -45,6 +54,7 @@ public class ParticleEffectOptions
 	public GameObject createCreature;
 	public GameObject destroyCreature;
 	public GameObject setCreatureGoal;
+	public GameObject enemy;
 	public GameObject lowHealth;
 	public GameObject attack;
 	public GameObject heal;
