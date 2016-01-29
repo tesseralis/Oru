@@ -1,0 +1,25 @@
+Terrain: |
+  wwwwwwwww
+  wlwwwwwww
+  wwwwwwwww
+  wwwtttwww
+  wwwtwtwww
+  wwwtttwww
+  tttwwwrwr
+  twtwwwwrt
+  tttwwwrtr
+Creatures:
+  1,1: Tiger
+  7,7: Dragon
+  1,7: Turtle
+  7,1: Bird
+Resources: {}
+Recipes:
+  Available:
+  - Shark
+  - Dog
+  Field:
+    8,8: Monkey
+Goals:
+  4,4: Any
+...
