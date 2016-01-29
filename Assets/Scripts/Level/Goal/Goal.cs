@@ -30,7 +30,7 @@ public class Goal : MonoBehaviour
 	private bool GoalConditionMet(IList<Creature> creatureList)
 	{
 		return creatureList.Any(x => x.Position == gameObject.Coordinate()
-			&& x.creatureType == winningCreatureType);
+			&& (winningCreatureType.name == "Any" || x.creatureType == winningCreatureType));
 	}
 
 }

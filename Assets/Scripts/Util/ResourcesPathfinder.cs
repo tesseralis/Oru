@@ -93,5 +93,5 @@ public static class ResourcesPathfinder
 		"Rabbit", "Dog", "Crane", "Bird",
 		"Mouse", "Koi", "Horse", "Turtle",
 		"Frog", "Snake", "Shark", "Tiger",
-		"Butterfly", "Monkey", "", "Dragon" };
+		"Butterfly", "Monkey", "Any", "Dragon" };
 }
