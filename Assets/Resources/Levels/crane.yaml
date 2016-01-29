@@ -1,9 +1,9 @@
 Terrain: |
-  ltltl
+  ltrtl
   lllll
   wrrrw
-  wlllw
   wtltw
+  wtrtw
 Creatures:
   3,2: Tiger
   1,2: Snake
