@@ -1,25 +1,41 @@
 Terrain: |
-  wwwwwwwww
-  wlwwwwwww
-  wwwwwwwww
-  wwwtttwww
-  wwwtwtwww
-  wwwtttwww
-  tttwwwrwr
-  twtwwwwrt
-  tttwwwrtr
+  lrtllrlww
+  rltllrlww
+  ttrrrrtll
+  llrtttwlt
+  llrtwtwtl
+  rrrtttwlt
+  ttlwwwwww
+  lltwrrwrt
+  lltwrrwtr
 Creatures:
   1,1: Tiger
   7,7: Dragon
   1,7: Turtle
   7,1: Bird
-Resources: {}
+  6,2: Crane
+Resources:
+  7,1:
+    Blue: 3
+  6,6:
+    White: 1
+  1,7:
+    Red: 4
+  0,1:
+    Blue: 1
+  1,0:
+    Blue: 1
 Recipes:
-  Available:
-  - Shark
-  - Dog
+  Available: []
   Field:
-    8,8: Monkey
+    8,8: Dog
+    0,8: Monkey
+    0,0: Shark
+    0,4: Horse
+    8,0: Koi
+    4,8: Snake
+    8,4: Butterfly
+    4,0: Crane
 Goals:
   4,4: Any
 ...
