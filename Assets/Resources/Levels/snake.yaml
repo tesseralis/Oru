@@ -23,6 +23,7 @@ Recipes:
     5,3: Snake
 Goals:
   0,5: Snake
-Instructions: |-
+Instructions: |
   Some creatures can fight enemy creatures.
+  With a fighting creature selected, click on an enemy to target it.
 ...

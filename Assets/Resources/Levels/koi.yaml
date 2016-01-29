@@ -24,4 +24,6 @@ Recipes:
     2,0: Koi
 Goals:
   2,2: Koi
+Instructions: |
+  Use the arrow keys or WASD to move the camera, and the mouse scroll to zoom in and out.
 ...

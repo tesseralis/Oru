@@ -15,6 +15,6 @@ Recipes:
 Goals:
   2,0: Mouse
 Instructions: |
-  Make creature pick up blueprints to create more kinds of creatures.
+  Move creatures over blueprints to pick them up and create more kinds of creatures.
   Some creatures can go on more kinds of terrain tiles than others.
 ...
