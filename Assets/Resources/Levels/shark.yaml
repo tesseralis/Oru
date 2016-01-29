@@ -1,7 +1,7 @@
 Terrain: |
   wwwwwww
-  lllllll
-  lllllll
+  rrrrrrr
+  rrrrrrr
   ttttttt
   lllllll
   lllllll
@@ -10,11 +10,11 @@ Creatures:
   2,3: Dragon
 Resources:
   4,3:
-    Blue: 10
-    White: 10
-    Red: 10
-    Black: 10
-    Energy: 10
+    Blue: 6
+    White: 4
+    Red: 9
+    Black: 7
+    Energy: 5
 Recipes:
   Available:
   - Horse
