@@ -2,9 +2,9 @@ Terrain: |
   lrtllrlww
   rltllrlww
   ttrrrrtll
-  llrtttwlt
-  llrtwtwtl
-  rrrtttwlt
+  llrtttwww
+  llrtwtwlt
+  rrrtttwtl
   ttlwwwwww
   lltwrrwrt
   lltwrrwtr
@@ -31,11 +31,11 @@ Recipes:
     8,8: Dog
     0,8: Monkey
     0,0: Shark
-    0,4: Horse
+    0,3: Horse
     8,0: Koi
-    4,8: Snake
-    8,4: Butterfly
-    4,0: Crane
+    5,8: Snake
+    8,5: Butterfly
+    3,0: Crane
 Goals:
   4,4: Any
 ...
