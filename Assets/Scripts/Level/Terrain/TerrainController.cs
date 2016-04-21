@@ -63,7 +63,7 @@ public class TerrainController : MonoBehaviour
 	}
 
 	// Initialize the grid
-	void Start ()
+	public void OnLoad()
 	{
 		foreach (var block in GetComponentsInChildren<TerrainTile>())
 		{
