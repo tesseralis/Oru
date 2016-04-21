@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Util;
 
 /// <summary>
@@ -30,6 +31,16 @@ public class TerrainController : MonoBehaviour
 			// Create the new item
 			grid[coordinate] = AddTerrainTile(coordinate, value);
 		}
+	}
+
+	public int Width
+	{
+		get { return grid.Keys.Max(c => c.x) - grid.Keys.Min(c => c.x) + 1; }
+	}
+
+	public int Height
+	{
+		get { return grid.Keys.Max(c => c.z) - grid.Keys.Min(c => c.z) + 1; }
 	}
 
 	// Add a terrain tile to this object, but not the game state
